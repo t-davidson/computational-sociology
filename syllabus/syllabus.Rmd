@@ -149,7 +149,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - King, Gary, Jennifer Pan, and Margaret E. Roberts. 2013. “How Censorship in China Allows Government Criticism but Silences Collective Expression.” American Political Science Review 107 (02): 326–43. https://doi.org/10.1017/S0003055413000014.
-- Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In Proceedings of the 22nd International Conference on World Wide Web, 307–318. http://dl.acm.org/citation.cfm?id=2488416.
 - Fiesler, Casey, Nate Beard, and Brian C Keegan. 2020. “No Robots, Spiders, or Scrapers: Legal and Ethical Regulation of Data Collection Methods in Social Media Terms of Service.” In Proceedings of the Fourteenth International AAAI Conference on Web and Social Media, 187–96.
 - *Bit by Bit*, C6
     
@@ -163,7 +162,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - *Bit by Bit*, C3-4
 - Salganik, Matthew, Peter Sheridan Dodds, and Duncan Watts. 2006. “Experimental Study of Inequality and Unpredictability in an Artificial Cultural Market.” Science Reports 311: 854–56.
 - Munger, Kevin. 2016. “Tweetment Effects on the Tweeted: Experimentally Reducing Racist Harassment.” Political Behavior, November. https://doi.org/10.1007/s11109-016-9373-5.
-- Bail, Christopher, Lisa Argyle, Taylor Brown, John Bumpus, Haohan Chen, M. B. Fallin Hunzaker, Jaemin Lee, Marcus Mann, Friedolin Merhout, and Alexander Volfovsky. 2018. “Exposure to Opposing Views on Social Media Can Increase Political Polarization.” Proceedings of the National Academy of Sciences 115 (37): 9216–21. https://doi.org/10.1073/pnas.1804840115.
 - Wang, Wei, David Rothschild, Sharad Goel, and Andrew Gelman. 2015. “Forecasting Elections with Non-Representative Polls.” International Journal of Forecasting 31 (3): 980–91. https://doi.org/10.1016/j.ijforecast.2014.06.001.
 
 ## *Paper proposal due*
@@ -177,6 +175,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - *Introduction to Information Retrieval*, pp. 117-126.
 - Grimmer, Justin, and Brandon Stewart. 2013. “Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.” Political Analysis 21 (3): 267–97. https://doi.org/10.1093/pan/mps028.
 - Evans, James, and Pedro Aceves. 2016. “Machine Translation: Mining Text for Social Theory.” Annual Review of Sociology 42 (1): 21–50. https://doi.org/10.1146/annurev-soc-081715-074206.
+- Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In Proceedings of the 22nd International Conference on World Wide Web, 307–318. http://dl.acm.org/citation.cfm?id=2488416.
 - Nelson, Laura 2017. “Computational Grounded Theory: A Methodological Framework.” Sociological Methods & Research, November. https://doi.org/10.1177/0049124117729703.
 
 ## Week 8
@@ -200,8 +199,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - DiMaggio, Paul, Manish Nag, and David Blei. 2013. “Exploiting Affinities between Topic Modeling and the Sociological Perspective on Culture: Application to Newspaper Coverage of U.S. Government Arts Funding.” Poetics 41 (6): 570–606. https://doi.org/10.1016/j.poetic.2013.08.004.
 - Roberts, Margaret, Brandon M. Stewart, Dustin Tingley, Christopher Lucas, Jetson Leder-Luis, Shana Kushner Gadarian, Bethany Albertson, and David Rand. 2014. “Structural Topic Models for Open-Ended Survey Responses: Structural Topic Models for Survey Responses.” American Journal of Political Science 58 (4): 1064–82. https://doi.org/10.1111/ajps.12103.
 - Karell, Daniel, and Michael Freedman. 2019. “Rhetorics of Radicalism.” American Sociological Review 84 (4): 726–53. https://doi.org/10.1177/0003122419859519.
-- Denny, Matthew, and Arthur Spirling. 2018. “Text Preprocessing For Unsupervised Learning: Why It Matters, When It Misleads, And What To Do About It.” Political Analysis 26 (02): 168–89. https://doi.org/10.1017/pan.2017.44.
-
 
 ## *Assignment 3: Natural language processing*
 
@@ -211,11 +208,10 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - Molina, Mario, and Filiz Garip. 2019. “Machine Learning for Sociology.” Annual Review of Sociology 45: 27–45.
-- Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al. 2017. “Mastering the Game of Go without Human Knowledge.” Nature 550 (7676): 354–59. https://doi.org/10.1038/nature24270.
 - Hofman, Jake, Amit Sharma, and Duncan Watts. 2017. “Prediction and Explanation in Social Systems.” Science 355 (6324): 486–488. https://doi.org/10.1126/science.aal3856.
 - Mullainathan, Sendhil, and Jann Spiess. 2017. “Machine Learning: An Applied Econometric Approach.” Journal of Economic Perspectives 31 (2): 87–106. https://doi.org/10.1257/jep.31.2.87.
 - Davidson, Thomas. 2019. “Black-Box Models and Sociological Explanations: Predicting High School Grade Point Average Using Neural Networks.” Socius: Sociological Research for a Dynamic World 5 (January): 237802311881770. https://doi.org/10.1177/2378023118817702.
-- Hanna, Alexander. 2013. “Computer-Aided Content Analysis of Digitally Enabled Movements.” Mobilization: An International Quarterly 18 (4): 367–388.
+- Hanna, Alex. 2013. “Computer-Aided Content Analysis of Digitally Enabled Movements.” Mobilization: An International Quarterly 18 (4): 367–388.
 
 ## *Paper initial data collection due*
 
@@ -241,6 +237,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Jean, N., M. Burke, M. Xie, W. M. Davis, D. B. Lobell, and S. Ermon. 2016. “Combining Satellite Imagery and Machine Learning to Predict Poverty.” Science 353 (6301): 790–94. https://doi.org/10.1126/science.aaf7894.
 - Gebru, Timnit, Jonathan Krause, Yilun Wang, Duyun Chen, Jia Deng, Erez Lieberman Aiden, and Li Fei-Fei. 2017. “Using Deep Learning and Google Street View to Estimate the Demographic Makeup of Neighborhoods across the United States.” Proceedings of the National Academy of Sciences 114 (50): 13108–13. https://doi.org/10.1073/pnas.1700035114.
 - Zhang, Han, and Jennifer Pan. 2019. “CASM: A Deep-Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media.” Sociological Methodology 49 (1): 1–57. https://doi.org/10.1177/0081175019860244.
+- Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al. 2017. “Mastering the Game of Go without Human Knowledge.” Nature 550 (7676): 354–59. https://doi.org/10.1038/nature24270.
 
 ## *Assignment 4: Machine learning*
 
