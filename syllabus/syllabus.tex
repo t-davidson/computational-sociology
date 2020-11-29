@@ -87,15 +87,15 @@ discuss supervised machine learning in more depth, assessing the
 relationship between prediction and explanation in social science,
 discussing bias and other limitations of these methods, as well as the
 opportunities these techniques present to work with images and
-multimodal data. In the last two weeks of the course we will discuss
-recent advances in social network analysis and agent-based modeling
-techniques. Throughout the course students will gain hands-on experience
-with these different techniques, as well as an understanding of how
-these techniques are being used in cutting-edge sociological research.
-Overall this course will provide students with a strong conceptual
-foundation in computational sociology and the ability to apply various
-techniques for data collection and analysis in their own research. All
-assignments will be conducted using the R programming language.
+multimodal data. Finally, we will explore the role of simulation and
+agent-based modeling in sociological research. Throughout the course
+students will gain hands-on experience with these different techniques,
+as well as an understanding of how these techniques are being used in
+cutting-edge sociological research. Overall this course will provide
+students with a strong conceptual foundation in computational sociology
+and the ability to apply various techniques for data collection and
+analysis in their own research. All assignments will be conducted using
+the R programming language.
 
 \hypertarget{prerequisites-and-preparation}{%
 \section{PREREQUISITES AND
@@ -393,6 +393,11 @@ surveys}\label{data-collection-iii-online-experiments-and-surveys}}
   ``Experimental Study of Inequality and Unpredictability in an
   Artificial Cultural Market.'' Science Reports 311: 854--56.
 \item
+  Kramer, Adam D. I., Jamie E. Guillory, and Jeffrey T. Hancock. 2014.
+  ``Experimental Evidence of Massive-Scale Emotional Contagion through
+  Social Networks.'' Proceedings of the National Academy of Sciences 111
+  (24): 8788--90. \url{https://doi.org/10.1073/pnas.1320040111}.
+\item
   Munger, Kevin. 2016. ``Tweetment Effects on the Tweeted:
   Experimentally Reducing Racist Harassment.'' Political Behavior,
   November. \url{https://doi.org/10.1007/s11109-016-9373-5}.
@@ -420,6 +425,10 @@ Fundamentals}\label{natural-language-processing-i-fundamentals}}
 \tightlist
 \item
   \emph{Introduction to Information Retrieval}, pp.~117-126.
+\item
+  DiMaggio, Paul. 2015. ``Adapting Computational Text Analysis to Social
+  Science (and Vice Versa).'' Big Data \& Society 2 (2):
+  205395171560290. \url{https://doi.org/10.1177/2053951715602908}.
 \item
   Grimmer, Justin, and Brandon Stewart. 2013. ``Text as Data: The
   Promise and Pitfalls of Automatic Content Analysis Methods for
@@ -473,6 +482,12 @@ Embeddings}\label{natural-language-processing-ii-word-embeddings}}
   of Culture: Analyzing the Meanings of Class through Word Embeddings.''
   American Sociological Review, September, 000312241987713.
   \url{https://doi.org/10.1177/0003122419877135}.
+\item
+  Manning, Christopher D., Kevin Clark, John Hewitt, Urvashi Khandelwal,
+  and Omer Levy. 2020. ``Emergent Linguistic Structure in Artificial
+  Neural Networks Trained by Self-Supervision.'' Proceedings of the
+  National Academy of Sciences, June, 201907367.
+  \url{https://doi.org/10.1073/pnas.1907367117}.
 \end{itemize}
 
 \hypertarget{week-9}{%
@@ -521,7 +536,7 @@ processing}}{Assignment 3: Natural language processing}}\label{assignment-3-natu
 
 \hypertarget{machine-learning-i-prediction-and-explanation}{%
 \subsubsection{Machine Learning I: Prediction and
-Explanation}\label{machine-learning-i-prediction-and-explanation}}
+explanation}\label{machine-learning-i-prediction-and-explanation}}
 
 \emph{Readings}
 
@@ -539,15 +554,11 @@ Explanation}\label{machine-learning-i-prediction-and-explanation}}
   Applied Econometric Approach.'' Journal of Economic Perspectives 31
   (2): 87--106. \url{https://doi.org/10.1257/jep.31.2.87}.
 \item
-  Davidson, Thomas. 2019. ``Black-Box Models and Sociological
+  Davidson, Thomas. 2020. ``Black-Box Models and Sociological
   Explanations: Predicting High School Grade Point Average Using Neural
   Networks.'' Socius: Sociological Research for a Dynamic World 5
   (January): 237802311881770.
   \url{https://doi.org/10.1177/2378023118817702}.
-\item
-  Hanna, Alex. 2013. ``Computer-Aided Content Analysis of Digitally
-  Enabled Movements.'' Mobilization: An International Quarterly 18 (4):
-  367--388.
 \end{itemize}
 
 \hypertarget{paper-initial-data-collection-due}{%
@@ -555,11 +566,49 @@ Explanation}\label{machine-learning-i-prediction-and-explanation}}
 due}}{Paper initial data collection due}}\label{paper-initial-data-collection-due}}
 
 \hypertarget{week-11}{%
-\subsection{Week 11}\label{week-11}}
+\section{Week 11}\label{week-11}}
 
-\hypertarget{machine-learning-ii-challenges}{%
-\subsubsection{Machine learning II:
-Challenges}\label{machine-learning-ii-challenges}}
+\hypertarget{machine-learning-ii-text-classification}{%
+\subsubsection{Machine learning II: Text
+classification}\label{machine-learning-ii-text-classification}}
+
+\emph{Readings}
+
+\begin{itemize}
+\tightlist
+\item
+  Hanna, Alex. 2013. ``Computer-Aided Content Analysis of Digitally
+  Enabled Movements.'' Mobilization: An International Quarterly 18 (4):
+  367--388.
+\item
+  Davidson, Thomas, Dana Warmsley, Michael Macy, and Ingmar Weber. 2017.
+  ``Automated Hate Speech Detection and the Problem of Offensive
+  Language.'' In Proceedings of the 11th International Conference on Web
+  and Social Media (ICWSM), 512--515.
+\item
+  King, Gary, Patrick Lam, and Margaret E. Roberts. 2017.
+  ``Computer-Assisted Keyword and Document Set Discovery from
+  Unstructured Text.'' American Journal of Political Science 61 (4):
+  971--88.
+\item
+  Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr.~2019.
+  ``Active Learning Approaches for Labeling Text: Review and Assessment
+  of the Performance of Active Learning Approaches.'' Political
+  Analysis.
+  \url{http://www-personal.umich.edu/~wmebane/Paper_Active_Learning_Approaches_for_Labeling_Text.pdf}.
+\item
+  Barberá, Pablo, Amber E. Boydstun, Suzanna Linn, Ryan McMahon, and
+  Jonathan Nagler. 2020. ``Automated Text Classification of News
+  Articles: A Practical Guide.'' Political Analysis, June, 1--24.
+  \url{https://doi.org/10.1017/pan.2020.8}.
+\end{itemize}
+
+\hypertarget{week-12}{%
+\subsection{Week 12}\label{week-12}}
+
+\hypertarget{machine-learning-iii-challenges}{%
+\subsubsection{Machine learning III:
+Challenges}\label{machine-learning-iii-challenges}}
 
 \emph{Readings}
 
@@ -595,12 +644,12 @@ Challenges}\label{machine-learning-ii-challenges}}
   Minnesota: Association for Computational Linguistics.
 \end{itemize}
 
-\hypertarget{week-12}{%
-\subsection{Week 12}\label{week-12}}
+\hypertarget{week-13}{%
+\subsection{Week 13}\label{week-13}}
 
-\hypertarget{machine-learning-iii-image-classification}{%
-\subsubsection{Machine learning III: Image
-classification}\label{machine-learning-iii-image-classification}}
+\hypertarget{machine-learning-iv-image-classification}{%
+\subsubsection{Machine learning IV: Image
+classification}\label{machine-learning-iv-image-classification}}
 
 \emph{Readings}
 
@@ -628,55 +677,15 @@ classification}\label{machine-learning-iii-image-classification}}
   for Identifying Collective Action Events with Text and Image Data from
   Social Media.'' Sociological Methodology 49 (1): 1--57.
   \url{https://doi.org/10.1177/0081175019860244}.
-\item
-  Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis
-  Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al.~2017.
-  ``Mastering the Game of Go without Human Knowledge.'' Nature 550
-  (7676): 354--59. \url{https://doi.org/10.1038/nature24270}.
-\end{itemize}
-
-\hypertarget{assignment-4-machine-learning}{%
-\subsection{\texorpdfstring{\emph{Assignment 4: Machine
-learning}}{Assignment 4: Machine learning}}\label{assignment-4-machine-learning}}
-
-\hypertarget{week-13}{%
-\subsection{Week 13}\label{week-13}}
-
-\hypertarget{social-network-analysis}{%
-\subsubsection{Social Network Analysis}\label{social-network-analysis}}
-
-\emph{Readings}
-
-\begin{itemize}
-\tightlist
-\item
-  Watts, Duncan. 1999. ``Networks, Dynamics, and the Small‐World
-  Phenomenon.'' American Journal of Sociology 105 (2): 493--527.
-  \url{https://doi.org/10.1086/210318}.
-\item
-  Aral, Sinan, Lev Muchnik, and Arun Sundararajan. 2009.
-  ``Distinguishing Influence-Based Contagion from Homophily-Driven
-  Diffusion in Dynamic Networks.'' Proceedings of the National Academy
-  of Sciences 106 (51): 21544--21549.
-\item
-  González-Bailón, Sandra, Javier Borge-Holthoefer, Alejandro Rivero,
-  and Yamir Moreno. 2011. ``The Dynamics of Protest Recruitment through
-  an Online Network.'' Scientific Reports 1 (1): 197.
-  \url{https://doi.org/10.1038/srep00197}.
-\item
-  Goel, Sharad, Ashton Anderson, Jake Hofman, and Duncan J. Watts. 2015.
-  ``The Structural Virality of Online Diffusion.'' Management Science,
-  July, 150722112809007. \url{https://doi.org/10.1287/mnsc.2015.2158}.
-\item
-  Block, Per, Christoph Stadtfeld, and Tom Snijders. 2019. ``Forms of
-  Dependence: Comparing SAOMs and ERGMs From Basic Principles.''
-  Sociological Methods \& Research 48 (1): 202--39.
-  \url{https://doi.org/10.1177/0049124116672680}.
 \end{itemize}
 
 \hypertarget{paper-preliminary-analyses-due}{%
 \subsection{\texorpdfstring{\emph{Paper preliminary analyses
 due}}{Paper preliminary analyses due}}\label{paper-preliminary-analyses-due}}
+
+\hypertarget{assignment-4-machine-learning}{%
+\subsection{\texorpdfstring{\emph{Assignment 4: Machine
+learning}}{Assignment 4: Machine learning}}\label{assignment-4-machine-learning}}
 
 \hypertarget{week-14}{%
 \subsection{Week 14}\label{week-14}}
@@ -698,10 +707,6 @@ due}}{Paper preliminary analyses due}}\label{paper-preliminary-analyses-due}}
   Empirical Social Research.'' Sociological Methods \& Research 44 (2):
   186--221. \url{https://doi.org/10.1177/0049124113506405}.
 \item
-  Centola, Damon, and Michael Macy. 2007. ``Complex Contagions and the
-  Weakness of Long Ties.'' American Journal of Sociology 113 (3):
-  702--34. \url{https://doi.org/10.1086/521848}.
-\item
   Centola, Damon. 2015. ``The Social Origins of Networks and
   Diffusion.'' American Journal of Sociology 120 (5): 1295--1338.
   \url{https://doi.org/10.1086/681275}.
@@ -709,12 +714,25 @@ due}}{Paper preliminary analyses due}}\label{paper-preliminary-analyses-due}}
   DellaPosta, Daniel, Yongren Shi, and Michael Macy. 2015. ``Why Do
   Liberals Drink Lattes?'' American Journal of Sociology 120 (5):
   1473--1511. \url{https://doi.org/10.1086/681254}.
+\item
+  Goldberg, Amir, and Sarah K. Stein. 2018. ``Beyond Social Contagion:
+  Associative Diffusion and the Emergence of Cultural Variation.''
+  American Sociological Review 83 (5): 897--932.
+  \url{https://doi.org/10.31235/osf.io/uqvd3}.
+\item
+  Rijt, Arnout van de. 2019. ``Self-Correcting Dynamics in Social
+  Influence Processes.'' American Journal of Sociology 124 (5):
+  1468--95. \url{https://doi.org/10.1086/702899}.
+\item
+  Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis
+  Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al.~2017.
+  ``Mastering the Game of Go without Human Knowledge.'' Nature 550
+  (7676): 354--59. \url{https://doi.org/10.1038/nature24270}.
 \end{itemize}
 
-\hypertarget{assignment-5-social-networks-and-agent-based-models}{%
-\subsection{\texorpdfstring{\emph{Assignment 5: Social networks and
-agent-based
-models}}{Assignment 5: Social networks and agent-based models}}\label{assignment-5-social-networks-and-agent-based-models}}
+\hypertarget{assignment-5-agent-based-models}{%
+\subsection{\texorpdfstring{\emph{Assignment 5: Agent-based
+models}}{Assignment 5: Agent-based models}}\label{assignment-5-agent-based-models}}
 
 \hypertarget{work-on-final-projects}{%
 \section{Work on final projects}\label{work-on-final-projects}}
