@@ -281,7 +281,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Centola, Damon. 2015. “The Social Origins of Networks and Diffusion.” American Journal of Sociology 120 (5): 1295–1338. https://doi.org/10.1086/681275.
 - DellaPosta, Daniel, Yongren Shi, and Michael Macy. 2015. “Why Do Liberals Drink Lattes?” American Journal of Sociology 120 (5): 1473–1511. https://doi.org/10.1086/681254.
 - Goldberg, Amir, and Sarah K. Stein. 2018. “Beyond Social Contagion: Associative Diffusion and the Emergence of Cultural Variation.” American Sociological Review 83 (5): 897–932. https://doi.org/10.31235/osf.io/uqvd3.
-- Rijt, Arnout van de. 2019. “Self-Correcting Dynamics in Social Influence Processes.” American Journal of Sociology 124 (5): 1468–95. https://doi.org/10.1086/702899.
 - Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al. 2017. “Mastering the Game of Go without Human Knowledge.” Nature 550 (7676): 354–59. https://doi.org/10.1038/nature24270.
 
 
