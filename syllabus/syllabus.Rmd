@@ -108,7 +108,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 - *R4DS*: C7-11
 - Freese, Jeremy. 2007. “Replication Standards for Quantitative Social Science: Why Not Sociology?” Sociological Methods & Research 36 (2): 153–72. https://doi.org/10.1177/0049124107306659.
-- Freese, Jeremy, and David Peterson. 2017. “Replication in Social Science,” Annual Review of Sociology.
 - Liu, David, and Matthew Salganik. 2020. “Successes and Struggles with Computational Reproducibility: Lessons from the Fragile Families Challenge,” Socius.
 
 ## Week 3
@@ -133,7 +132,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
-*Note: I have included readings that use a range of different APIs including Reddit (Hamilton et al.), Spotify (Askin and Mauskampf), Facebook (Davidson and Berezin), Google Trends (Davidson and Berezin; Bail, Brown, and Wimmer), Twitter (Mitts), and YouTube (Munger and Phillips). My intent is for you to see the breadth of research making use of APIs rather than to go in-depth into any one study. Make sure to read Dean Freelon's article on the "post-API age."*
+*Note: I have included readings that use a range of different APIs including Reddit (Hamilton et al.), Spotify (Askin and Mauskampf), Facebook (Davidson and Berezin), Google Trends (Davidson and Berezin; Bail, Brown, and Wimmer), Twitter (Mitts), and YouTube (Munger and Phillips). My intent is for you to see the breadth of research making use of APIs rather than to go in-depth into any one study. Make sure to read Deen Freelon's article on the "post-API age."*
 
 - *Bit by Bit*, C2
 - Hamilton, William, Justine Zhang, Cristian Danescu-Niculescu-Mizil, Dan Jurafsky, and Jure Leskovec. 2017. “Loyalty in Online Communities.” ICWSM, 10.
