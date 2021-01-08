@@ -10,6 +10,8 @@ title:
      |
      | SOC576 
      |  COMPUTATIONAL SOCIOLOGY
+     | Rutgers University
+     |
      |  Syllabus
 
 author: Thomas Davidson
@@ -50,8 +52,8 @@ There will be two types of assessment used in the course. There will be several 
 There are weekly reading assignments for this course. These readings include methodological texts, reviews of relevant methodological and theoretical considerations, and examples of how sociologists and other social scientists apply computational approaches in their research. Given the complexity and unfamiliarity of some of the approaches we will cover in the course, I have included a diverse set of readings for each topic. Some students may find the technical readings more useful whereas others may benefit from the more contextualized applications. 
 
 
-## Require texts and useful readings
-*\* indicates a required text. All required texts and useful reading are available for free online on the listed websites.*
+## Require texts and useful references
+*\* indicates a required text. All required texts and useful references are available for free online on the listed websites.*
 
 - \*Matthew Salganik. 2017. *Bit by Bit* (https://www.bitbybitbook.com/en/1st-ed/preface/)
 - \*Wickham, Hadley, and Garrett Grolemund. 2016. *R for Data Science: Import, Tidy, Transform, Visualize, and Model Data*. (*R4DS*). O’Reilly Media, Inc.
@@ -59,7 +61,12 @@ There are weekly reading assignments for this course. These readings include met
 - James, Gareth, Daniela Witten, Trevor Hastie, and Robert Tibshirani. 2013. *An Introduction to Statistical Learning*. Springer Texts in Statistics. (Entire book can be downloaded as a PDF via Rutgers Library)
 - Manning, Christopher D., Hinrich Schütze, and Prabhakar Raghavan. 2008. *Introduction to Information Retrieval*. Cambridge University Press.
  (https://nlp.stanford.edu/IR-book/information-retrieval-book.html)
+- Silge, Julia, and David Robinson. 2017. *Text Mining with R: A Tidy Approach.* O’Reilly Media. https://www.tidytextmining.com/dtm.html.
 - Healy, Kieran. 2018. *Data Visualization: A Practical Introduction*. Princeton University Press. (https://socviz.co/)
+
+# RESOURCES
+
+There will be a Github repository containing all files related to this course (A link will be shared in the first week of class). I will also use this as a space to maintain a wiki links to various related resources. Students will also use Github to submit assignments. We will be using Slack to communicate with one another during this course, all enrolled students will receive an invite to join the Slack channel.
 
 # COURSE POLICIES
 
@@ -86,13 +93,10 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
-- *R4DS*: Preface, C2-6
+- *R4DS*: Preface, C2-6, 21
 - *Bit by Bit*, C1
 - Lazer, David, et al. 2009. “Life in the Network: The Coming Age of Computational Social Science.” Science 323 (5915): 721–23. https://doi.org/10.1126/science.1167742.
-- Golder, Scott A., and Michael W. Macy. 2014. “Digital Footprints: Opportunities and Challenges for Online Social Research.” Annual Review of Sociology 40 (1): 129–52. https://doi.org/10.1146/annurev-soc-071913-043145.
-- Bail, Christopher A. 2014. “The Cultural Environment: Measuring Culture with Big Data.” Theory and Society 43 (3–4): 465–82. https://doi.org/10.1007/s11186-014-9216-5.
 - Edelmann, Achim, Tom Wolff, Danielle Montagne, and Christopher A. Bail. 2020. “Computational Social Science and Sociology.” Annual Review of Sociology 46 (1): annurev-soc-121919-054621. https://doi.org/10.1146/annurev-soc-121919-054621.
-
 
 
 ## Week 2
@@ -102,13 +106,19 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Learning objectives:
     - Understand different types of data structure (list, set, dictionary, matrix)
     - Introduction to the tidyverse
+    
+    Use this as a chance to add in some social networks readings.
 -->
     
 *Readings*
 
-- *R4DS*: C7-11
-- Freese, Jeremy. 2007. “Replication Standards for Quantitative Social Science: Why Not Sociology?” Sociological Methods & Research 36 (2): 153–72. https://doi.org/10.1177/0049124107306659.
-- Liu, David, and Matthew Salganik. 2020. “Successes and Struggles with Computational Reproducibility: Lessons from the Fragile Families Challenge,” Socius.
+- *R4DS*: C7-10, 16
+- Golder, Scott A., and Michael W. Macy. 2014. “Digital Footprints: Opportunities and Challenges for Online Social Research.” Annual Review of Sociology 40 (1): 129–52. https://doi.org/10.1146/annurev-soc-071913-043145.
+- Bail, Christopher A. 2014. “The Cultural Environment: Measuring Culture with Big Data.” Theory and Society 43 (3–4): 465–82. https://doi.org/10.1007/s11186-014-9216-5.
+
+<!--- Breiger, Ronald L. 1974. “The Duality of Persons and Groups.” Social Forces 53 (2): 181–90.
+-->
+
 
 ## Week 3
 ### Programming Fundamentals
@@ -123,7 +133,9 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
-- *R4DS*: C14-17, 21-24
+- *R4DS*: C14-15, 17
+- Freese, Jeremy. 2007. “Replication Standards for Quantitative Social Science: Why Not Sociology?” Sociological Methods & Research 36 (2): 153–72. https://doi.org/10.1177/0049124107306659.
+- Liu, David, and Matthew Salganik. 2020. “Successes and Struggles with Computational Reproducibility: Lessons from the Fragile Families Challenge,” Socius.
     
 ## *Assignment 1: The computational toolkit.*
     
@@ -132,25 +144,35 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
-*Note: I have included readings that use a range of different APIs including Reddit (Hamilton et al.), Spotify (Askin and Mauskampf), Facebook (Davidson and Berezin), Google Trends (Davidson and Berezin; Bail, Brown, and Wimmer), Twitter (Mitts), and YouTube (Munger and Phillips). My intent is for you to see the breadth of research making use of APIs rather than to go in-depth into any one study. Make sure to read Deen Freelon's article on the "post-API age."*
 
+
+- *R4DS*: C11
 - *Bit by Bit*, C2
-- Hamilton, William, Justine Zhang, Cristian Danescu-Niculescu-Mizil, Dan Jurafsky, and Jure Leskovec. 2017. “Loyalty in Online Communities.” ICWSM, 10.
+- Baumgartner, Jason, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Blackburn. 2020. “The Pushshift Reddit Dataset.” In Proceedings of the International AAAI Conference on Web and Social Media, 14:830–39.
+- Freelon, Deen. 2018. “Computational Research in the Post-API Age.” Political Communication 35 (4): 665–68. https://doi.org/10.1080/10584609.2018.1477506. 
+
+*Recommended*
+
+*I have included recommended readings that use a range of different APIs including Spotify (Askin and Mauskampf), Facebook (Davidson and Berezin), Google Trends (Davidson and Berezin; Bail, Brown, and Wimmer), Twitter (Mitts), and YouTube (Munger and Phillips).*
+
 - Askin, Noah, and Michael Mauskapf. 2017. “What Makes Popular Culture Popular? Product Features and Optimal Differentiation in Music.” American Sociological Review 82 (5): 910–44. https://doi.org/10.1177/0003122417728662.
 - Davidson, Thomas, and Mabel Berezin. 2018. “Britain First and the UK Independence Party: Social Media and Movement-Party Dynamics.” Mobilization: An International Quarterly 23 (4): 485–510. https://doi.org/10.17813/1086-671X-23-4-485.
 - Bail, Christopher, Taylor Brown, and Andreas Wimmer. 2019. “Prestige, Proximity, and Prejudice: How Google Search Terms Diffuse across the World.” American Journal of Sociology 124 (5): 1496–1548. https://doi.org/10.1086/702007.
 - Mitts, Tamar. 2019. “From Isolation to Radicalization: Anti-Muslim Hostility and Support for ISIS in the West.” American Political Science Review 113 (1): 173–94. https://doi.org/10.1017/S0003055418000618.
 - Munger, Kevin, and Joseph Phillips. 2020. “Right-Wing YouTube: A Supply and Demand Perspective.” The International Journal of Press/Politics, 34.
-- Freelon, Deen. 2018. “Computational Research in the Post-API Age.” Political Communication 35 (4): 665–68. https://doi.org/10.1080/10584609.2018.1477506.
     
 ## Week 5
 ### Data Collection II: Webscraping
 
 *Readings*
 
-- King, Gary, Jennifer Pan, and Margaret E. Roberts. 2013. “How Censorship in China Allows Government Criticism but Silences Collective Expression.” American Political Science Review 107 (02): 326–43. https://doi.org/10.1017/S0003055413000014.
-- Fiesler, Casey, Nate Beard, and Brian C Keegan. 2020. “No Robots, Spiders, or Scrapers: Legal and Ethical Regulation of Data Collection Methods in Social Media Terms of Service.” In Proceedings of the Fourteenth International AAAI Conference on Web and Social Media, 187–96.
 - *Bit by Bit*, C6
+- Fiesler, Casey, Nate Beard, and Brian C Keegan. 2020. “No Robots, Spiders, or Scrapers: Legal and Ethical Regulation of Data Collection Methods in Social Media Terms of Service.” In Proceedings of the Fourteenth International AAAI Conference on Web and Social Media, 187–96.
+
+
+*Recommended*
+
+- King, Gary, Jennifer Pan, and Margaret E. Roberts. 2013. “How Censorship in China Allows Government Criticism but Silences Collective Expression.” American Political Science Review 107 (02): 326–43. https://doi.org/10.1017/S0003055413000014.
     
 ## *Assignment 2: Collecting and storing data*
 
@@ -173,22 +195,36 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
+- *Text Mining with R*, C1-3.
 - *Introduction to Information Retrieval*, pp. 117-126.
-- DiMaggio, Paul. 2015. “Adapting Computational Text Analysis to Social Science (and Vice Versa).” Big Data & Society 2 (2): 205395171560290. https://doi.org/10.1177/2053951715602908.
 - Grimmer, Justin, and Brandon Stewart. 2013. “Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.” Political Analysis 21 (3): 267–97. https://doi.org/10.1093/pan/mps028.
+- DiMaggio, Paul. 2015. “Adapting Computational Text Analysis to Social Science (and Vice Versa).” Big Data & Society 2 (2): 205395171560290. https://doi.org/10.1177/2053951715602908.
 - Evans, James, and Pedro Aceves. 2016. “Machine Translation: Mining Text for Social Theory.” Annual Review of Sociology 42 (1): 21–50. https://doi.org/10.1146/annurev-soc-081715-074206.
+
+*Recommended*
+
+- Pang, Bo, and Lillian Lee. 2008. “Opinion Mining and Sentiment Analysis.” Foundations and Trends in Information Retrieval 2 (1–2): 1–135.
 - Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In Proceedings of the 22nd International Conference on World Wide Web, 307–318. http://dl.acm.org/citation.cfm?id=2488416.
-- Nelson, Laura 2017. “Computational Grounded Theory: A Methodological Framework.” Sociological Methods & Research, November. https://doi.org/10.1177/0049124117729703.
+- Niculae, Vlad, Srijan Kumar, Jordan Boyd-Graber, and Cristian Danescu-Niculescu-Mizil. 2015. “Linguistic Harbingers of Betrayal: A Case Study on an Online Strategy Game.” ArXiv Preprint ArXiv:1506.04744. http://arxiv.org/abs/1506.04744.
+- McFarland, Daniel A., Dan Jurafsky, and Craig Rawlings. 2013. “Making the Connection: Social Bonding in Courtship Situations.” American Journal of Sociology 118 (6): 1596–1649. https://doi.org/10.1086/670240.
+
+
+<!-- Example of basic use of NLP
+- Paxton, Pamela, Kristopher Velasco, and Robert W Ressler. 2020. “Does Use of Emotion Increase Donations and Volunteers for Nonprofits?” American Sociological Review, 33. -->
 
 ## Week 8
 ### Natural Language Processing II: Word Embeddings
 
 *Readings*
 
+- *Text Mining with R*: C5.
 - Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg Corrado, and Jeff Dean. 2013. “Distributed Representations of Words and Phrases and Their Compositionality.” In Advances in Neural Information Processing Systems, 3111–3119. http://papers.nips.cc/paper/5021-distributed-representations.
 - Hamilton, William, Jure Leskovec, and Dan Jurafsky. 2016. “Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change.” In Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics, 1489–1501.
 - Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. “BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.” In Proceedings of NAACL-HLT 2019, 4171–86. ACL.
 - Kozlowski, Austin, Matt Taddy, and James Evans. 2019. “The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings.” American Sociological Review, September, 000312241987713. https://doi.org/10.1177/0003122419877135.
+
+*Recommended*
+
 - Manning, Christopher D., Kevin Clark, John Hewitt, Urvashi Khandelwal, and Omer Levy. 2020. “Emergent Linguistic Structure in Artificial Neural Networks Trained by Self-Supervision.” Proceedings of the National Academy of Sciences, June, 201907367. https://doi.org/10.1073/pnas.1907367117.
 
 
@@ -197,11 +233,17 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 *Readings*
 
+- *Text Mining with R*: C6.
 - Blei, David 2012. “Probabilistic Topic Models.” Communications of the ACM 55 (4): 77. https://doi.org/10.1145/2133806.2133826.
 - Mohr, John, and Petko Bogdanov. 2013. “Introduction—Topic Models: What They Are and Why They Matter.” Poetics 41 (6): 545–69. https://doi.org/10.1016/j.poetic.2013.10.001.
-- DiMaggio, Paul, Manish Nag, and David Blei. 2013. “Exploiting Affinities between Topic Modeling and the Sociological Perspective on Culture: Application to Newspaper Coverage of U.S. Government Arts Funding.” Poetics 41 (6): 570–606. https://doi.org/10.1016/j.poetic.2013.08.004.
 - Roberts, Margaret, Brandon M. Stewart, Dustin Tingley, Christopher Lucas, Jetson Leder-Luis, Shana Kushner Gadarian, Bethany Albertson, and David Rand. 2014. “Structural Topic Models for Open-Ended Survey Responses: Structural Topic Models for Survey Responses.” American Journal of Political Science 58 (4): 1064–82. https://doi.org/10.1111/ajps.12103.
+
+
+*Recommended*
+
+- DiMaggio, Paul, Manish Nag, and David Blei. 2013. “Exploiting Affinities between Topic Modeling and the Sociological Perspective on Culture: Application to Newspaper Coverage of U.S. Government Arts Funding.” Poetics 41 (6): 570–606. https://doi.org/10.1016/j.poetic.2013.08.004.
 - Karell, Daniel, and Michael Freedman. 2019. “Rhetorics of Radicalism.” American Sociological Review 84 (4): 726–53. https://doi.org/10.1177/0003122419859519.
+- Stoltz, Dustin S, and Marshall A Taylor. 2019. “Textual Spanning: Finding Discursive Holes in Text Networks.” Socius.
 
 ## *Assignment 3: Natural language processing*
 
@@ -211,23 +253,34 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - Molina, Mario, and Filiz Garip. 2019. “Machine Learning for Sociology.” Annual Review of Sociology 45: 27–45.
-- Hofman, Jake, Amit Sharma, and Duncan Watts. 2017. “Prediction and Explanation in Social Systems.” Science 355 (6324): 486–488. https://doi.org/10.1126/science.aal3856.
-- Mullainathan, Sendhil, and Jann Spiess. 2017. “Machine Learning: An Applied Econometric Approach.” Journal of Economic Perspectives 31 (2): 87–106. https://doi.org/10.1257/jep.31.2.87.
 - Davidson, Thomas. 2020. “Black-Box Models and Sociological Explanations: Predicting High School Grade Point Average Using Neural Networks.” Socius: Sociological Research for a Dynamic World 5 (January): 237802311881770. https://doi.org/10.1177/2378023118817702.
 
+*Recommended*
+
+<!--
+- Watts, Duncan J. 2014. “Common Sense and Sociological Explanations.” American Journal of Sociology 120 (2): 313–51. https://doi.org/10.1086/678271.
+- Turco, Catherine J., and Ezra W. Zuckerman. 2017. “Verstehen for Sociology: Comment on Watts.” American Journal of Sociology 122 (4): 1272–91.
+- Watts, Duncan. 2017. “Response to Turco and Zuckerman’s ‘Verstehen for Sociology.’” American Journal of Sociology 122 (4): 1292–99. -->
+- Hofman, Jake, Amit Sharma, and Duncan Watts. 2017. “Prediction and Explanation in Social Systems.” Science 355 (6324): 486–488. https://doi.org/10.1126/science.aal3856.
+- Mullainathan, Sendhil, and Jann Spiess. 2017. “Machine Learning: An Applied Econometric Approach.” Journal of Economic Perspectives 31 (2): 87–106. https://doi.org/10.1257/jep.31.2.87.
 
 ## *Paper initial data collection due*
 
-# Week 11
+## Week 11
 ### Machine learning II: Text classification
 
 *Readings*
 
 - Hanna, Alex. 2013. “Computer-Aided Content Analysis of Digitally Enabled Movements.” Mobilization: An International Quarterly 18 (4): 367–388.
 - Davidson, Thomas, Dana Warmsley, Michael Macy, and Ingmar Weber. 2017. “Automated Hate Speech Detection and the Problem of Offensive Language.” In Proceedings of the 11th International Conference on Web and Social Media (ICWSM), 512–515.
+- Barberá, Pablo, Amber E. Boydstun, Suzanna Linn, Ryan McMahon, and Jonathan Nagler. 2020. “Automated Text Classification of News Articles: A Practical Guide.” Political Analysis, June, 1–24. https://doi.org/10.1017/pan.2020.8.
+- Nelson, Laura 2017. “Computational Grounded Theory: A Methodological Framework.” Sociological Methods & Research, November. https://doi.org/10.1177/0049124117729703.
+
+*Recommended*
+
 - King, Gary, Patrick Lam, and Margaret E. Roberts. 2017. “Computer-Assisted Keyword and Document Set Discovery from Unstructured Text.” American Journal of Political Science 61 (4): 971–88.
 - Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr. 2019. “Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches.” Political Analysis. http://www-personal.umich.edu/~wmebane/Paper_Active_Learning_Approaches_for_Labeling_Text.pdf.
-- Barberá, Pablo, Amber E. Boydstun, Suzanna Linn, Ryan McMahon, and Jonathan Nagler. 2020. “Automated Text Classification of News Articles: A Practical Guide.” Political Analysis, June, 1–24. https://doi.org/10.1017/pan.2020.8.
+
 
 
 ## Week 12
@@ -280,6 +333,10 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Centola, Damon. 2015. “The Social Origins of Networks and Diffusion.” American Journal of Sociology 120 (5): 1295–1338. https://doi.org/10.1086/681275.
 - DellaPosta, Daniel, Yongren Shi, and Michael Macy. 2015. “Why Do Liberals Drink Lattes?” American Journal of Sociology 120 (5): 1473–1511. https://doi.org/10.1086/681254.
 - Goldberg, Amir, and Sarah K. Stein. 2018. “Beyond Social Contagion: Associative Diffusion and the Emergence of Cultural Variation.” American Sociological Review 83 (5): 897–932. https://doi.org/10.31235/osf.io/uqvd3.
+
+*Recommended*
+
+- Shirado, Hirokazu, and Nicholas A. Christakis. 2017. “Locally Noisy Autonomous Agents Improve Global Human Coordination in Network Experiments.” Nature 545 (7654): 370–74. https://doi.org/10.1038/nature22332.
 - Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al. 2017. “Mastering the Game of Go without Human Knowledge.” Nature 550 (7676): 354–59. https://doi.org/10.1038/nature24270.
 
 
