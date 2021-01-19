@@ -8,7 +8,7 @@ geometry: margin=1in
 
 title: 
      |
-     | SOC576 
+     | SOC577
      |  COMPUTATIONAL SOCIOLOGY
      | Rutgers University
      |
@@ -16,13 +16,6 @@ title:
 
 author: Thomas Davidson
 date: "Spring 2021"
-
-email: "thomas.davidson@rutgers.edu"
-web: "https://github.com/t-davidson/computational-sociology/"
-#officehours: "W 09:00-11:30 a.m."
-#office: "230A Brackett Hall"
-#classroom: "*online*"
-classhours: "Mondays 4:10-6:50 p.m."
 
 fontfamily: mathpazo
 fontsize: 10pt
@@ -35,6 +28,15 @@ header-includes:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+# CONTACT AND LOGISTICS
+
+E-mail: ``thomas.davidson@rutgers.edu``
+
+Website: ``https://github.com/t-davidson/computational-sociology``
+
+Class meetings: Mondays 4:10-6:50 p.m. (Zoom)
+
+Office hours: Thursday 4:00-5:00pm and by appointment.
 
 # COURSE DESCRIPTION
 This course is designed to introduce students to computational methods and their applications to sociological research. We will discuss the computational toolkit from the bottom up, beginning with the fundamentals of programming and data analysis and management. Once these fundamentals are in place, we will turn to different methods for collecting data: application programming interfaces, web-scraping, and online experiments. The remainder of the course will focus on computational methods for data analysis. First, we will cover various methods for the quantitative analysis of text data including word embeddings, topic modeling, and supervised learning. Second, we will discuss supervised machine learning in more depth, assessing the relationship between prediction and explanation in social science, discussing bias and other limitations of these methods, as well as the opportunities these techniques present to work with images and multimodal data. Finally, we will explore the role of simulation and agent-based modeling in sociological research. Throughout the course students will gain hands-on experience with these different techniques, as well as an understanding of how these techniques are being used in cutting-edge sociological research. Overall this course will provide students with a strong conceptual foundation in computational sociology and the ability to apply various techniques for data collection and analysis in their own research. All assignments will be conducted using the R programming language.
