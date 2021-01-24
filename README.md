@@ -2,7 +2,7 @@
 
 # Wiki
 
-This Wiki contains information pertaining to SOC576 Computational Sociology, Spring 2021, Rutgers University.
+This Wiki contains information pertaining to SOC577 Computational Sociology, Spring 2021, Rutgers University.
 
 ## Preparation
 
