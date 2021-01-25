@@ -135,7 +135,6 @@ N <- 10
 seq(N) # generates a sequence from 1 to N
 rev(seq(N)) # reverses a vector
 rnorm(N) # samples N times from a normal distribution
-runif(N) # samples N times from a uniform distribution
 rbinom(N,1,0.5) # N observations of a single trial with a 0.5 probability of success
 ```
 
