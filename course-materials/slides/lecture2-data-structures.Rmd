@@ -45,12 +45,6 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
 - Data frames and tibbles
 - A note on style
 
-<!-- 
-# Cover these next week
-- Boolean logic
-- Loading data
-- Tidyverse: tidyr and dplyr -->
-
 # Object-oriented programming
 - A paradigm of computer programming
     - We create *objects* of different *classes* such as numbers, strings, and data frames
@@ -250,7 +244,13 @@ M1[,i] # Returns column i
 Like its component vectors, a matrix contains data of the same type. If we have a mix of data types we generally want to use a ``data.frame``.
 ```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
 df <- iris
-head(df, n=5)
+df$a <- 1
+
+df.2 <- df
+df.2$b <- 2
+
+df <- "wrggrwrg"
+print(df)
 ```
 
 # Data frames
@@ -304,7 +304,8 @@ class(iris.df)
 - Try to avoid extremely long expressions
   - Make complex functions modular (more next lecture)
   - Tidyverse uses the `%>%` operator to help with this (more next lecture)
+- Comment your code for your future self and others
   
 # Questions?
-- Comment your code for your future self and others
+
 

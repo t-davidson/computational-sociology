@@ -182,64 +182,7 @@ include_graphics('../images/package_wars.png')
     - Write in Markdown or Visual Editor
     -   These slides are rendered using RMarkdown
     -   You will be using RMarkdown for your homework assignments and hopefully your papers
-    
-# Github
-## Overview
-- Github is a version-control system
-    - This allows you to easily control and manage changes to your code (similar to Track Changes in Word)
-    - It can facilitate collaboration
-    - Version-control helps to ensure reproducibility
-    - It makes it easy to share code
-- Github is *not* designed as a place to store large datasets (100Mb file size limit)
 
-# Github
-## Usage
-- A Github *repository* (or *repo* for short) contains all files and associated history
-    - A repository can be public or private
-    - Files should be organized into folders
-    - Github can render Markdown files (suffix ``.md`` in Markdown), useful for documentation
-- You can interact with Github either through the website, the command line, the desktop app, or via RStudio
-- Github repositories exist online and you can *clone* them to your local computer
-
-
-# Github
-## Basic commands
-
-- Let's say you want to make changes to a repository, in this case adding a single file called ``myfile.R``:
-1. Make changes to ``myfile.R`` and save the file.
-2. ``git status`` will show information about the status of your repo.
-3. ``git add myfile.R`` will stage the file to be added to the online repo.
-    - Avoid using ``git add *`` 
-4. ``git commit -m "Adding a new file"`` commits the file to the repo, along with an informative message.
-
-# Github
-## Basic commands
-5. ``git push origin main`` then tells Github to push the local changes to the main branch of the online repository
-    - Conversely, ``git pull origin main`` will pull the latest updates from your main branch to your local machine
-6. Now visit the web page for your repository and you should see the changes.
-
-
-# Github
-## Viewing commit histories
-- You can view the history of a given file by looking at the commits
-    - e.g. Let's look at the syllabus for this course https://github.com/t-davidson/computational-sociology/commits/main/syllabus/syllabus.Rmd
-
-# Github
-## Branches
-- A *branch* consists of a particular version of the repo
-    - All repos start with a single branch called *main* (formerly *master*)
-    - You can create separate branches for particular tasks
-        - This is particularly useful for collaboration
-    - You can then *merge* the branch back into main
-        - But be careful of *merge conflicts*
-- A *pull request* is a mechanism for merging content into a repository
-    - This can enable the code to be reviewed before it is integrated
-- The *issue* function can be used to note any issues with the code and to bring them to the repo owner's attention (e.g. https://github.com/tidyverse/ggplot2)
-        
-# Github
-## Forks
-- A *fork* is a copy of another repository (usually from another user)
-    - This allows you to easily copy the repository and modify it without changing the original content
 
 # Slack
 ## Why Slack?
@@ -247,7 +190,7 @@ include_graphics('../images/package_wars.png')
     - Reduces need to email
     - Shared problem solving
 - Code formatting
-    - Use "```" to start a code snippet (Slack should auto-complete) 
+    - Use "```" to start a code snippet (Slack should auto-complete)
 - Emojis!
 
 # Other resources
