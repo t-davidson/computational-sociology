@@ -148,7 +148,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 
 
-- *R4DS*: C11
+- *R4DS*: C11, 13
 - *Bit by Bit*, C2
 - Baumgartner, Jason, Savvas Zannettou, Brian Keegan, Megan Squire, and Jeremy Blackburn. 2020. “The Pushshift Reddit Dataset.” In Proceedings of the International AAAI Conference on Web and Social Media, 14:830–39.
 - Freelon, Deen. 2018. “Computational Research in the Post-API Age.” Political Communication 35 (4): 665–68. https://doi.org/10.1080/10584609.2018.1477506. 
