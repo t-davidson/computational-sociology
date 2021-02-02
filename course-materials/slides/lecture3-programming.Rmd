@@ -130,7 +130,7 @@ FALSE | TRUE & FALSE
 # If-else statements
 - We often encounter situations where we want to make a choice contingent upon the value of some information received.
 - If-else statements allow us to chain together one or more conditional actions.
-  - e.g. If time is between 4:10-6:50pm, attend computatinal sociology class meeting. Else, do something else.
+  - e.g. If time is between 4:10-6:50pm, attend computational sociology class meeting. Else, do something else.
 
 # If-else statements
 The basic syntax. The ``if`` is followed by a conditional statement in parentheses. If the condition is met, then the code in the braces is executed.
@@ -388,7 +388,7 @@ We can also use pipes to do basic arithmetic using pipes. Note again the differe
 
 1 %>% add(2) %>% subtract(10) %>% multiply_by(10)
 ```
-\footnotesize  Note how magrittr provides aliases for certain mathematic operations as shown in the second line. https://stackoverflow.com/questions/27364390/chain-arithmetic-operators-in-dplyr-with-pipe#_=_
+\footnotesize  Note how magrittr provides aliases for certain mathematical operations as shown in the second line. https://stackoverflow.com/questions/27364390/chain-arithmetic-operators-in-dplyr-with-pipe#_=_
 
 # Pipes
 Pipes are particularly useful we're working with tabular data. Here's an example without pipes or nesting. Each line produces an object that is then passed as input to the following line.
@@ -403,7 +403,7 @@ print(summary)
 ```
 
 # Pipes
-In this case the expressins have been nested. This is better as we are not unnecessarily storing intermediate objects. 
+In this case the expressions have been nested. This is better as we are not unnecessarily storing intermediate objects. 
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 summarize(group_by(
   filter(flights, !is.na(dep_delay), !is.na(arr_delay)), 
