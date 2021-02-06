@@ -193,13 +193,13 @@ f <- sample(fruits, 1)
 
 if (f == "apple") {print("We selected an apple")
   } else if (f == "orange") {print("We selected an orange")
-    } else if (f == "pineapple") {print("We selected a pineapple")}
+    } else {print("We selected a pineapple")}
 ```
 
 
 # Loops
 - Often when we program we need to complete the same operation many times. One of the common approaches is to use a loop.
-- There are three main kinds of loops
+- There are two kinds of loops you will encounter
   - For-loops
     - Iterative over an entire sequence
   - While-loops
@@ -229,6 +229,8 @@ for i in range(1,10001):
 print(s)
 ```
 \footnotesize The syntax varies slightly across programming languages but the basic structure is very similar, as this Python example shows. Note that for-loops and other functions in R tend to use braces around the operations. We will see this again when we look at functions.
+
+<!-- The Python code fails to knit unless the cell is executed directly prior to knitting. It seems like the Python environment needs to be manually initialized before the knitting works.-->
 
 # For-loops
 ```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
