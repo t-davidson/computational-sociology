@@ -1,0 +1,437 @@
+---
+title: "Computational Sociology" 
+subtitle: "Observational Studies and Application Programming Interfaces"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: February 8, 2021
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+# Plan
+
+- Course updates
+- Digital trace data
+- Strings and dates
+- Application Programming Interfaces (APIs)
+  - What are they?
+  - How do they work?
+  - Using an API
+- The Post-API Age?
+
+# Course updates
+## Homework
+- Homework tomorrow (2/9) at 5pm Eastern.
+  - Please push your final version to Github with the appropriate commit message
+  - Use Slack to ask questions and collaboratively solve problems
+  - I can also provide help using the feedback pull request feature on Github
+
+# Course updates
+## Project proposal
+- Meet to discuss project ideas
+- Project proposal due 3/2, 3-5 pages double-spaced
+  - Introductory paragraph
+  - Brief literature review (~1 page)
+    - Focus on your main research question(s)
+  - Data
+    - Potential data sources
+    - Collection plan
+  - Methodology
+    - Possible methods for analysis
+  - References
+  
+<!--TODO: Complete below-->
+
+# Digital trace data
+## Defining "big data"
+"The first way that many people encounter social research in the digital age is through what is often called big data. Despite the widespread use of this term, there is no consensus about what big data even is." - Salganik, C2.2
+  
+# Digital trace data
+## Advantages of "big data"
+- Size
+  - Large-scale processes
+  - Hetereogeneity
+  - Rare events
+  - Small effects
+
+# Digital trace data
+## Advantages of "big data"
+- Always-on
+  - Longitudinal studies
+  - Unexpected events
+- Non-reactive
+  - Stigmatized behaviors
+  - Hidden populations
+  
+# Digital trace data
+## Disadvantages of "big data"
+- Incomplete
+- Inaccessible
+- Non-representative
+- Drift
+- Algorithmic confounding
+- Dirty
+- Sensitive
+
+# Digital trace data
+## Big data and observational data
+"A first step to learning from big data is realizing that it is part of a broader category of data that has been used for social research for many years: observational data. Roughly, observational data is any data that results from observing a social system without intervening in some way." - Salganik, C2.1
+
+
+# Digital trace data
+## Repurposing digital traces
+"In the analog age, most of the data that were used for social research was created for the purpose of doing research. In the digital age, however, a huge amount of data is being created by companies and governments for purposes other than research, such as providing services, generating profit, and administering laws. Creative people, however, have realized that you can repurpose this corporate and government data for research." - Salganik, C2.2
+
+# Digital trace data
+## Kinds of analysis
+- Counting things
+  - e.g. What types of social media posts are censored in China?
+- Forecasting
+  - e.g. Can we predict flu prevalence using Google Searches?
+- Approximating experiments
+  - e.g. Does social influence predict product adoption?
+  
+# Digital trace data
+## Some advice
+- For most social scientific questions we don't need huge data
+  - Analyses are also intractable with large datasets
+- Start with a question then find data to answer it
+  - Although data exploration can lead to new questions
+  
+# APIs
+## What is an API?
+- An Application Programming Interface is a way to programmatically interact with a website
+- It allows servers to directly communicate with one another
+- You can make requests to request, modify, or delete data
+  - Different APIs allow for different types of interactions
+  - Most of the time you will want to request data
+- Remember: APIs are typically created for developers with different user cases to academic researchers
+
+# APIs
+## How does an API work?
+1. Construct an API request
+2. The client (our computer) sends the request to the API server
+3. The server processes the request, retrieving any relevant data from a database
+4. The server sends back the requested data to the client
+
+
+# How does an API work?
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../IMAGES/api.png')
+```  
+\tiny https://sites.psu.edu/annaarsiriy/files/2019/02/Screen-Shot-2019-02-10-at-2.31.08-PM-1p26wa2.png
+
+# APIs
+## Github API example
+Here is a simple call to `users` *endpoint* of the Github API: https://api.github.com/users/t-davidson
+
+# APIs
+## Github API example
+The original API call provides us with other information. We could use this to find my followers: https://api.github.com/users/t-davidson/followers
+
+# APIs
+## Credentials
+- Often APIs will use credentials to control access
+  - A *key* (analogous to a username)
+  - A *secret* (analogous to a password)
+  - An *access token* (grants access based on key and password)
+  - Generally the access token is provided as part of the call
+- Keep credentials private
+  - Avoid accidentally sharing them on Github
+
+# APIs
+## Rate-limiting
+- APIs use rate-limiting to control usage
+  - How many API calls you can make
+  - How much data you can retrieve
+- Obey rate-limits, otherwise your credentials may be blocked
+- APIs sometimes show you your rate limits
+  - e.g., `https://api.github.com/rate_limit`
+  
+
+# APIs
+## JSON
+- An API will commonly return data in JSON (JavaScript Object Notation) format
+  - Format: `{"key": "value"}`
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../IMAGES/github_json.png')
+```  
+
+
+# APIs
+## Calling an API in R
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+library(httr)
+library(jsonlite)
+library(tidyverse)
+
+url <- "https://api.github.com/users/t-davidson"
+request <- GET(url = url)
+response <- content(request, as = "text", encoding = "UTF-8")
+data <- fromJSON(response)
+```
+
+# APIs
+## Calling an API in R
+We can use pipes to chain together these operations.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+data <- GET(url = url) %>%
+  content(as = "text", encoding = "UTF-8") %>%
+  fromJSON()
+```
+
+# APIs
+## Calling an API in R
+`class` shows us that the object is a list. We can then use the `$` operator to pull out specific elements.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+class(data)
+data$name
+data$followers_url
+```
+
+# APIs
+## Calling an API in R
+We can make another API call to get information on followers.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+followers <- GET(url = data$followers_url) %>%
+  content(as = "text", encoding = "UTF-8") %>%
+  fromJSON() %>% as_tibble()
+```
+
+# APIs
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+print(followers)
+```
+
+# APIs
+## Calling an API in R
+Let's make a function to repeat this process to get the followers' followers.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+get.followers <- function(followers.url) {
+  followers <- GET(url = followers.url) %>%
+  content(as = "text", encoding = "UTF-8") %>%
+  fromJSON() %>% as_tibble()
+  return(followers)
+}
+```
+
+# APIs
+## Calling an API in R
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+senders <- character() # list of people following others
+receivers <- character() # list of those receiving ties
+
+for (i in 1:dim(followers)[1]) {
+  i.id <- followers$login[i] # get follower name
+  receivers <- append(receivers, "t-davidson") # update edge-listss
+  senders <- append(senders, i.id)
+  i.followers <- get.followers(followers$followers_url[i]) # get i's followers
+  for (j in 1:dim(i.followers)[1]) {# for each follower
+    if (j <= 5) { # only consider their first 5 followers
+    receivers <- append(receivers, i.id) # update edgelist
+    senders <- append(senders, i.followers$login[j])
+    }
+  }
+}
+```
+We can now use this function to build a network.
+
+# APIs
+## Calling an API in R
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', include=TRUE}
+library(igraph)
+library(ggnetwork)
+A <- cbind(senders[1:100], receivers[1:100]) # take first 100 edges
+G <- graph_from_edgelist(A, directed = TRUE) # construct a graph
+G %>% ggnetwork() %>% ggplot(aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(arrow = arrow(length = unit(4, "pt"), type = "closed")) +
+  geom_nodes(size=4) +
+  geom_nodelabel_repel(aes(label=ifelse(name == "t-davidson", name, NA)),  box.padding = unit(1, "lines"), color="green") +
+  theme_blank()
+```
+
+# APIs
+## Using the Spotify API
+- It's always good to start by reading the documentation
+  - https://developer.spotify.com/documentation/web-api/
+- This provides information on the API, endpoints, rate-limits, etc.
+
+# APIs
+## Using the Spotify API
+Let's log in to use the API.
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../IMAGES/spotify1.png')
+```  
+\tiny https://developer.spotify.com/dashboard/
+
+# APIs
+## Using the Spotify API
+Click on this button to create a new app.
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../IMAGES/spotify2.png')
+```  
+
+# APIs
+## Using the Spotify API
+- Copy your credentials and paste them into `creds.json`
+  - Storing credentials in a separate file helps to keep them separated from anything you might commit to Github
+
+# APIs
+## Using the Spotify API
+We're going to be using `spotifyr`, a *wrapper* around the spotify API. This allows us to make use of the functionality without needing to write the API calls, make requests, or convert the results to JSON/tabular format.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+#library(devtools)
+# devtools::install_github('charlie86/spotifyr') # install directly from github
+library("spotifyr")
+```
+\footnotesize  `devtools` package can be used to install a library directly from Github. You can read more about the library here: https://www.rcharlie.com/spotifyr/.
+
+# APIs
+## Using the Spotify API
+Now let's read in the credentials and create a token.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+creds <- read_json("creds.json") # read creds
+
+Sys.setenv(SPOTIFY_CLIENT_ID = creds$id) # set creds
+Sys.setenv(SPOTIFY_CLIENT_SECRET = creds$secret)
+
+access_token <- get_spotify_access_token() # retrieve access token
+```
+
+# APIs
+## Using the Spotify API
+Now we're authorized, we can use the package to retrieve information from the API.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+#?get_artist_audio_features
+stones <- get_artist_audio_features("The Rolling Stones") %>% as_tibble()
+colnames(stones)
+```
+
+# APIs
+## Using the Spotify API
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+head(stones$track_name, n=10)
+```
+
+# APIs
+## Using the Spotify API
+We can use this `tibble` to calculate some statistics about the group.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+results <- stones %>% filter(album_release_year < 2015) %>% group_by(album_release_year) %>% summarize(mean.dan = mean(danceability), mean.ac = mean(acousticness), var.valence = var(valence))
+``` 
+
+
+# APIs
+## Using the Spotify API
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+p <- ggplot(results, aes(x=album_release_year, y=mean.dan))
+p + geom_line() + geom_smooth() + labs(title="Danceability of the Rolling Stones over time", caption = "Data from collect from Spotify API") + xlab("") + ylab("Mean danceability") + theme_bw()
+```
+
+# APIs
+## Using the Spotify API
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+p <- ggplot(results, aes(x=album_release_year, y=mean.ac))
+p + geom_line() + geom_smooth() + xlab("") + labs(title="Acousticness of the Rolling Stones over time", caption = "Data from collect from Spotify API")  + xlab("") + ylab("Mean acousticness") + theme_bw()
+```
+
+# APIs
+## Using the Spotify API
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+p <- ggplot(results, aes(x=album_release_year, y=var.valence))
+p + geom_line() + geom_smooth() + xlab("") + labs(title="Variance in valence of the Rolling Stones over time", caption = "Data from collect from Spotify API")  + xlab("") + ylab("Variance of valence") + theme_bw()
+```
+
+# APIs
+## Using the Spotify API
+Let's collect the same data for Pink Floyd and combine it.
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+pf <- get_artist_audio_features("Pink Floyd") %>% as_tibble()
+both <- bind_rows(stones, pf)
+
+r <- both %>% filter(album_release_year < 2015) %>% group_by(album_release_year, artist_name) %>% summarize(mean.dan = mean(danceability), mean.ac = mean(acousticness), sd.valence = var(valence), artist_name)
+```  
+
+# APIs
+## Using the Spotify API
+Let's compare their danceability.
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+p <- ggplot(r, aes(x=album_release_year, y=mean.dan, color=artist_name))
+p + geom_line() + geom_smooth() + labs(title="Comparing danceability of the Rolling Stones and Pink Floyd", caption = "Data from collect from Spotify API") + xlab("") + ylab("Mean danceability") + theme_bw()
+```  
+
+# APIs
+## Using the Spotify API
+- Some features require a Spotify login
+  - Edit the settings for the app and add `http://localhost:1410/` to Redirect URIs
+  - This tells the API to open up authentication on port 1410 of your computer
+
+# APIs
+## Using the Spotify API
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(lubridate)
+get_my_recently_played(limit = 5) %>% 
+    mutate(artist.name = map_chr(track.artists, function(x) x$name[1]),
+           played_at = as_datetime(played_at)) %>% 
+    select(track.name, artist.name, track.album.name, played_at) %>% as_tibble()
+```
+\tiny Example from the `spotifyr` documentation. Note this will only work if you have added a redirect URI to your app.
+
+# APIs
+## Best-practices
+- If available, use a wrapper
+  - Although sometimes you will have to write your own queries
+- Build in functions to obey rate-limits where possible
+- Access only the data you need
+- Test using small examples before collecting a large dataset
+
+# APIs
+## The post-API age?
+- Following Facebook's decision in 2018 to close down access to its Pages API, Deen Freelon writes:
+  - "We find ourselves in a situation where heavy investment in teaching and learning platform-specific methods can be rendered useless overnight."
+- Recommendations
+  - Learn to web scrape (next week)
+  - Understand terms of service and implications of violating them
+  
+# APIs
+## The post-API age?
+- The future for APIs seems brighter
+  - Facebook is making more data available via CrowdTangle and other APIs
+    - Although stricter protections for user data due to privacy concerns
+  - Twitter just announced increases in access for academic researchers
+  - Much of Reddit is available via Pushshift
+    
+# Questions?
+    
+
+    
+    
+
+
