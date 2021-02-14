@@ -2,3 +2,5 @@
 .ipynb_checkpoints
 .RHistory
 .tex
+.aux
+.RProj
