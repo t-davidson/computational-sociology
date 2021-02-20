@@ -195,6 +195,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Evans, James, and Pedro Aceves. 2016. “Machine Translation: Mining Text for Social Theory.” *Annual Review of Sociology* 42 (1): 21–50. https://doi.org/10.1146/annurev-soc-081715-074206.
 
 *Recommended*
+
 - *Introduction to Information Retrieval*, pp. 117-126.
 - Danescu-Niculescu-Mizil, Cristian, Lillian Lee, Bo Pang, and Jon Kleinberg. 2012. “Echoes of Power: Language Effects and Power Differences in Social Interaction.” In *Proceedings of the 21st International Conference on World Wide Web*, 699–708. ACM. http://dl.acm.org/citation.cfm?id=2187931.
 - Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In *Proceedings of the 22nd International Conference on World Wide Web*, 307–318. http://dl.acm.org/citation.cfm?id=2488416.
