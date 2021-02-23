@@ -48,7 +48,7 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
   - Due 3/5 at 5pm EST
   
 # Course updates
-- Project proposal due 3/2 at 5pm
+- Project proposal due 3/5 at 5pm
   - Submission via a Google Form (To be shared on Slack)
   - Schedule meeting to discuss your project idea before submitting
 - 3-5 pages, double-spaced

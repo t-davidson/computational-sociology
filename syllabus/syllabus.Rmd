@@ -158,7 +158,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 5
 ### Data Collection II: Webscraping
 
-## *Assignment 2: Collecting and storing data released. Due 3/2 at 5pm.*
+## *Assignment 2: Collecting and storing data released. Due 3/5 at 5pm.*
 
 *Readings*
 
@@ -284,6 +284,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - Salganik, Matthew, Ian Lundberg, Alexander Kindel, et al. 2020. “Measuring the Predictability of Life Outcomes with a Scientiﬁc Mass Collaboration.” *Proceedings of the National Academy of Sciences*.
+- Garip, Filiz. 2020. “What Failure to Predict Life Outcomes Can Teach Us.” *Proceedings of the National Academy of Sciences*.
 - Buolamwini, Joy, and Timnit Gebru. 2018. “Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classiﬁcation.” In *Proceedings of Machine Learning Research*, 81:1–15.
 - Davidson, Thomas, Debasmita Bhattacharya, and Ingmar Weber. 2019. “Racial Bias in Hate Speech and Abusive Language Detection Datasets.” In *Proceedings of the Third Workshop on Abusive Language Online*, 25–35. Florence, Italy: Association for Computational Linguistics. https://doi.org/10.18653/v1/W19-3504.
 - De-Arteaga, Maria, Alexey Romanov, Hanna Wallach, Jennifer Chayes, Christian Borgs, Alexandra Chouldechova, Sahin Geyik, Krishnaram Kenthapadi, and Adam Tauman Kalai. 2019. “Bias in Bios: A Case Study of Semantic Representation Bias in a High-Stakes Setting.” In *Proceedings of the Conference on Fairness, Accountability, and Transparency  - FAT* ’19, 120–28. Atlanta, GA, USA: ACM Press. https://doi.org/10.1145/3287560.3287572.
