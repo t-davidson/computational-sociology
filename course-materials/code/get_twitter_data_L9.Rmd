@@ -19,12 +19,7 @@ knitr::opts_chunk$set(error = TRUE)
 # Required packages
 library(rmarkdown)
 library(tidyverse)
-library(knitr)
-library(magrittr)
-library(jsonlite)
-library(rvest)
 library(rtweet)
-library(reticulate)
 ```
 
 Loading credentials
@@ -43,5 +38,5 @@ Getting 1000 most recent statuses for NYTimes and WSJ.
 tl <- get_timeline(c("nytimes", "wsj"), n = 1000)
 ### Your code here
 tl <- tl %>% select(status_id, created_at, screen_name, text, favorite_count, retweet_count)
-write.table(tl, "../data/nytimes_wsj_1000_statuses_march192021.csv")
+write_tsv(tl, "../data/nytimes_wsj_1000_statuses_march192021.tsv")
 ```
