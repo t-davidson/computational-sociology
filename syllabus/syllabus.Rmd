@@ -217,6 +217,8 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Hamilton, William, Jure Leskovec, and Dan Jurafsky. 2016. “Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change.” In *Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics*, 1489–1501.
 - Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. “BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.” In *Proceedings of NAACL-HLT 2019*, 4171–86. ACL.
 - Manning, Christopher D., Kevin Clark, John Hewitt, Urvashi Khandelwal, and Omer Levy. 2020. “Emergent Linguistic Structure in Artificial Neural Networks Trained by Self-Supervision.” *Proceedings of the National Academy of Sciences*, June, 201907367. https://doi.org/10.1073/pnas.1907367117.
+- Rodman, Emma. 2019. “A Timely Intervention: Tracking the Changing Meanings of Political Concepts with Word Vectors.” *Political Analysis*l, July, 1–25. https://doi.org/10.1017/pan.2019.23.
+
 
 
 ## **NO CLASS. SPRING BREAK**
@@ -224,8 +226,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 9
 ### Natural Language Processing III: Topic Models
 
-## *Paper initial data collection due on 3/23 at 5pm.*
-## *Assignment 3: Natural language processing released. Due 3/30 at 5pm.*
+## *Assignment 3: Natural language processing released. Due 4/2 at 5pm.*
 
 *Readings*
 
@@ -247,7 +248,9 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - Molina, Mario, and Filiz Garip. 2019. “Machine Learning for Sociology.” *Annual Review of Sociology* 45: 27–45.
+- Grimmer, Justin, Margaret E. Roberts, and Brandon M. Stewart. 2021. “Machine Learning for Social Science: An Agnostic Approach.” *Annual Review of Political Science* 24 (1): annurev-polisci-053119-015921. https://doi.org/10.1146/annurev-polisci-053119-015921.
 - Davidson, Thomas. 2020. “Black-Box Models and Sociological Explanations: Predicting High School Grade Point Average Using Neural Networks.” *Socius: Sociological Research for a Dynamic World* 5 (January): 237802311881770. https://doi.org/10.1177/2378023118817702.
+
 
 *Recommended*
 
@@ -262,35 +265,45 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 11
 ### Machine learning II: Text classification
 
+## *Paper initial data collection due on 4/9 at 5pm.*
+
 *Readings*
 
 - Hanna, Alex. 2013. “Computer-Aided Content Analysis of Digitally Enabled Movements.” *Mobilization: An International Quarterly* 18 (4): 367–388.
-- Davidson, Thomas, Dana Warmsley, Michael Macy, and Ingmar Weber. 2017. “Automated Hate Speech Detection and the Problem of Offensive Language.” In *Proceedings of the 11th International Conference on Web and Social Media* (ICWSM), 512–515.
-- Barberá, Pablo, Amber E. Boydstun, Suzanna Linn, Ryan McMahon, and Jonathan Nagler. 2020. “Automated Text Classification of News Articles: A Practical Guide.” *Political Analysis*, June, 1–24. https://doi.org/10.1017/pan.2020.8.
 - Nelson, Laura 2017. “Computational Grounded Theory: A Methodological Framework.” *Sociological Methods & Research*, November. https://doi.org/10.1177/0049124117729703.
+- Barberá, Pablo, Amber E. Boydstun, Suzanna Linn, Ryan McMahon, and Jonathan Nagler. 2020. “Automated Text Classification of News Articles: A Practical Guide.” *Political Analysis*, June, 1–24. https://doi.org/10.1017/pan.2020.8.
+
+
 
 *Recommended*
 
+
 - King, Gary, Patrick Lam, and Margaret E. Roberts. 2017. “Computer-Assisted Keyword and Document Set Discovery from Unstructured Text.” *American Journal of Political Science* 61 (4): 971–88.
 - Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr. 2019. “Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches.” *Political Analysis*. http://www-personal.umich.edu/~wmebane/Paper_Active_Learning_Approaches_for_Labeling_Text.pdf.
+- Dun, Lindsay, Stuart Soroka, and Christopher Wlezien. 2020. “Dictionaries, Supervised Learning, and Media Coverage of Public Policy.” Political Communication, June, 1–19. https://doi.org/10.1080/10584609.2020.1763529.
 
 
 
 ## Week 12
 ### Machine learning III: Challenges
 
-## *Paper preliminary analyses due 4/13 at 5pm*
-## *Assignment 4: Machine learning released. Due 4/20 at 5pm*
+## *Assignment 4: Machine learning released. Due 4/23 at 5pm*
 
 *Readings*
 
 - Salganik, Matthew, Ian Lundberg, Alexander Kindel, et al. 2020. “Measuring the Predictability of Life Outcomes with a Scientiﬁc Mass Collaboration.” *Proceedings of the National Academy of Sciences*.
 - Garip, Filiz. 2020. “What Failure to Predict Life Outcomes Can Teach Us.” *Proceedings of the National Academy of Sciences*.
+- Dixon, Lucas, John Li, Jeffrey Sorensen, Nithum Thain, and Lucy Vasserman. 2018. “Measuring and Mitigating Unintended Bias in Text Classification.” In *Proceedings of the 2018 AAAI/ACM Conference on AI, Ethics, and Society*  - AIES ’18, 67–73. New Orleans, LA, USA: ACM Press. https://doi.org/10.1145/3278721.3278729.
 - Buolamwini, Joy, and Timnit Gebru. 2018. “Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classiﬁcation.” In *Proceedings of Machine Learning Research*, 81:1–15.
-- Davidson, Thomas, Debasmita Bhattacharya, and Ingmar Weber. 2019. “Racial Bias in Hate Speech and Abusive Language Detection Datasets.” In *Proceedings of the Third Workshop on Abusive Language Online*, 25–35. Florence, Italy: Association for Computational Linguistics. https://doi.org/10.18653/v1/W19-3504.
 - De-Arteaga, Maria, Alexey Romanov, Hanna Wallach, Jennifer Chayes, Christian Borgs, Alexandra Chouldechova, Sahin Geyik, Krishnaram Kenthapadi, and Adam Tauman Kalai. 2019. “Bias in Bios: A Case Study of Semantic Representation Bias in a High-Stakes Setting.” In *Proceedings of the Conference on Fairness, Accountability, and Transparency  - FAT* ’19, 120–28. Atlanta, GA, USA: ACM Press. https://doi.org/10.1145/3287560.3287572.
+- Davidson, Thomas, Debasmita Bhattacharya, and Ingmar Weber. 2019. “Racial Bias in Hate Speech and Abusive Language Detection Datasets.” In *Proceedings of the Third Workshop on Abusive Language Online*, 25–35. Florence, Italy: Association for Computational Linguistics. https://doi.org/10.18653/v1/W19-3504.
+
+*Recommended*
+
 - Gonen, Hila, and Yoav Goldberg. 2019. “Lipstick on a Pig: Debiasing Methods Cover up Systematic Gender Biases in Word Embeddings But Do Not Remove Them.” In Proceedings of NAACL_HLT, 609–14. Minneapolis, Minnesota: Association for Computational Linguistics.
 - Bender, Emily M, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. “On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?” In *Conference on Fairness, Accountability, and Transparency* (FAccT ’21), 14. Canada: ACM Press.
+- Sambasivan, Nithya, Shivani Kapania, Hannah Highfill, Diana Akrong, Praveen Paritosh, and Lora Aroyo. 2021. “``Everyone Wants to Do the Model Work, Not the Data Work’’: Data Cascades in High-Stakes AI.” In , 15.
+
 
 
 
@@ -300,9 +313,13 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 *Readings*
 
 - Krizhevsky, Alex, Ilya Sutskever, and Geoffrey Hinton. 2012. “Imagenet Classification with Deep Convolutional Neural Networks.” In *Advances in Neural Information Processing Systems*, 1097–1105. http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks.
+- Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. 2017. “Feature Visualization.” *Distill*. https://doi.org/10.23915/distill.00007.
 - Jean, N., M. Burke, M. Xie, W. M. Davis, D. B. Lobell, and S. Ermon. 2016. “Combining Satellite Imagery and Machine Learning to Predict Poverty.” *Science* 353 (6301): 790–94. https://doi.org/10.1126/science.aaf7894.
 - Gebru, Timnit, Jonathan Krause, Yilun Wang, Duyun Chen, Jia Deng, Erez Lieberman Aiden, and Li Fei-Fei. 2017. “Using Deep Learning and Google Street View to Estimate the Demographic Makeup of Neighborhoods across the United States.” *Proceedings of the National Academy of Sciences* 114 (50): 13108–13. https://doi.org/10.1073/pnas.1700035114.
 - Zhang, Han, and Jennifer Pan. 2019. “CASM: A Deep-Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media.” *Sociological Methodology* 49 (1): 1–57. https://doi.org/10.1177/0081175019860244.
+- Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. “Learning Transferable Visual Models From Natural Language Supervision.” OpenAI, 47. [Blog: https://openai.com/blog/clip/, code: https://github.com/openai/CLIP].
+  - See https://microscope-azure-edge.openai.com/models for model visualizations
+
 
 <!--
 ## Week 13
@@ -320,6 +337,8 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 14
 ### Agent-Based Models
 
+## *Paper preliminary analyses due 4/30 at 5pm*
+
 *Readings*
 
 - Macy, Michael, and Robert Willer. 2002. “From Factors to Factors: Computational Sociology and Agent-Based Modeling.” *Annual Review of Sociology* 28 (1): 143–66. https://doi.org/10.1146/annurev.soc.28.110601.141117.
@@ -335,6 +354,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 
 # Week 15
 ## Student presentations
+- 5 minute presentation, plus Q&A for each student
 
 
 
