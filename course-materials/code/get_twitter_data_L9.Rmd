@@ -7,8 +7,6 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-# Do not edit this chunk
-
 # The following lines define how the output of code chunks should behave
 knitr::opts_chunk$set(echo = TRUE)
 knitr::opts_chunk$set(include = TRUE)
@@ -20,6 +18,7 @@ knitr::opts_chunk$set(error = TRUE)
 library(rmarkdown)
 library(tidyverse)
 library(rtweet)
+library(jsonlite)
 ```
 
 Loading credentials
@@ -33,10 +32,11 @@ token <- create_token(
   consumer_secret = creds$secret)
 ```
 
-Getting 1000 most recent statuses for NYTimes and WSJ.
+Getting 2000 most recent statuses for NYTimes and WSJ.
 ```{r q6, echo=TRUE, tidy=TRUE}
-tl <- get_timeline(c("nytimes", "wsj"), n = 1000)
+tl <- get_timeline(c("nytimes", "wsj"), n = 2000)
 ### Your code here
 tl <- tl %>% select(status_id, created_at, screen_name, text, favorite_count, retweet_count)
-write_tsv(tl, "../data/nytimes_wsj_1000_statuses_march192021.tsv")
+tl$status_id <- as.character(tl$status_id) # Convert IDs to string
+write_tsv(tl, "../data/nytimes_wsj_2000_statuses_march222021.tsv")
 ```
