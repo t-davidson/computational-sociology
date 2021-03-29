@@ -1,0 +1,529 @@
+---
+title: "Computational Sociology" 
+subtitle: "Machine Learning"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: March 29, 2021
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \usepackage{hyperref}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+# Plan
+1. Course updates
+2. Introduction to machine learning
+3. Model evaluation
+4. Classification algorithms
+5. Machine learning in R
+
+<!--Topics:
+- ML vs statistics; predictin vs. explanation
+- ML and sociology
+- Supervised vs. unsupervised
+- Feature construction
+- Bias-variance trade-offs
+- Overfitting
+  - Regularization
+- Cross-validation
+  - K-fold
+    - Train, test, validation split
+- Accuracy
+  - Precision, recall, F1, AUC
+- Classification algorithms
+  - Logistic regression
+  - Naive Bayes
+  - SVM
+  - Decision tree
+  - Random forest
+  - Neural network
+- Parameter search
+- Deploying a model
+- Training data
+  - More next week
+-->
+
+# Course updates
+## Homework 3
+- Homework 3 has now been released
+  - Due next Monday at 4pm
+  
+# Roadmap
+## A month of machine learning
+1. Introduction to supervised machine learning
+2. Supervised text classification
+3. Challenges: Unpredictability and bias
+4. Supervised image classification / computer vision
+
+# Introduction to machine learning
+## What is machine learning?
+- Machine learning is a method to "automate discovery from data" (Molina and Garip 2019).
+- It is a method well-suited to working with large datasets and has a range of different applications (Grimmer, Roberts, and Stewart 2021).
+
+
+# Introduction to machine learning
+## Supervised and unsupervised learning
+- *Supervised machine learning*
+  - We observe an output $Y$ for each input $X$.
+  - The goal is to learn a function to predict $X$ given $Y$
+  - Often SML is used for *classification* problems, where the goal is the classify observation into discrete classes.
+- *Unsupervised machine learning*
+  - We only observe $X$, there is often no "correct" answer $Y$
+    - e.g. Topic modeling.
+
+# Introduction to machine learning
+## Prediction and explanation in sociology
+- Most sociological analyses are *explanatory*
+  - The objective is to explain a relationship between variables, descriptive or causal.
+- Watts (2014) argues that we must pay more attention to *prediction* and consider the *predictive validity* of sociological theories.
+  - This may allow us to better understand the scope and robustness of many sociological findings.
+
+\tiny See Watts, Duncan J. 2014. “Common Sense and Sociological Explanations.” American Journal of Sociology 120 (2): 313–51. https://doi.org/10.1086/678271 and the debate with Turco and Zuckerman.
+
+<!--Discuss ML and sociology.
+Describe some of the breakthroughs/potentials discussed in Molina and Garip
+-->
+
+# Introduction to machine learning
+## Prediction and explanation in sociology
+- Consider the following linear model: $$Y = \hat{\beta_0} +  \hat{\beta_1} + \epsilon$$
+- Social scientists are typically interested in the $\hat{\beta}$ given $Y$, whereas computer scientists are more interested models to predict $\hat{Y}$.
+- What can we learn by constructing models optimized to predict $\hat{Y}$?
+
+# Introduction to machine learning
+## Prediction and explanation in sociology
+- Predictive models are specified differently to explanatory ones:
+  - In a regression context, we might use theory to guide the selection of a handful of *variables* to appropriately estimate $\hat{\beta}$.
+  - In a predictive context, we want to find the function $f(X)$, such that $Y = f(X)$. This often involves many more variables and a more complex functional form.
+    - Variables in the ML context are referred to as *features*. 
+    
+# Introduction to machine learning
+## Why predict?
+- Policy interventions
+- Document classification
+- Causal inference
+- Record linkage and data imputation
+
+# Introduction to machine learning
+## Why predict?
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../images/grs.png')
+``` 
+\tiny \centering Grimmer, Roberts, and Stewart 2021.
+
+# Introduction to machine learning
+## Data splitting and model training
+- In supervised machine learning we generally split our data into two groups, *training* and *testing*
+- The *training* data is used to train a model or to estimate $Y = f(X)$.
+  - The model uses $X$ to predict a *known* $Y$.
+- The *testing* data is used to chose and evaluate a model. This is also referred to as *held-out* or *out-of-sample* data.
+  - We take our trained model and predict $Y$ for the test examples. 
+  - We then compare $\hat{Y}$ to $Y$ to assess predictive accuracy.
+- Sometimes we reserve a third *validation* set of data that we only use at the end of the process.
+  - Unlike the testing data, we never use it for model selection.
+
+# Introduction to machine learning
+## Vignette
+- Let's say we want to predict a college-attendance given information about their early childhood.
+- The explanatory approach would be to construct some regression model to predict $$Y_{college} = \hat{\beta_0} +  \hat{\beta_{1:K}}X_{1:K} + \epsilon$$ using $K$ predictor variables.
+- Assuming the model is appropriately specified (e.g. We have addressed missingness, multicollinearity, heteroskedasticity), we would then analyze the statistical significance of the coefficients to develop an explanation.
+  - e.g "Mother's level of education is a positive predictor of college attendance ($p < 0.05$)."
+  
+# Introduction to machine learning
+## Vignette
+- Now consider a predictive version of this model. Here the goal is to develop the best possible prediction of $Y_{college}$.
+- We will include $M$ predictors, such that $M>>K$, to better approximate $f(X)$.
+- We estimate a model using our training data, $$Y_{college_{train}}=\hat{\beta_0}+\hat{\beta_{1:M}}X_{1:M}+\epsilon$$
+- We then use this model to predict $\hat{Y}_{college_{test}}$ and compare the predictions to the known values, $Y_{college_{test}}$.
+- Finally, we make a statement about the accuracy of our model.
+  - e.g. "The model predicted out-of-sample college attendance with 75% accuracy."
+  
+# Introduction to machine learning
+## Explanatory models $\neq$ predictive models
+- Mullainathan and Spiess (2017) evaluate the relationship between predictive and explanatory models. In an ideal world, we might want to have a model optimized for predicting Y hats and Beta hat's.
+- Explanatory models often have low-predictive power. But can predictive models be explanatory?
+
+# Introduction to machine learning
+## Explanatory models $\neq$ predictive models
+- “The very appeal of these algorithms is that they can fit many different functions. But this creates an Achilles’ heel: more functions mean a greater chance that two functions with very different coefficients can produce similar prediction quality” (Mullainathan and Spiess 2017: 97–98).
+- In short, there might be many different subsets of a dataset that produce equally good predictions. This makes it hard to develop a coherent explanation based on a predictive model.
+
+# Model evaluation
+## Bias-variance trade-offs
+```{r, out.width="50%",out.height="70%", fig.align="center"}
+include_graphics('../images/bitbybit3-1_bias-variance.png')
+``` 
+\tiny \centering Salganik 2017. See this \href{http://www.r2d3.us/visual-intro-to-machine-learning-part-2/}{website} for a visualization of the bias-variance trade-off. 
+
+# Model evaluation
+## Underfitting and overfitting
+- *Underfitting* occurs when a model poorly fits the data.
+  - e.g. A linear model may not capture non-linear relationships between variables.
+- *Overfitting* occurs when a model fits random noise in the training data.
+  - If a model has overfit then it does not generalize well to unseen data.
+  - This tends to be a more serious problem in machine-learning than underfitting since we often have richly parameterized models.
+    - *Out-of-sample* validation allows us to directly measure overfitting, something generally ignored in explanatory approaches (Watts 2014).
+
+# Model evaluation
+## Cross-validation
+- Train-test splits reduce the amount of data available to us, increasing risk of underfitting and potentially making results sensitive to the particular split.
+- *Cross-validation* is an approach to split the data into small test-train subsets.
+- A popular approach is *k-fold* cross-validation where we split the data into *k* subsets.
+  - We successively train a model of each $k-1$ folds and test it on the $k^{th}$ fold.
+  - The results are then averaged across all $k$ folds.
+  
+# Model evaluation
+## Cross-validation
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../images/kfold.png')
+``` 
+\tiny \centering Source: Wikipedia.
+
+# Model evaluation
+## Cross-validation
+- The extreme is called *leave-one-out* or *LOO* cross-validation.
+  - Given $N$ observations, we train $N$ models, each time using $N-1$ data points. 
+  - However this is rarely used because it is very computationally expensive.
+
+\footnotesize Note how these approaches are similar to *bootstrap* and *jackknife* resampling.
+
+# Model evaluation
+## Regularization
+- *Regularization* is another approach we can use to prevent overfitting. 
+  - We constrain the parameter space to try to prevent fitting noise.
+- For example, the *least absolute shrinkage and selection operator (LASSO)* imposes a penalty on regression coefficients,
+  - In addition to minimizing the squared error, we also want to minimize $\sum_{j=1}^k |\beta_j|$, the sum of the absolute values of the coefficients.
+  - In practice, this forces many coefficients to equal zero, $\beta_j = 0$, reducing the complexity of the parameter space.
+  
+# Model evaluation
+## Metrics: Binary classification
+- The following metrics apply to binary classification problems, although many can be generalized to multi-class or continuous outcomes.
+- A binary classifier learns a function $f(X)$ to predict $Y$, where $Y=1$ or $Y=0$.
+  - Many algorithms return a predicted probability $P(Y|X)$, but some only return a discrete value ($1$ or $0$).
+  
+# Model evaluation
+## Metrics: TP, FP, TN, FN
+```{r, out.width="60%",out.height="70%", fig.align="center"}
+include_graphics('../images/true_false.png')
+``` 
+\tiny \centering Source: Wikipedia.
+
+# Model evaluation
+## Metrics: Precision
+```{r, out.width="60%",out.height="70%", fig.align="center"}
+include_graphics('../images/precision.png')
+``` 
+\tiny \centering Source: Wikipedia.
+
+# Model evaluation
+## Metrics: Recall
+```{r, out.width="60%",out.height="70%", fig.align="center"}
+include_graphics('../images/recall.png')
+``` 
+\tiny \centering Source: Wikipedia.
+
+# Model evaluation
+## Metrics: F1
+The $F_1$ score is the *harmonic mean* of precision and recall and is often used as an overall description of predictive performance for a classifier.
+$$F_1 = 2\frac{precision*recall}{precision+recall} = \frac{TP}{TP+\frac{1}{2}(FP+FN)}$$
+
+# Model evaluation
+## Metrics: The confusion matrix
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/confusion_matrix.png')
+``` 
+
+\tiny Davidson, Thomas, Dana Warmsley, Michael Macy, and Ingmar Weber. 2017. “Automated Hate Speech Detection and the Problem of Offensive Language.” In Proceedings of the 11th International Conference on Web and Social Media (ICWSM), 512–15.
+
+# Model evaluation
+## Metrics: Receiver Operating Characteristic (ROC) curve
+- If an algorithm returns a predicted probability then we must identify a *threshold*, such that $$Class(Y) = \begin{cases} 1, &  \hat{P(Y|X)} \geq threshold \\ 0, & \hat{P(Y|X)} < threshold \end{cases}$$
+- Plot the true positive rate ($TPR = TP/TP+FN$)  against false positive rate ($FPR = FP/FP+TN$) for different predicted probability thresholds to identify the optimal value. This is known as the *ROC* curve.
+- The area under the ROC curve (*AUC*) provides an overall measure of classifier performance.
+
+# Model evaluation
+## Metrics: Receiver Operating Characteristic (ROC) curve
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/roc_wiki.png')
+``` 
+\tiny \centering Source: Wikipedia
+
+# Model evaluation
+## Metrics
+- The choice of metric depends on the outcome of interest and what you want to optimize for. Often we might want to use a metric like ROC or F1 to find a compromise.
+- Consider a carbon monoxide alarm:
+\begin{table}[]
+\begin{tabular}{lll}
+           & Alarm & No alarm \\
+CO present & TP    & FN       \\
+CO absent  & FP    & TN      
+\end{tabular}
+\end{table}
+- False negatives are really bad and should be avoided at all costs.
+- Too many false positives will also be bad, as it may lead people to remove the batteries from the alarm, but a low level will be tolerated.
+
+
+# Classification algorithms*
+## Logistic regression
+- Logistic regression is a regression model for binary outcomes (although there is some debate about when we should estimate a standard linear probability model using OLS).
+- Uses a logit function to estimate the log-odds of an event ($Y=1$) given predictors $X$.
+- Multinomial logistic regression can be used if you have a multi-class outcome.
+  - e.g. A model predicting level of education.
+  
+\footnotesize *Many of these algorithms can also be used for regression problems where the outcome is continuous.
+
+# Classification algorithms
+## Support Vector Machines
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/svm.png')
+``` 
+\tiny \centering Source: Wikipedia
+
+# Classification algorithms
+## Decision Trees
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/Decision_Tree.jpg')
+``` 
+\tiny \centering Source: Wikipedia. See this \href{http://www.r2d3.us/visual-intro-to-machine-learning-part-1/}{website} for an excellent visual introduction to decision trees.
+
+# Classification algorithms
+## Random Forests
+- Decision trees tend to overfit the training data
+- Solution: Grow lots of trees and average over them
+  - Using a procedure called *bootstrap aggregating* or *bagging* for short we can sample from our data and generate a *forest* consisting of many decision trees. This is known as an *ensemble* method because it involves more than one model.
+  - The approach is effective because the algorithm randomly splits the data into leaf nodes based on different features, hence it is a *random* forest.
+  - The final classification is an average across the different decision trees.
+  
+# Classification algorithms
+## Random Forests
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/random_forest.png')
+``` 
+\tiny \centering Source: Wikipedia
+
+# Classification algorithms 
+## Neural networks
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/neural_net.png')
+``` 
+\tiny \centering Davidson 2019.
+
+# Classification algorithms 
+## Neural networks
+```{r, out.width="70%",out.height="50%", fig.align="center"}
+include_graphics('../images/imagenet_structure.png')
+``` 
+\tiny Krizhevsky, Alex, Ilya Sutskever, and Geoffrey E. Hinton. 2012. “Imagenet Classification with Deep Convolutional Neural Networks.” In Advances in Neural Information Processing Systems, 1097–1105.
+
+# Classification algorithms
+## Hyperparameters
+- Each algorithm has hyperparameters that can adjust how it works.
+  - e.g. Regularization type for logistic regression and SVM.
+  - e.g. Number of trees, tree depth, and splitting criterion for random forest.
+  - e.g. Number of layers, activation function, and optimization routine for neural networks.
+- Often we want to find the algorithm that best fits the data so we conduct a search over different hyperparameters and compare many different models.
+  - In many cases we also want to test the effect of different pre-processing or feature construction steps.
+  
+# Classification algorithms
+## Hyperparameter search and computational complexity.
+- Davidson (2019) uses neural network models to predict high school GPA.
+  - Three model hyperparameters with 40 different combinations
+    - Number of hidden layers (depth)
+    - Number of neurons per hidden layer (breadth)
+    - Activation function
+  - Each model is trained using 5-fold cross-validation, resulting in 200 different model fits
+- These models took over 12 hours to estimate on a high-end Macbook Pro.
+
+\tiny Python code and output is available \href{https://github.com/t-davidson/fragile-families-challenge/blob/master/model/gpa.ipynb}{here}.
+
+<!--# Classification algorithms
+## Parameter search and computational complexity.
+- Consider the following hypothetical example: the goal is to predict whether a tweet is hateful, offensive, or neither
+  - Pre-processing decisions: stem or no-stem, unigrams, bigrams, or trigrams (6 combinations).
+  - Model choice: logistic regression, SVM, or random forest (3 choices).
+  - Model parameters: logistic regression (LASSO or no LASSO), SVM (regularization penality, 2 options), random forest (5 values different values for N trees, 2 values for max depth, 2 choices for splitting criterion).
+- 6 preprocessing steps x (2 logistic regression variants + 2 SVM variants + 20 RF variants) = 6*24 = 144 models.
+- If we use 5-fold cross-validation then each variation is estimated 5 times on subsamples of the data
+  - 5*144 = 720 separate model fits.-->
+
+# Classification algorithms
+## Black-box models and interpretability
+- In contrast to standard explanatory models, which are considered to be interpretable, many of these algorithms are described as "black boxes," meaning that we are unable to observe their workings.
+- There is a trade-off between model complexity (often associated with better predictions) and human interpretability
+  - Watts (2014) argues that it may be worth sacrificing some interpretability in the interest of better predictions.
+- But there are lots of developments in the field of ML interpretability
+  - See Chrisoph Molar's open-source book \href{https://christophm.github.io/interpretable-ml-book/}{*Interpretable Machine Learning} for an overview.
+  
+# Classification algorithms
+## Black-box models
+```{r, out.width="75%",out.height="60%", fig.align="center"}
+include_graphics('../images/lime_dog.png')
+``` 
+\tiny \centering  Ribeiro, Marco Tulio, Sameer Singh, and Carlos Guestrin. 2016. “‘Why Should I Trust You?’: Explaining the Predictions of Any Classifier.” In Proceedings of the 22nd ACM SIGKDD, 1135–44. ACM. https://doi.org/10.1145/2939672.2939778.
+
+
+# Classification algorithms
+## Black-box models
+```{r, out.width="80%",out.height="60%", fig.align="center"}
+include_graphics('../images/davidson_lime.png')
+```
+\tiny \centering Davidson 2019.
+
+# Machine learning in R
+## Tidymodels
+- `tidymodels` is a set of packages designed to use tidy principles to conduct machine-learning.
+  - See https://www.tidymodels.org/packages/ for a list of packages.
+```{r, out.width="50%",out.height="35%", fig.align="center"}
+include_graphics('../images/tidymodels.png')
+```
+\tiny \centering Source: \href{https://rviews.rstudio.com/2019/06/19/a-gentle-intro-to-tidymodels/}{tidymodels tutorial.}
+
+# Machine learning in R
+## Loading `tidymodels`
+The `tidymodels` package loads all of the sub-packages, as well as the `tidyverse` packages. We're going to be using the `iris` dataset for today's analysis. This is a simple dataset containing data on 150 irises. There are three species, "setosa", "versicolor", and "viriginica" and four variables `sepal.Length`, `sepal.Width`, `Petal.Length`, and `Petal.Width`. The goal is to predict the species given the sepal and petal information.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(tidymodels)
+head(iris)
+```
+
+# Machine learning in R
+## Loading and splitting data
+We can use the `initial_split` command to create a train-test split, where 20% of the data are held-out for testing.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+iris_split <- initial_split(iris, prop = 0.8)
+print(iris_split)
+```
+
+# Machine learning in R
+## Viewing the data
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+iris_split %>% training() %>% head()
+```
+<!--
+
+- Use recipes to preprocess data; rsample for sampling?
+- Use parsnip to specify models
+- Workflows to put the steps together
+- Use tune/dials to modify hyperparameters
+- Use yardstick to measure performance
+-->
+
+# Machine learning in R
+## Pre-processing
+We will use the `recipes` package to pre-process the data.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+iris_recipe <- training(iris_split) %>%
+  recipe(Species ~.) %>%
+  step_corr(all_predictors()) %>%
+  step_center(all_predictors(), -all_outcomes()) %>%
+  step_scale(all_predictors(), -all_outcomes()) %>%
+  prep()
+
+iris_recipe # Not petal length removed due to correlation
+```
+
+# Machine learning in R
+## Pre-processing the test data
+The previous chunk only applied these transformations to the training data. We want to also modify the test data so that they are the same dimensions. We can apply the `recipe` to the new data using the `bake` command. We also want to load the training data into a variable using the `juice` command. This extracts the data directly from the recipe.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+iris_testing <- iris_recipe %>% 
+  bake(testing(iris_split))
+
+iris_training <- juice(iris_recipe)
+```
+
+# Machine learning in R
+## Specifying a model
+The `parsnip` command allows us to specify a model. ML models in R exist across a range of different packages and `parsnip` gives them a standardized syntax. We define the model, choose the package (in this case `randomForest`), then use `fit` to train the model.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(randomForest)
+rf <-  rand_forest(trees = 100, mode = "classification") %>%
+  set_engine("randomForest") %>%
+  fit(Species ~ ., data = iris_training)
+```
+
+# Machine learning in R
+## Making predictions
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+preds <- predict(rf, iris_testing)
+bind_cols(iris_testing, preds)
+```
+
+# Machine learning in R
+## Calculating metrics
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+precision <- bind_cols(iris_testing, preds) %>% precision(truth=Species, estimate = .pred_class)
+recall <- bind_cols(iris_testing, preds) %>% recall(truth=Species, estimate = .pred_class)
+print(bind_rows(precision, recall))
+```
+# Machine learning in R
+## Calculating metrics
+We can also extract the predicted probabilities by adding an argument to the `predict` function.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+probs <- rf %>%
+  predict(iris_testing, type = "prob") %>%
+  bind_cols(iris_testing)
+head(probs)
+```
+
+# Machine learning in R
+## Calculating metrics
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+probs %>% roc_curve(Species, .pred_setosa:.pred_virginica ) %>% autoplot()
+```
+# Machine learning in R
+## Calculating metrics
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+probs %>% roc_auc(Species, .pred_setosa:.pred_virginica )
+```
+
+# Machine learning in R
+## Next week
+- We will go into more depth using `tidymodels` to implement cross-validation and a hyperparameter search and will evaluate multiple different models.
+- Supervised machine learning to perform text classification.
+- Discuss sampling and data annotation procedures.
+
+# Machine learning in R
+## Alternatives
+- Python has a more developed ML ecosystem than R.
+  - `scikit-learn` provides a suite of tools for most machine-learning tasks except deep-learning, which requires specialized libraries.
+```{r, out.width="45%",out.height="40%", fig.align="center"}
+include_graphics('../images/scikit.png')
+```
+\tiny \centering Source: \href{https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html}{scikit-learn documentation}. See this \href{https://www.r-bloggers.com/2020/04/how-to-run-pythons-scikit-learn-in-r-in-5-minutes/}{tutorial} for how to run `scikit-learn` using R.
+
+# Summary
+- Machine learning techniques allow us to "automate discovery from data"
+- Supervised and unsupervised ML techniques
+- Prediction vs. explanation
+- Over and underfitting
+- Regularization
+- Algorithms
+
+
