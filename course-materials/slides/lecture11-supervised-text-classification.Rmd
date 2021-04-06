@@ -26,6 +26,7 @@ knitr::opts_chunk$set(
 	warning = FALSE,
 	dev = "pdf",
 	tidy = FALSE,
+	eval = FALSE,
 	tidy.opts = list(width.cutoff = 80)
 )
 knitr::opts_chunk$set(warning = FALSE)
@@ -84,14 +85,14 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
     
 # Introduction to supervised text classification
 ## Sociological applications
-```{r, out.width="45%",out.height="40%", fig.align="center"}
+```{r, out.width="70%",out.height="65%", fig.align="center", eval=TRUE}
 include_graphics('../images/hanna_schema.png')
 ```
 \footnotesize Hanna, Alex. 2013.
 
 # Introduction to supervised text classification
 ## Sociological applications
-```{r, out.width="45%",out.height="40%", fig.align="center"}
+```{r, out.width="70%",out.height="65%", fig.align="center", eval=TRUE}
 include_graphics('../images/hanna_results.png')
 ```
 
@@ -100,7 +101,7 @@ include_graphics('../images/hanna_results.png')
 - Laura Nelson (2017) proposes an approach called *computational grounded theory*
   - Start with an unsupervised approach to inductively summarize a corpus
   - Identify patterns and return to close reading of a corpus
-  - Use supervised learning (and appropriate statistical texts) to confirm identified patterns
+  - Use supervised learning (and appropriate statistical tests) to confirm identified patterns
     - *Note: Assigned article does not actually used supervised machine learning but instead compares documents according to dictionary measures*
 
 # Supervised text classification in R
@@ -128,7 +129,9 @@ library(tidyverse)
 path <- '../data/imbd_reviews_sample.tsv'
 #write_tsv(d.sample, file=path)
 d <- read_tsv(path)
+
 d %>% filter(sentiment == "pos") %>% count()
+#d <- d %>% sample_n(1000) # uncomment if you want to further downsample
 ```
 
 # Supervised text classification in R
@@ -145,7 +148,7 @@ test <- testing(review_split)
 
 # Supervised text classification in R
 ## Creating a `recipe`
-We begin by creating a `recipe` by specifying the equatin and the dataset.
+We begin by creating a `recipe` by specifying the equation and the dataset.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 review_recipe <- recipe(sentiment ~ text, data  = train)
 ```
@@ -184,6 +187,7 @@ We can print the workflow to review the sequence of operations to be performed.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 print(review_wf)
 ```
+
 # Supervised text classification in R
 ## Cross-validation
 We can then incorporate cross-validation into our model to get a better estimate of out-of-sample performance. In this case we use k-fold/v-fold cross-validation, where k/v is set to 10.
@@ -224,7 +228,7 @@ lasso_pred_probs %>% group_by(id) %>%
 # Supervised text classification in R
 ## Computing an ROC curve
 We can view the performance of each classifier using the ROC curve. In general they all appear to perform quite well.
-```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 library(viridis)
 lasso_pred_probs %>%
   group_by(id) %>%
@@ -242,7 +246,6 @@ lasso_pred_probs %>%
 ## Selecting tuning parameters
 Now we have code we can use to fit a model using cross-validation. The next step is to find the optimal set of parameters. In this case there are two things we might want to vary: the size of the feature matrix and the regularization strength. To do this we need to modify the recipe and model object to specify that we want to `tune` these parameters.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
-
 review_recipe_2 <- recipe(sentiment ~ text, data  = train) %>% step_tokenize(text) %>%
   step_tokenfilter(text, max_tokens = tune()) %>%
   step_tfidf(text)
@@ -300,7 +303,7 @@ tuned_metrics %>% group_by(max_tokens, .metric) %>%
 # Supervised text classification in R
 ## Plotting the results
 Even better, we can directly plot the relationship between the variables. In this case it seems like the regularization makes a much bigger difference than the size of the feature matrix.
-```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 autoplot(tune_params) + 
   labs(title = "Lasso model performance across regularization penalties and feature spaces",
        color = "Number of tokens") + scale_color_viridis_d()
@@ -342,7 +345,7 @@ print(bind_rows(final.precision, final.recall, final.f1))
 
 # Supervised text classification in R
 ## Evaluating out-of-sample performance
-```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 collect_predictions(final_fitted) %>%
   conf_mat(truth = sentiment, estimate = .pred_class) %>%
   autoplot(type = "heatmap") #+ scale_fill_viridis_c()
@@ -404,7 +407,7 @@ imp <- reviews_imp %>%
 
 # Supervised text classification in R
 ## Visualizing feature importance
-```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 imp %>%
   ggplot(aes(x = Importance,
              y = fct_reorder(Variable, Importance),
@@ -414,9 +417,10 @@ imp %>%
   facet_wrap(~Sign, scales = "free") +
   labs(
     y = NULL,
-    title = "Variable importance for predicting the valence of an IMBD review"
+    title = "Feature importance for predicting the valence of an IMBD review"
   ) + scale_fill_viridis_d(option="plasma")
 ```
+
 # Supervised text classification in R
 ## Next steps
 - We only considered a single model. In a real-world application it would be worth repeating these steps for a variety of different classifiers, including parameter tuning.
@@ -476,14 +480,14 @@ imp %>%
   
 # Data sampling and annotation
 ## Keywords and categories
-```{r, out.width="45%",out.height="40%", fig.align="center"}
+```{r, out.width="70%",out.height="65%", fig.align="center", eval=TRUE}
 include_graphics('../images/klr_1.png')
 ```
-\footnotesize King, Gary, Patrick Lam, and Margaret E. Roberts. 2017. “Computer-Assisted Keyword and Document Set Discovery from Unstructured Text.” American Journal of Political Science 61 (4): 971–88.
+\tiny King, Gary, Patrick Lam, and Margaret E. Roberts. 2017. “Computer-Assisted Keyword and Document Set Discovery from Unstructured Text.” American Journal of Political Science 61 (4): 971–88.
 
 # Data sampling and annotation
 ## Keywords and categories
-```{r, out.width="45%",out.height="40%", fig.align="center"}
+```{r, out.width="70%",out.height="65%", fig.align="center", eval=TRUE}
 include_graphics('../images/klr_2.png')
 ```
 
@@ -494,7 +498,7 @@ include_graphics('../images/klr_2.png')
   - Use an automated discovery approach* and/or domain expertise to expand the keyword set
   - Increase the size of the keyword set as long as returned documents increase but relevant proportion does not decline Barberá et al. 2020: 8).
 
-\footnotesize \href{https://github.com/t-davidson/automated-keyword-discovery-demo}{Python code} to implement King, Lam, and Roberts' approach.
+\tiny \href{https://github.com/t-davidson/automated-keyword-discovery-demo}{Python code} to implement King, Lam, and Roberts' approach.
 
 # Data sampling and annotation
 ## Which specific examples should be annotated?
@@ -512,10 +516,10 @@ include_graphics('../images/klr_2.png')
 
 # Data sampling and annotation
 ## Active learning in practice
-```{r, out.width="45%",out.height="40%", fig.align="center"}
+```{r, out.width="70%",out.height="65%", fig.align="center", eval=TRUE}
 include_graphics('../images/active_learning.png')
 ```
-\small Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr. 2019. “Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches.” *Political Analysis*.
+\tiny Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr. 2019. “Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches.” *Political Analysis*.
 
 # Data sampling and annotation
 ## How many cases do we need?
