@@ -1,0 +1,52 @@
+---
+title: 'Your title here'
+author: |
+  | Your name
+  | Your affiliation
+fontsize: 12pt
+output:
+  pdf_document: default
+  html_document: default
+header-includes: \usepackage{setspace}\doublespacing
+indent: yes
+geometry: margin=1in
+---
+
+
+```{r setup, echo=FALSE, warning=FALSE, message=FALSE}
+### This chunk controls any options to set up your analysis
+
+# These lines define global options. These will apply to all chunks unless overridden in chunk options
+library(knitr)
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+
+# These lines define how any numbers should be formatted
+options(scipen=999)
+options(digits=3)
+
+# Any other options here, feel free to customize as necessary
+
+# Note, you can also modify the options at the top of this document to change how the output is rendered, see https://bookdown.org/yihui/rmarkdown/pdf-document.html
+```
+
+# Heading
+
+## Subheading
+
+This is a paper
+
+```{r chunk1}
+# Use this chunk to start loading data, etc. You can make as many chunks as necessary. If a chunk produces a visualization or table then ensure it is at the relevant point in your text.
+# I suggest naming chunks with understandable names when possible
+
+```
+
+## Next subheading
+
+### Sub-subheading
+
+# Next heading
+and so on
