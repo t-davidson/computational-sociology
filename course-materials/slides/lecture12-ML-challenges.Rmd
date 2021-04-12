@@ -179,32 +179,32 @@ include_graphics('../images/racial_bias_btch.png')
 \tiny \centering This table shows results for tweets containing the word "b***h". This word was used in ~1.7% of AAE and 0.5% of SAE tweets.
 
 # Biased predictions
-## Bias in occupation classifiers
+## Gender bias in occupation classifiers
 ```{r, out.width="70%",out.height="70%", fig.align="center"}
 include_graphics('../images/performance_by_gender_identifiers.png')
 ```
 \tiny \centering De-Arteaga et al. 2019.
 
 # Biased predictions
-## Bias in occupation classifiers
+## Gender bias in occupation classifiers
 ```{r, out.width="70%",out.height="70%", fig.align="center"}
 include_graphics('../images/dearteaga_fig4.png')
 ```
 
 # Biased predictions
-## Bias in occupation classifiers
+## Gender bias in occupation classifiers
 ```{r, out.width="70%",out.height="70%", fig.align="center"}
 include_graphics('../images/error_rate_and_female_percent.png')
 ```
 
 # Biased predictions
-## Bias in occupation classifiers
+## Gender bias in occupation classifiers
 ```{r, out.width="70%",out.height="70%", fig.align="center"}
 include_graphics('../images/word_correlation.png')
 ```
 
 # Biased predictions
-## Bias in occupation classifiers
+## Gender bias in occupation classifiers
 ```{r, out.width="70%",out.height="70%", fig.align="center"}
 include_graphics('../images/attention.png')
 ```
