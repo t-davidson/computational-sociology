@@ -36,7 +36,7 @@ Website: ``https://github.com/t-davidson/computational-sociology``
 
 Class meetings: Mondays 4:10-6:50 p.m. (Zoom)
 
-Office hours: Friday 4:00-5:00pm and by appointment.
+Office hours: Thursday 4:00-5:00pm and by appointment.
 
 # COURSE DESCRIPTION
 This course is designed to introduce students to computational methods and their applications to sociological research. We will discuss the computational toolkit from the bottom up, beginning with the fundamentals of programming and data analysis and management. Once these fundamentals are in place, we will turn to different methods for collecting data: application programming interfaces, web-scraping, and online experiments. The remainder of the course will focus on computational methods for data analysis. First, we will cover various methods for the quantitative analysis of text data including word embeddings, topic modeling, and supervised learning. Second, we will discuss supervised machine learning in more depth, assessing the relationship between prediction and explanation in social science, discussing bias and other limitations of these methods, as well as the opportunities these techniques present to work with images and multimodal data. Finally, we will explore the role of simulation and agent-based modeling in sociological research. Throughout the course students will gain hands-on experience with these different techniques, as well as an understanding of how these techniques are being used in cutting-edge sociological research. Overall this course will provide students with a strong conceptual foundation in computational sociology and the ability to apply various techniques for data collection and analysis in their own research. All assignments will be conducted using the R programming language.
@@ -265,7 +265,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 11
 ### Machine learning II: Text classification
 
-## *Paper initial data collection due on 4/9 at 5pm.*
+## *Paper initial data collection due on 4/12 at 4pm.*
 
 *Readings*
 
@@ -287,7 +287,7 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 12
 ### Machine learning III: Challenges
 
-## *Assignment 4: Machine learning released. Due 4/23 at 5pm*
+## *Assignment 4: Machine learning released. Due 4/26 at 4pm*
 
 *Readings*
 
@@ -317,6 +317,9 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Jean, N., M. Burke, M. Xie, W. M. Davis, D. B. Lobell, and S. Ermon. 2016. “Combining Satellite Imagery and Machine Learning to Predict Poverty.” *Science* 353 (6301): 790–94. https://doi.org/10.1126/science.aaf7894.
 - Gebru, Timnit, Jonathan Krause, Yilun Wang, Duyun Chen, Jia Deng, Erez Lieberman Aiden, and Li Fei-Fei. 2017. “Using Deep Learning and Google Street View to Estimate the Demographic Makeup of Neighborhoods across the United States.” *Proceedings of the National Academy of Sciences* 114 (50): 13108–13. https://doi.org/10.1073/pnas.1700035114.
 - Zhang, Han, and Jennifer Pan. 2019. “CASM: A Deep-Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media.” *Sociological Methodology* 49 (1): 1–57. https://doi.org/10.1177/0081175019860244.
+
+*Recommended*
+
 - Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. “Learning Transferable Visual Models From Natural Language Supervision.” OpenAI, 47. [Blog: https://openai.com/blog/clip/, code: https://github.com/openai/CLIP].
   - See https://microscope-azure-edge.openai.com/models for model visualizations
 
@@ -337,8 +340,6 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 ## Week 14
 ### Agent-Based Models
 
-## *Paper preliminary analyses due 4/30 at 5pm*
-
 *Readings*
 
 - Macy, Michael, and Robert Willer. 2002. “From Factors to Factors: Computational Sociology and Agent-Based Modeling.” *Annual Review of Sociology* 28 (1): 143–66. https://doi.org/10.1146/annurev.soc.28.110601.141117.
@@ -353,13 +354,20 @@ I will also be making additional accommodations due to the COVID-19 pandemic. If
 - Silver, David, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, et al. 2017. “Mastering the Game of Go without Human Knowledge.” *Nature* 550 (7676): 354–59. https://doi.org/10.1038/nature24270.
 
 # Week 15
+
+## *Paper preliminary analyses due 5/3 at 5pm*
+
 ## Student presentations
-- 5 minute presentation, plus Q&A for each student
-
-
+- 5 minute presentation, plus Q&A
+  - Five slides (Add to shared Google Slides presentation)
+    - Title
+    - Motivation
+    - Data
+    - Methodology
+    - Results
 
 # Final paper
-*Final paper due on 5/15 at 5pm ET*
+*Final paper due on 5/10 at 5pm ET*
 
 
 
