@@ -80,7 +80,7 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
 # What is agent-based modeling?
 ## Agent-based modeling and quantitative social science  
 - Often we are interested in the *emergent* properties of local interactions between agents and how they aggregate into system-level processes such as diffusion, polarization, and segregation
-  - These complex system-level patterns can emerge without any centralize coordination
+  - These complex system-level patterns can emerge without any centralized coordination
 - Like historical sociology and ethnography, agent-based modeling is a *relational* approach, focusing on the context-dependent and contingent nature of social interaction
 
 # What is agent-based modeling?
@@ -156,7 +156,7 @@ include_graphics('../images/dimaggio_garip.png')
 
 # What is agent-based modeling?
 ## Parameters and sensitivity
-- It can be difficult to decide which parameters and which to fix
+- Use theory to guide decisions regarding which parameters vary and should be fixed
 - How do system-wide outcomes vary as we adjust parameters?
 - Models can be extremely sensitive to small variations in parameters
   - Be careful to check for coding errors!
@@ -209,7 +209,7 @@ The agents are what are known as ``S4`` classes in R. This means that all slots 
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', tidy=FALSE}
 print(a@id)
 print(a@infected)
-#a@id <- 'a' # uncomment and run to produce error
+a@id <- 'a' # uncomment and run to produce error
 ```
 \tiny Read more about S4 classes here: http://adv-r.had.co.nz/S4.html
 
@@ -224,6 +224,8 @@ agent.generator <- function(N){
   }
   return(agents)
 }
+
+agent.generator(4)
 ```
 
 # Building an agent-based model
@@ -280,9 +282,9 @@ simulator <- function(N, t, P, agents){
 ## Running a single simulation
 Here we define the relevant parameters, generate a set of agents, and run ``simulator``.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', tidy=FALSE}
-N = 50 # agents
-P = .1 # transmission probability
-t= 10 # timesteps
+N = 500 # agents
+P = .05 # transmission probability
+t= 100 # timesteps
 
 set.seed(478437) # set randomization seed
 
