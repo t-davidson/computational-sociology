@@ -1,26 +1,22 @@
 ---
-output: 
+title: |
+  | SOC577
+  |  COMPUTATIONAL SOCIOLOGY
+  | Rutgers University
+  |
+  |  Syllabus
+author: "Thomas Davidson"
+date: "Spring 2021"
+output:
+  word_document: default
   pdf_document:
-    keep_tex: true
+    keep_tex: yes
     fig_caption: yes
     latex_engine: pdflatex
 geometry: margin=1in
-
-title: 
-     |
-     | SOC577
-     |  COMPUTATIONAL SOCIOLOGY
-     | Rutgers University
-     |
-     |  Syllabus
-
-author: Thomas Davidson
-date: "Spring 2021"
-
 fontfamily: mathpazo
 fontsize: 10pt
-header-includes:
-   - \linespread{1.05}
+header-includes: \linespread{1.05}
 ---
 
 
