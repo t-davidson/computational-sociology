@@ -1,0 +1,233 @@
+---
+title: "Web-Scraping"
+author: "Thomas Davidson"
+date: "January 6, 2020"
+output:
+  slidy_presentation:
+    incremental: no
+  beamer_presentation:
+    theme: Antibes
+    colortheme: beaver
+    fonttheme: structurebold
+    toc: no
+    incremental: no
+subtitle: WICSS-Tucson
+institute: Rutgers University
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+```
+
+### Note: I had to abandom this project since I was unable to scrape the website - it started to make Javascript errors as I was working. This is terribly annoying. I tried to use selenium but this was also creating problems, it appears to require Docker to work with R.
+
+
+# Plan
+1. What is web-scraping?
+2. When should I use it?
+3. Scraping the web
+4. Crawling websites
+5. Javascript and browser automation
+
+# What is web-scraping?
+## Overview and terminology
+- Web-scraping is a method to collect data from websites
+  - A web-page is loaded using a **URL** (Uniform Resource Locator)
+  - The underlying code, usually **HTML** (Hypertext Markup Language), is collected
+  - The HTML is parsed to collect the relevant data (**scraping**)
+  - The process is then repeated for other pages on the same website in an automated fashion (**crawling**)
+
+# What is web-scraping?
+## Challenges
+- Different websites have different structures, so a script used to scrape one website will likely have to be changed to scrape another
+- Websites can be internally inconsistent, making them difficult to scrape
+- Some websites are easier to crawl than others
+- Some websites limit or prohibit scraping
+  - This is a legal grey area
+
+# When should I use it?
+## Commercial use cases
+- Search engines
+  - Google scrapes websites to create a searchable index of the internet
+- Price comparison
+  - Kayak scrape airlines to compare flight prices, other websites do the same for hotels and rental cars
+- Recruitment
+  - Recruitment companies scrape LinkedIn to get data on workersforu
+  
+# When should I use it?
+## Social scientific use cases
+- Web-scraping is a useful tool to collect data from websites without APIs
+  - Large social media platforms and other sites have APIs but smaller websites do not
+    - Local newspapers, forums, small businesses, educational institutions, etc.
+- Often we want to collect data from a single website
+  - e.g. All posts written on a forum
+- Sometimes we might want to collect data from many websites
+  - e.g. All schools in a school district
+  
+# When should I use it?
+## Ethical and legal considerations
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/fielser_et_al.png')
+```
+
+# When should I use it?
+## Ethical and legal considerations
+- Fiesler, Beard, and Keegan (2020) review the legal cases related to web-scraping and analyze website terms of service
+  - "In short, it is an unsettled question as to whether it is explicitly illegal (or even a criminal act) to violate TOS."
+  - No academic or journalist has ever been prosecuted for violating a website terms of service to collect data for research
+- They analyze terms of service of over 100 social media websites
+  - Terms of service are ambiguous, inconsistent, and lack context
+
+
+# When should I use it?
+## Best-practices
+- Only scrape publicly available data
+  - i.e. You can access the page on the web without logging in
+- Do not scrape copyright protected data
+- Try not to violate website terms of service
+- Do not burden the website
+  - Limit the number of calls you make (similar to rate-limiting in APIs)
+- Avoid using the data in a way that may interfere with the website's business
+  - i.e. Don't copy valuable data from a small business and share it on Github
+
+# Scraping the web
+## Start by looking up ``robots.txt''
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/fielser_et_al.png')
+```
+These are pages intended for search engine crawlers that provides information on what a website wants you to scrape.
+
+# Scraping the web
+## Decoding ``robots.txt``
+- ``User-agent`` = the name of the scraper
+  - ``*`` = All scrapers
+- ``Allow: /path/`` = OK to scrape
+- ``Disallow: /path/`` = Not OK to scrape
+  - ``Disallow: /`` = Not OK to scrape any pages
+- ``Crawl-Delay: N`` = Wait ``N`` miliseconds between each call to the website 
+
+# Scraping the web
+## Inspecting HTML
+
+
+# Scraping the web
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE}
+library(rvest)
+library(RSelenium)
+library(dplyr)
+library(stringr)
+```
+
+# Scraping the web
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE}
+url <- "https://www.cellartracker.com/forum/tm.asp?m=504438"
+thread <- read_html(url)
+print(thread)
+# This got blocked after a couple of calls. I need to use RSelenium
+```
+
+# Scraping the web
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE}
+driver <- rsDriver(browser="firefox", verbose=F, port=3000L)
+remote_driver <- rd[["client"]]
+```
+
+# Scraping the web
+## Parsing HTML to get messages
+```{r, echo=TRUE, tidy=FALSE}
+messages <- thread %>% html_nodes(".msg") %>% 
+  html_text()
+print(length(messages))
+messages <- thread %>% html_nodes(".msg") %>% 
+  html_text() %>% str_trim() 
+messages
+# This is better but still sme special characters to address
+```
+
+# Scraping the web
+## Parsing HTML to get user information
+```{r, echo=TRUE}
+users <- thread %>% html_nodes(".subhead")
+print(length(users))
+#users[[5]] 
+#dates <- thread %>% html_nodes(".ultrasmall") %>% html_text()
+#print(length(dates))
+users <- thread %>% html_nodes(".subhead") %>% 
+  html_attrs()
+#users[[5]]
+users <- thread %>% html_nodes(".subhead") %>% 
+  html_attr("href")
+#users[[5]]
+users <- thread %>% html_nodes(".subhead") %>% 
+  html_attr("href") %>% str_subset("showProfile")
+length(users)
+```
+
+# Scraping the web
+## Parsing HTML to get time stamps
+```{r, echo=TRUE}
+ts <- thread %>% html_nodes(".ultrasmall") %>% html_text()
+length(ts)
+print(ts)
+ts <- thread %>% html_nodes(".ultrasmall") %>% html_text() %>% str_subset("AM|PM")
+length(ts)
+```
+
+<!--Look at the 5th comment. It is a quote. We need to figure out how to select it.-->
+
+# Scraping the web
+## Putting it all together
+```{r, echo=TRUE}
+get.posts <- function(url) {
+  thread <- read_html(url)
+  messages <- thread %>% html_nodes(".msg") %>% 
+    html_text() %>% str_trim() %>%
+    str_trunc(20, "right") # only get 1st 20 chars
+  users <- thread %>% html_nodes(".subhead") %>%
+    html_attr("href") %>% str_subset("showProfile")
+  ts <- thread %>% html_nodes(".ultrasmall") %>%
+    html_text() %>% str_subset("AM|PM")
+  df <- data.frame(messages, users, ts)
+  colnames(df) <- c("message","user", "timestamp")
+  return(df)
+}
+```
+
+# Scraping the web
+## Putting it all together
+```{r, echo=TRUE}
+results <- get.posts(url)
+results[1:5,]
+```
+
+# Scraping the web
+## Testing
+```{r, echo=TRUE}
+test.1 
+test.url <- "https://www.cellartracker.com/forum/tm.asp?m=34711"
+test.2 <- get.posts(test.url)
+test[1:5,]
+```
+
+# Scraping the web
+## Pagination
+```{r, echo=TRUE}
+thread.2 <- read_html("htps://www.cellartracker.com/forum/tm.asp?m=34711")
+p <- thread %>% html_nodes(".ultrasmall")
+```
+
+<!--Note: The results do not show properly when using knitr to render the slides. I will need to fix this. -->
