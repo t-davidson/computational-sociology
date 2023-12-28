@@ -2,9 +2,9 @@
 
 # Wiki
 
-Last updated spring 2021.
+Last updated December 28, 2023.
 
-## Preparation
+## Preparation for the class
 
 This section will help to familiarize students with the tools we will be using throughout the semester. Please read it carefully and ensure you have completed the checklist by the second week of classes.
 
