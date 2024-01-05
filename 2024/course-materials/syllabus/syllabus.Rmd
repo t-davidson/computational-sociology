@@ -43,7 +43,16 @@ This course is designed to introduce students to computational methods and their
 This course is designed for students without any experience using computational methods or advanced statistics. Nonetheless, the course will proceed more efficiently if students without any such experience are willing to undertake some independent learning prior to the beginning of the course. In particular, I recommend students familiarize themselves with the R programming language, the RStudio computing environment, and RMarkdown documents, as we will be using these tools throughout the course. We will review these topics over the first few weeks of class, but the more familiar students are with these tools, the more time we can spend focusing on their sociological applications. Information on learning resources is provided on the course website.
 
 # ASSESSMENT
-There will be two types of assessment used in the course. There will be four homework assignments (each worth 10% of the final grade) designed to help students to become familiar with the various methodological techniques covered in the course. A schedule of these assignments can be found in the course outline below. Students will also write an empirical paper over the course of the semester, worth 60% of the final grade. The paper will involve the collection of original data and preliminary analyses using one or more of the approaches covered in the course. I intend for the paper to be an opportunity for students to develop the basis for a qualifying exam, master's thesis, or dissertation chapter. Students are expected to make progress on the paper over the course of the semester. There will be three preliminary submissions related to the final paper (each worth 5% of the final grade): a proposal, initial data collection and descriptive analysis, and the implementation of methodological approach  (see course outline for a timeline). Each of these stages will be an opportunity to gain feedback on the final paper. The final paper will be due at the end of the semester.
+There will be four homework assignments designed to help students to become familiar with the various methodological techniques covered in the course. A schedule of these assignments can be found in the course outline below. Students will also write an empirical paper over the course of the semester, worth 60% of the final grade. The paper will involve the collection of original data and preliminary analyses using one or more of the approaches covered in the course. I intend for the paper to be an opportunity for students to develop the basis for a qualifying exam, master's thesis, or dissertation chapter. Students are expected to make progress on the paper over the course of the semester. There will be three preliminary submissions related to the final paper: a proposal, initial data collection and descriptive analysis, and the implementation of methodological approach  (see course outline for a timeline). Each of these stages will be an opportunity to gain feedback on the final paper. The results will be presented during the last meeting and a final paper will be due at the end of the semester.
+
+## Grade breakdown
+- Homework assignments: 40% (10% each)
+- Final project (60%)
+    - Proposal (5%)
+    - Data collection and descriptive analysis (5%)
+    - Preliminary results (5%)
+    - Presentation (5%)
+    - Final paper (40%)
 
 # CHAT-GPT AND AI TOOLS
 Over the course of the semester we will consider how generative artificial intelligence tools can be used to advance computational research and will situate these tools in the context of earlier techniques. Not only can these technologies contribute to methodological advances, but they are a valuable pedagogical resource. I encourage you to draw on these tools to help you to learn to code and learn various computational methods. At the same time, however, these tools come with risks. For example, they can produce misleading or incorrect results, and hence must be used with caution. I strongly recommed trying to solve problems yourself or by consulting the course materials before resorting to AI assistant.
@@ -256,7 +265,7 @@ In accordance with University policy, if you have a documented disability and re
     - Watts, Duncan. 2017. \href{https://doi.org/10.1086/693954}{“Response to Turco and Zuckerman’s ‘Verstehen for Sociology.’”} *American Journal of Sociology* 122 (4): 1292–99.
 - Davidson, Thomas. 2020. \href{https://doi.org/10.1177/2378023118817702}{“Black-Box Models and Sociological Explanations: Predicting High School Grade Point Average Using Neural Networks.”} *Socius: Sociological Research for a Dynamic World* 5 (January).
 
-
+## *Paper initial data collection report due 4/5 at 5pm.*
 
 ## Week 11, 4/4
 ### Supervised text classification
@@ -294,8 +303,6 @@ https://doi.org/10.17813/maiq.18.4.m1g180620x7n1542
 - Wankmüller, Sandra. 2022. \href{https://doi.org/10.1177/00491241221134527}{“Introduction to Neural Transfer Learning With Transformers for Social Science Text Analysis.”} *Sociological Methods & Research*.
 - Bender, Emily M, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. \href{https://dl.acm.org/doi/10.1145/3442188.3445922}{“On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?”} In *Conference on Fairness, Accountability, and Transparency* (FAccT ’21).
 
-
-
 *Further reading*
 
 - Vaswani, Ashish, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, and Illia Polosukhin. 2017. \href{https://papers.nips.cc/paper/7181-attention-is-all-you-need}{“Attention Is All You Need.”} in *Advances in Neural Information Processing Systems*.
@@ -304,7 +311,7 @@ https://doi.org/10.17813/maiq.18.4.m1g180620x7n1542
 - Widmann, Tobias, and Maximilian Wich. 2022. \href{https://doi.org/10.1017/pan.2022.15}{“Creating and Comparing Dictionary, Word Embedding, and Transformer-Based Models to Measure Discrete Emotions in German Political Text.”} *Political Analysis* 1–16.
 - Bonikowski, Bart, Yuchen Luo, and Oscar Stuhler. 2022. \href{https://doi.org/10.1177/00491241221122317}{“Politics as Usual? Measuring Populism, Nationalism, and Authoritarianism in U.S. Presidential Campaigns (1952–2020) with Neural Language Models.”} *Sociological Methods & Research* 51(4):1721–87.
 
-## *Paper initial data collection due 4/12 at 5pm.*
+## *Paper preliminary results due 4/19 at 5pm.*
 
 ## Week 13, 4/18
 ### Computer Vision and Multimodal Models
@@ -330,17 +337,10 @@ Also add CLIP / multimodal-->
 - Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. \href{https://openai.com/blog/clip/}{“Learning Transferable Visual Models From Natural Language Supervision.”} OpenAI.
 
 
-
 ## Week 14, 4/25
 ### Student presentations
 
-- 10 minute presentation, plus Q&A
-  - Five slides (Add to shared Google Slides presentation)
-    - Title
-    - Motivation
-    - Data
-    - Methodology
-    - Results
+- 10 minute presentation, plus Q&A.
 
 # Final paper
 *Final paper due via email on 5/3 at 5pm*
