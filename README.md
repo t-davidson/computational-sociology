@@ -8,7 +8,7 @@ Last updated January 8, 2024.
 
 This section will help to familiarize students with the tools we will be using throughout the semester. Please read it carefully and ensure you have completed the checklist by the second week of classes.
 
-I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/computational-sociology/blob/main/syllabus/syllabus.pdf). Here you will find links to all of the readings for the semester. All of the books are available for free online. Below are some helpful resources for learning about R, RStudio, RMarkdown, and Github.
+I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/computational-sociology/blob/main/2024/course-materials/syllabus/syllabus.pdf). Here you will find links to all of the readings for the semester. All of the books are available for free online. Below are some helpful resources for learning about R, RStudio, RMarkdown, and Github.
 
 ### R
 The most useful thing you can do to prepare for this course is to familiarize yourself with R.
