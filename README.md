@@ -2,9 +2,9 @@
 
 # Wiki
 
-Last updated December 28, 2023.
+Last updated January 8, 2024.
 
-## Preparation for the class
+## Setting up the computational stack
 
 This section will help to familiarize students with the tools we will be using throughout the semester. Please read it carefully and ensure you have completed the checklist by the second week of classes.
 
@@ -13,7 +13,7 @@ I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/c
 ### R
 The most useful thing you can do to prepare for this course is to familiarize yourself with R.
 
-Chris Bail at Duke has recorded a series of short videos introducing R. You can find a Twitter thread and a link to the materials [here]([https://twitter.com/chris_bail/status/1303496513918771203?lang=en](https://sicss.io/boot_camp/)). These videos are intended to serve as an introduction to programming in R for a social science audience. They were created as a resource for participants in the Summer Institute in Computational Social Science without much prior experience.
+Chris Bail at Duke has recorded a series of short videos introducing R. You can find the lectures [here](https://sicss.io/boot_camp/). These videos are intended to serve as an introduction to programming in R for a social science audience. They were created as a resource for participants in the Summer Institute in Computational Social Science without much prior experience.
 
 The main textbook we will be using this semester is R for Data Science (R4DS) by Hadley Wickham and Garrett Grolemund (which Bail also uses in the videos discussed above). We will work through most of this book over the first few weeks of the semester. I have indicated the relevant chapters each week. The textbook focuses on using R to work with data, drawing upon a set of packages known as the `tidyverse` (the first author Hadley Wickham is the lead developer). It is a well-organized and easy-to-follow introduction to the fundamentals of R. If you have the time, I would recommend starting to read (or skim) through the chapters listed in the syllabus and using RStudio to test out some of the examples (if you use the online version of the book you can easily copy over the code).
 
