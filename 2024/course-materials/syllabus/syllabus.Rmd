@@ -111,7 +111,6 @@ In accordance with University policy, if you have a documented disability and re
 
 - *R4DS*: C7-10, 16
 - Bearman, Peter S., James Moody, and Katherine Stovel. 2004. \href{https://doi.org/10.1086/386272}{“Chains of Affection: The Structure of Adolescent Romantic and Sexual Networks.”} *American Journal of Sociology* 110(1):44–91.
-- Kossinets, Gueorgi, and Duncan J. Watts. 2009. \href{https://doi.org/10.1086/599247}{“Origins of Homophily in an Evolving Social Network.”} *American Journal of Sociology* 115(2):405–50.
 - Shi, Feng, Yongren Shi, Fedor A. Dokshin, James A. Evans, and Michael W. Macy. 2017. \href{https://doi.org/10.1038/s41562-017-0079}{“Millions of Online Book Co-Purchases Reveal Partisan Differences in the Consumption of Science.”} *Nature Human Behaviour* 1(4):0079.
 
 
