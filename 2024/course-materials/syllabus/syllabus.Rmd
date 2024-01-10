@@ -196,6 +196,9 @@ In accordance with University policy, if you have a documented disability and re
 *Further reading*
 
 - Grimmer, Justin, and Brandon Stewart. 2013. \href{https://doi.org/10.1093/pan/mps028}{“Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.”} *Political Analysis* 21 (3): 267–97.
+- Flores, René D. 2017. \href{https://doi.org/10.1086/692983}{“Do Anti-Immigrant Laws Shape Public Sentiment? A Study of Arizona’s SB 1070 Using Twitter Data.”} *American Journal of Sociology* 123(2):333–84.
+- Srivastava, Sameer B., Amir Goldberg, V. Govind Manian, and Christopher Potts. 2018. \href{https://doi.org/10.1287/mnsc.2016.2671}{“Enculturation Trajectories: Language, Cultural Adaptation, and Individual Outcomes in Organizations.”} *Management Science* 64(3):1348–64.
+
 
 ## Week 8, 3/7
 ### Word Embeddings and Computational Semantics
@@ -295,10 +298,8 @@ https://doi.org/10.17813/maiq.18.4.m1g180620x7n1542
 
 *Readings*
 
-<!--TODO: Add Jurfasky and Martin reading / Add my paper with YJ-->
-
 - Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. \href{http://dl.acm.org/citation.cfm?id=2488416}{“No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.”} In *Proceedings of the 22nd International Conference on World Wide Web*, 307–318.
-- Jensen, Jeffrey L., Daniel Karell, Cole Tanigawa-Lau, Nizar Habash, Mai Oudah, and Dhia Fairus Shofia Fani. 2022. \href{https://doi.org/10.1177/00811750211053370}{“Language Models in Sociological Research: An Application to Classifying Large Administrative Data and Measuring Religiosity.”} *Sociological Methodology* 52(1):30–52.
+- Manning, Christopher D. 2022. \href{https://doi.org/10.1162/daed_a_01905}{"Human Language Understanding \& Reasoning."} *Daedalus* 151(2):127–38.
 - Wankmüller, Sandra. 2022. \href{https://doi.org/10.1177/00491241221134527}{“Introduction to Neural Transfer Learning With Transformers for Social Science Text Analysis.”} *Sociological Methods & Research*.
 - Bender, Emily M, Timnit Gebru, Angelina McMillan-Major, and Shmargaret Shmitchell. 2021. \href{https://dl.acm.org/doi/10.1145/3442188.3445922}{“On the Dangers of Stochastic Parrots: Can Language Models Be Too Big?”} In *Conference on Fairness, Accountability, and Transparency* (FAccT ’21).
 
@@ -308,6 +309,7 @@ https://doi.org/10.17813/maiq.18.4.m1g180620x7n1542
 - Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. \href{https://aclanthology.org/N19-1423}{“BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.”} in *Proceedings of NAACL-HLT*.
 - Brown, Tom B., and many others. 2020. \href{https://arxiv.org/pdf/2005.14165.pdf}{“Language Models Are Few-Shot Learners.”} *ArXiv*
 - Widmann, Tobias, and Maximilian Wich. 2022. \href{https://doi.org/10.1017/pan.2022.15}{“Creating and Comparing Dictionary, Word Embedding, and Transformer-Based Models to Measure Discrete Emotions in German Political Text.”} *Political Analysis* 1–16.
+- Jensen, Jeffrey L., Daniel Karell, Cole Tanigawa-Lau, Nizar Habash, Mai Oudah, and Dhia Fairus Shofia Fani. 2022. \href{https://doi.org/10.1177/00811750211053370}{“Language Models in Sociological Research: An Application to Classifying Large Administrative Data and Measuring Religiosity.”} *Sociological Methodology* 52(1):30–52.
 - Bonikowski, Bart, Yuchen Luo, and Oscar Stuhler. 2022. \href{https://doi.org/10.1177/00491241221122317}{“Politics as Usual? Measuring Populism, Nationalism, and Authoritarianism in U.S. Presidential Campaigns (1952–2020) with Neural Language Models.”} *Sociological Methods & Research* 51(4):1721–87.
 
 ## *Paper preliminary results due 4/19 at 5pm.*
@@ -324,7 +326,7 @@ Also add CLIP / multimodal-->
 - Torres, Michelle, and Francisco Cantú. 2021. \href{https://doi.org/10.1017/pan.2021.9}{“Learning to See: Convolutional Neural Networks for the Analysis of Social Science Data.”} *Political Analysis* 1–19.
 - Zhang, Han, and Jennifer Pan. 2019. \href{https://doi.org/10.1177/0081175019860244}{“CASM: A Deep-Learning Approach for Identifying Collective Action Events with Text and Image Data from Social Media.”} *Sociological Methodology* 49 (1): 1–57.
 - Hwang, Jackelyn, Nima Dahir, Mayuka Sarukkai, and Gabby Wright. 2023. \href{https://doi.org/10.1177/00491241231171945}{“Curating Training Data for Reliable Large-Scale Visual Data Analysis: Lessons from Identifying Trash in Street View Imagery.”} *Sociological Methods & Research* 004912412311719.
-- Torres, Michelle. 2023. \href{https://doi.org/10.1017/pan.2023.32}{“A Framework for the Unsupervised and Semi-Supervised Analysis of Visual Frames.”} *Political Analysis* 1–22.
+
 
 
 *Further reading*
@@ -334,6 +336,7 @@ Also add CLIP / multimodal-->
 - Buolamwini, Joy, and Timnit Gebru. 2018. \href{https://proceedings.mlr.press/v81/buolamwini18a/buolamwini18a.pdf}{“Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classiﬁcation.”} In *Proceedings of Machine Learning Research*, 81:1–15.
 - Olah, Chris, Alexander Mordvintsev, and Ludwig Schubert. 2017. \href{https://doi.org/10.23915/distill.00007}{“Feature Visualization.”} *Distill*.
 - Radford, Alec, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, et al. 2021. \href{https://openai.com/blog/clip/}{“Learning Transferable Visual Models From Natural Language Supervision.”} OpenAI.
+- Torres, Michelle. 2023. \href{https://doi.org/10.1017/pan.2023.32}{“A Framework for the Unsupervised and Semi-Supervised Analysis of Visual Frames.”} *Political Analysis* 1–22.
 
 
 ## Week 14, 4/25
