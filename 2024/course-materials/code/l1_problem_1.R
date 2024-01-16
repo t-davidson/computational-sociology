@@ -6,4 +6,4 @@ calculate_mean <- function() {
 }}
 
 # This line should run once the code works. What is your answer?
-calculate_mean(rnorm(1000))
+round(calculate_mean(runif(1E6)),2)
