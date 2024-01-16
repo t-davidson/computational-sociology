@@ -35,17 +35,19 @@ use_git_config(user.name = "t-davidson", user.email = "thomas.davidson@rutgers.e
 
 Follow these instructions to generate and store an access token: https://happygitwithr.com/https-pat.html
 
-5. (OPTIONAL) You should have Github set up now! I recommend trying to set up a repository to test it out and learn some core functionality, but you can skip to Step 6.
+5. Finally, you can use Github to get the latest version of all the course files (including this one!) on your computer.
 
-You will set up a new repository on the Github website, clone it using RStudio, then commit and push a change, before verifying it on the website.
-
-Follow the instructions here: https://happygitwithr.com/rstudio-git-github.html
-
-6. Finally, you can use Github to get the latest version of all the course files (including this one!) on your computer.
-
-Return to RStudio and click the `File` tab at the top of the page and select `New Project...` from the dropdown. This will open up the project wizard. Click the `Version Control` option then `Git`. Paste the URL for this project (https://github.com/t-davidson/SOC542) into the Repository URL box and select an appropriate directory to store it (this is where the files will all live). When you're ready, click `Create Project`
+Return to RStudio and click the `File` tab at the top of the page and select `New Project...` from the dropdown. This will open up the project wizard. Click the `Version Control` option then `Git`. Paste the URL for this project (https://github.com/t-davidson/computational-sociology/blob/main/2024/course-materials/github_setup.md) into the Repository URL box and select an appropriate directory to store it (this is where the files will all live). When you're ready, click `Create Project`
 
 You will see a window pop up and then you will return to RStudio when the process is completed. If you look in the `Files` pane you should see the files from the course. You should also see a tab titled `Git` at the top. Now, whenever there is an update to the course, all you need to do is click the downwards facing green arrow to "pull" the files onto your computer.
+
+## Next steps
+
+I recommend trying to set up a repository to test it out and learn some core functionality.
+
+Set up a new repository on the Github website, clone it using RStudio, then commit and push a change, before verifying it on the website. You will need to do this for your final project so you might want to call the repository something related, e.g. "computational-project"
+
+Follow the instructions here: https://happygitwithr.com/rstudio-git-github.html
 
 ## Using Github for homework assignments
 
