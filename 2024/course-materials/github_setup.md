@@ -25,7 +25,7 @@ Please note that the instructions vary depending on your operating system. If yo
 
 3. Now you have Git on your computer. You need to run a command in R to associate it with the account you set up in Step 1.
 
-Luckily there is an R package to help you do this All you need to do is install the following package and run this command in the R console (replacing the username and email address).
+Luckily there is an R package to help you do this All you need to do is install the following package and run this command in the R console (replacing the username and email address with yours).
 
 ```
 install.package("usethis")
