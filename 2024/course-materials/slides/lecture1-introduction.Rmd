@@ -352,13 +352,13 @@ include_graphics('../images/cd_point_click_1.png')
 
 # Navigating files using RStudio
 Run the `getwd()` command to show the current working directory in R. 
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 getwd()
 ```
 
 # Navigating files using RStudio
 Run the `setwd()` command to change your working directory. Try going one step back from the current directory using `..`. You can then run `getwd()` to verify it has changed.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize', warning=F}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize', warning=F}
 setwd("..")
 getwd()
 ```
@@ -369,7 +369,7 @@ getwd()
     
 # Navigating files using RStudio
 The working directory is important when considering loading files. Navigate to the `code` directory. You can use the `list.files` function to see a list of the files in the current directory.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 setwd("../code/")
 list.files()
 ```
@@ -382,26 +382,26 @@ list.files()
     
 # Files contained in the working directory
 If a file exists in the working directory, you will see it when running `list.files`. It can be loaded by using the file name.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize', message=F}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize', message=F}
 library("tidyverse")
 read_file("file.txt") %>% print()
 ```  
 
 # Files contained in an outer directory
 If a file is contained in an upper level directory, you need to use the `..` to escape the current directory. For each step out from the current directory you need to add another `/..` to the file path. In this case, the file is contained one level above the current directory.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 read_file("../file_outer.txt") %>% print()
 ```  
 
 # Files contained in an inner directory
 If a file is contained in an inner directory, you need to add the name of the directory to the file path.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 read_file("nested/file_inner.txt") %>% print()
 ```  
 
 # Files contained in an inner directory
 If a file is contained in an inner directory, you need to add the name of the directory to the file path.
-```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+```{r, echo=TRUE, eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 read_file("nested/nested2/file_inner_inner.txt") %>% print()
 ```  
 
