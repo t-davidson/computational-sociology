@@ -55,9 +55,9 @@ There will be four homework assignments designed to help students to become fami
     - Final paper (40%)
 
 # CHAT-GPT AND AI TOOLS
-Over the course of the semester we will consider how generative artificial intelligence tools can be used to advance computational research and will situate these tools in the context of earlier techniques. Not only can these technologies contribute to methodological advances, but they are a valuable pedagogical resource. I encourage you to draw on these tools to help you to learn to code and learn various computational methods. At the same time, however, these tools come with risks. For example, they can produce misleading or incorrect results, and hence must be used with caution. I strongly recommed trying to solve problems yourself or by consulting the course materials before resorting to AI assistant.
+Over the course of the semester we will consider how generative artificial intelligence tools can be used to advance computational research and will situate these tools in the context of earlier techniques. Not only can these technologies contribute to methodological advances, but they are a valuable pedagogical resource. I encourage you to draw on these tools to help you to learn to code and learn various computational methods. At the same time, however, these tools come with risks. For example, they can produce misleading or incorrect results, and hence must be used with caution. I am also concerned that overreliance on AI can undermine your learning. I strongly recommend trying to solve problems yourself or by consulting the course materials before resorting to AI for assistance.
 
-AI tools can also be used in ways that violate academic integrity polices and undermine your learning. As such, you are prohibited for using ChatGPT or other AI tools to complete homework assignments or to write your final paper. Of course, the definition of AI tools becomes some what blurred when we think about tools like Grammarly, which uses similar technologies to help you improve your writing; Google Docs now has similar functionality and Microsoft is rolling this out in Office. I will permit you to use these tools to help you edit your work, but you may not use them to generate sentences or paragraphs of text. Similarly, I will permit you to use these tools to help edit and debug code in your final project, but you may not use them to generate entire chunks of code. *You will be asked to provide a statement in assignments and your final project detailing any ways that AI tools were used.* Please contact me if you are unsure about whether a particular use case is acceptable.
+AI tools can also be used in ways that violate academic integrity policies. As such, you are prohibited for using ChatGPT or other AI tools to complete homework assignments or to write your final paper. Of course, the definition of AI tools becomes some what blurred when we think about tools like Grammarly, which uses similar technologies to help you improve your writing. Google Docs now has similar functionality and Microsoft is rolling this out in Office. I will permit you to use these tools to help you edit your work, but you may not use them to generate sentences or paragraphs of text. Similarly, I will permit you to use AI to help edit and debug code in your final project, but you may not use them to generate entire chunks of code. *You will be asked to provide a statement in assignments and your final project detailing any ways that AI tools were used.* Please contact me if you are unsure about whether a particular use case is acceptable.
 
 # READINGS
 There are weekly reading assignments for this course. Please complete these before each class. These readings include methodological texts, reviews articles, and examples of how sociologists and other social scientists apply computational approaches in their research.
@@ -67,7 +67,7 @@ There are weekly reading assignments for this course. Please complete these befo
 *All texts are available for free online.*
 
 - Matthew Salganik. 2017. \textit{\href{https://www.bitbybitbook.com/en/1st-ed/preface/}{Bit by Bit}}. Princeton University Press. ISBN: 0691196109
-- Wickham, Hadley, and Garrett Grolemund. 2016. \textit{\href{https://r4ds.had.co.nz/}{R for Data Science: Import, Tidy, Transform, Visualize, and Model Data}}. (*R4DS*). O’Reilly Media, Inc. ISBN: 1491910399
+- Wickham, Hadley, and Garrett Grolemund. 2023. \textit{\href{https://r4ds.hadley.nz/}{R for Data Science: Import, Tidy, Transform, Visualize, and Model Data}}. 2nd edition. (*R4DS*). O’Reilly Media, Inc. ISBN: 1491910399
 - Martin, James H., and Daniel Jurafsky. 2020. \textit{\href{https://web.stanford.edu/~jurafsky/slp3/}{Speech and Language Processing: An Introduction to Natural Language Processing, Computational Linguistics, and Speech Recognition.}} 3rd edition. Prentice Hall. ISBN: 0131873210
 - Silge, Julia, and David Robinson. 2017. \textit{\href{https://www.tidytextmining.com/dtm.html}{Text Mining with R: A Tidy Approach.}} O’Reilly Media. ISBN: 1491981652
 
@@ -92,7 +92,7 @@ In accordance with University policy, if you have a documented disability and re
 
 *Readings*
 
-- *R4DS*: Preface, C2-6, 21
+- *R4DS*: Introduction, C1-4 (skim 1), skim 5, 6-8, 
 - *Bit by Bit*, C1
 - Lazer, David, et al. 2009. \href{https://doi.org/10.1126/science.1167742}{“Life in the Network: The Coming Age of Computational Social Science.”} *Science* 323 (5915): 721–23.
 - Golder, Scott A., and Michael W. Macy. 2014. \href{https://doi.org/10.1146/annurev-soc-071913-043145}{“Digital Footprints: Opportunities and Challenges for Online Social Research.”} *Annual Review of Sociology* 40 (1): 129–52.
@@ -109,7 +109,7 @@ In accordance with University policy, if you have a documented disability and re
     
 *Readings*
 
-- *R4DS*: C7-10, 16
+- *R4DS*: C27, 16
 - Bearman, Peter S., James Moody, and Katherine Stovel. 2004. \href{https://doi.org/10.1086/386272}{“Chains of Affection: The Structure of Adolescent Romantic and Sexual Networks.”} *American Journal of Sociology* 110(1):44–91.
 - Shi, Feng, Yongren Shi, Fedor A. Dokshin, James A. Evans, and Michael W. Macy. 2017. \href{https://doi.org/10.1038/s41562-017-0079}{“Millions of Online Book Co-Purchases Reveal Partisan Differences in the Consumption of Science.”} *Nature Human Behaviour* 1(4):0079.
 
@@ -128,7 +128,7 @@ In accordance with University policy, if you have a documented disability and re
 
 *Readings*
 
-- *R4DS*: C14-15, 17
+- *R4DS*: C25-26, 18-19
 - Macy, Michael, and Robert Willer. 2002. \href{https://doi.org/10.1146/annurev.soc.28.110601.141117}{“From Factors to Actors: Computational Sociology and Agent-Based Modeling.”} *Annual Review of Sociology* 28 (1): 143–66.
 - Bruch, Elizabeth, and Jon Atwell. 2015. \href{https://doi.org/10.1177/0049124113506405}{“Agent-Based Models in Empirical Social Research.”} *Sociological Methods & Research* 44 (2): 186–221.
 - Centola, Damon, and Michael Macy. 2007. \href{https://doi.org/10.1086/521848}{“Complex Contagions and the Weakness of Long Ties.”} *American Journal of Sociology* 113(3):702–34.
@@ -148,7 +148,7 @@ In accordance with University policy, if you have a documented disability and re
 
 *Readings*
 
-- *R4DS*: C11 ("Strings with stringr"), 13 ("Dates and Times with lubridate")
+- *R4DS*: C14, 17
 - *Bit by Bit*, C2
 - Askin, Noah, and Michael Mauskapf. 2017. \href{https://doi.org/10.1177/0003122417728662}{“What Makes Popular Culture Popular? Product Features and Optimal Differentiation in Music.”} *American Sociological Review* 82 (5): 910–44.
 - Freelon, Deen. 2018. \href{https://doi.org/10.1080/10584609.2018.1477506}{“Computational Research in the Post-API Age.”} *Political Communication* 35 (4): 665–68.
@@ -158,11 +158,17 @@ In accordance with University policy, if you have a documented disability and re
 
 *Readings*
 
+- *R4DS*: C24
 - *Bit by Bit*, C6
 - Li, Fumin, Yisu Zhou, and Tianji Cai. 2021. \href{https://doi.org/10.1177/0894439319886019}{“Trails of Data: Three Cases for Collecting Web Information for Social Science Research.”} *Social Science Computer Review* 39(5):922–42.
 - Tjaden, Jasper. 2023. \href{https://doi.org/10.1177/01979183231208428}{“Web Scraping for Migration, Mobility, and Migrant Integration Studies: Introduction, Application, and Potential Use Cases.”} *International Migration Review*.
 - Fiesler, Casey, Nate Beard, and Brian C Keegan. 2020. \href{https://doi.org/10.1609/icwsm.v14i1.7290}{“No Robots, Spiders, or Scrapers: Legal and Ethical Regulation of Data Collection Methods in Social Media Terms of Service.”} In *Proceedings of the Fourteenth International AAAI Conference on Web and Social Media*, 187–96.
 - Dahlke, Ross, Deepak Kumar, Zakir Durumeric, and Jeffrey T. Hancock. 2023. \href{https://doi.org/10.1177/08944393231218214}{“Quantifying the Systematic Bias in the Accessibility and Inaccessibility of Web Scraping Content From URL-Logged Web-Browsing Digital Trace Data.”} *Social Science Computer Review*.
+
+*Further reading*
+
+- Haber, Jaren R. 2020. \href{https://doi.org/10.1177/0038040720953218}{“Sorting Schools: A Computational Analysis of Charter School Identities and Stratification.”} *Sociology of Education* 94(1): 43-64.
+
 
 ## *Assignment 2: Collecting and storing data released. Due 2/23 at 5pm.*
 
@@ -171,6 +177,7 @@ In accordance with University policy, if you have a documented disability and re
 
 *Readings*
 
+- *R4DS*: C9-11
 - *Bit by Bit*, C3-5
 - Salganik, Matthew J., and Duncan J. Watts. 2008. \href{https://doi.org/10.1177/019027250807100404}{“Leading the Herd Astray: An Experimental Study of Self-Fulfilling Prophecies in an Artificial Cultural Market.”} *Social Psychology Quarterly* 71 (4): 338–55.
 - Wang, Wei, David Rothschild, Sharad Goel, and Andrew Gelman. 2015. \href{https://doi.org/10.1016/j.ijforecast.2014.06.001}{“Forecasting Elections with Non-Representative Polls.”} *International Journal of Forecasting* 31 (3): 980–91.
