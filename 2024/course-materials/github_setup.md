@@ -17,6 +17,8 @@ I strongly recommend browsing the resources below and familiarizing yourself wit
 
 1. Set up an account on Github https://github.com (we will be using the free version so no need to pay).
 
+Use your Rutgers email and make a short, memorable username. Store your password securely. You may also be required to set up two-factor authorization.
+
 2. Install Git on your computer following instructions here https://github.com/git-guides/install-git.
 
 Please note that the instructions vary depending on your operating system. If you are using MacOS then you may have Github installed already. 
