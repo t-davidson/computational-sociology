@@ -1,0 +1,1 @@
+I'm nested inside the `slides` directory. My relative path is `~/slides/nested/file_inner.txt`.
