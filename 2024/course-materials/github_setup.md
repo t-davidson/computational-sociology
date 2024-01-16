@@ -32,12 +32,9 @@ install.package("usethis")
 library(usethis)
 use_git_config(user.name = "t-davidson", user.email = "thomas.davidson@rutgers.edu")
 ```
+If you get an access or permission error then you may need to complete this step to generate and store an access token: https://happygitwithr.com/https-pat.html. Otherwise, proceed to the next step.
 
-4. At this point Git is set up on your computer.  Proceed to Step 5, but if you find you have an access or permission error then you may need to complete this step:
-
-Follow these instructions to generate and store an access token: https://happygitwithr.com/https-pat.html
-
-5. Finally, you can use Github to get the latest version of all the course files (including this one!) on your computer.
+4. Finally, you can use Github to get the latest version of all the course files (including this one!) on your computer.
 
 Return to RStudio and click the `File` tab at the top of the page and select `New Project...` from the dropdown. This will open up the project wizard. Click the `Version Control` option then `Git`. Paste the URL for this project (https://github.com/t-davidson/computational-sociology/blob/main/2024/course-materials/github_setup.md) into the Repository URL box and select an appropriate directory to store it (this is where the files will all live). When you're ready, click `Create Project`
 
