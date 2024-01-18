@@ -29,7 +29,7 @@ The main textbook we will be using this semester is R for Data Science (R4DS) by
 ### RStudio
 We will be using RStudio for assignments in this class. You can download the free version of RStudio Desktop [here](https://rstudio.com/products/rstudio/download/). RStudio is an integrated development environment (IDE) that has a great deal of helpful functionality. You can use it for a range of tasks, including to write and run code, finding help, viewing plots, and inspecting data.
 
-Once you have set up RStudio, run the command to install `tidyverse`, a set of packages that we will be using extensively this semester.
+Once you have set up RStudio, run the command `install.packages("tidyverse")` to install `tidyverse`, a set of packages that we will be using extensively this semester.
 
 ### RMarkdown
 RMarkdown is a framework designed by the developers of RStudio that allows you to combine code, text, and other elements into the same document. RMarkdown can create slideshows and other documents. For example, the course syllabus and the slides I will use in the lectures are both created in RMarkdown. Course assignments (and potentially your final papers) will be written using RMarkdown. I recommend taking a look at [this tutorial](https://rmarkdown.rstudio.com/lesson-1.html).
