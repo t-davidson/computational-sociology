@@ -62,7 +62,7 @@ include_graphics('../images/watts_telescope.png')
 \centering \tiny Quoted in Golder and Macy 2014.
 
 # Introduction to Computational Sociology
-## Measuring diurnal rhythms usning Twitter
+## Measuring diurnal rhythms using Twitter
 ```{r, out.width="70%",out.height="60%", fig.align="center"}
 include_graphics('../images/golder_macy_diurnal.png')
 ```
@@ -79,6 +79,16 @@ include_graphics('../images/bitbybit1-2_readymade-custommade.png')
 ## Multi-modal data and cultural sociology
 - Bail (2014) writes that "[S]ocial scientists—and cultural sociologists in particular—have largely ignored the promise of so-called “big data.” Instead, cultural sociologists have left this wellspring of information about the arguments, worldviews, or values of hundreds of millions of people from Internet sites and other digitized texts to computer scientists who possess the technological expertise to extract and manage such data but lack the theoretical direction to interpret their meaning."
 - CSS tools provide new ways to measure culture and analyze texts, images, and other media previously confined to relatively small-scale, interpretativist methods
+
+# Introduction to Computational Sociology
+## Is it quantitative or qualitative?
+- Early work in CSS largely used quantitative methods like social network analysis and simulation, as well as conventional statistical techniques
+- Capacity to study texts and other non-tabular data also opens new opportunities to conduct qualitative analysis at scale
+    - Topic modeling as content analysis (e.g., DiMaggio, Nag, and Blei 2013; Mohr et al. 2013)
+    - Computational ethnography (Abramson et al. 2018)
+    - Conversational content analysis (Davidson 2024?)
+- Hybrid, mixed-methods approaches combining computational methods with qualitative analysis
+    - Computational grounded theory (Nelson 2017)
 
 # Introduction to Computational Sociology
 ## The emergence of a field
