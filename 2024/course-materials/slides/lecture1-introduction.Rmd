@@ -232,14 +232,14 @@ Go through key settings on RStudio.-->
     - Autocompletion violates academic integrity
     - And the solutions are often distracting and not very helpful
     
-# Excercise
+# Exercise
 ## Problem solving in R
 
 - Download and inspect this code in RStudio (paste it into a new R file)
-    - \url{https://raw.githubusercontent.com/t-davidson/computational-sociology/main/2024/course-materials/code/l1_problem_1.R}
+    - \url{https://tinyurl.com/badcode2024}
 - Task: Identify and fix the errors
 
-# Excercise
+# Exercise
 ## Problem solving in R
 
 - Three groups:
@@ -307,8 +307,8 @@ Follow the instructions on the course website to set up Github with RStudio: \ur
 2. Install Git
 3. Sync your Github account with RStudio
   
-# Cloning the course website
-- Once you have this set up, navigate to the course website on Github and copy the URL
+# Cloning the course materials
+- Once you have this set up, navigate to the course website on Github and copy the URL:
     - \url{https://github.com/t-davidson/computational-sociology}
   
 # Cloning the course materials
@@ -405,8 +405,8 @@ If a file is contained in an inner directory, you need to add the name of the di
 read_file("nested/nested2/file_inner_inner.txt") %>% print()
 ```  
 
-# Excercise
-Uncomment the code and omplete the path to print the contents of the file hiding in the `2021` directory.
+# Exercise
+Modify the path below to find and print the contents of the hidden file in the `2021` directory.
 ```{r, echo=T, eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
 read_file("") %>% print()
 ```  
