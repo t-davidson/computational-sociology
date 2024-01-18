@@ -6,7 +6,16 @@ Last updated January 8, 2024.
 
 ## Setting up the computational stack
 
-This section will help to familiarize students with the tools we will be using throughout the semester. Please read it carefully and ensure you have completed the checklist by the second week of classes.
+This section will help to familiarize students with the tools we will be using throughout the semester. Please read it carefully and ensure you have completed the following checklist by the second week of classes.
+
+#### Checklist
+  - Install RStudio
+    - Install `tidyverse` package
+  - Setup Github integration
+    - Make an account on Github
+    - Install Git
+    - Sync with RStudio
+    - Clone course repository
 
 I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/computational-sociology/blob/main/2024/course-materials/syllabus/syllabus.pdf). Here you will find links to all of the readings for the semester. All of the books are available for free online. Below are some helpful resources for learning about R, RStudio, RMarkdown, and Github.
 
@@ -20,21 +29,14 @@ The main textbook we will be using this semester is R for Data Science (R4DS) by
 ### RStudio
 We will be using RStudio for assignments in this class. You can download the free version of RStudio Desktop [here](https://rstudio.com/products/rstudio/download/). RStudio is an integrated development environment (IDE) that has a great deal of helpful functionality. You can use it for a range of tasks, including to write and run code, finding help, viewing plots, and inspecting data.
 
+Once you have set up RStudio, run the command to install `tidyverse`, a set of packages that we will be using extensively this semester.
+
 ### RMarkdown
 RMarkdown is a framework designed by the developers of RStudio that allows you to combine code, text, and other elements into the same document. RMarkdown can create slideshows and other documents. For example, the course syllabus and the slides I will use in the lectures are both created in RMarkdown. Course assignments (and potentially your final papers) will be written using RMarkdown. I recommend taking a look at [this tutorial](https://rmarkdown.rstudio.com/lesson-1.html).
 
 ### Github
 Github is a website used to store and share code. The most useful aspect of Github is *version control*. If you regularly store your code on Github then it is easy to keep a record of your work over time (similar to tracked changes in Word documents). All course materials will be hosted in a Github repository. You will be using Github to submit your course assignments.
 
-You can sign up to Github [here](https://github.com) (no need to pay, sign up for a free account). As students, you can get free access to certain paid features by signing up for a [student developer pack](https://education.github.com/pack). Once you have made your account, follow the instructions here. You will likely need to upload a copy of your student ID as evidence. They should provide you with access within a few days.
+You can sign up to Github [here](https://github.com) (no need to pay, sign up for a free account). Once you have made your account, follow the instructions [here](https://github.com/t-davidson/computational-sociology/blob/main/2024/course-materials/github_setup.md) to integrate it with RStudio.
 
-Once you have an account, [this](https://guides.github.com/activities/hello-world/) tutorial will introduce you to most of what you will need to know.
-
-### Checklist
-  - Install RStudio
-    - Install RMarkdown and read tutorial
-  - Make Github account
-    - Apply for Github student developer account
-    - Follow Github tutorial
-  - (Optional) Watch Bail’s R tutorials
-  - (Optional) Read R4DS
+We will go over the core functionality in class, but [this](https://guides.github.com/activities/hello-world/) tutorial will introduce you to most of what you will need to know.
