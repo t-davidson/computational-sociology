@@ -28,7 +28,7 @@ Please note that the instructions vary depending on your operating system. If yo
 Luckily there is an R package to help you do this All you need to do is install the following package and run this command in the R console (replacing the username and email address with yours).
 
 ```
-install.package("usethis")
+install.packages("usethis")
 library(usethis)
 use_git_config(user.name = "t-davidson", user.email = "thomas.davidson@rutgers.edu")
 ```
