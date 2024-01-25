@@ -1,0 +1,539 @@
+---
+title: "Computational Sociology" 
+subtitle: "Social networks and data structures"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: January 25, 2024
+urlcolor: blue
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+
+# Plan
+- Part I : Social networks and social network analysis
+    - Introduction to social networks
+    - Big ideas
+    - Two studies and implications for computational social science
+- Part II : Data structures in R
+    - Basic types
+    - Vectors
+    - Lists
+    - Matrices
+    - Data frames
+    
+# Part I: Social networks and social network analysis
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/florentine_network.png')
+```
+
+# Social networks
+- A social network is a set of actors, or people, and the relationships between them
+    - Family structures and kinship networks
+    - Friendship and acquaintanceship networks
+    - Organizations
+    - Online social networks
+    
+# Social network analysis   
+- Social network analysis is the study of social networks using mathematical and computational tools
+- Networks can be represented using concepts from a branch of mathematics called graph theory
+    - People or actors are represented as "nodes"
+    - Relationships are represented as "edges"
+    
+# Social network analysis
+## Visualizing networks
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/florentine_network.png')
+```
+\tiny 15th century Florentine marriage network (depicted in Jackson, Matthew O. 2010. *Social and Economic Networks*. Princeton University Press.)
+
+
+# Social network analysis
+## Visualizing networks
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/got_network.png')
+```
+\tiny Characters mentioned in *Game of Thrones* books, annotated with structural information. From Beveridge, Andrew, and Jie Shan. 2016. \href{10.4169/mathhorizons.23.4.18}{“Network of Thrones.”} *Math Horizons* 23(4): 18–22.
+
+
+# Social network analysis
+## Big ideas: Homophily
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/homophily_india.png')
+```
+\tiny Lee, Jaemin, and Mudit Kumar Singh. 2024. \href{https://www.doi.org/10.1002/jid.3828}{“Expansion, Cohesion and Diversity: The Network Advantages of Microfinance Groups in Indian Villages.”} *Journal of International Development* 36(1):559–86.
+
+# Social network analysis
+## Big ideas: The strength of weak ties
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/granovetter_weak_ties.png')
+```
+\tiny Granovetter 1973.
+
+# Social network analysis
+## Big ideas: Structural holes
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/burt_structural_holes.png')
+```
+\tiny Burt 2004.
+
+# Social network analysis
+## Big ideas: Duality of persons and groups
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/breiger_persons_groups.png')
+```
+\tiny Breiger 1974
+
+
+# Social network analysis
+## Spanning trees of sexual relationships in a high school
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/sex_network.png')
+```
+\tiny Bearman, Moody, and Stovel 2004
+
+# Social network analysis
+## Forbidden triads and triadic closure
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/forbidden_triad.png')
+```
+\tiny Granovetter 1973.
+
+# Social network analysis
+## Micro-mechanism: Norms against cycles and "seconds"
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/bearman_cycle.png')
+```
+
+# Social network analysis
+## Simulated networks
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/bearman_simulated_networks.png')
+```
+
+# Social network analysis
+## Polarization in book purchases
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/amazon_network.png')
+```
+\tiny Shi et al. 2017
+
+# Social network analysis
+## Polarization in book purchases
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/shi_science.png')
+```
+
+# Social network analysis
+## Scientific fields and political ideology
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/shi_dendogram.png')
+```
+
+# Social network analysis
+## Polarized science?
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/shi_fields.png')
+```
+
+# Social network analysis
+## Social networks and computational social science
+- *Custommade vs. readymade data*:
+    - Add Health data is custommade
+    - Amazon book data is readymade
+        - Ubiquity of large-scale, dynamic network datasets on the internet creates new opportunities
+- *Computational approaches to network analysis*:
+    - Bearman et al. 2004 demonstrate how simulations can reveal micro-mechanism underlying macro-structures
+    - Advances in computational power enable new types of network simulation (see Block, Stadtfeld, and Snijders 2019)
+        - Exponential random graph models (ERGMs)
+        - Stochastic actor-oriented models (SOAMs)
+
+# Social networks and computational social science
+## Revisiting old theories with new data and methods
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/weak_ties_science.png')
+```
+\tiny Rajkumar, Karthik, Guillaume Saint-Jacques, Iavor Bojinov, Erik Brynjolfsson, and Sinan Aral. 2022. \href{https://www.science.org/doi/10.1126/science.abl4476}{“A Causal Test of the Strength of Weak Ties.”} *Science* 377:1304–10.
+
+
+# Social networks and computational social science
+## Advances in network modeling
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/network_transitions.png')
+```
+\tiny Block, Stadtfeld, and Snijders 2019.
+
+# Part II: Data structures
+
+Open RStudio and load `lecture2-data-structures.Rmd`, located in this week's Canvas Module. Scroll down to this line.
+
+# Object-oriented programming
+- A paradigm of computer programming
+    - We create *objects* of different *classes* such as numbers, strings, and data frames
+    - These objects have *attributes*, properties such as data
+        - e.g. The numeric object we call **`A`** has an attribute called `value` equal to **`1`**
+    - Objects are associated with *methods* that allow us to manipulate them
+        - e.g. a numeric object might have a method called `add`, such that **`A + A`** will return **`2`**.
+
+# Basic types
+There are four basic types we will be using throughout the class. Here I used them to record some information about one of my cats. In R, it is convention to use the `<-` operator to assign an object to a name.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize'}
+# Character (also known as "strings")
+name <- "Gary"
+# Numeric
+weight <- 13.2
+# Integer ("int" for short)
+age <- 5L
+# Logical
+human <- FALSE
+```
+\tiny The other two are called `complex` and `raw`. See \href{https://cran.r-project.org/doc/manuals/R-lang.html}{documentation}
+
+# Basic types
+There are a few useful commands for inspecting objects.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+print(name) # Prints value in console
+class(name) # Shows class of object
+typeof(name) # Shows type of object, not always equal to class
+```
+
+# Basic types
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+print(weight) # Prints value in console
+class(weight) # Shows class of object
+typeof(weight) # Shows type of object, not always equal to class
+```
+
+# Basic types
+We can use the `==` expression to verify the value of an object. We will discuss Boolean operations in more detail next lecture.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+name == "Tabitha"
+age == 3L
+age >= 3L # is greater than
+age != 3L # is not
+```
+
+# Vectors
+A vector is a collection of elements of the *same* type. We can define an empty vector with `N` elements of a type. Empty vectors assume certain default values depending on the type.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+N <- 5
+x <- logical(N)
+print(x)
+y <- numeric(N)
+print(y)
+z <- character(N)
+print(z)
+```
+
+# Vectors
+Let's take a closer look at numeric vectors. We can use the combine function `c()` to concatenate multiple values into a vector.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+v1 <- c(1,2,3,4,5)
+v2 <- c(1,1,1,1,1)
+class(v1) # check the class of v1
+```
+
+# Vectors
+We can easily perform various mathematical operations on numeric vectors
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+v1 + v2 # addition
+v1 - v2 # subtraction
+v1 * v2 # multiplication
+sum(v1) # sum over v1
+```
+\tiny Note how the different methods return different types of outputs. The arithmetic operations return vectors while `sum` returns a numeric value.
+
+
+# Vectors
+What happens if we try to combine objects of different types using combine?
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+t <- c("cat", 5, TRUE)
+typeof(t)
+t
+```
+
+# Vectors
+There are lots of commands for generating special types of numeric vectors. Note how `N` has already been defined above.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+seq(N) # generates a sequence from 1 to N
+rev(seq(N)) # reverses order
+rnorm(N) # samples N times from a normal distribution
+```
+
+# Vectors
+We can use the help `?` command to find information about each of these commands.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+?seq
+```
+
+# Vectors
+We can use the `index` to access the specific elements of a vector. R uses square brackets for such indexing.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+x <- rnorm(N)
+print(x)
+print(x[1]) # R indexing starts at 1; Python and some others start at 0
+
+x[1] <- 9 # We can combine indexing with assignment to modify elements
+print(x)
+```
+
+# Vectors
+The `head` and `tail` commands are useful when we're working with larger objects. Here we draw 10,000 observations from an normal distribution.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+x <- rnorm(10000)
+length(x)
+head(x)
+tail(x)
+```
+
+# Exercise: Vectors
+Retrieve the final element from `x` using indexing.
+```{r, echo=TRUE, eval = FALSE, mysize=TRUE, size='\\footnotesize' }
+
+```
+
+
+# Vectors
+Vectors can also contain null elements to indicate missing values, represented by the `NA` symbol.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+x <- c(1,2,3,4,NA)
+is.na(x) # The is.na function indicates whether each value is missing.
+!is.na(x) # Prepending ! denotes the inverse of a logical operation
+```
+\tiny `NA` is a logical type but can exist within numeric and character vectors. It is an exception to the rule discussed above regarding the presence of multiple types in the same vector.
+
+# Lists
+A list is an object that can contain different types of elements, including basic types and vectors.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+print(v1)
+l1 <- list(v1) # We can easily convert the vector v1 into a list.
+print(l1)
+```
+
+# Lists
+Lists have a slightly different form of indexing. This can be one of the most confusing aspects of R for beginners!
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+l1[1] # The first element of the list contains the vector
+l1[[1]] # Double brackets allows us to access the vector itself
+class(l1[1]) # first element is a list
+class(l1[[1]]) # double indexing gives us the contents
+```
+
+# Lists
+We can access specific elements of a list by using standard indexing.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+l1[[1]][1] # Followed by single brackets to access a specific element
+l1[1][1] # If we're not careful, we will just get the entire sublist
+```
+
+# Lists
+We can easily combine multiple vectors into a list.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+v.list <- list(v1,v2) # We could store both vectors in a list
+print(v.list)
+```
+
+# Lists
+We index sublists using double brackets, then specific elements with single brackets.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+v.list[[2]][4] # We can use double brackets to get element 4 of list 2
+```
+
+# Lists
+We can make indexing easier if we start with an empty list and then add elements using a named index via the `$` operator.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+v <- list() # initialize empty list
+v$v1 <- v1 # the $ sign is used for named indexing
+v$v2 <- v2
+print(v)
+```
+
+# Excercise: Lists
+Combine `$` and square bracket indexing to extract the 5th element of `v1` from the list `v`.
+```{r, echo=TRUE, eval=F, mysize=TRUE, size='\\footnotesize' }
+
+```
+
+
+# Lists
+We can define lists more concisely by providing sublists as named arguments.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+cats <- list(names = c("Gary", "Tabitha"), ages = c(5,2))
+print(cats)
+```
+
+# Matrices
+A matrix is a two-dimensional data structure. Like vectors, matrices hold objects of a single type. Here we're defining a matrix using two arguments, the number of rows and columns.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+matrix(nrow=5,ncol=5) # Here there is no content so the matrix is empty
+```
+
+# Matrices
+We can also pass an argument to define the initial contents of a matrix.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+M <- matrix(0L, nrow=5, ncol=5) # 5x5 matrix of zeros
+M
+```
+
+# Matrices
+We can create a matrix by combining vectors using `cbind`.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+M1 <- cbind(v1,v2) # Treat vectors a columns
+print(M1)
+```
+
+# Matrices
+If we want to treat the vectors as rows, we alternatively use `rbind`. We could also get the same result by *transposing* `M1`.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+M2 <- rbind(v1, v2) # Vectors as rows
+print(M2)
+print(t(M1)) # t() is the transpose function
+```
+
+# Matrices
+The `dim` function provides us with information about the dimensions of a given matrix. It returns the number of rows and columns.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+dim(M1) # Shows the dimensions of the matrix
+dim(M2)
+```
+
+# Matrices
+We can get particular values using two-dimensional indexing. By convention `i` denotes the row and `j` the column.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+i <- 1 # row index
+j <- 2 # column index
+M1[i,j] # Returns element i,j
+M1[i,] # Returns row i
+M1[,j] # Returns column i
+```
+
+# Matrices
+Like lists, we can  also name rows and columns to help make indexing easier. The `colnames` and `rownames` functions show the names of each column and row.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+colnames(M1)
+rownames(M1)
+```
+
+# Matrices
+We can use these functions to assign new names.
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+colnames(M1) <- c("X", "Y")
+rownames(M1) <- seq(1, nrow(M1))
+print(M1)
+```
+
+# Style
+## A note on style
+- Not only do programming languages require a specific syntax to function, but there are also stylistic conventions
+- There are packages you can use to automatically style your code (`styler` and `lintr`)
+- See https://style.tidyverse.org/ for more info on R style
+
+# Style
+## Some style tips
+- Naming
+  - Use short, informative variable names
+  - Use snake_case or CamelCase for multiple words
+  - Maintain a consistent naming convention
+  
+# Style
+## Some style tips 
+- Use appropriate spacing to make code readable
+  - e.g. `a <- 1` is preferable to `a<-1`
+- Try to avoid long expressions
+  - Make complex functions modular (more next lecture)
+  - Tidyverse uses the `%>%` operator to help with this (more next lecture)
+  
+# Style
+## Some style tips 
+- Comment on your code for your future self and others
+- In RMarkdown, write explanations outside of chunks
+- ChatGPT and other AI can be helpful for explaining code and showing how to add useful comments
+
+# Use data structures to represent social networks
+## Storing names in vectors
+Let's see how these types of objects can be used to create formal representations of social networks. We can start by defining a vector of names for a fictional friend group.
+
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+names <- c("Bob", "Alice", "Carol", "Ted")
+```
+
+# Use data structures to represent social networks
+## Representing relationships in a matrix
+Next, we can define a matrix to store relationship ties. Each person is referenced according to their index in the name vector
+
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+X <- matrix(0, nrow = length(names), ncol = length(names))
+X[1,2] <- 1 # edge from Bob to Alice
+X[1,3] <- 1
+X[3,2] <- 1
+X[1,4] <- 1
+X[4,2] <- 1
+
+print(X)
+```
+
+# Use data structures to represent social networks
+## Storing information in a list
+```{r, echo=TRUE, , mysize=TRUE, size='\\footnotesize' }
+network_info <- list(names = names, network = X)
+print(network_info)
+```  
+
+# Putting it all together
+## Plotting the network
+```{r, echo=FALSE, mysize=TRUE, size='\\footnotesize', out.width="70%",out.height="70%", fig.align="center"}
+require("igraph")
+require("ggnetwork")
+require("ggplot2")
+
+g <- graph_from_adjacency_matrix(X, mode = "directed", diag = F)
+V(g)$name <- names
+net <- ggnetwork(g)
+ggplot(net, aes(x = x, y = y, xend = xend, yend = yend)) +
+  geom_edges(color = "black", arrow = arrow(type = "closed", length = unit(2, "mm"))) +
+  geom_nodes(color = "black", size = 6) +
+  geom_nodelabel_repel(aes(label = name),
+                       fontface = "bold", box.padding = unit(1, "lines")) +
+  theme_void() +
+  theme(legend.position = "none") + 
+  xlim(min(net$x) - 0.2, max(net$x) + 0.2) +  # Adjusting x limits
+  ylim(min(net$y) - 0.2, max(net$y) + 0.2)   # Adjusting y limits
+```  
+
+# Next week
+
+- Programming in R
+    - Boolean logic
+    - If-statements
+    - Loops
+    - Functions
+- Agent-based modeling
+
+
