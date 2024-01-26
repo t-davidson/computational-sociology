@@ -136,6 +136,7 @@ In accordance with University policy, if you have a documented disability and re
 
 *Further reading*
 
+- Schelling, Thomas C. 1971. \href{https://doi.org/10.1080/0022250X.1971.9989794}{“Dynamic Models of Segregation.”} *Journal of Mathematical Sociology* 1:143–86.
 - Watts, Duncan. 1999. \href{https://doi.org/10.1086/210318}{“Networks, Dynamics, and the Small‐World Phenomenon.”} *American Journal of Sociology* 105 (2): 493–527.
 - Centola, Damon. 2015. \href{https://doi.org/10.1086/681275}{“The Social Origins of Networks and Diffusion.”} *American Journal of Sociology* 120 (5): 1295–1338.
 - Goldberg, Amir, and Sarah K. Stein. 2018. \href{https://doi.org/10.31235/osf.io/uqvd3}{“Beyond Social Contagion: Associative Diffusion and the Emergence of Cultural Variation.”} *American Sociological Review* 83 (5): 897–932.
@@ -161,13 +162,13 @@ In accordance with University policy, if you have a documented disability and re
 - *R4DS*: C24
 - *Bit by Bit*, C6
 - Li, Fumin, Yisu Zhou, and Tianji Cai. 2021. \href{https://doi.org/10.1177/0894439319886019}{“Trails of Data: Three Cases for Collecting Web Information for Social Science Research.”} *Social Science Computer Review* 39(5):922–42.
-- Tjaden, Jasper. 2023. \href{https://doi.org/10.1177/01979183231208428}{“Web Scraping for Migration, Mobility, and Migrant Integration Studies: Introduction, Application, and Potential Use Cases.”} *International Migration Review*.
 - Fiesler, Casey, Nate Beard, and Brian C Keegan. 2020. \href{https://doi.org/10.1609/icwsm.v14i1.7290}{“No Robots, Spiders, or Scrapers: Legal and Ethical Regulation of Data Collection Methods in Social Media Terms of Service.”} In *Proceedings of the Fourteenth International AAAI Conference on Web and Social Media*, 187–96.
 - Dahlke, Ross, Deepak Kumar, Zakir Durumeric, and Jeffrey T. Hancock. 2023. \href{https://doi.org/10.1177/08944393231218214}{“Quantifying the Systematic Bias in the Accessibility and Inaccessibility of Web Scraping Content From URL-Logged Web-Browsing Digital Trace Data.”} *Social Science Computer Review*.
 
 *Further reading*
 
 - Haber, Jaren R. 2020. \href{https://doi.org/10.1177/0038040720953218}{“Sorting Schools: A Computational Analysis of Charter School Identities and Stratification.”} *Sociology of Education* 94(1): 43-64.
+- Tjaden, Jasper. 2023. \href{https://doi.org/10.1177/01979183231208428}{“Web Scraping for Migration, Mobility, and Migrant Integration Studies: Introduction, Application, and Potential Use Cases.”} *International Migration Review*.
 
 
 ## *Assignment 2: Collecting and storing data released. Due 2/23 at 5pm.*
