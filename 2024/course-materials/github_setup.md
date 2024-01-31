@@ -50,7 +50,34 @@ Follow the instructions here: https://happygitwithr.com/rstudio-git-github.html
 
 ## Using Github for homework assignments
 
-We will be using something called Github Classroom for the homework assignments. Each homework assignment will be a separate Github repository, where each student gets a personal version. You will need to clone this repository using the same process as in Step 6. You can then submit your solutions by committing changes and pushing them to your repository.
+We will be using something called Github Classroom for the homework assignments. Each homework assignment will be a separate Github repository, where each student gets a personal version. 
+
+
+### How to download ("clone") the homework repository
+You will need to clone this repository using the same process as in Step 4. Just use the URL for your unique repository in place of the course website. Make sure to save it some separate (e.g. not inside the `computational-sociology` directory). Once you have downloaded it, clicking the project file will open up RStudio within the homework repository.
+
+### How to commit and push changes to the homework
+
+- Save the files you want to update
+- Navigate to the Git tab in RStudio and click the check-box for the file then click `Commit`
+- A dialogue box will open. Add a short message to the `Commit message` box, e.g. `Updated HW1 solutions` then click the `Commit` button again. 
+- Finally, click the `Push` button with the green upwards arrow to send the change to your cloud-based repository
+	- Note: If you are asked for your username and password, click `Cancel` and exit the process. Follow these instructions to set up a personal access token (https://happygitwithr.com/https-pat.html#tldr) then attempt again.
+- Once you have pushed the changes, visit the Github webpage for your homework repository and you should see your commit message next to the file name, showing it is updated.
+
+You can commit as many times as you want. I recommend testing this process our before your final submission.
+
+For the final submission, please use the commit message indicated at the bottom of the `.Rmd` file to confirm it is the final submission.
+
+## On projects
+
+Over the course of the semester you will likely have multiple different Github repositories (main course repo, homeworks, papers).
+
+The simplest way to open a project is to open the `.RProj` file located in each folder or to use the dropdown menu in RStudio to open projects.
+
+Make sure you know what project you are currently in. You will need to switch between projects. For example, you might have a homework open in one project and will need to close RStudio and open the main project to work on in class problems.
+
+You can learn more about projects in the *R for Data Science* book: https://r4ds.hadley.nz/workflow-scripts.html#projects
 
 ### How to commit changes to the homework
 
