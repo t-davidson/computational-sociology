@@ -1,0 +1,605 @@
+---
+title: "Computational Sociology" 
+subtitle: "Agent-based modeling and programming fundamentals"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: February 1, 2024
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+# Plan
+
+- Course updates
+- Part I: Agent-based modeling
+- Part II: Programming fundamentals
+
+# Course updates
+## Homework
+- Homework 1 will be released by at the end of class
+  - Due next Friday (2/9) at 5pm Eastern.
+
+# Introduction to agent-based modeling
+## Agent-based modeling and quantitative social science
+- Most quantitative social science is variable-centered
+  - e.g. We study the associations and interactions between variables in a linear regression
+  
+# Introduction to agent-based modeling
+## Agent-based modeling and quantitative social science
+- As a consequence, many sociologists think about the world in terms of what Andrew Abbott calls "general linear reality"
+  - A social world composed of fixed entities with fixed attributes
+    
+# Introduction to agent-based modeling
+## Agent-based modeling and quantitative social science
+- Agent-based modeling is the study of "social life as interactions among adaptive agents who influence one another in response to the influence they receive." (Macy and Willer 2002)
+  - Rather than interactions between *variables*, we consider interactions between *interdependent individuals*
+  
+# Introduction to agent-based modeling
+## Agent-based modeling and quantitative social science  
+- Often we are interested in the *emergent* properties of local interactions between agents and how they aggregate into system-level processes such as diffusion, polarization, and segregation
+  - These complex system-level patterns can emerge without any centralized coordination
+- Like historical sociology and ethnography, agent-based modeling is a *relational* approach, focusing on the context-dependent and contingent nature of social interaction
+
+# Introduction to agent-based modeling
+## Key assumptions
+- Macy and Willer 2002 outline four key assumptions that underpin many sociological agent-based models
+  - Agents are *autonomous*
+    - There is no system-wide coordination
+  - Agents are *interdependent*
+    - Agents respond to each other and to their environment
+  - Agents follow *simple rules*
+    - Simple local rules can generate global complexity
+  - Agents are *adaptive* and *backwards looking*
+    - Agents can alter their behavior through processes such as imitation and learning
+    
+# Introduction to agent-based modeling
+## Advantages of ABMs
+- Virtual experiments to test causal mechanisms
+  - Particularly useful where real-world experimentation is impractical
+- Theory building and testing
+  - Bridging between micro and macro levels of analysis
+  - Varying the social structure *and* the agency of individuals
+
+# Introduction to agent-based modeling
+## Craig Reynolds *Flocking behavior* (1987)
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/boids.png')
+```
+\tiny \centering Reynolds, Craig W. 1987. “Flocks, Herds and Schools: A Distributed Behavioral Model.” In *Proceedings of the 14th Annual Conference on Computer Graphics and Interactive Techniques*, 25–34.
+
+# Introduction to agent-based modeling
+## Flocking behavior in NetLogo
+http://www.netlogoweb.org/launch#http://ccl.northwestern.edu/netlogo/models/models/Sample%20Models/Biology/Flocking.nlogo
+
+# Introduction to agent-based modeling
+## Thomas Schelling *Homophily and segregation*
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/shelling.png')
+```
+\tiny \centering Schelling, Thomas C. 1971. “Dynamic Models of Segregation.” *Journal of Mathematical Sociology* 1: 143–86.
+
+# NetLogo and NetLogoWeb
+## Schelling's segregation model in NetLogo
+http://www.netlogoweb.org/launch#http://ccl.northwestern.edu/netlogo/models/models/IABM%20Textbook/chapter%203/Segregation%20Extensions/Segregation%20Simple.nlogo
+
+# Modeling diffusion
+## Simple diffusion and the S-curve
+
+# Modeling diffusion
+## Complex contagions
+- A simple diffusion process, like catching the flu, requires a single exposure
+- *Complex contagions* require exposures to multiple people
+    - Joining a high-risk social movement
+    - Avant garde fashions
+    - New technologies
+    
+# Modeling diffusion
+## Thresholds 
+- *Thresholds* denote the number of exposures
+    - Variation across diffusion processes
+    - Individual variation
+        - Distributions of thresholds in a population\*
+        
+\tiny \*See: Granovetter, Mark. 1978. “Threshold Models of Collective Behavior.” *American Journal of Sociology* 83(6):1420–43.
+
+    
+# Modeling diffusion
+## Weak ties as long ties
+- Granovetter (1971) emphasized the "*strength* of weak ties"
+- Centola and Macy (2007) put emphasis on the "*length*" of weak ties, noting how the can help to connect different parts of a network
+
+# Modeling diffusion
+## Six degrees of separation and small-worlds
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/milgram.png')
+```
+\tiny \centering Travers, Jeffrey, and Stanley Milgram. 1969. “An Experimental Study of the Small World Problem.” *Sociometry* 32(4):425.
+
+# Modeling diffusion
+## Six degrees of separation and small-worlds
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/smallworld1.png')
+```
+\tiny \centering Watts, Duncan J., and Steven H. Strogatz. 1998. “Collective Dynamics of ‘Small-World’ Networks.” *Nature* 393(6684):440–42.
+
+# Modeling diffusion
+## Six degrees of separation and small-worlds
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/smallworld2.png')
+```
+\tiny \centering Watts, Duncan J., and Steven H. Strogatz. 1998. “Collective Dynamics of ‘Small-World’ Networks.” *Nature* 393(6684):440–42.
+    
+    
+# Modeling diffusion
+## Complex contagions
+- While much information flows through weak ties, Centola and Macy (2007) argue that weak ties are often insufficient for social contagions
+- It is not just the presence of ties that "bridge" communities, but the *width* of the bridge, or the number of ties, that matters
+
+# Modeling diffusion
+## Modeling complex contagions
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/complex1.png')
+```
+
+# Modeling diffusion
+## Modeling complex contagions
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/complex2.png')
+```
+
+# Modeling polarization
+## Robert Axelrod *Local convergence and global polarization* (1987)
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/axelrod1997.png')
+```
+\tiny \centering Axelrod, Robert. 1997. “The Dissemination of Culture: A Model with Local Convergence and Global Polarization.” *Journal of Conflict Resolution* 41 (2): 203–26.
+
+# Modeling polarization
+## Delia Baldassarri and Peter Bearman (2007)
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/bb_polar.png')
+```
+\tiny \centering Baldassarri, Delia, and Peter Bearman. 2007. “Dynamics of Political Polarization.” *American Sociological Review* 72(5):784–811.
+
+
+# Modeling polarization
+## Politics and lifestyle choices
+DellaPosta, Shi, and Macy (2015) suggest a mechanism to explain observed correlations between political attitudes and lifestyle choices
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/dellaposta_corr.png')
+```
+
+
+# Modeling polarization
+## Politics and lifestyle choices
+- Dellaposta and colleagues argue that correlation between politics and lifestyle choices explained by *network autocorrelation*, "the tendency for people to resemble their network neighbors" (p.1488)
+- Feedback loops between spatial settings, relations, and lifestyle
+
+# Modeling polarization
+## Politics and lifestyle choices
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/dellaposta.png')
+```
+
+# Modeling polarization
+## Competing explanations: Cognitive mechanisms
+Goldberg and Stein (2018) propose an alternative mechanism, arguing that culture does not spread like a virus, but depends on belief structures
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/goldberg_stein.png')
+```
+
+# Introduction to agent-based modeling
+## Integrating real-world data
+DiMaggio and Garip (2011) construct agent with attributes based on the General Social Survey
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/dimaggio_garip.png')
+```
+\tiny \centering DiMaggio, Paul, and Filiz Garip. 2011. “How Network Externalities Can Exacerbate Intergroup Inequality.” *American Journal of Sociology* 116 (6): 1887–1933.
+
+# Introduction to agent-based modeling
+## Realism and external validity
+- Bruch and Atwell (2015) distinguish between two types of realism in ABMs
+  - *Low-dimensional realism*: simple, parsimonious models
+  - *High-dimensional realism*: complex, complicated models
+- Trade-offs:
+  - The latter might be more realistic, but involve more parameters and may be less intelligible
+
+# Introduction to agent-based modeling
+## Parameters and sensitivity
+- Use theory to guide decisions regarding which parameters vary and should be fixed
+  - Formalizations can be hard to operationalize
+- Models can be extremely sensitive to small variations in parameters
+  - Be careful to check for coding errors!*
+- Timing matters
+  - Constant time vs. discrete-time
+  - Asynchronous vs. synchronous updating
+  
+\tiny \* Read these papers and associated exchanges for some cautionary tales: van de Rijt, Arnout, David Siegel, and Michael Macy. 2009. “Neighborhood Chance and Neighborhood Change: A Comment on Bruch and Mare.” *American Journal of Sociology* 114(4):1166–80 \& Goldberg, Amir. 2021. “Reply to DellaPosta and Davoodi: Associative Diffusion and the Pitfalls of Structural Reductionism.” *American Sociological Review* 1–6.
+
+# Recap
+## Data structures in R
+- Basic data types
+- Vectors
+- Lists
+- Matrices
+
+# Programming fundamentals
+- Boolean logic
+- If-else statements
+- Loops
+- Functions
+- Pipes
+  
+# Boolean logic in R
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../IMAGES/boolean.png')
+```
+  
+# Boolean logic
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+TRUE == TRUE # equals
+TRUE != FALSE # not equals
+TRUE == !FALSE
+!TRUE != FALSE
+```
+
+# Boolean logic
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+TRUE | FALSE # or
+TRUE & FALSE # and
+TRUE & FALSE == FALSE
+```
+
+
+# Boolean logic
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+TRUE | FALSE & FALSE
+FALSE | TRUE & FALSE
+```
+\tiny See \href{https://stat.ethz.ch/R-manual/R-patched/library/base/html/Logic.html}{the documentation} for more on logic in R.
+
+# If-else statements
+- We often encounter situations where we want to make a choice contingent upon the value of some information received.
+- If-else statements allow us to chain together one or more conditional actions.
+  - e.g. If time is between 10:20-11:40am AND day is Monday or Thursday,  attend Computational Data Science lecture. Else, do something else.
+
+# If-else statements
+The basic syntax. The ``if`` is followed by a conditional statement in parentheses. If the condition is met, then the code in the braces is executed.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+x <- TRUE
+
+if (x == TRUE) {
+ print("x is true")
+}
+```
+
+# If-else statements
+In this case we have a vector containing five fruits. We use `sample` to randomly pick one. We can use an if-statement to determine whether we have selected an apple. Complete the conditional.
+```{r, echo=TRUE, eval = F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+fruits <- c("apple", "apple",
+            "orange", "orange",
+            "apple")
+
+f <- sample(fruits, 1)
+
+if () {print("We selected an apple")}
+```
+
+# If-else statements
+In the previous example we only have an if-statement. If the condition is not met then nothing happens. Here we add an else statement.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+fruits <- c("apple", "apple", 
+            "orange", "orange",
+            "apple")
+
+f <- sample(fruits, 1)
+
+if (f == "apple") {
+  print("We selected an apple")
+  } else
+  {
+    print("We selected an orange")
+    }
+```
+\tiny Note that R can be quite fussy about the syntax. If ``else`` is on the line below then the function throws an error.
+
+# If-else statements
+What about this case where we have another fruit? If we only care about apples we could modify the output of our else condition.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+fruits <- c("apple", "apple", 
+            "orange", "orange", 
+            "apple", "pineapple")
+
+f <- sample(fruits, 1)
+
+if (f == "apple") {print("We selected an apple")
+} else 
+  {print("We selected another fruit.")
+    }
+
+```
+
+# If-else statements
+We could also use else-if statements to have a separate consideration of all three.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+f <- sample(fruits, 1)
+
+if (f == "apple") {print("We selected an apple")
+  } else if (f == "orange") {print("We selected an orange")
+    } else {print("We selected a pineapple")}
+```
+
+
+# Loops
+- Often when we program we need to complete the same operation many times. One of the common approaches is to use a loop.
+- There are two kinds of loops you will encounter
+  - For-loops
+    - Iterative over an entire sequence
+  - While-loops
+    - Iterate over a sequence while a condition is met
+
+# For-loops
+Here is a simple example where we use a loop to calculate the sum of a sequence of values.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+s <- 0 # value to store our sum
+
+for (i in 1:100)  {# for i from 1 to 100
+  s <- s + i # add i to sum
+}
+
+print(s)
+```
+
+# For-loops
+```{python, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+s = 0
+
+for i in range(1,101):
+  s += i
+
+print(s)
+```
+\tiny The syntax varies slightly across programming languages but the basic structure is very similar, as this Python example shows. Note that for-loops and other functions in R tend to use braces around the operations. We will see this again when we look at functions.
+
+<!-- The Python code fails to knit unless the cell is executed directly prior to knitting. It seems like the Python environment needs to be manually initialized before the knitting works.-->
+
+# For-loops
+Write a loop to print each number.
+```{r, echo=TRUE, eval = F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+nums <- 1:10
+
+```
+
+# For-loops
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+is_orange <- logical(length(fruits)) # a vector of logical objects
+
+i=1 # In this case we need to maintain a counter
+for (f in fruits) {
+  if (f == "orange") {
+    is_orange[i] <- TRUE
+  }
+  i <- i + 1 # increment counter by 1
+}
+
+print(fruits)
+print(is_orange)
+```
+
+# For-loops
+Loops can also easily be *nested*. Here we start a second loop within the first one and use it to populate a matrix.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+M <- matrix(nrow=5,ncol=5)
+
+for (i in 1:5) {
+  for (j in 1:5) {
+    M[i,j] <- i*j
+  }
+}
+print(M)
+```
+
+# While-loops
+A while loop runs when a condition is true and ends when it becomes false. *Make sure the condition will eventually be false to avoid an infinite loop.*
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+i <- 1 # iterator
+while (i < 5) {
+  print(i)
+  i <- i+1
+}
+```
+
+# While-loops
+In this example we iterate over fruits until we get a pineapple.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+i <- 1 # iterator
+f <- fruits[i] # define initial value 
+while (f != "pineapple") {
+  print(f)
+  i <- i+1 # increment index
+  f <- fruits[i] # get next f
+}
+```
+
+# Functions
+- A function is a customized sequence of operations
+- We use functions to make our code modular and extendable
+- There are thousands of functions built into R and available for packages, but sometimes it is useful to create our own
+  - *R4DS* contains the following heuristic:
+    - "You should consider writing a function whenever you've copied and pasted a block of code more than twice"
+
+# Functions
+Here is an example of a simple function that returns the mean of a vector of values $x$. 
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+avg <- function(x) {
+  return(sum(x)/length(x))
+}
+
+avg(c(5,6,6,4,3))
+```
+\tiny We define the function by using the ``function`` command and assigning it to the name ``avg``. The content in the parentheses is called the ``argument`` of the function. The ``return`` statement tells the function what output to produce.
+
+# Functions
+Here is the same function in Python.
+```{python, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+def avg(x):
+  return(sum(x)/len(x))
+
+avg([5,6,6,4,3])
+```
+\tiny Again you can see that the syntax is slightly different, for example the ``def`` command is used to define a function on the left hand side, followed by the name.
+
+# Functions
+## Testing
+- It is important to test functions to ensure they work as expected
+  - Ensure the function will only process valid inputs
+  - It is good practice to handle incorrect inputs
+    - There are many ways a function could behave that would not raise errors in R but could still be problematic
+  - Write unit tests to ensure the function works as expected
+    - Make sure to handle edge cases, inputs that require special handling
+    
+# Functions
+## Testing
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize', error=TRUE}
+avg(c("a", "b", "c"))
+```
+
+# Functions
+## Testing
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize', error=TRUE}
+avg(c())
+```
+
+
+# Functions
+## Testing
+The function can be modified to return a message if input is incorrect. Note the use of two ``return`` statements within the function.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+avg <- function(values)
+{ if (!is.numeric(values)) {
+  return("Input must be numeric.")
+}
+  else{
+  return(sum(values)/length(values))
+  }
+}
+```
+
+# Functions
+## Testing
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+# Unit tests
+avg(c("a", "b", "c"))
+avg(c())
+avg(c(2.6, 2.4))
+```
+
+
+# Pipes
+- Pipes are a tool designed to allow you to chain together a sequence of operations
+ - The pipe is designed to improve the readability of complex chains of function
+- Implemented in the ``magrittr`` package but loaded in ``tidyverse``
+
+# Pipes
+Pipes can be used to chain together sequences of operations. There are two different versions of the syntax:
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+library(tidyverse)
+x <- 10
+
+x %>% print() # Old style 
+
+x |> print() # New style
+```
+
+# Pipes
+Note how pipes allow us to chain operations from left to right, rather than nesting them from inner to outer. In this case we take a sequence from 1 to 10, get the square root of each value, sum the roots, then print the sum.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+print(sum(sqrt(seq(1:10)))) # nested functions
+
+seq(1:10) %>% sqrt() %>% sum() %>% print() # using pipes
+```
+
+# Pipes
+We can also use pipes to do basic arithmetic using pipes. Note again the difference between the nested operations and the pipe operator.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+library(magrittr)
+((1+2)-10)*10
+
+1 %>% add(2) %>% subtract(10) %>% multiply_by(10)
+```
+\tiny  Note how `magrittr` provides aliases for certain mathematical operations as shown in the second line. \href{https://stackoverflow.com/questions/27364390/chain-arithmetic-operators-in-dplyr-with-pipe#_=_}{This StackOverflow post has some further discussion}.
+
+# Pipes
+Pipes are particularly useful we're working with tabular data. Here's an example without pipes or nesting. Each line produces an object that is then passed as input to the following line.
+```{r, echo=TRUE, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+library(nycflights13)
+
+
+not_delayed <- filter(flights, !is.na(dep_delay), !is.na(arr_delay))
+grouped <- group_by(not_delayed, year, month, day)
+summary <- summarize(grouped, mean = mean(dep_delay))
+print(summary)
+```
+
+# Pipes
+In this case the expressions have been nested. This is better as we are not unnecessarily storing intermediate objects. 
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+summarize(group_by(
+  filter(flights, !is.na(dep_delay), !is.na(arr_delay)), 
+  year, month, day), mean = mean(dep_delay))
+```
+
+# Pipes
+Write out this expression using a pipe
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+
+```
+
+
+# Putting it all together: Schelling's segregation model in R
+
+- Open the file `schelling.R`, located inside the `code` directory
+
+# Homework
+- Visit the link on Slack for link to Github Classroom
+- Clone to your computer (see instructions on website)
+- Homework due 2/9 (next Friday) at 5pm
+- Submit via Github (see instructions on website)
+
+# Next week
+- Application Programming Interfaces for data collection
+    - *Sign up for a Spotify account*
+- Tabular data and visualization
+    
+
+    
+    
+
+
