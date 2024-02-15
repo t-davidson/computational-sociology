@@ -1,0 +1,667 @@
+---
+title: "Computational Sociology" 
+subtitle: "Scraping the web"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: February 15, 2024
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+# Plan
+1. Ethics and computational research
+2. Introduction to webscraping
+3. When to use it
+
+# Ethics and computational research
+## New ethical questions
+- Salganik discusses some examples of recent studies that raise new ethical questions
+  - Emotional contagion experiment on Facebook
+  - Observational study of Facebook networks
+  - Browser-based study of censorship
+  
+# Ethics and computational research
+## Four ethical principles
+- *Respect for persons*
+  - Treating people as autonomous and honoring their wishes
+- *Beneficence*
+  - Understanding risks and benefits; finding the right balance
+- *Justice*
+  - Even distribution of the risks and benefits
+- *Respect for law and public interest*
+  - Extends beyond research participants to other stakeholders
+  - Compliance and transparency-based accountability
+  
+# Ethics and computational research
+## Two ways of thinking about research ethics
+- *Consequentialism*
+  - Focus on the consequences of research
+  - Ends
+- *Deontology*
+  - Consideration of ethical duties, irrespective of consequences
+  - Means
+
+# Ethics and computational research
+## Four challenges in digital research
+- *Informed consent*
+  - When is it practical to get consent to participate?
+  - When is it acceptable to proceed without consent?
+- *Managing informational risk*
+  - Risks of disclosure of personal information
+  - Anonymization is often imperfect
+- *Privacy*
+  - What information is public or private?
+  - Context-relative informational norms
+- *Ethical decisions and uncertainty*
+  - Minimal risk standard
+  - Power analysis
+  
+# What is web-scraping?
+## Terminology
+- Web-scraping is a method to collect data from websites
+  - We use the code underlying a webpage to collect data (**scraping**)
+  - The process is then repeated for other pages on the same website in an automated fashion (**crawling**)
+
+# What is web-scraping?
+## Challenges
+- Different websites have different structures, so a script used to scrape one website will likely have to be changed to scrape another
+- Websites can be internally inconsistent, making them difficult to scrape
+- Some websites are easier to crawl than others
+- Some websites limit or prohibit scraping
+
+# When should I use it?
+## Commercial use cases
+- Search engines
+  - Google scrapes websites to create a searchable index of the internet
+- Price comparison
+  - Kayak scrape airlines to compare flight prices, other websites do the same for hotels and rental cars
+- Recruitment
+  - Recruitment companies scrape LinkedIn to get data on workers
+  
+# When should I use it?
+## Social scientific use cases
+- Web-scraping is a useful tool to collect data from websites without APIs
+  - Large social media platforms and other sites have APIs but smaller websites do not
+    - Local newspapers, forums, small businesses, educational institutions, etc.
+- Often we want to collect data from a single website
+  - e.g. All posts written on a forum
+- Sometimes we might want to collect data from many websites
+  - e.g. All schools in a school district
+  
+# When should I use it?
+## Ethical and legal considerations
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/fielser_et_al.png')
+```
+
+# When should I use it?
+## Ethical and legal considerations
+- Fiesler, Beard, and Keegan (2020)s review the legal cases related to web-scraping and analyze website terms of service
+  - "In short, it is an unsettled question as to whether it is explicitly illegal (or even a criminal act) to violate TOS."
+  - No academic or journalist has ever been prosecuted for violating a website terms of service to collect data for research
+- They analyze terms of service of over 100 social media websites
+  - Terms of service are ambiguous, inconsistent, and lack context
+  
+# When should I use it?
+## Ethical and legal considerations
+- Recent legal cases have considered webscraping and ruled in favor of legality
+    - *hiQ Labs, Inc. v. LinkedIn Corp.* (https://en.wikipedia.org/wiki/HiQ_Labs_v._LinkedIn)
+        - Court ruled in favor of company sued for scraping LinkedIn
+- Advocacy for public interest webscraping
+    - https://themarkup.org/news/2020/12/03/why-web-scraping-is-vital-to-democracy
+    
+
+
+# When should I use it?
+## Best-practices
+- Only scrape publicly available data
+  - i.e. You can access the page on the web without logging in
+- Do not scrape copyright protected data
+- Try not to violate website terms of service
+- Do not burden the website
+  - Limit the number of calls you make (similar to rate-limiting in APIs)
+- Avoid using the data in a way that may interfere with business
+  - i.e. Don't copy valuable data from a small business and share it on Github
+
+# How to scrape a web page
+## Start by looking up ``robots.txt''
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/robots.png')
+```
+
+# How to scrape a web page
+## Decoding ``robots.txt``
+- **``User-agent``** = the name of the scraper
+  - **``*``** = All scrapers
+- **``Allow: /path/``** = OK to scrape
+- **``Disallow: /path/``** = Not OK to scrape
+  - **``Disallow: /``** = Not OK to scrape any pages
+- **``Crawl-Delay: N``** = Wait ``N`` miliseconds between each call to the website 
+
+# How to scrape a web page
+## Exercise
+- Find a website of interest
+- Locate the robots.txt file
+  - Does the website allow webscraping?
+  - Are there any restrictions on which pages can be accessed?
+
+# How to scrape a web page
+## Terminology
+- A web-page is loaded using a **URL** (Uniform Resource Locator)
+- The underlying code we are interested in is usually **HTML** (Hypertext Markup Language)
+- Many websites use **CSS** (Cascading Style Sheets) to structure HTML
+  - This will help us to find what we are interested in
+    - See https://flukeout.github.io/ for an interactive tutorial on using CSS selectors
+    - Chrome Plugin to help find CSS elements: https://selectorgadget.com/
+
+# How to scrape a web page
+## Inspecting HTML
+- Open up a website and right click on any text or image on the screen
+  - You should see an option ``Inspect Element``
+  - This will allow you to see the code used to generate the page
+  
+# How to scrape a web page
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/inspect_google.png')
+```
+
+
+# How to scrape a web page
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/main_page.png')
+```
+
+# How to scrape a web page
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/scrape_page.png')
+```
+
+# How to scrape a web page
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+library(rvest)
+library(tidyverse)
+library(stringr)
+```
+
+# How to scrape a web page
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+url <- "https://thecatsite.com/threads/advice-on-cat-introductions-feeling-a-bit-lost.422848/"
+thread <- rvest::read_html(url)
+```
+
+# How to scrape a web page
+## Using ``rvest`` to scrape HTML
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+class(thread)
+print(thread)
+```
+
+# How to scrape a web page
+## Collecting messages
+First, we parse the HTML to obtain the text of each message on the page. Here we use the CSS selector ``.message-body``, which selects all elements with class ``message-body``. The `html_nodes` function in `rvest` allows us to retrieve these nodes.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+message.data <- thread %>% html_nodes(".message-body")
+print(message.data[2])
+```
+
+# How to scrape a web page
+## Collecting messages
+Next we use `html_text()` to extract the text from the HTML.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+messages <- thread %>% html_nodes(".message-body") %>% 
+  html_text() %>% str_trim() 
+print(messages[1])
+```
+
+
+# How to scrape a web page
+## Collecting messages
+As expected, there are twenty messages.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+print(length(messages))
+print(substr(messages[20], 1, 250)) # print a substring
+```
+
+
+# How to scrape a web page
+## Getting user names
+Next we collect the name of each user using the same logic. User information is found by parsing the ``.message-userDetails`` node. 
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+users <- thread %>% html_nodes(".message-userDetails") %>%
+  html_text() %>% str_trim()
+print(length(users))
+class(users)
+print(users[1])
+```
+
+
+# How to scrape a web page
+## Getting user names
+Let's add some more elements to the pipe to extract the user name from this string. Note how the elements in the string returned in the previous chunk are separated by the newline symbol (`\n`).
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+users <- thread %>% html_nodes(".message-userDetails") %>%
+  html_text() %>% str_trim() %>% str_split('\n')
+class(users)
+print(users[1])
+```
+
+# How to scrape a web page
+## Getting user names
+The final step is to get the name from each list. This can be done by using the `map` command.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+users <- thread %>% html_nodes(".message-userDetails") %>%
+  html_text() %>% str_trim() %>% str_split('\n') %>% map(1)
+class(users)
+print(users[1:2])
+```
+
+# How to scrape a web page
+## Collecting timestamps
+Finally, we also want to get the time-stamp of each message. While the forum only displays dates, we can actually get the full timestamp. What's the problem here?
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+dates <- thread %>% html_nodes("time.u-dt")
+print(dates[1])
+length(dates)
+```
+
+
+# How to scrape a web page
+## Collecting timestamps
+I went back to the HTML and found this CSS selector ``.u-concealed .u-dt`` is selected instead. It returns the datetime for each post in the thread, along with the date time at the top indicating when the thread was created.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+dates <- thread %>% html_nodes(".u-concealed .u-dt")
+length(dates)
+dates[1]
+class(dates[1])
+```
+
+# How to scrape a web page
+## Collecting timestamps
+Each HTML node contains several different attributes related to the time. In this case we can select the `datetime` attribute using the `html_attr` function.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+dates <- thread %>% html_nodes(".u-concealed .u-dt") %>% html_attr("datetime")
+print(dates[1])
+class(dates[1])
+```
+
+# How to scrape a web page
+## Collecting timestamps
+Finally, its often useful to clean up timestamps. We can do this using the `lubridate` package. In this case we extract the year, month, day, hour, minutes, and seconds, converted to EST. The result is a special type of object used to represent dates and times.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+library(lubridate)
+dates <- dates %>% ymd_hms(tz = "EST")
+print(dates[1])
+class(dates)
+```
+
+# How to scrape a web page
+## Putting it all together
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+length(users)
+class(users)
+length(messages)
+class(messages)
+length(dates)
+class(dates)
+```
+
+# How to scrape a web page
+## Putting it all together
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+data <- as_tibble(cbind(messages, unlist(users), dates[-1]))
+colnames(data) <- c("message", "user", "timestamp")
+head(data)
+```
+
+# How to scrape a web page
+## Creating a function to collect and store data
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.posts <- function(thread) {
+  messages <- thread %>% html_nodes(".message-body") %>% 
+    html_text() %>% str_trim()
+  users <- thread %>% html_nodes(".message-userDetails") %>%
+    html_text() %>% str_trim() %>% str_split('\n') %>% map(1)
+  timestamps <- thread %>% html_nodes(".u-concealed .u-dt") %>%
+    html_attr("datetime") %>% ymd_hms(tz="EST")
+  timestamps <- timestamps[-1] # remove first timestamp
+  data <- as_tibble(cbind(messages, unlist(users), timestamps))
+  colnames(data) <- c("message","user", "timestamp")
+  return(data)
+}
+```
+
+# How to scrape a web page
+## Using the function
+We can now easily run all the code to extract information using a single function call:
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+results <- get.posts(thread)
+head(results)
+```
+
+# How to scrape a web page
+## Pagination
+The next step is to figure out how we can navigate the different pages of the thread. Inspect the HTML to find the appropriate element to go to the next page.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+thread %>% html_nodes("")
+```
+
+# How to scrape a web page
+## Pagination
+In this case I want both the links *and* the descriptions. 
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+links <- thread %>% html_nodes("") %>%
+  html_attr("href")
+desc <- thread %>% html_nodes("") %>%
+  html_text()
+pagination.info <- data.frame(links, desc) %>% 
+  filter(str_detect(desc, "Next")) %>% distinct()
+head(pagination.info)
+```
+
+# How to scrape a web page
+## Pagination
+We can then use the base URL to get the link to the next page.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+base <- "https://thecatsite.com"
+next.page <- paste(base, pagination.info$links, sep = '')
+print(next.page)
+```
+
+# How to scrape a web page
+## Pagination
+Let's verify this works by using the `get.posts` function.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+results <- get.posts(read_html(next.page))
+results[1:5,]
+```
+
+# How to scrape a web page
+## Pagination function
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.next.page <- function(thread){
+  links <- thread %>% html_nodes(".pageNav-jump") %>% 
+    html_attr("href")
+  desc <- thread %>% html_nodes(".pageNav-jump") %>% 
+    html_text()
+  pagination.info <- data.frame(links, desc) %>% 
+    filter(str_detect(desc, "Next")) %>% distinct()
+  base <- "https://thecatsite.com"
+  next.page <- paste(base, pagination.info$links, sep = '')
+  return(next.page)
+}
+get.next.page(thread)
+```
+
+# How to scrape a web page
+## Testing the pagination function
+We can easily use this function to paginate. In this case we use `get.next.page` to get the link to page 2, read the HTML for page 2, then use `get.next.page` to extract the link to page 3.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+thread.2 <- read_html(get.next.page(thread))
+page.3 <- get.next.page(thread.2)
+print(page.3)
+```
+
+# How to scrape a web page
+## Testing the pagination function
+What happens when we run out of pages? In this case there is no link to the next page. The `get.next.page` function does not produce an error, but only returns the base URL.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.next.page(read_html("https://thecatsite.com/threads/advice-on-cat-introductions-feeling-a-bit-lost.422848/page-28"))
+```
+
+# How to scrape a web page
+## Improving the function
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.next.page <- function(thread){
+  links <- thread %>% html_nodes(".pageNav-jump") %>% 
+    html_attr("href")
+  desc <- thread %>% html_nodes(".pageNav-jump") %>% 
+    html_text()
+  pagination.info <- data.frame(links, desc) %>% 
+    filter(str_detect(desc, "Next")) %>% distinct()
+  if (dim(pagination.info)[1] == 1) {
+    base <- "https://thecatsite.com"
+    next.page <- paste(base, pagination.info$links, sep = '')
+  return(next.page)
+    } else {
+    return("Final page")
+  }
+}
+```
+
+# How to scrape a web page
+## Testing the pagination function
+We now get this message when we try to paginate on the final page.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.next.page(read_html("https://thecatsite.com/threads/advice-on-cat-introductions-feeling-a-bit-lost.422848/page-28"))
+```
+
+# How to scrape a web page
+## Paginate and scrape
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+paginate.and.scrape <- function(url){
+  thread <- read_html(url)
+  posts <- get.posts(thread)
+  next.page <- get.next.page(thread)
+  
+  while (!str_detect(next.page, "Final page"))
+  {
+    print(next.page)
+    thread <- read_html(next.page)
+    posts <- rbind(posts, get.posts(thread))
+    next.page <- get.next.page(thread)
+    Sys.sleep(0.5) # wait 0.5 seconds
+  }
+  return(posts)
+}
+```
+
+# How to scrape a web page
+## Paginate and scrape
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+full.thread <- paginate.and.scrape(url)
+dim(full.thread)
+print(head(full.thread))
+```
+
+# How to scrape a web page
+## Crawling a website
+- Now we have a function we can use to paginate and scrape the data from threads on the website
+- The next goal is to write a crawler to traverse the website and retrieve information from all of the threads we are interested in.
+- Fortunately, these threads are organized in a similar way to posts
+  - Each page contains 20 threads and links to the next page
+
+# How to scrape a web page
+## Crawling a website
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+get.threads <- function(url) {
+  f <- read_html(url)
+  title <- f %>% html_nodes(".structItem-title") %>% 
+    html_text() %>% str_trim()
+  link <- f %>% html_nodes(".structItem-title a") %>% 
+    html_attr("href")  %>% str_trim()
+  link <- data.frame(link)
+  link <- link %>% filter(str_detect(link, "/threads/"))
+  threads <- data.frame(title, link)
+  return(threads)
+}
+```
+
+# How to scrape a web page
+## Crawling a website
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+forum.url <- "https://thecatsite.com/forums/cat-behavior.5/"
+
+threads <- get.threads(forum.url)
+```
+
+# How to scrape a web page
+## Crawling a website
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+print(threads$title)
+```
+
+# How to scrape a web page
+## Crawling a website
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+print(threads$link)
+```
+
+
+# How to scrape a web page
+## Crawling a website
+Iterating over the first 5 pages of threads and collecting all threads in each set.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+pagination.max <- 5
+url <- forum.url
+results <- tibble()
+
+for (p in 1:pagination.max) {
+  print(p)
+  threads <- get.threads(url)
+  for (t in 1:dim(threads)[1]) {
+    page.url <- paste(base, threads$link[t], sep = '')
+    new.results <- paginate.and.scrape(page.url)
+    new.results$threads <- threads$title[t]
+    results <- bind_rows(results, new.results)
+  }
+  url <- get.next.page(read_html(url))
+}
+```
+
+# How to scrape a web page
+## Storing the results
+The results should consist of a few thousand messages and associated metadata. Save the results of this crawl to as a CSV file.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+write_csv(results, "../data/cat_crawl.csv")
+```
+
+# How to scrape a web page
+## Data storage
+- If you try to collect all the data you need before saving it, you run the risk of data loss if you script crashes
+  - This risk increases as you collect more data
+    - More memory on your computer is being used
+    - Increased likelihood of encountering anomalies that cause errors
+- Reasonable solutions
+  - Continuously save results to disk (e.g. concatenate each thread to a CSV)
+  - Store results in chunks (e.g. each thread in a new CSV)
+
+# How to scrape a web page
+## Data storage 
+- A more robust solution
+  - Write output to a relational database
+    - This helps to organize the data and makes it easier to query and manage, particularly with large datasets
+     - I recommend PostgreSQL, a free open-source, SQL-compatible relational database
+
+# How to scrape a web page
+## Data storage 
+- If collecting a lot of data, I recommend use a server to run the code and to store scraped data
+- Requirements
+  - Access to a server
+    - But most universities have free computing clusters
+  - Command line knowledge
+  - Database knowledge
+    
+# How to scrape a web page
+## Logging
+- Log the progress of your webscraper
+  - Simple option:
+    - Print statements in code
+  - Better option:
+    - Use a log file
+  - To keep yourself updated:
+    - Use a Slack App to send yourself messages
+
+# Advanced webscraping
+## Javascript and browser automation
+- Many websites use Javascript, which cause problems for web-scrapers as it cannot directly be parsed to HTML
+- We can get around this by doing the following
+  - Automatically to open a browser (e.g. Google Chrome)
+  - Load a website in the browser
+  - Read the HTML from the browser into R
+
+# Advanced webscraping
+## Selenium
+- Selenium WebDriver and the package ``RSelenium`` (https://github.com/ropensci/RSelenium) is the most popular approach
+- **However**, ``RSelenium`` requires a complicated set up using a Docker container
+- It will be easier to use `selenium` in Python then read the data into R
+    - https://python-bloggers.com/2020/07/rvspython-3-setting-up-selenium-limitations-with-the-rselenium-package-getting-past-them/
+
+# Advanced webscraping
+## Running Selenium using Python
+This Python code uses selenium to open up a Chrome browser, visit a website, and collect the HTML. It then closes the browser.
+```{python, echo=TRUE, eval=FALSE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+from selenium import webdriver
+from time import sleep
+driver = webdriver.Chrome()
+driver.get('https://www.sociology.rutgers.edu')
+html = driver.page_source
+sleep(15)
+driver.close()
+```
+\tiny This will only work if the Chrome driver has been downloaded and is in your PATH. See https://chromedriver.chromium.org/getting-started
+
+# Advanced webscraping
+## Using reticulate to obtain results using R
+We can use `reticulate` to pass objects from Python to R. Note the Python objects are shown in the `Environment` tab.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+library(reticulate)
+html.text <- read_html(py$html) %>% html_text()
+```
+
+# Advanced webscraping
+## Inspecting the results in R
+Reticulate allowed us to run a Python script then pass the results to R. We can then use the same commands as above to process it.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', tidy=FALSE, eval=FALSE}
+print(substr(html.text, 1, 35))
+```
+
+# Advanced webscraping
+## Browser automation
+- Using browser automation you can perform other tasks that simulate a human user
+    - Clicking buttons
+    - Filing forms
+    - Logging in
+    - Saving images
+    
+# Concluding remarks
+- Webscraping can be used to collect data from websites when APIs are not available
+- Read terms of service and inspect robots.txt before starting
+- Use HTML structure and CSS elements to navigate website
+- Start small and test, test, test
+- Log results and store data incrementally (ideally in a database)
+- Some websites require more complex strategies using browser automation
+
+    
+#  Next week
+- Online surveys and experiments
+    - No coding, more discussion
+- Homework 2 released
