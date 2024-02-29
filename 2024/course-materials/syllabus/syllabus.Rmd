@@ -171,8 +171,6 @@ In accordance with University policy, if you have a documented disability and re
 - Tjaden, Jasper. 2023. \href{https://doi.org/10.1177/01979183231208428}{“Web Scraping for Migration, Mobility, and Migrant Integration Studies: Introduction, Application, and Potential Use Cases.”} *International Migration Review*.
 
 
-## *Assignment 2: Collecting and storing data released. Due 2/23 at 5pm.*
-
 ## Week 6, 2/22
 ### Online Experiments and Surveys
 
@@ -190,6 +188,8 @@ In accordance with University policy, if you have a documented disability and re
 
 - Guess, Andrew M., Neil Malhotra, Jennifer Pan, Pablo Barberá, Hunt Allcott, Taylor Brown, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Matthew Gentzkow, Sandra González-Bailón, Edward Kennedy, Young Mie Kim, David Lazer, Devra Moehler, Brendan Nyhan, Carlos Velasco Rivera, Jaime Settle, Daniel Robert Thomas, Emily Thorson, Rebekah Tromble, Arjun Wilkins, Magdalena Wojcieszak, Beixian Xiong, Chad Kiewiet de Jonge, Annie Franco, Winter Mason, Natalie Jomini Stroud, and Joshua A. Tucker. 2023. \href{https://doi.org/10.1126/science.abp9364}{“How Do Social Media Feed Algorithms Affect Attitudes and Behavior in an Election Campaign?”} *Science* 381(6656):398–404.
 - Bail, Christopher A., D. Sunshine Hillygus, Alexander Volfovsky, Maxwell B. Allamong, Fatima Alqabandi, Diana Jordan, Graham Tierney, Christina Tucker, Andrew Trexler, and Austin van Loon. 2023. \href{https://doi.org/10.31235/osf.io/ucfbk}{“Do We Need a Social Media Accelerator?”}
+
+## *Assignment 2: Collecting and storing data released. Due 3/1 at 5pm.*
     
 ## Week 7, 2/29
 ### Fundamentals of Natural Language Processing 
@@ -204,9 +204,6 @@ In accordance with University policy, if you have a documented disability and re
 *Further reading*
 
 - Grimmer, Justin, and Brandon Stewart. 2013. \href{https://doi.org/10.1093/pan/mps028}{“Text as Data: The Promise and Pitfalls of Automatic Content Analysis Methods for Political Texts.”} *Political Analysis* 21 (3): 267–97.
-- Flores, René D. 2017. \href{https://doi.org/10.1086/692983}{“Do Anti-Immigrant Laws Shape Public Sentiment? A Study of Arizona’s SB 1070 Using Twitter Data.”} *American Journal of Sociology* 123(2):333–84.
-- Srivastava, Sameer B., Amir Goldberg, V. Govind Manian, and Christopher Potts. 2018. \href{https://doi.org/10.1287/mnsc.2016.2671}{“Enculturation Trajectories: Language, Cultural Adaptation, and Individual Outcomes in Organizations.”} *Management Science* 64(3):1348–64.
-
 
 ## Week 8, 3/7
 ### Word Embeddings and Computational Semantics
@@ -219,7 +216,7 @@ In accordance with University policy, if you have a documented disability and re
 - Kozlowski, Austin, Matt Taddy, and James Evans. 2019. \href{https://doi.org/10.1177/0003122419877135}{“The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings.”} *American Sociological Review*, September.
 - Stoltz, Dustin S., and Marshall A. Taylor. 2021. \href{https://doi.org/10.1016/j.poetic.2021.101567}{“Cultural Cartography with Word Embeddings.”} *Poetics* 101567.
 - Arseniev-Koehler, Alina, and Jacob G. Foster. 2022. \href{https://doi.org/10.1177/00491241221122603}{“Machine Learning as a Model for Cultural Learning: Teaching an Algorithm What It Means to Be Fat.”} *Sociological Methods & Research* 51(4):1484–1539.
-- Zhou, Di. 2022. \href{https://doi.org/10.1177/00031224221123030}{“The Elements of Cultural Power: Novelty, Emotion, Status, and Cultural Capital.”} *American Sociological Review* 000312242211230.
+
 
 
 *Further reading*
@@ -230,6 +227,9 @@ In accordance with University policy, if you have a documented disability and re
 - Rodman, Emma. 2019. \href{https://doi.org/10.1017/pan.2019.23}{“A Timely Intervention: Tracking the Changing Meanings of Political Concepts with Word Vectors.”} *Political Analysis*, July, 1–25.
 - Gonen, Hila, and Yoav Goldberg. 2019. \href{https://aclanthology.org/N19-1061/}{“Lipstick on a Pig: Debiasing Methods Cover up Systematic Gender Biases in Word Embeddings But Do Not Remove Them.”} In *Proceedings of NAACL-HLT*, 609–14.
 - De-Arteaga, Maria, Alexey Romanov, Hanna Wallach, Jennifer Chayes, Christian Borgs, Alexandra Chouldechova, Sahin Geyik, Krishnaram Kenthapadi, and Adam Tauman Kalai. 2019. \href{https://doi.org/10.1145/3287560.3287572}{“Bias in Bios: A Case Study of Semantic Representation Bias in a High-Stakes Setting.”} In *Proceedings of the Conference on Fairness, Accountability, and Transparency*, 120–28.
+- Zhou, Di. 2022. \href{https://doi.org/10.1177/00031224221123030}{“The Elements of Cultural Power: Novelty, Emotion, Status, and Cultural Capital.”} *American Sociological Review* 000312242211230.
+- Best, Rachel Kahn, and Alina Arseniev-Koehler. 2023. \href{https://doi.org/10.1177/00031224231197436}{“The Stigma of Diseases: Unequal Burden, Uneven Decline.”} *American Sociological Review* 88(5):938–69.
+
 
 ## *Paper proposals due 3/8 at 5pm.*
 
@@ -248,8 +248,10 @@ In accordance with University policy, if you have a documented disability and re
 - Roberts, Margaret, Brandon M. Stewart, Dustin Tingley, Christopher Lucas, Jetson Leder-Luis, Shana Kushner Gadarian, Bethany Albertson, and David Rand. 2014. \href{https://doi.org/10.1111/ajps.12103}{“Structural Topic Models for Open-Ended Survey Responses: Structural Topic Models for Survey Responses.”} *American Journal of Political Science* 58 (4): 1064–82.
 - Karell, Daniel, and Michael Freedman. 2019. \href{https://doi.org/10.1177/0003122419859519}{“Rhetorics of Radicalism.”} *American Sociological Review* 84 (4): 726–53.
 
+
 *Further reading*
 
+- Greve, Henrich R., Hayagreeva Rao, Paul Vicinanza, and Echo Yan Zhou. 2022. \href{https://doi.org/10.1177/00031224221125937}{“Online Conspiracy Groups: Micro-Bloggers, Bots, and Coronavirus Conspiracy Talk on Twitter.”} *American Sociological Review* 87(6):919–49.
 - Eshima, Shusei, Kosuke Imai, and Tomoya Sasaki. 2023. \href{https://doi.org/10.1111/ajps.12779}{“Keyword-Assisted Topic Models.”} *American Journal of Political Science* 1-21.
 - Grootendorst, Maarten. 2022. \href{https://arxiv.org/abs/2203.05794}{“BERTopic: Neural Topic Modeling with a Class-Based TF-IDF Procedure.”} *ArXiv*. .
 - Pham, Chau Minh, Alexander Hoyle, Simeng Sun, and Mohit Iyyer. 2023. \href{https://arxiv.org/abs/2311.01449}{“TopicGPT: A Prompt-Based Topic Modeling Framework.”} *ArXiv*.
@@ -294,7 +296,7 @@ https://doi.org/10.17813/maiq.18.4.m1g180620x7n1542
 
 <!--TODO: Update with more recent papers-->
 
-
+- Flores, René D. 2017. \href{https://doi.org/10.1086/692983}{“Do Anti-Immigrant Laws Shape Public Sentiment? A Study of Arizona’s SB 1070 Using Twitter Data.”} *American Journal of Sociology* 123(2):333–84.
 - Davidson, Thomas, Debasmita Bhattacharya, and Ingmar Weber. 2019. \href{https://doi.org/10.18653/v1/W19-3504}{“Racial Bias in Hate Speech and Abusive Language Detection Datasets.”} In *Proceedings of the Third Workshop on Abusive Language Online*, 25–35.
 - Miller, Blake, Fridolin Linder, and Walter R. Mebane, Jr. 2019. \href{https://doi.org/10.1017/pan.2020.4 }{“Active Learning Approaches for Labeling Text: Review and Assessment of the Performance of Active Learning Approaches.”} *Political Analysis* 28(4): 532-551.
 - King, Gary, Patrick Lam, and Margaret E. Roberts. 2017. \href{https://www.jstor.org/stable/26379539}{“Computer-Assisted Keyword and Document Set Discovery from Unstructured Text.”} *American Journal of Political Science* 61 (4): 971–88.
