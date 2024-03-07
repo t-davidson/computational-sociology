@@ -3,7 +3,7 @@ title: "Computational Sociology"
 subtitle: "Word embeddings"
 author: Dr. Thomas Davidson
 institute: Rutgers University
-date: March 6, 2024
+date: March 7, 2024
 output:
     beamer_presentation:
       theme: "Szeged"
