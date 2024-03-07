@@ -1,0 +1,711 @@
+---
+title: "Computational Sociology" 
+subtitle: "Word embeddings"
+author: Dr. Thomas Davidson
+institute: Rutgers University
+date: March 6, 2024
+output:
+    beamer_presentation:
+      theme: "Szeged"
+      colortheme: "beaver"
+      fonttheme: "structurebold"
+      toc: false
+      incremental: false
+urlcolor: blue
+header-includes:
+  - \usepackage{multicol}
+  - \usepackage{caption}
+  - \usepackage{hyperref}
+  - \captionsetup[figure]{font=scriptsize}
+  - \captionsetup[figure]{labelformat=empty}
+  - \DeclareUnicodeCharacter{2212}{\textendash}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before) 
+    return(options$size)
+})
+```
+
+# Plan
+1. Course updates
+2. The vector-space model review
+3. Latent semantic analysis
+4. Language models
+5. Word embeddings
+6. Contextualized embeddings
+
+# Course updates
+- Project proposals due 5pm tomorrow
+  - Submit via email
+- Mid-semester evaluation
+  - Please complete by Friday
+- Homework 2 and proposal feedback coming soon
+  
+# The vector-space model review
+## Vector representations
+- Last week we looked at how we can represent texts as numeric vectors
+  - Documents as vectors of words 
+  - Words as vectors of documents
+- A document-term matrix (*DTM*) is a matrix where documents are represented as rows and tokens as columns
+
+# The vector-space model review
+## Weighting schemes
+- We can use different schemes to weight these vectors
+  - Binary (Does word $w_i$ occur in document $d_j$?)
+  - Counts (How many times does word $w_i$ occur in document $d_j$?)
+  - TF-IDF (How many times does word $w_i$ occur in document $d_j$, accounting for how often $w_i$ occurs across all documents $d \in D$?)
+    - Recall *Zipf's Law*: a handful of words account for most words used; such words do little to help us to distinguish between documents
+    
+# The vector-space model review
+## Cosine similarity
+$$ cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|\|\vec{v}\|} = \frac{\sum_{i}\vec{u_i} \vec{v_i}}{\sqrt{\sum_{i}\vec{u}_i^2} \sqrt{\sum_{i}\vec{v}_i^2}} $$
+
+# The vector-space model review
+## Limitations
+- These methods produce *high-dimensinal*,  *sparse* vector representations
+  - Given a vocabulary of unique tokens $N$ the length of each vector $|V| = N$.
+  - Many values will be zero since most documents only contain a small subset of the vocabulary.
+  
+
+# The vector-space model review
+## Limitations
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/sparse_memory.png')
+```  
+\tiny Source: https://smltar.com/embeddings.html
+  
+# Latent semantic analysis
+## Latent Semantic Analysis
+- One approach to reduce dimensionality and better capture semantics is called **Latent Semantic Analysis**  (*LSA*)
+  - We can use a process called *singular value decomposition* to find a *low-rank approximation* of a DTM. 
+- This provides *low-dimensional*, *dense* vector representations
+  - Low-dimensional, since $|V| << N$
+  - Dense, since vectors contain real values, with few zeros
+- In short, we can "squash" a big matrix into a much smaller matrix while retaining important information.
+  
+$$DTM = U \Sigma V^T$$
+  
+# Latent semantic analysis
+## Singular Value Decomposition
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../images/SVD.png')
+```  
+
+\tiny See the \href{https://en.wikipedia.org/wiki/Latent_semantic_analysis}{Wikipedia page} for video of the latent dimensions in a sparse TDM.
+
+# Latent semantic analysis
+## Loading data and packages
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(tidyverse)
+library(tidytext)
+library(ggplot2)
+library(stringr)
+
+df <- read_csv("../data/politics_twitter.csv")
+dim(df)
+unique(df$screen_name)
+```
+
+
+
+# Latent semantic analysis
+## Text preprocessing
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+texts.tidy <- df %>% 
+    mutate(text = gsub("@\\w+", "", text)) %>%
+    mutate(text = gsub("#\\w+", "", text)) %>%
+    mutate(text = gsub("’", "'", text)) %>%
+    unnest_tokens(word, text) %>%
+    anti_join(stop_words) %>%
+    count(status_id, word) %>%
+    group_by(word) %>%
+    mutate(tweet_count = n_distinct(status_id),
+           text_count = sum(n)) %>%
+    ungroup() %>%
+    filter(tweet_count >= 100 & text_count < 1E4) %>%
+    filter(!str_detect(word, "^[0-9]+$")) %>%
+    bind_tf_idf(word, status_id, n)
+```
+
+# Latent semantic analysis
+## Creating a DTM
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+X <- texts.tidy %>% cast_dtm(status_id, word, tf_idf) %>% as.matrix()
+```
+
+# Latent semantic analysis
+## Creating a lookup dictionary
+We can construct a list to allow us to easily find the index of a particular token.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+lookup.index.from.token <- list()
+
+for (i in 1:length(colnames(X))) {
+  lookup.index.from.token[colnames(X)[i]] <- i
+}
+```
+
+# Latent semantic analysis
+## Using the lookup dictionary
+This easily allows us to find the vector representation of a particular word. Note how most values are zero.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+lookup.index.from.token["president"]
+round(as.numeric(X[,unlist(lookup.index.from.token["president"])]),5)[1:100]
+```
+
+
+# Latent semantic analysis
+## Calculating similarties
+The following code normalizes each *column* and constructs a word-word cosine-similarity matrix.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+normalize <- function(X) {
+  columnNorms <- sqrt(colSums(X^2))
+  Xn <- X / matrix(columnNorms, 
+                   nrow = nrow(X), 
+                   ncol = ncol(X), byrow = TRUE)
+  return(Xn)
+}
+
+X.n <- normalize(X)
+
+sims <- crossprod(X.n) # Optimized routine for t(X.n) %*% X.n
+dim(sims)
+```
+
+# Latent semantic analysis
+## Most similar function
+For a given token, this function allows us to find the `n` most similar tokens in the similarity matrix, where `n` defaults to `10`.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+get.top.n <- function(token, sims, n=10) {
+  top <- sort(sims[unlist(lookup.index.from.token[token]),], 
+                 decreasing=T)[1:n]
+  return(top)
+}
+```
+
+# Latent semantic analysis
+## Finding similar words
+```{r, echo=TRUE, eval = FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+get.top.n("", sims, n = 5)
+```
+
+
+# Latent semantic analysis
+## Singular value decomposition
+The `svd` function allows us to decompose the DTM. We can then easily reconstruct it using the formula shown above.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+# Computing the singular value decomposition
+lsa <- svd(X)
+
+# We can recover the original matrix from this representation
+X.2 <- lsa$u %*% diag(lsa$d) %*% t(lsa$v) # X = U \Sigma V^T
+
+# Verifying that values are the same, example of first column
+sum(round(X-X.2,5))
+```
+
+# Latent semantic analysis
+## Singular value decomposition
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', fig.width=4, fig.height=3}
+lsa.df <- data.frame(lsa$d[1:100])
+colnames(lsa.df) <- c("v")
+lsa.df$index <- 1:100 #1:length(lsa$d) #Using first 100
+ggplot(lsa.df, aes(y = v, x = index)) + geom_line() + geom_point(alpha=0.5) +
+  labs(y="Variance explained", x = "Singular value number", title = "Variance explained by singular values") +
+  theme_minimal()
+```
+\tiny This plot shows the magnitude of the singular values (the diagonal entries of $\Sigma$). The magnitude of the singular value corresponds to the amount of variance explained in the original matrix.
+
+# Latent semantic analysis
+## Truncated singular value decomposition
+In the example above retained the original matrix dimensions. The point of latent semantic analysis is to compute a *truncated* SVD such that we have a new matrix in a sub-space of X. In this case we only want to retain the first `k` dimensions of the matrix.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+k <- 50 # Dimensions in truncated matrix
+
+# We can take the SVD of X but only retain the first k singular values
+lsa.2 <- svd(X, nu=k, nv=k)
+
+# In this case we reconstruct X just using the first k singular values
+X.trunc <- lsa.2$u %*% diag(lsa.2$d[1:k]) %*% t(lsa.2$v)
+
+# But the values will be slightly different since it is an approximation
+# Some information is lost due to the compression
+sum(round(X-X.trunc,2))
+```
+
+# Latent semantic analysis
+## Inspecting the LSA matrix
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+words.lsa <- t(lsa.2$v)
+colnames(words.lsa) <- colnames(X)
+
+round(as.numeric(words.lsa[,unlist(lookup.index.from.token["president"])]), 3)
+```
+
+
+
+# Latent semantic analysis
+## Recalculating similarties using the LSA matrix
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+words.lsa.n <- normalize(words.lsa)
+sims.lsa <- t(words.lsa.n) %*% words.lsa.n
+```
+
+
+# Latent semantic analysis
+## Comparing similarities
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+bind_cols(names(get.top.n("economy",sims)), names(get.top.n("economy",sims.lsa)))
+```
+
+# Latent semantic analysis
+## Comparing similarities
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+get.bottom.n <- function(token, sims, n=10) {
+  bottom <- sort(sims[unlist(lookup.index.from.token[token]),], 
+                 decreasing=F)[1:n]
+  return(bottom)
+}
+
+get.bottom.n("health", sims)
+```
+
+# Latent semantic analysis
+## Comparing similarities
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+bind_cols(names(get.top.n("health",sims, n = 10)), names(get.top.n("health",sims.lsa, n = 10)))
+```
+
+# Latent semantic analysis
+## Execise
+Re-run the code above with a different value of `k` (try lower or higher). Compare some terms in the original similarity matrix and the new matrix. How does changing `k` affect the results?
+```{r, echo=TRUE, eval = FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+get.top.n("", sims)
+get.top.n("", sims.lsa)
+```
+
+
+# Latent semantic analysis
+## Inspecting the latent dimensions
+We can analyze the meaning of the latent dimensions by looking at the terms with the highest weights in each row. In this case I use the raw LSA matrix. What do you notice about the dimensions?
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+lsa_dimensions <- tibble(Word1 = character(), 
+                         Word2 = character(), 
+                         Word3 = character())
+
+for (i in 1:nrow(words.lsa)) {
+  top.words <- sort(words.lsa[i,], decreasing = TRUE)[1:3]
+  temp <- tibble(Word1 = names(top.words)[1],
+                 Word2 = names(top.words)[2],
+                 Word3 = names(top.words)[3])
+  lsa_dimensions <- bind_rows(lsa_dimensions, temp)
+}
+```
+
+# Latent semantic analysis
+## Limitations of Latent Semantic Analysis
+- Bag-of-words assumptions and document-level word associations
+  - We still treat words as belonging to documents and lack finer context about their relationships
+    - Although we could theoretically treat smaller units like sentences as documents
+- Matrix computations become intractable with large corpora
+- A neat linear algebra trick, but no underlying *language model*
+
+# Language models
+## Intuition
+- A language model is a probabilistic model of language use
+- Given some string of tokens, what is the most likely token?
+  - Examples
+    - Auto-complete
+    - Google search completion
+
+# Language models
+## Bigram models
+- $P(w_i|w_{i-1})$ = What is the probability of word $w_i$ given the last word, $w_{i-1}$?
+   - $P(Jersey|New)$
+   - $P(Brunswick|New)$
+   - $P(York|New)$
+   - $P(Sociology|New)$
+
+# Language models
+## Bigram models
+- We use a corpus of text to calculate these probabilities from word co-occurrence.
+    - $P(Jersey|New) = \frac{C(New\ Jersey)}{C(New)}$, e.g. proportion of times "New" is followed by "Jersey", where $C()$ is the count operator.
+- More frequently occurring pairs will have a higher probability.
+  - We might expect that $P(York|New) \approx P(Jersey|New) > P(Brunswick|New) >> P(Sociology|New)$
+
+# Language models
+## Incorporating more information
+- We can also model the probability of a word, given a sequence of words
+- $P(x|S)$ = What is the probability of some word $x$ given a partial sentence $S$?
+ - $A = P(Jersey|Rutgers\ University\ is\ in\ New)$
+ - $B = P(Brunswick|Rutgers\ University\ is\ in\ New)$
+ - $C = P(York|Rutgers\ University\ is\ in\ New)$
+- In this case we have more information, so "York" is less likely to be the next word. Hence,
+  - $A \approx B > C$.
+  
+# Language models
+## Estimation
+We can compute the probability of an entire sequence of words by using considering the *joint conditional probabilities* of each pair of words in the sequence. For a sequence of $n$ words, we want to know the joint probability of $P(w_1, w_2,w_3,...,w_n)$. We can simplify this using the chain rule of probability:
+
+$$P(w_{1:n}) = P(w_1)P(w_2|w_1)P(w_3|w_{1:2})...P(w_n|w_{1:n−1}) $$
+
+$$= \prod_{k=1}^n P(w_k|w_{1:k-1})$$
+
+# Language models
+## Estimation
+The bigram model simplifies this by assuming it is a first-order Markov process, such that the probability $w_k$ only depends on the previous word, $w_{k-1}$.
+
+$$P(w_{1:n}) \approx \prod_{k=1}^n P(w_k|w_{k-1})$$
+
+These probabilities can be estimated by using Maximum Likelihood Estimation on a corpus.
+
+\tiny See https://web.stanford.edu/~jurafsky/slp3/3.pdf for an excellent review of language models
+
+# Language models
+## Empirical applications
+- Danescu-Niculescu-Mizil et al. 2013 construct a bigram language model for each month on *BeerAdvocate* and *RateBeer* to capture the language of the community
+  - For any given comment or user, they can then use a measure called *cross-entropy* to calculate how "surprising" the text is, given the assumptions about the language model
+- The theory is that new users will take time to assimilate into the linguistic norms of the community
+  
+\tiny https://en.wikipedia.org/wiki/Cross_entropy
+  
+# Language models
+## Empirical applications
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/language_model_example.png') # cross-entropy figure
+```  
+\tiny Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In Proceedings of the 22nd International Conference on World Wide Web, 307–18. ACM. http://dl.acm.org/citation.cfm?id=2488416.
+
+# Language models
+## Limitations of N-gram language models
+- Language use is much more complex than N-gram language models
+- Three limitations:
+  1. Insufficient for meaningful language generation
+  2. More complex models become intractable to compute
+  3. Limited information on word order
+
+# Language models
+## Neural language models
+- Recent advances in both the availability of large corpora of text *and* the development of neural network models have resulted in new ways of computing language models.
+- By using machine-learning  to train a language model, we can construct better, more meaningful vector representations
+
+# Word embeddings
+## Intuition
+- We use the context in which a word occurs to train a language model
+  - The model learns by viewing millions of short snippets of text (e.g 5-grams)
+- This model outputs a vector representation of each word in $k$-dimensional space, where $k << |V|$.
+  - Like LSA, these vectors are *dense*
+    - Each element contains a real number and can be positive or negative
+
+# Word embeddings
+## Word2vec: Skip-gram and continuous bag-of-words (CBOW)
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/word2vec_training.png')
+```
+
+# Word embeddings
+## Word2vec: CBOW intuition
+- We start with a string where the focal word is known, but hidden from the model, but we know the context within a window, in this case two words on either side of the focal word
+  - e.g. "The cat $?$ on the", where $? =$ "sat" 
+- The model is trained using a process called *negative sampling*, where it must distinguish between the true sentence and "fake" sentences where $?$ is replaced with another token.
+  - Each "guess" allows the model to begin to learn the correct answer
+- By repeating this for millions of text snippets the model is able to "learn" which words go with which contexts
+
+# Word embeddings
+## Word2vec:  Skip-gram intuition
+- We start with a string where the focal is known, but the context within the window is hidden
+  - e.g. "$?_1\ ?_2$ sat $?_3\ ?_4$"
+- The model tests different words in the vocabulary to predict the missing context words
+  - Each "guess" allows the model to begin to learn the correct answer
+- By repeating this for millions of text snippets the model is able to "learn" which contexts go with which words
+
+# Word embeddings
+## Word2vec: Model
+- Word2vec uses a shallow neural-network to predict a word given a context (CBOW) or a context given a word (skip-gram)
+  - But we do not care about the prediction itself, only the *weights* the model learns
+- It is a self-supervised method since the model is able to update using the correct answers
+  - e.g. In CBOW the model knows when the prediction is wrong and updates the weights accordingly
+
+# Word embeddings
+## Word2vec: Feed-forward neural network
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/neural_net.png')
+```   
+\tiny This example shows a two-layer feed-forward neural network.
+ 
+# Word embeddings
+## Word2vec: Estimation procedure   
+- Batches of text are passed through the network
+  - After each batch, weights are updated using *back-propagation*
+    - The model updates its weights in the direction of the correct answer (the objective is to improve predictive accuracy)
+    - Optimization via *stochastic gradient descent*
+    
+# Word embeddings
+## Vector representations of words
+- Each word is represented as a vector of weights learned by the neural network
+  - Word embeddings are *byproduct* of training a neural language model
+  - Each element of this vector represents how strongly the word activates a neuron in the hidden layer of the network
+  - This represents the association between the word and a given dimension in semantic space
+
+# Word embeddings
+## Distributional semantics
+- The word vectors in the embedding space capture information about the context in which words are used
+  - Words with similar meanings are situated close together in the embedding space
+- *Distributional semantics* is the theory that the meaning of a word is derived from its context in language use
+  - "You shall know a word by the company it keeps", linguist J.R. Firth (1957)
+- This is consistent with philosopher Ludwig Wittgenstein's *use theory of meaning*
+  - "the meaning of a word is its use in the language", *Philosophical Investigations* (1953)
+
+# Word embeddings
+## Analogies
+- The most famous result from the initial word embedding paper is the ability of these vectors to capture analogies:
+  - $king - man + woman \approx queen$
+  - $Madrid - Spain + France \approx Paris$
+  
+\tiny Mikolov, Tomas, Kai Chen, Greg Corrado, and Jeffrey Dean. 2013. “Efficient Estimation of Word Representations in Vector Space.” arXiv Preprint *arXiv*:1301.3781 / Mikolov, Tomas, Ilya Sutskever, Kai Chen, Greg S. Corrado, and Jeff Dean. 2013. “Distributed Representations of Words and Phrases and Their Compositionality.” In *Advances in Neural Information Processing Systems*, 3111–19.
+
+# Word embeddings
+## Sociological applications: Understanding social class
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/class_embeddings.png')
+```
+\tiny Kozlowski, Austin C., Matt Taddy, and James A. Evans. 2019. \href{https://doi.org/10.1177/0003122419877135}{“The Geometry of Culture: Analyzing the Meanings of Class through Word Embeddings.”} American Sociological Review, September, 000312241987713.
+
+# Word embeddings
+## Sociological applications: Understanding social class
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/survey_embeddings.png')
+```
+
+# Word embeddings
+## Sociological applications: Latent dimensions
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/stolz_taylor_pairs.png')
+```
+\tiny Stoltz, Dustin S., and Marshall A. Taylor. 2021. “Cultural Cartography with Word Embeddings.” *Poetics* 88 (October): 101567.
+
+# Word embeddings
+## Sociological applications: Understanding cultural schemas
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/obesity_gender.png')
+```
+\tiny Arseniev-Koehler, Alina, and Jacob G. Foster. 2022. \href{https://doi.org/10.31235/osf.io/c9yj3}{“Machine Learning as a Model for Cultural Learning: Teaching an Algorithm What It Means to Be Fat.”} *Sociological Methods & Research* 51 (4): 1484–1539.
+
+# Word embeddings
+## Sociological applications: Understanding cultural schemas
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/ak_foster_healthy.png')
+```
+
+# Word embeddings
+## Sociological applications: Semantic change
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/semantic_change.png')
+```
+\tiny Hamilton, William L., Jure Leskovec, and Dan Jurafsky. 2016. “Diachronic Word Embeddings Reveal Statistical Laws of Semantic Change.” In *Proceedings of the 54th Annual Meeting of the Association for Computational Linguistics*, 1489–1501.
+
+
+# Word embeddings
+## Sociological applications: Semantic change
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/stolz_taylor_cosine.png')
+```
+\tiny Stoltz, Dustin S., and Marshall A. Taylor. 2021. “Cultural Cartography with Word Embeddings.” *Poetics* 88 (October): 101567.
+
+# Word embeddings
+## Sociological applications: Semantic change
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/trump_semantics.png')
+```
+\tiny Davidson 2017, unpublished.
+
+# Word embeddings
+## Sociological applications: Semantic change
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/best_ak_judgments.png')
+```
+\tiny Best, Rachel Kahn, and Alina Arseniev-Koehler. 2023. “The Stigma of Diseases: Unequal Burden, Uneven Decline.” *American Sociological Review* 88 (5): 938–69.
+
+
+# Word embeddings
+## Pre-trained word embeddings
+- In addition to `word2vec` there are several other popular variants including `GloVe` and `Fasttext` (see Stolz and Taylor 2021)
+  - Pre-trained embeddings are available to download so you don't need to train your own
+- When to train your own embeddings?
+  - The underlying language model / data generating process differ from that represented by existing corpora
+    - e.g. Arseniev-Koehler and Foster interested in news coverage specific to health
+  - Requires large numbers of documents (> 10k)
+    
+
+# Word embeddings
+## Word embeddings in R
+We're going to use the library `word2vec`. The library is a R wrapper around a `C++` library. The \href{https://github.com/maxoodf/word2vec}{the original library can be found here} and the R version wrapper \href{https://github.com/bnosac/word2vec}{here}.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+#install.packages("word2vec")
+library(word2vec)
+set.seed(8901) # random seed
+```
+
+# Word embeddings
+## Training a word2vec model
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+model <- word2vec::word2vec(x = tolower(df$text), 
+                  type="cbow",# continuous bag of words
+                  dim=100, # 100-dim output vectors
+                  window = 3L, # window size 3
+                  iter = 10L, # train over 10 iterations
+                  negative= 10L,# 10 negative samples for each positive sample
+                  min_count = 10L) # Drop words less than 10 times
+```
+
+# Word embeddings
+## Getting embeddings for words
+We can use the `predict` function to find the nearest words to a given term.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+predict(model, c("economy"), type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Testing analogical reasoning
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+emb <- as.matrix(model) # Extracting embedding matrix
+vector <- emb["king", ] - emb["man", ] + emb["woman", ]
+predict(model, vector, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Testing analogical reasoning
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+vector <- emb["austin", ] - emb["texas", ] + emb["illinois", ]
+predict(model, vector, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Loading a pre-trained embedding
+Let's try another example. I downloaded a \href{https://github.com/maxoodf/word2vec#basic-usage}{pre-trained} word embedding model trained on a much larger corpus of English texts. The file is 833MB in size. Following the \href{https://github.com/bnosac/word2vec}{documentation} we can load this model into R.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+model.pt <- read.word2vec(file = "../data/sg_ns_500_10.w2v", normalize = TRUE)
+```
+
+
+# Word embeddings
+## Similarities
+Find the top 10 most similar terms to "economy" in the embedding space.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+predict(model.pt, c("economy"), type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Similarities
+Find the top 10 most similar terms to "immigration" in the embedding space.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+predict(model.pt, c("immigration"), type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Repeating the analogy test
+Let's re-try the analogy test. We still don't go great but now `queen` is in the top 5 results.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+emb <- as.matrix(model.pt)
+vector <- emb["king", ] - emb["man", ] + emb["woman", ]
+predict(model.pt, vector, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Repeating the analogy test
+Let's try another analogy. The correct answer is second. Not bad.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+vector <- emb["madrid", ] - emb["spain", ] + emb["france", ]
+predict(model.pt, vector, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Repeating the analogy test
+Let's try another slightly more complex analogy. Not bad overall.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+vector <- (emb["new", ] + emb["jersey", ])/2 - emb["trenton", ] + emb["albany", ]
+predict(model.pt, vector, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Representing documents
+Last week we focused on how we could represent documents using the rows in the DTM. So far we have just considered how words are represented in the embedding space. We can represent a document by averaging over its composite words.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+descartes <- (emb["i", ] + 
+                emb["think", ] + 
+                emb["therefore", ] + 
+                emb["i", ] + 
+                emb["am", ])/5
+predict(model.pt, descartes, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Representing documents
+The package has a function called `doc2vec` to do this automatically. This function includes an additional scaling factor (see documentation) so the results are slightly different.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+descartes <- doc2vec(model.pt, "i think therefore i am")
+predict(model.pt, descartes, type = "nearest", top_n = 10)
+```
+
+# Word embeddings
+## Visualizing high-dimensional embeddings in low-dimensional space
+- There are various algorithms available for visualizing word-embeddings in low-dimensional space
+  - `PCA`, `t-SNE`, `UMAP`
+- There are also browser-based interactive embedding explorers
+  - See \href{https://projector.tensorflow.org/}{this example on the Tensorflow website}
+
+# Contextualized embeddings
+## Limitations of existing approaches
+- Word2vec and other embedding methods run into problems when dealing with *polysemy*
+  - e.g. The vector for "crane" will be learned by averaging across different uses of the term: bird, construction equipment, movement
+  - "She had to crane her neck to see the crane perched on top of the crane".
+- New methods have been developed to allow the vector for "crane" to vary according to different contexts
+    - Intuition: Meaning varies depending on context 
+        - e.g. Proximity to "neck" implies "crane" used to describe movement
+
+# Contextualized embeddings
+## Architectures
+```{r, out.width="80%",out.height="70%", fig.align="center"}
+include_graphics('../images/contextualized.png') # cross-entropy figure
+```  
+
+\tiny Source: Devlin, Jacob, Ming-Wei Chang, Kenton Lee, and Kristina Toutanova. 2019. “BERT: Pre-Training of Deep Bidirectional Transformers for Language Understanding.” In *Proceedings of NAACL-HLT* 2019, 4171–86. ACL.
+
+# Contextualized embeddings
+## Methodological innovations
+- More complex, deeper neural networks
+  - *Attention* mechanisms, *LSTM* architecture, *transformers*
+- Optimization over multiple tasks (not just a simple prediction problem like Word2vec)
+- Character-level tokenization and embeddings
+- Much more data and enormous compute power required
+  - e.g. BERT trained on a 3.3 billion word corpus over 40 epochs, taking over 4 days to train on 64 TPU chips (each chip costs ~$10k).
+  
+# Large language models
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../images/Model-Size-Chart.png')
+```
+\tiny See \href{https://developer.nvidia.com/blog/using-deepspeed-and-megatron-to-train-megatron-turing-nlg-530b-the-worlds-largest-and-most-powerful-generative-language-model/}{Nvidia blog on Megatron-Turing NLG}.
+
+# Summary
+- Limitations of sparse representations of text
+  - LSA allows us to project sparse matrix into a dense, low-dimensional representation
+- Probabilistic language models allow us to directly model language use
+- Word embeddings use a neural language model to represent texts as dense vectors
+    - Distributional semantics
+- Recent methodological advances better incorporate context
+  
+# Next week
+- Spring break
+- After break
+    - Topic modeling
