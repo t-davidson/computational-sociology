@@ -11,13 +11,13 @@ This section will help to familiarize students with the tools we will be using t
 #### Checklist
   - Install RStudio
     - Install `tidyverse` package
-  - Setup Github integration
-    - Make an account on Github
+  - Setup GitHub integration
+    - Make an account on GitHub
     - Install Git
     - Sync with RStudio
     - Clone course repository
 
-I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/computational-sociology/blob/main/2026/syllabus/syllabus.pdf). Here you will find links to all of the readings for the semester. All of the books are available for free online. Below are some helpful resources for learning about R, RStudio, RMarkdown, and Github.
+I have an up-to-date copy of the syllabus [here](https://github.com/t-davidson/computational-sociology/blob/main/2026/syllabus/syllabus.pdf). Here you will find links to all of the readings for the semester. All of the books are available for free online. Below are some helpful resources for learning about R, RStudio, RMarkdown, and GitHub.
 
 ### R
 The most useful thing you can do to prepare for this course is to familiarize yourself with R.
@@ -34,9 +34,9 @@ Once you have set up RStudio, run the command `install.packages("tidyverse")` to
 ### RMarkdown
 RMarkdown is a framework designed by the developers of RStudio that allows you to combine code, text, and other elements into the same document. RMarkdown can create slideshows and other documents. For example, the course syllabus and the slides I will use in the lectures are both created in RMarkdown. Course assignments (and potentially your final papers) will be written using RMarkdown. I recommend taking a look at [this tutorial](https://rmarkdown.rstudio.com/lesson-1.html).
 
-### Github
-Github is a website used to store and share code. The most useful aspect of Github is *version control*. If you regularly store your code on Github then it is easy to keep a record of your work over time (similar to tracked changes in Word documents). All course materials will be hosted in a Github repository.
+### GitHub
+GitHub is a website used to store and share code. The most useful aspect of GitHub is *version control*. If you regularly store your code on GitHub then it is easy to keep a record of your work over time (similar to tracked changes in Word documents). All course materials will be hosted in a GitHub repository.
 
-You can sign up to Github [here](https://github.com) (no need to pay, sign up for a free account). Once you have made your account, follow the instructions [here](https://github.com/t-davidson/computational-sociology/blob/main/2026/course-materials/github_setup.md) to integrate it with RStudio.
+You can sign up to GitHub [here](https://github.com) (no need to pay, sign up for a free account). Once you have made your account, follow the instructions [here](https://github.com/t-davidson/computational-sociology/blob/main/2026/course-materials/github_setup.md) to integrate it with RStudio.
 
 We will go over the core functionality in class, but [this](https://docs.github.com/en/get-started/using-github/hello-world) tutorial will introduce you to most of what you will need to know.

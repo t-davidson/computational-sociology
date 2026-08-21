@@ -1,0 +1,544 @@
+---
+title: "Computational Sociology"
+subtitle: "Introduction"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: August 21, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+```
+
+# Plan
+
+- Part I
+  - Introductions
+  - A brief introduction to computational sociology
+  - Course outline
+  - AI use
+- Part II
+  - File management
+  - R, RStudio, and RMarkdown
+  - GitHub
+
+# Introduction to Computational Sociology
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/Moores_Law_Transistor_Count_1970-2020.png')
+```
+
+\centering \tiny  \url{https://ourworldindata.org/moores-law}
+
+# Introduction to Computational Sociology
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/social_media_usage.png')
+```
+
+\centering \tiny    \url{https://ourworldindata.org/grapher/users-by-social-media-platform}
+
+# Introduction to Computational Sociology
+
+## Computational Social Science
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/lazer_quote.png')
+```
+
+\centering \tiny Lazer et al. 2009
+
+# Introduction to Computational Sociology
+
+## Digital traces and big data
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/watts_telescope.png')
+```
+
+\centering \tiny Quoted in Golder and Macy 2014
+
+# Introduction to Computational Sociology
+
+## Digital traces and big data
+
+"[S]ocial scientists—and cultural sociologists in particular—have largely ignored the promise of so-called “big data.” Instead, cultural sociologists have left this wellspring of information about the arguments, worldviews, or values of hundreds of millions of people from Internet sites and other digitized texts to computer scientists who possess the technological expertise to extract and manage such data but lack the theoretical direction to interpret their meaning."
+
+\centering \tiny Bail 2014
+
+# Introduction to Computational Sociology
+
+## Example: Measuring diurnal rhythms using Twitter
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/golder_macy_diurnal.png')
+```
+
+\centering \tiny (PA = Positive Affect; NA = Negative Affect. Golder and Macy 2011)
+
+# Introduction to Computational Sociology
+
+## Readymade data
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/bitbybit1-2_readymade-custommade.png')
+```
+
+\centering \tiny Salganik 2017 \url{https://www.bitbybitbook.com/figures/chapter1/bitbybit1-2_readymade-custommade.png}
+
+# Introduction to Computational Sociology
+
+## Is it quantitative or qualitative?
+
+- Early work in CSS largely used quantitative methods like social network analysis and simulation, as well as conventional statistical techniques
+- New approaches to text that complement and extend qualitative methods
+  - Topic modeling as content analysis (e.g., DiMaggio, Nag, and Blei 2013; Mohr and Bogdanov 2013)
+  - Computational ethnography (Abramson et al. 2018, 2026)
+  - Qualitative research with LLM chatbots (Ibrahim and Voyer 2026)
+- Hybrid, mixed-methods approaches
+  - Computational grounded theory (Nelson 2020)
+
+# Introduction to Computational Sociology
+
+## The expansion of a field
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/css_pubs.png')
+```
+
+\centering \tiny Edelmann et al. 2020
+
+# Introduction to Computational Sociology
+
+## Toward a definition
+
+1.  Use of readymade, multimodal data (image, text, video)
+2.  New modes of data collection (web-scraping, APIs, online surveys and experiments)
+3.  Application of methods developed in computer science (topic modeling, word embeddings, deep learning, generative AI)
+
+# Introduction to Computational Sociology
+
+## Generative AI and transformation of the field
+
+- Generative AI as a General Purpose Technology
+  - AI as method
+  - AI as tool
+  - AI as object
+- Is all sociology computational now?
+
+# Course outline
+
+## Goals
+
+- By the end of this course, students will be able to
+  - Understand and implement fundamental data structures and programming concepts
+  - Collect observational data from online sources and build familiarity with online surveys and experiments
+  - Apply a range of computational techniques to social science research questions, and understand how these techniques can complement conventional quantitative and qualitative approaches
+  - Critically evaluate the use of new data sources and computational models, including methodological and ethical challenges
+
+# Course outline
+
+## Structure
+
+1.  Programming and data structures (Weeks 1-2)
+2.  Data collection (Weeks 3-4)
+3.  Natural language processing (Weeks 5-7)
+4.  Machine learning (Weeks 8-9)
+5.  Large language models and multimodal data (Weeks 10-12)
+
+# Course outline
+
+## Assessment
+
+- Homework assignments: 30%
+- Presentations: 20%
+- Final project: 50%
+
+# Generative AI
+
+- Large language models are trained on large amounts of text data as well as code from GitHub
+  - This means they can "understand" R and can write and comment on code
+  - And these models have "knowledge" about most of the topics covered during the class
+  - Writing, executing, and debugging code
+
+# Generative AI
+
+- Generative AI tools are now a routine part of computational research, whether as coding assistants, as agents that carry out multi-step analytic tasks, or as measurement instruments
+- I expect you to develop an informed judgment about them
+  - That judgment comes from using these tools enough to learn where they help and where they fail
+  - And from studying them as objects of inquiry
+  
+# AI adoption in sociology
+
+```{r, out.width="70%",out.height="75%", fig.align="center"}
+include_graphics('../../../img/alvero_et_al_SS.png')
+```
+
+\centering \tiny Alvero et al. 2026
+
+
+# Emerging norms about AI use
+
+```{r, out.width="70%",out.height="75%", fig.align="center"}
+include_graphics('../../../img/stuhler_norms.png')
+```
+\centering \tiny Stuhler et al. 2026 (working paper)
+
+# Generative AI
+
+## Applications
+
+- Generative AI as a *research method*
+  - Later in the semester, we will discuss these technologies in more detail and how they can advance computational social science
+- Generative AI as a *pedagogical tool*
+  - These tools can help you learn computational methods, but they also pose challenges to academic integrity
+
+
+# Generative AI as a pedagogical tool
+
+## Benefits and risks
+
+- *Benefits*
+  - Bespoke problem solving
+  - Efficient for coding and debugging
+  - Deep knowledge base, search augmentation
+- *Risks*
+  - Undermines learning
+  - Replaces thinking; cognitive atrophy
+  - Insufficient contextual grounding
+  
+# Negative impacts on learning
+
+```{r, out.width="50%", fig.align="center"}
+include_graphics('../../../img/china_ai_study.jpeg')
+```
+\centering \tiny \url{https://www.economist.com/graphic-detail/2026/08/18/does-ai-stop-children-from-learning}
+
+# Negative impacts on learning
+
+```{r, out.width="30%", fig.align="center"}
+include_graphics('../../../img/ai_cheating.png')
+```
+
+\centering \tiny \url{https://www.insidehighered.com/news/faculty/learning-assessment/2026/07/08/brown-professor-suspects-most-his-class-used-ai-cheat}
+
+# AI use in this course
+
+## Three types of permitted use
+
+- **No AI**
+  - Exercises designed to build fundamentals
+  - Required readings
+- **AI-assisted work**
+  - Generate or debug code
+    - You must understand all code you submit
+  - *Never* permitted for writing
+- **AI as a method**
+  - Using AI as a measurement tool
+  - Justify and validate
+
+# AI use in this course
+
+## Responsibility
+
+- You are responsible for whatever you submit
+  - If a model makes an error and you miss it, it is your error
+- Verify, test, and explain anything you hand in
+- *Include a short statement describing how you used AI tools in all assignments*
+- Ask me if you are unsure whether a particular use is acceptable
+
+# Exercise
+
+## Problem solving in R
+
+- Download and inspect this code in RStudio (paste it into a new R file)
+  - \url{https://tinyurl.com/code-to-fix}
+- Task: Identify and fix the errors
+
+# Exercise
+
+## Problem solving in R
+
+- Three groups:
+  1.  Fix it without using the internet
+  2.  Fix it by searching StackOverflow as needed
+  3.  Fix it by using AI as needed (ChatGPT, Gemini, etc.)
+
+# Break
+
+# File management
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/file_not_found.png')
+```
+
+\tiny Source: \href{https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z}{The Verge, 2021.}
+
+# File management
+
+- Keeping track of course materials
+- Working on homework assignments
+- Organizing final projects
+- Reproducibility
+
+# Organizing your files
+
+- Make a directory to contain all materials for this class
+- Store this somewhere practical
+  - e.g., `/Users/me/Documents/computational-sociology`, `/Users/me/Desktop/Classes/computational-sociology`
+  - Do not leave files in your `Downloads` directory!
+
+# Organizing your files
+
+- Within this directory, create separate directories for other files, like readings and homework assignments
+- Do not use spaces in directory names! Use dashes or underscores instead
+
+# Organizing your files
+
+It might look something like this once you have added other sub-directories.
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/directory_structure.png')
+```
+
+# Why R?
+
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/package_wars.png')
+```
+
+\centering \tiny \url{https://kieranhealy.org/blog/archives/2019/02/07/statswars/}
+
+# Why R?
+
+- Free and open-source
+- A statistical programming language
+- Active developer community
+  - Many cutting-edge approaches now implemented in R before Stata
+
+# RStudio
+
+## Overview
+
+- RStudio is an Integrated Development Environment (IDE) for programming in R
+  - Run code
+  - View data, objects, plots
+  - Create output like papers or slides
+  - Integrations including GitHub and a Python interpreter
+
+# RMarkdown
+
+## Overview
+
+- RMarkdown is an interactive coding environment
+  - RMarkdown documents can combine text, R code, LaTeX, and any output.
+  - Write in Markdown or Visual Editor
+  
+```{=html}
+<!--Exercise: Install RStudio and create a new markdown document. 
+Go through key settings on RStudio.-->
+```
+
+# Git and GitHub
+
+- Git is a version-control system
+  - Manages changes to your code (similar to Track Changes in Word)
+  - Facilitates collaboration and sharing
+  - Helps to ensure reproducibility
+- GitHub is a website used to store code
+  - It is *not* a place to store large files
+
+# Terminology
+
+- A GitHub *repository* (or *repo*) contains all files and associated history
+  - Public and private repos
+  - Files should be organized into directories
+  - GitHub can render Markdown files (suffix `.md`), useful for documentation
+- GitHub repositories exist online and you can *clone* them to your local computer using git
+
+# Using Git and GitHub
+
+- Multiple approaches:
+  - RStudio integration (recommended)
+  - Command line (recommended for advanced users)
+  - GitHub Desktop (redundant if using RStudio)
+  - Via web browser (only recommended for viewing)
+
+
+# Using GitHub
+
+Follow the instructions on the course website to set up GitHub with RStudio: \url{https://github.com/t-davidson/computational-sociology/blob/main/2026/course-materials/github_setup.md}
+
+1.  Register for a GitHub account
+2.  Install Git
+3.  Sync Git with RStudio
+
+# Cloning the course materials
+
+- Once you have this set up, navigate to the course website on GitHub and copy the URL:
+  - \url{https://github.com/t-davidson/computational-sociology}
+
+# Cloning the course materials
+
+- In RStudio, click `File > New Project > Version Control > Git`
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/add_course_github.png')
+```
+
+# Cloning the course materials
+
+- Paste the URL into the `Repository URL` field
+- Write a suitable name in the `Project directory name` field
+  - This will be the name of the folder that is created on your computer
+- Choose a location to store the repository on your computer
+  - Recommend using the folder we created earlier
+- Then click `Create Project`
+
+# Cloning the course materials
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/github_loading.png')
+```
+
+# Cloning the course materials
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/updated_file_structure.png')
+```
+
+# Cloning the course materials
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/inside_the_directory.png')
+```
+
+# Navigating files using RStudio
+
+You can also use the `Files` pane in RStudio to navigate folders.
+
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/cd_point_click_1.png')
+```
+
+# Opening this .Rmd file
+
+- Navigate to `2026/course-materials/slides/` and open `lecture1-introduction.Rmd` by double-clicking the file
+
+# Navigating files using RStudio
+
+Run the `getwd()` command to show the current working directory in R.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+getwd()
+```
+
+# Navigating files using RStudio
+
+Run the `setwd()` command to change your working directory. Try going one step back from the current directory using `..`. You can then run `getwd()` to verify it has changed.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize', warning=F}
+setwd("..")
+getwd()
+```
+
+# Navigating files using RStudio
+
+- When a `.Rmd` file is opened RStudio defaults to the directory where the file is contained.
+  - If you run `setwd()` it will change within a chunk, but other chunks will revert back to the working directory.
+
+# Navigating files using RStudio
+
+The working directory is important when considering loading files. Navigate to the `code` directory. You can use the `list.files` function to see a list of the files in the current directory.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+setwd("../code/")
+list.files()
+```
+
+# Using file paths
+
+- The working directory is critical because it defines a path we need to use to load files. Different files will fall into one of three groups:
+  1.  Files contained in the working directory.
+  2.  Files contained in outer directories.
+  3.  Files contained in inner, nested directories.
+
+# Files contained in the working directory
+
+If a file exists in the working directory, you will see it when running `list.files`. It can be loaded by using the file name.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize', message=F}
+library("tidyverse")
+read_file("file.txt") %>% print()
+```
+
+# Files contained in an outer directory
+
+If a file is contained in an upper level directory, you need to use the `..` to escape the current directory. For each step out from the current directory you need to add another `/..` to the file path. In this case, the file is contained one level above the current directory.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+read_file("../file_outer.txt") %>% print()
+```
+
+# Files contained in an inner directory
+
+If a file is contained in an inner directory, you need to add the name of the directory to the file path.
+
+```{r, echo=TRUE,eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+read_file("nested/file_inner.txt") %>% print()
+```
+
+# Files contained in an inner directory
+
+If a file is contained in an inner directory, you need to add the name of the directory to the file path.
+
+```{r, echo=TRUE, eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+read_file("nested/nested2/file_inner_inner.txt") %>% print()
+```
+
+# Exercise
+
+Modify the path below to find and print the contents of the hidden file in the `2021` directory.
+
+```{r, echo=T, eval=F, tidy=TRUE, mysize=TRUE, size='\\footnotesize'}
+read_file("") %>% print()
+```
+
+# File navigation
+
+## Common errors
+
+- It is common to get errors if you misspecify a path when trying to load a file. You will get an error like the following:
+  - `Error: 'filename' does not exist in the current working directory ('directory').`
+- If this happens, check whether the file is in your current working directory.
+  - You can always use your `Files` tab or your normal file viewer to verify the location.
+
+# Next week
+
+- Substantive topics
+  - From networks to agent-based models
+- Technical topics
+  - Data structures and algorithms in R
+    - Vectors, matrices, lists, loops, and functions
+
+<!--Note: Next lecture we will pull from GitHub at beginning of class to download the latest slides-->

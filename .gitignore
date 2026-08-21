@@ -1,6 +1,20 @@
 .DS_Store
 .ipynb_checkpoints
 .RHistory
-.tex
-.aux
-.RProj
+*.tex
+*.aux
+*.log
+*.RProj
+.Rproj.user
+CLAUDE.md
+
+# Shared image directory - not tracked (large binaries, local only)
+img/
+
+# Previous offerings of the course - kept locally for reference, not tracked
+2021/
+2024/
+
+# Syllabus: track only the rendered PDF, not the sources
+2026/syllabus/*
+!2026/syllabus/syllabus.pdf
