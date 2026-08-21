@@ -1,0 +1,1 @@
+Hi, I'm a file in the `slides` directory. My path is simply my name because you're already inside the directory.
