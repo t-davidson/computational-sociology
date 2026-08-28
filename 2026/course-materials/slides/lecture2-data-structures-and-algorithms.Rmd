@@ -1,0 +1,700 @@
+---
+title: "Computational Sociology"
+subtitle: "Data structures and algorithms: From networks to agent-based models"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: August 28, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before)
+    return(options$size)
+})
+```
+
+
+# Plan
+- Part I: Networks and agent-based models
+- Part II: Data structures and programming
+    - Basic types, vectors, matrices, lists
+    - Logic, loops, and functions
+- Part III: Putting it all together
+
+# Part I: Social networks and social network analysis
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/florentine_network.png')
+```
+\tiny 15th century Florentine marriage network (depicted in Jackson, Matthew O. 2010. *Social and Economic Networks*. Princeton University Press.)
+
+# Social networks
+- A social network is a set of actors, or people, and the relationships between them
+    - Family structures and kinship networks
+    - Friendship and acquaintanceship networks
+    - Organizations
+    - Online social networks
+    
+# Social networks    
+- Social network analysis studies these structures using mathematical and computational tools
+    - Networks are represented using concepts from a branch of mathematics called graph theory
+    - People or actors are represented as "nodes"
+    - Relationships are represented as "edges"
+
+# Social network analysis
+## Visualizing networks
+```{r, out.width="70%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/got_network.png')
+```
+\tiny Characters mentioned in *Game of Thrones* books, annotated with structural information. From Beveridge, Andrew, and Jie Shan. 2016. \href{https://doi.org/10.4169/mathhorizons.23.4.18}{“Network of Thrones.”} *Math Horizons* 23(4): 18–22.
+
+
+# Social network analysis
+## Big ideas: Homophily
+```{r, out.width="70%",out.height="65%", fig.align="center"}
+include_graphics('../../../img/homophily_india.png')
+```
+\tiny \centering Lee, Jaemin, and Mudit Kumar Singh. 2024. \href{https://www.doi.org/10.1002/jid.3828}{“Expansion, Cohesion and Diversity: The Network Advantages of Microfinance Groups in Indian Villages.”} *Journal of International Development* 36(1):559–86.
+
+# Social network analysis
+## Big ideas: The strength of weak ties
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/granovetter_weak_ties.png')
+```
+\tiny \centering Granovetter 1973
+
+# Social network analysis
+## Big ideas: Structural holes
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/burt_structural_holes.png')
+```
+\tiny \centering Burt 2004
+
+# Social network analysis
+## Big ideas: Duality of persons and groups
+```{r, out.width="70%", fig.align="center"}
+include_graphics('../../../img/breiger_persons_groups.png')
+```
+\tiny \centering Breiger 1974
+
+
+# Social network analysis
+## Spanning trees of sexual relationships in a high school
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/sex_network.png')
+```
+\tiny \centering Bearman, Moody, and Stovel 2004
+
+# Social network analysis
+## Forbidden triads and triadic closure
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/forbidden_triad.png')
+```
+\tiny \centering Granovetter 1973
+
+# Social network analysis
+## Micro-mechanism: Norms against cycles and "seconds"
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/bearman_cycle.png')
+```
+
+# Social network analysis
+## Simulated networks
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/bearman_simulated_networks.png')
+```
+\tiny \centering Bearman, Moody, and Stovel 2004
+
+# Social network analysis
+## Can you find someone's partner from network structure alone?
+```{r, out.width="60%",out.height="60%", fig.align="center"}
+include_graphics('../../../img/backstrom_kleinberg_neighborhood.png')
+```
+\tiny \centering Backstrom and Kleinberg 2014
+
+# Social network analysis
+## Embeddedness and dispersion
+- *Embeddedness* counts the friends two people share
+- *Dispersion* measures whether mutual friends are themselves unconnected
+    - The partner is usually the friend whose mutual connections reach across separate parts of the network
+
+# Social network analysis
+## Embeddedness and dispersion
+```{r, out.width="55%",out.height="55%", fig.align="center"}
+include_graphics('../../../img/backstrom_kleinberg_dispersion.png')
+```
+\tiny \centering Backstrom and Kleinberg 2014
+
+# Social network analysis
+## Embeddedness and dispersion
+```{r, out.width="55%",out.height="55%", fig.align="center"}
+include_graphics('../../../img/dispersion_performance.png')
+```
+\tiny \centering Backstrom and Kleinberg 2014
+
+# Social networks and computational social science
+- *Custommade vs. readymade data*:
+    - Add Health data is custommade
+    - The Facebook data is readymade
+        - The ubiquity of large-scale, dynamic network datasets creates new opportunities
+
+# Social networks and computational social science
+- *Computational approaches to network analysis*:
+    - Bearman et al. 2004 demonstrate how simulations can reveal micro-mechanisms underlying macro-structures
+    - Large-scale network data facilitate analysis at unprecedented scale
+    - Advances in computational power enable new types of network simulation (see Block, Stadtfeld, and Snijders 2019)
+
+# Introduction to agent-based modeling
+## From variables to actors
+- Most quantitative social science is variable-centered
+    - Regression forces us to think about the world in terms of what Andrew Abbott calls "general linear reality," a social world composed of fixed entities with fixed attributes
+    
+# Introduction to agent-based modeling
+## From variables to actors    
+- Agent-based modeling is the study of "social life as interactions among adaptive agents who influence one another in response to the influence they receive" (Macy and Willer 2002)
+    - Rather than interactions between *variables*, ABMs consider interactions between *interdependent individuals*
+
+# Introduction to agent-based modeling
+## Emergence
+- ABMs can reveal *emergent* properties of local interactions between agents and how they aggregate into system-level processes such as diffusion, polarization, and segregation
+    - Complex, system-level patterns can develop without any centralized coordination
+- Like historical sociology and ethnography, agent-based modeling is a *relational* approach, focusing on the context-dependent and contingent nature of social interaction
+
+# Introduction to agent-based modeling
+## Four key assumptions (Macy and Willer 2002)
+- Agents are *autonomous*
+  - There is no system-wide coordination
+- Agents are *interdependent*
+  - Agents respond to each other and to their environment
+- Agents follow *simple rules*
+  - Simple local rules can generate global complexity
+- Agents are *adaptive* and *backward-looking*
+  - Agents can alter their behavior through processes such as imitation and learning
+
+# Introduction to agent-based modeling
+## Strengths of ABMs
+- Virtual experiments to test causal mechanisms
+  - Particularly useful where real-world experimentation is impractical
+- Theory building and testing
+  - Bridging between micro and macro levels of analysis
+  - Varying the social structure *and* the agency of individuals
+
+# Modeling polarization
+## Local convergence and global polarization
+```{r, out.width="52%", fig.align="center"}
+include_graphics('../../../img/axelrod1997.png')
+```
+\tiny \centering Axelrod, Robert. 1997. “The Dissemination of Culture: A Model with Local Convergence and Global Polarization.” *Journal of Conflict Resolution* 41 (2): 203–26.
+
+# Modeling polarization
+## Politics and lifestyle choices: Why do liberals drink lattes?
+High correlations between political attitudes and lifestyle choices  
+```{r, out.width="60%", fig.align="center"}
+include_graphics('../../../img/dellaposta_corr.png')
+```
+\tiny \centering DellaPosta, Shi, and Macy 2015
+
+
+# Modeling polarization
+## Politics and lifestyle choices: Why do liberals drink lattes?
+- Mechanism: *network autocorrelation*
+  - Feedback loops between spatial settings, relations, and lifestyle
+```{r, out.width="50%",out.height="50%", fig.align="center"}
+include_graphics('../../../img/dellaposta.png')
+```
+
+\tiny \centering DellaPosta, Shi, and Macy 2015
+
+# Modeling polarization
+## Competing explanations: Associative diffusion
+- Alternative mechanism: *belief structures* developed via observation, interpretation, and evaluation
+```{r, out.width="80%", fig.align="center"}
+include_graphics('../../../img/goldberg_observation.png')
+```
+\tiny \centering Goldberg and Stein 2018
+
+# Modeling polarization
+## Competing explanations: Associative diffusion
+
+```{r, out.width="80%", fig.align="center"}
+include_graphics('../../../img/goldberg_stein.png')
+```
+\tiny \centering Goldberg and Stein 2018
+
+
+
+# Building agent-based models
+## Realism and external validity
+- Bruch and Atwell (2015) distinguish between two types of realism in ABMs
+  - *Low-dimensional realism*: simple, parsimonious models
+  - *High-dimensional realism*: complex, complicated models
+- Trade-offs:
+  - The latter might be more realistic, but involve more parameters and may be less intelligible
+  
+# Building agent-based models
+## Integrating real data to enhance realism
+```{r, out.width="70%", fig.align="center"}
+include_graphics('../../../img/dimaggio_garip.png')
+```
+\tiny \centering DiMaggio, Paul, and Filiz Garip. 2011. “How Network Externalities Can Exacerbate Intergroup Inequality.” *American Journal of Sociology* 116 (6): 1887–1933.
+
+# Building agent-based models
+## High-dimensional realism using generative AI
+```{r, out.width="80%",fig.align="center"}
+include_graphics('../../../img/park_agents.png')
+```
+\tiny \centering Park et al. 2023
+
+# Building agent-based models
+## Parameters and sensitivity
+- Use theory to guide decisions regarding which parameters vary and which are fixed
+  - Formalizations can be hard to operationalize
+- Models can be extremely sensitive to small variations in parameters
+  - Be careful to check for coding errors\*
+- Timing matters
+  - Continuous-time vs. discrete-time
+  - Asynchronous vs. synchronous updating
+
+\tiny \* See: van de Rijt, Arnout, David Siegel, and Michael Macy. 2009. “Neighborhood Chance and Neighborhood Change: A Comment on Bruch and Mare.” *American Journal of Sociology* 114(4):1166–80 \& Goldberg, Amir. 2021. “Associative Diffusion and the Pitfalls of Structural Reductionism.” *American Sociological Review* 86(6):1205–10.
+
+# Schelling's segregation model
+```{r, out.width="70%",out.height="70%", fig.align="center"}
+include_graphics('../../../img/shelling.png')
+```
+\tiny \centering Schelling, Thomas C. 1971. “Dynamic Models of Segregation.” *Journal of Mathematical Sociology* 1: 143–86.
+
+# Schelling's segregation model
+## NetLogo
+- Visit \url{https://www.netlogoweb.org}
+- Click NetLogo Web
+- Select "Sample Models/Social Science/Segregation" from dropdown
+
+
+# Part II: Data structures and programming
+## Building Schelling's model
+- Agents belonging to two groups occupy cells on a grid
+- Each agent looks at the neighbors surrounding it
+- An agent with too few similar neighbors moves to an empty cell
+- Repeat until nobody moves
+
+
+# Opening the RMarkdown file
+- Open class project in RStudio
+- Click pull (downwards blue arrow) in Git tab
+- Open `lecture2-data-structures-and-algorithms.Rmd`, located in `2026/course-materials/slides/`. 
+- Scroll down to this line.
+
+# Objects
+- R is an object-oriented language
+    - We create *objects* of different *classes* such as numbers, strings, and matrices
+    - Objects have *attributes*, properties such as their contents and dimensions
+    - Objects are associated with *methods* that allow us to manipulate them
+        - e.g. If `A` is a numeric object equal to 1, its `add` method means `A + A` returns 2
+
+# Basic types
+Four basic types will cover almost everything in this class. Here they store the attributes of a Schelling agent. R uses the `<-` operator for assignment.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+# Integer ("int" for short)
+group <- 1L         # which group the agent belongs to
+# Numeric
+threshold <- 0.5    # share of similar neighbors it requires
+# Logical
+happy <- FALSE      # is it content where it is?
+# Character (also known as "strings")
+label <- "blue"     # a name for the group
+```
+\tiny The other two are called `complex` and `raw`. See \href{https://cran.r-project.org/doc/manuals/R-lang.html}{documentation}
+
+# Basic types
+Three commands for inspecting an object.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+print(threshold) # Prints value in console
+class(threshold) # Shows class of object
+typeof(group)    # Shows type, not always equal to class
+```
+
+# Basic types
+Comparison operators return a logical value, `TRUE` or `FALSE`.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+group == 1L      # equals
+group != 2L      # is not
+0.25 >= threshold  # is greater than or equal to
+```
+
+# Vectors
+A vector is a collection of elements of the *same* type. The `c()` function *combines* values into a vector. Here are an agent's neighbors.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+nbrs <- c(1, 2, 1, 0, 1, 2, 0, 2) # e.g. an agent's neighbors
+length(nbrs)
+```
+
+# Vectors
+Square brackets, `[]`, are used for *indexing* specific cells.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+nbrs[1] # First neighbor
+nbrs[8] # Last neighbor
+```
+
+# Vectors
+An empty vector of `N` elements takes a default value depending on its type. These are useful for storing results.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+N <- 5
+numeric(N)
+logical(N)
+character(N)
+```
+
+# Vectors
+What happens when different types are combined?
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+c(1, 2, "empty")
+typeof(c(1, 2, "empty"))
+```
+
+# Boolean logic
+```{r, out.width="70%", fig.align="center"}
+include_graphics('../../../img/boolean.png')
+```
+
+# Boolean logic
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+TRUE & FALSE   # and
+TRUE | FALSE   # or
+!TRUE          # not
+TRUE & !FALSE
+```
+\tiny See \href{https://stat.ethz.ch/R-manual/R-patched/library/base/html/Logic.html}{the documentation} for more on logic in R.
+
+# Boolean logic
+Comparing a vector to a value returns a logical vector, one element at a time. The model needs two of these.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+occupied <- nbrs != 0     # which positions hold an agent
+occupied
+same <- nbrs == group     # which hold an agent from the same group
+same
+```
+
+# Boolean logic
+`sum()` treats `TRUE` as 1 and `FALSE` as 0.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+sum(same)                  # N similar neighbors
+sum(occupied)              # N neighbors
+sum(same) / sum(occupied)  # share similar
+```
+
+# Exercise: Vectors
+An agent from group 2 has the neighborhood below. Is it happy?
+```{r, echo=TRUE, eval=FALSE, mysize=TRUE, size='\\footnotesize'}
+group2 <- 2                         # the agent's group
+nbrs2 <- c(1, 1, 2, 0, 1, 1, 0, 2)  # its neighborhood
+```
+
+# Randomness
+Seeds ensure reproducibility. `sample` draws values uniformly.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+set.seed(950)
+sample(c(1, 2), 1)  # assign an agent to a group
+sample(1:5, 1)      # choose a row at random
+```
+\tiny Use the help command, e.g. `?sample`, to find the arguments a function takes.
+
+# Matrices
+A matrix is a two-dimensional structure that, like a vector, holds a single type. This one is the grid the agents live on.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+n_rows <- 5
+n_cols <- 5
+grid <- matrix(0, nrow = n_rows, ncol = n_cols) # matrix of 0s
+dim(grid)   # N rows, N columns
+grid
+```
+
+# Matrices
+Two-dimensional indexing to assign. Used here to assign positions or print the status.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+grid[3, 3] <- 1   # an agent from group 1
+grid[2, 2] <- 1
+grid[3, 4] <- 2   # an agent from group 2
+grid[4, 3] <- 2
+grid[3, ]         # row 3
+grid[, 3]         # column 3
+```
+
+# Matrices
+A range in place of a single index returns a submatrix. This represents an agent's Moore neighborhood.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+i <- 3
+j <- 3
+nbrs <- grid[(i - 1):(i + 1), (j - 1):(j + 1)]
+nbrs
+```
+\tiny \centering \url{https://en.wikipedia.org/wiki/Moore_neighborhood}
+
+# Matrices
+The same comparisons work on the submatrix. We subtract one from each count to exclude self.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+sum(nbrs == grid[i, j]) - 1  # similar neighbors
+sum(nbrs != 0) - 1           # neighbors of any kind
+```
+
+# Lists
+A list holds elements of different types. Named arguments make its contents easy to retrieve with the `$` operator.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+params <- list(n_rows = 5, n_cols = 5, threshold = 0.5)
+params$threshold
+```
+
+# Lists
+Single brackets return a sublist; double brackets its contents.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+params[1]         # a list of length one
+params[[1]]       # the value inside it
+class(params[1])
+class(params[[1]])
+```
+
+# Lists
+A list can represent the whole state of the model in a single object.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+model <- list(grid = grid, params = params)
+model$params$threshold
+```
+
+# Exercise: Lists
+Combine `$` and square bracket indexing to return the value of the cell at row 3, column 4 of the grid stored in `model`.
+```{r, echo=TRUE, eval=FALSE, mysize=TRUE, size='\\footnotesize'}
+
+```
+
+# If-else statements
+- We often want to make a choice contingent on some piece of information
+- If-else statements chain together one or more conditional actions
+  - In Schelling's model, if an agent's neighborhood is not similar enough it moves; else it stays
+
+# If-else statements
+The `if` is followed by a condition in parentheses. If the condition is met, the code inside the braces runs. If not, the code after `else` runs instead.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+happiness <- 0.25
+
+if (happiness < threshold) {
+  print("move")
+} else {
+  print("stay")
+}
+```
+\tiny Note the syntax. Putting `else` on the line below the closing brace throws an error.
+
+# If-else statements
+Operations can be chained together using `else if`. This is used during the grid sweep.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+if (grid[i, j] == 0) {
+  print("the cell is empty")
+} else if (happiness < threshold) {
+  print("move")
+} else {
+  print("stay")
+}
+```
+
+# Loops
+- Loops repeat an operation many times
+  - *For-loops* have a defined start and end
+  - *While-loops* iterate as long as a condition holds
+- Schelling's model needs both
+  - For-loop to visit every cell
+  - While-loop to continue until nobody moves
+
+# For-loops
+Here a loop assigns each of five agents to a random group and stores the result.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+groups <- numeric(5)
+
+for (k in 1:5) {
+  groups[k] <- sample(c(1, 2), 1)
+}
+
+groups
+```
+
+# For-loops
+```{python, echo=TRUE, eval=FALSE, python.reticulate=FALSE, mysize=TRUE, size='\\footnotesize'}
+import random
+
+groups = []
+
+for k in range(5):
+  groups.append(random.choice([1, 2]))
+```
+\tiny The syntax varies across languages but the structure is the same, as this Python example shows.
+
+# For-loops
+Loops can be *nested*. In this case, cycling through each row and column.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+for (i in 1:n_rows) {
+  for (j in 1:n_cols) {
+    if (grid[i, j] != 0) {
+      print(paste("agent at", i, j))
+    }
+  }
+}
+```
+
+# While-loops
+A while-loop runs while a condition is true and stops when it becomes false. *The condition should eventually be false to avoid an infinite loop.*
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+agents <- 0
+
+while (agents < 3) {
+  agents <- agents + 1
+  print(agents)
+}
+```
+
+# While-loops
+This can be used to allow the simulation to continue indefinitely until all agents are happy, i.e. none moved.
+```{r, echo=TRUE, eval=FALSE, mysize=TRUE, size='\\footnotesize'}
+all_happy <- FALSE
+
+while (!all_happy) {
+  moves <- 0
+  # sweep the grid, moving unhappy agents
+  # and adding one to moves for each
+  if (moves == 0) {
+    all_happy <- TRUE
+  }
+}
+```
+\tiny Note: There may be parameterizations where this results in an infinite loop. When might this occur?
+
+# Functions
+- A function takes an input, performs a sequence of operations, and yields an output
+- Functions make code modular and extendable
+- Many functions are built into R and available in packages, but it is often useful to write our own
+
+"You should consider writing a function whenever you've copied and pasted a block of code more than twice" *R4DS*
+
+# Functions
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+calculate_happiness <- function(i, j) { # input
+  nbrs <- grid[max(i - 1, 1):min(i + 1, n_rows), # operations
+               max(j - 1, 1):min(j + 1, n_cols)]
+  similar <- sum(nbrs == grid[i, j]) - 1
+  occupied <- sum(nbrs != 0) - 1
+  return(similar / occupied) # output
+}
+
+calculate_happiness(3, 3)
+```
+\tiny `max` and `min` keep the slice inside the grid to ensure a valid result when the agent sits on an edge.
+
+# Functions
+## Testing
+- It is important to test a function rather than assume it works
+  - Check that it handles valid inputs correctly
+  - Check the *edge cases*, the inputs that require special handling
+- Errors that produce no warning are harder to find than the ones that stop the code
+
+# Functions
+## Testing: agents on the edge of the grid
+An agent in the corner has three neighboring positions rather than eight.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+grid[1, 1] <- 1
+calculate_happiness(1, 1)
+```
+\tiny The result is correct, but it rests on a single neighbor.
+
+# Functions
+## Testing: agents with no neighbors
+The agent has no neighbors. What causes the error?
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize', error=TRUE}
+grid[5, 5] <- 1
+happiness <- calculate_happiness(5, 5)
+happiness
+
+if (happiness < threshold) {print("move")}
+```
+
+# Functions
+## Updating to handle the isolated agents
+Note the condition and the two `return` statements.
+```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
+calculate_happiness <- function(i, j) {
+  nbrs <- grid[max(i - 1, 1):min(i + 1, n_rows),
+               max(j - 1, 1):min(j + 1, n_cols)]
+  occupied <- sum(nbrs != 0) - 1
+  if (occupied == 0) {
+    return(1) # an isolated agent has no reason to move
+  }
+  similar <- sum(nbrs == grid[i, j]) - 1
+  return(similar / occupied)
+}
+calculate_happiness(5, 5)
+
+```
+
+# Style
+## A note on style
+- Programming languages require a specific syntax to function, but they also have stylistic conventions
+- The `styler` and `lintr` packages will style code automatically
+- See \url{https://style.tidyverse.org/} for more on R style
+
+# Style
+## Recommendations
+- Use short, informative variable names
+- Adopt a consistent convention, either snake_case or CamelCase
+- Use spacing to make code readable,`a <- 1` is preferable to `a<-1`
+- Make complex operations modular
+- Comment liberally for your future self and others
+
+# Part III: Putting it all together
+
+# Schelling's segregation model in R
+- Open `schelling.R`, located inside the `code` directory, and inspect the components
+
+# Schelling's segregation model in R
+## Before and after
+```{r, out.width="49%", out.height="49%", fig.show="hold", fig.align="center"}
+include_graphics(c('../../../img/schelling_initial.png',
+                   '../../../img/schelling_final.png'))
+```
+\tiny A threshold of 0.5 means an agent moves only when it is outnumbered where it lives. Preferences this mild still produce a sharply segregated grid.
+
+# Schelling's segregation model in R
+## Exercises
+- Lower `threshold` to 0.3. What happens to the results?
+- Raise it to 0.7. Does the model still settle?
+- Change `n_agents`. What happens when the grid is denser?
+- `calculate_happiness` divides by the number of occupied positions. Change it to divide by all neighboring positions. What happens?
+
+# Next week
+- Substantive topic
+    - Collecting digital trace data
+- Technical topics
+    - Application programming interfaces and web scraping
+    - Working with tabular data
