@@ -67,8 +67,15 @@ You will see a window pop up and then you will return to RStudio when the proces
 
 ## Using Github for homework assignments
 
-We will be using something called Github Classroom for the homework assignments. Each homework assignment will be a separate Github repository, where each student gets a personal version.
+We will be using a platform called Classroom 50 for the homework assignments. Each homework assignment will be a separate Github repository, where each student gets a personal version. There are three steps: join the class organization, accept each assignment, and clone the repository it creates for you.
 
+### Joining the class organization
+
+Before the first assignment you will receive an email inviting you to join the `UNC-computational-sociology` organization on Github. Accept it before doing anything else. Assignment links will not work until you have joined. If a link says "Not a member yet", you have not accepted the invitation, or you are signed in to a different Github account.
+
+### Accepting an assignment
+
+For each assignment I will share a link. Open it, sign in to Github if prompted, and click `Accept`. This creates your personal repository inside the class organization, named after the class, the assignment, and your username. The page will show the repository name and an `Open repository` button. Click it and copy the URL from your browser. This is the address you will use to clone it.
 
 ### How to download ("clone") the homework repository
 
@@ -82,7 +89,7 @@ You will need to clone this repository using the same process as in Step 5 above
 - A dialogue box will open. Add a short message to the `Commit message` box, e.g. `Final HW1 solutions` then click the `Commit` button again.
 - Finally, click the `Push` button with the green upwards arrow to send the change to your cloud-based repository
 	- Note: If you are asked for your username and password, enter your username and paste your PAT (not your Github password) as the password.
-- Once you have pushed the changes, visit the Github webpage for your homework repository and you should see your commit message next to the file name, showing it is updated.
+- Once you have pushed the changes, visit the Github webpage for your homework repository and you should see your commit message next to the file name, showing it is updated. Every push counts as a submission. There is nothing else you need to do to submit.
 
 You can commit as many times as you want. I recommend testing this process out before your final submission.
 
