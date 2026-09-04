@@ -18,3 +18,9 @@ img/
 # Syllabus: track only the rendered PDF, not the sources
 2026/syllabus/*
 !2026/syllabus/syllabus.pdf
+
+# Beamer build artifacts
+*.nav
+*.snm
+*.toc
+*.vrb
