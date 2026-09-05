@@ -110,4 +110,4 @@ You can learn more about projects in the [*R for Data Science* book](https://r4d
 Some of the instructions here are part of a detailed guide to all you could ever want to know about RStudio and Github: [happygitwithr.com](https://happygitwithr.com/index.html). Github provides guides and lots of documentation on its website: [github.com/git-guides](https://github.com/git-guides). Github also provides a [cheatsheet](https://training.github.com/) (multilingual).
 
 ### Student developer pack
-Students can get free access to some premium features by signing up for the [Student Developer Pack](https://education.github.com/pack). It is not essential for our purposes, but I highly recommend doing so. The most obvious perk is the ability to create private repositories.
+Students can get free access to some premium features by signing up for the [Student Developer Pack](https://education.github.com/pack). It is not essential for our purposes, but I highly recommend doing so.
