@@ -7,6 +7,10 @@
 *.RProj
 .Rproj.user
 CLAUDE.md
+AGENTS.md
+TASKS.md
+COMPLETED.md
+NOTES.md
 
 # Shared image directory - not tracked (large binaries, local only)
 img/
