@@ -52,6 +52,7 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
 ## Project proposal
 - 2-3 page double-spaced proposal for final project
   - Introduction and related work
+  - Research question
   - Data
   - Methodology
   - References
