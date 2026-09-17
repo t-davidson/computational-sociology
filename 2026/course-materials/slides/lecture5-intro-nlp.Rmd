@@ -1,0 +1,800 @@
+---
+title: "Computational Sociology"
+subtitle: "Fundamentals of natural language processing"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: September 18, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+# TODO: Add project milestones and deadlines once the instructor sets them.
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before)
+    return(options$size)
+})
+```
+
+# Course updates
+## Homework
+- Homework 1 due today
+  - Submit by committing and pushing to your GitHub homework repository
+    - Check all required components added
+
+# Plan
+- Part I: What is natural language processing?
+- Part II: Working with text
+- Part III: Comparing documents
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part I: What is NLP?\par}
+\vfill
+\end{center}
+
+# Introduction to NLP
+## What is natural language processing?
+- Three components of NLP*:
+  - Natural language / "text as data"
+    - A corpus of text (e.g. books, reviews, tweets, e-mails)
+  - (Computational) linguistics
+    - Linguistic theory to guide analysis and computational approaches to handle data
+  - Statistics
+    - Statistical approaches to text data
+
+\tiny \*Not *that* NLP: https://en.wikipedia.org/wiki/Neuro-linguistic_programming
+
+# Introduction to NLP
+## Applications: Power dynamics
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/power_dynamics.png')
+```
+\tiny Danescu-Niculescu-Mizil, Cristian, Lillian Lee, Bo Pang, and Jon Kleinberg. 2012. “Echoes of Power: Language Effects and Power Differences in Social Interaction.” In *Proceedings of the 21st International Conference on World Wide Web*, 699–708.
+
+# Introduction to NLP
+## Applications: Identity and group membership
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/no_country.png')
+```
+\tiny Danescu-Niculescu-Mizil, Cristian, Robert West, Dan Jurafsky, Jure Leskovec, and Christopher Potts. 2013. “No Country for Old Members: User Lifecycle and Linguistic Change in Online Communities.” In *Proceedings of the 22nd International Conference on World Wide Web*, 307–18.
+
+# Introduction to NLP
+## Applications: Trust and betrayal
+```{r, out.width="100%", fig.align="center"}
+  include_graphics('../../../img/betrayal.png')
+```
+
+\tiny Niculae, Vlad, Srijan Kumar, Jordan Boyd-Graber, and Cristian Danescu-Niculescu-Mizil. 2015. “Linguistic Harbingers of Betrayal: A Case Study on an Online Strategy Game.” In *Proceedings of the 53rd Annual Meeting of the ACL and the 7th International Joint Conference on Natural Language Processing*.
+
+# Introduction to NLP
+## Applications: Gender and social action
+
+```{r, out.width="100%", fig.align="center"}
+  include_graphics('../../../img/stuhler1.png')
+```
+\tiny Stuhler, Oscar. 2022. “Who Does What to Whom? Making Text Parsers Work for Sociological Inquiry.” *Sociological Methods & Research* 51 (4): 1580–1633.
+
+# Introduction to NLP
+## Applications: Gender and social action
+
+```{r, out.width="100%", fig.align="center"}
+  include_graphics('../../../img/stuhler2.png')
+```
+\tiny Stuhler, Oscar. 2022. “Who Does What to Whom? Making Text Parsers Work for Sociological Inquiry.” *Sociological Methods & Research* 51 (4): 1580–1633.
+
+# Introduction to NLP
+## NLP and Social Theory (Evans and Aceves 2016)
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/evans_aceves2.png')
+```
+
+# Introduction to NLP
+## NLP and Social Theory (Evans and Aceves 2016)
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/evans_aceves1.png')
+```
+
+# Introduction to NLP
+## Computational Grounded Theory (Nelson 2020)
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/nelson_cgt1.png')
+```
+
+# Introduction to NLP
+## Computational Grounded Theory (Nelson 2020)
+```{r, out.height="50%", fig.align="center"}
+  include_graphics('../../../img/nelson_cgt2.png')
+```
+
+# Introduction to NLP
+## Computational and qualitative research
+
+*Computational approaches are sometimes less subtle and deep than the reading of a
+skillful analyst, who interprets text in context. Nevertheless, ... recent advances in NLP
+and ML are being used to enhance qualitative analysis in two ways. First, supervised ML prediction
+tools can “learn” and reliably extend many sociologically interesting textual classifications to
+massive text samples far beyond human capacity to read, curate, and code. Second, unsupervised
+ML approaches can “discover” unnoticed, surprising regularities in these massive samples of text
+that may merit sociological consideration and theorization.*
+
+\tiny James Evans and Pedro Aceves, 2016
+
+# Introduction to NLP
+## Text as data
+```{r, out.width="100%", fig.align="center"}
+  include_graphics('../../../img/grimmer_stewart.png')
+```
+\tiny Justin Grimmer and Brandon Stewart, 2013
+
+
+# Introduction to NLP
+## NLP class schedule
+- Week 5 (today)
+  - Pre-processing, bag-of-words, and the vector-space model
+- Week 6
+  - Word embeddings
+- Week 7
+  - Topic models
+- Week 9 (after fall break)
+  - Supervised text classification
+- Weeks 10-12
+  - Language models and multimodal models
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part II: Working with text\par}
+\vfill
+\end{center}
+
+# Working with text
+## Pre-processing
+- There are several steps we need to take to clean or "pre-process" texts for analysis
+  - Tokenization
+  - Stemming/lemmatization
+  - Stop-word removal
+  - Handling punctuation and special characters
+
+# Working with text
+## Tokenization
+- Tokenization is the process of splitting a document into words
+  - e.g. "Cogito, ergo sum" $\Rightarrow$ ("Cogito,", "ergo", "sum")
+- Splitting on whitespace is a simple starting point in English
+  - Tokenizers also need rules for punctuation, contractions, and hyphenated words
+- Tokenization is more difficult in languages like Mandarin where word boundaries need to be detected
+
+# Working with text
+## Stemming/lemmatization
+- We often want to reduce sparsity by reducing words to a common root
+  - e.g. ("school", "schools", "schooling", "schooled") $\Rightarrow$ "school"
+- Stemming is a simple, heuristic-based approach
+- Lemmatization is a more rigorous approach based on morphology, but computationally-intensive
+
+# Working with text
+## Stop-word removal
+- "Stop-words" are frequently occurring words that are often removed
+- The intuition is that they add little meaning and do not help us to distinguish between documents
+  - e.g. Virtually all texts in English will contain the words "and", "the", "of", etc.
+- Most NLP packages have lists of stop-words to easily facilitate removal
+
+# Working with text
+## Handling punctuation and special characters
+- In many cases we may want to remove punctuation, HTML tags, or unwanted control characters
+  - This is often done using regular expressions ("regex")
+  - Words are typically set to lowercase
+
+# Working with text
+## Pre-process with caution!
+- Researchers often apply these techniques before starting an analysis, but these choices may affect our results
+  - There is no one-size-fits-all solution, so think carefully before removing anything
+  - It's often useful to experiment to see if pre-processing steps affect results
+
+# Working with text
+## Pre-process with caution!
+```{r, out.width="70%", fig.align="center"}
+  include_graphics('../../../img/denny_and_spirling.png')
+```
+\tiny Denny, Matthew J., and Arthur Spirling. 2018. “Text Preprocessing For Unsupervised Learning” Political Analysis 26 (02): 168–89. https://doi.org/10.1017/pan.2017.44.
+
+# Working with text
+## Word counts
+- Now we have done some pre-processing, one of the most basic ways we can start to analyze texts is by counting the frequency of words.
+  - e.g. "I think, therefore I am" $\Rightarrow$
+
+\begin{table}[]
+\begin{tabular}{ll}
+Word & Count \\
+I & 2 \\
+think & 1 \\
+therefore & 1 \\
+am & 1
+\end{tabular}
+\end{table}
+
+
+# Working with text
+## Frequency distributions
+- \textbf{Zipf's law}: *A word's frequency is inversely proportional to its rank order in the frequency distribution*.
+  - "the" is the most common word in the English language, accounting for 7% of all words in the *Brown Corpus of American English*
+  - "and" and "of" compete for second place, each accounting for ~3.5% of words in the corpus
+  - The most frequent 135 words account for approximately half the 1 million words in the corpus
+  - Around 50,000 words, representing half the total unique words in the corpus, are *hapax legomena*, words which only occur once
+
+# Zipf's law
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/zipf.png')
+```
+\tiny A plot of the rank versus frequency for the first 10 million words in 30 Wikipedias (dumps from October 2015) in a log-log scale (Source: Wikipedia).
+
+# Working with text
+## Bag-of-words
+- Documents are often treated as "bags of words", i.e. a collection of words without information about the order
+  - e.g. "This is a document" $\Rightarrow$ ("a","document", "is", "This", "is")
+
+# Working with text
+## Example: Loading data
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(tidyverse)
+library(tidytext)
+library(gutenbergr)
+library(ggplot2)
+library(stringr)
+#install.packages("tm") # Dependency for tidytext, required for cast_dtm
+
+ef <- gutenberg_download(41360) # Download Elementary Forms
+cm <- gutenberg_download(61) # Download Communist Manifesto
+
+ef$title <- "Elementary Forms"
+cm$title <- "Communist Manifesto"
+
+texts <- bind_rows(ef, cm)
+```
+
+# Working with text
+We are  using a tabular format where each text is represented as a table, where the first column is the ID in the Project Gutenberg database and the `text` field contains each line as a new row.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tail(texts$text)
+```
+
+# Working with text
+## Tokenizing using `tidytext`
+The `unnest_tokens` function is used to tokenize the text, resulting in a table containing the original text ID and each token as a separate row.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text <- texts |> unnest_tokens(word, text)
+tail(tidy.text$word)
+```
+
+# Term frequency in *The Communist Manifesto*
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 61) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='red') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in The Communist Manifesto")
+```
+
+# Term frequency in *Elementary Forms*
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 41360) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in Elementary Forms")
+```
+
+# Working with text
+## Removing stopwords
+We can load a corpus of stop words contained in `tidytext` and use `anti_join` to filter our texts. This retains all records without a match in stopwords.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+data(stop_words)
+head(stop_words)
+```
+
+# Working with text
+## Removing stopwords
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text <- tidy.text |>
+  anti_join(stop_words)
+```
+
+# Term frequency in *The Communist Manifesto*
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 61) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='red') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in The Communist Manifesto", caption="Stopwords removed")
+```
+
+# Term frequency in *Elementary Forms*
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 41360) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in Elementary Forms", caption="Stopwords removed")
+```
+
+# Working with text
+## Removing new stopwords
+The last example shows how there is still some "junk" in the Durkheim text. We can try to remove this by adding to our stopword list.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+to.remove <- tibble(text=c("pp", "tr")) |> unnest_tokens(word, text)
+
+tidy.text <- tidy.text |>
+  anti_join(to.remove)
+```
+
+# Term frequency in *Elementary Forms*
+```{r, echo=FALSE, fig.width=6, fig.height=4, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 41360) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in Elementary Forms", caption="Stopwords removed+")
+```
+
+
+# Working with text
+## Stemming
+We can stem the terms using a function from the package `SnowballC`, which is a wrapper for a commonly used stemmer called the Porter Stemmer, written in C.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(SnowballC)
+
+tidy.text <- tidy.text |>
+  mutate(word = wordStem(word, language = "en"))
+```
+\tiny Stemmer example: \url{https://cbail.github.io/SICSS_Basic_Text_Analysis.html}. More on stemming and lemmatizing in R: \url{https://smltar.com/stemming}.
+
+# Term frequency in *Elementary Forms*
+```{r, echo=FALSE, fig.width=6, fig.height=4, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.text |> filter(gutenberg_id == 41360) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='Term frequency', title="10 most frequent terms in Elementary Forms", caption="Stopwords removed+, stemmed")
+```
+
+# Working with text
+## Counting words
+Let's get counts of words across both texts to analyze their distribution.
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+# Count words by text
+text.words <- tidy.text |> count(title, word, sort = TRUE)
+
+# Get total number of words in each text
+total.words <- text.words |> group_by(title) |>
+  summarize(total = sum(n))
+
+# Merge
+words <- left_join(text.words, total.words)
+```
+
+# Working with text
+## Counting words
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+head(words)
+```
+
+# Word frequency distribution
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+ggplot(words, aes(n/total, fill = title)) +
+  geom_histogram(show.legend = FALSE) +
+  facet_wrap(~title, ncol = 2, scales = "free_y") +
+  labs(y="Count", x= "Proportion of total words used") + theme_minimal()
+```
+
+# Working with text
+## Zipf's law
+Calculating rank and frequency for each word in each text.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+freq_by_rank <- words |>
+  group_by(title) |>
+  mutate(rank = row_number(),
+         `term frequency` = n/total) |>
+  ungroup()
+```
+
+# Zipf's law
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(scales)
+freq_by_rank |>
+  ggplot(aes(rank, `term frequency`, color =title)) +
+  geom_line(linewidth = 1.1, alpha = 1, show.legend = F) +
+  scale_x_log10() +
+  scale_y_log10(labels = scales::label_number()) + theme_minimal() +
+  labs(y='Term frequency', x="Rank", caption='Log-log axes')
+```
+
+# Working with text
+## N-grams
+- So far we have just considered treating a text as a "bag-of-words"
+- One way to maintain some information about word order (and hence syntax) is to use N-grams
+- An *N-gram*\* is a sequence of $N$ words
+- We often split texts into N-grams to capture basic syntactic units like phrases
+  - $N$ is usually small.
+    - $N = 2$ is called a "bigram"; $N = 3$ is a "trigram"
+  - e.g. "I like peanut butter" contains the following bigrams: "I like", "like peanut", & "peanut butter".
+
+  \tiny *Nothing to do with Scientology https://en.wikipedia.org/wiki/Engram_(Dianetics)
+
+# Working with text
+## N-grams
+- We can also use *character N-grams* to split documents into sequences of characters
+  - e.g. "character" can be split into the following triplets ("cha", "har", "ara", "rac", "act", "cte", "ter")
+- BERT uses WordPiece tokenization with a learned vocabulary of words and subword pieces
+  - An unfamiliar word can often be split into familiar pieces
+  - Words that cannot be represented receive an unknown token (`[UNK]`)
+
+# Exercise
+Modify `unnest_tokens` to obtain trigrams from the texts. Use `?function_name` for help.
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+tidy.trigrams <- texts |> unnest_tokens(word, text) |> drop_na()
+head(tidy.trigrams)
+```
+
+# Trigrams in *The Communist Manifesto*
+```{r, echo=TRUE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+tidy.trigrams |> filter(gutenberg_id == 61) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='red') +
+  labs(y = NULL, x='Term frequency',
+       title="Top 10 trigrams in The Communist Manifesto")
+```
+
+# Trigrams in *Elementary Forms*
+```{r, echo=TRUE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+tidy.trigrams |> filter(gutenberg_id == 41360) |>
+  count(word, sort = TRUE) |>
+  slice(1:10) |>
+  mutate(word = reorder(word, n)) |>
+  ggplot(aes(n, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='Term frequency',
+       title="Top 10 trigrams in Elementary Forms")
+```
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part III: Comparing documents\par}
+\vfill
+\end{center}
+
+# Working with text
+## Comparing documents
+1. Re-weighting word counts to find distinctive words
+2. Representing documents as vectors of word counts
+3. Geometric interpretations of document vectors
+
+# Working with text
+## Limitations of word counts
+- Raw word counts are an insufficient for document comparison
+  - Some words occur in most documents, providing little information (recall Zipf's law)
+  - Some words are rare, providing little generalizable insight
+- Goal: Find words that help distinguish between documents
+
+# Working with text
+## Term-frequency inverse document-frequency (TF-IDF)
+- Term-frequency inverse document-frequency (TF-IDF) is a way to weight word counts ("term frequencies") to give higher weights to words that help distinguish between documents
+  - Intuition: Adjust word counts to account for how many documents a word appears in
+
+# Working with text
+## Calculating term-frequency inverse document-frequency (TF-IDF)
+- $D$ = number of documents in the corpus
+- $tf_{t,d}$ = number of times term $t$ is used in document $d$, as a proportion of all words in $d$
+- $df_{t}$ = number of documents containing term $t$
+- $idf_{t} = log(\frac{D}{df_{t}})$
+  - $\frac{D}{df_{t}}$, the ratio of documents to documents with $t$ is larger for terms occurring in fewer documents
+  - The logarithm penalizes very high values
+  - If a word occurs in all documents $df_{t} = D \rightarrow idf_{t} = log\frac{D}{D} = log(1) = 0$ .
+- We then use these values to calculate $TF\text{-}IDF_{t,d} = tf_{t,d}*idf_{t}$
+
+# Working with text
+## Computing TF-IDF in `tidytext`
+We can compute TF-IDF weights using the word-count object we created earlier.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+tidy.tfidf <- words |> bind_tf_idf(word, title, n)
+head(tidy.tfidf)
+```
+
+# Working with text
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.tfidf |> filter(word == "countri")
+```
+
+# Working with text
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.tfidf |> filter(word == "australia")
+```
+
+# Working with text
+Choose another word and inspect the results.
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize', eval = FALSE}
+tidy.tfidf |> filter(word == "")
+```
+
+# Working with text
+In this case *all* words unique to one document will have the same IDF score. Why?
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+head(tidy.tfidf |> filter(round(idf,2) == 0.69))
+```
+
+# TF-IDF weighted word stems in *The Communist Manifesto*
+```{r, echo=FALSE, out.height="65%", fig.align="center", fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.tfidf |> filter(title == "Communist Manifesto") |>
+  arrange(desc(tf_idf)) |>
+  mutate(word = reorder(word, tf_idf)) |>
+  head(10) |>
+  ggplot(aes(tf_idf, word)) +
+  geom_col(fill='red') +
+  labs(y = NULL, x='TF-IDF weight', title="10 terms with highest TF-IDF in The Communist Manifesto",
+       caption="Stopwords removed+, stemmed")
+```
+
+# TF-IDF weighted word stems in *Elementary Forms*
+```{r, echo=FALSE, fig.width=6, fig.height=4,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+tidy.tfidf |> filter(title == "Elementary Forms") |>
+  arrange(desc(tf_idf)) |>
+  mutate(word = reorder(word, tf_idf)) |>
+  head(10) |>
+  ggplot(aes(tf_idf, word)) +
+  geom_col(fill='blue') +
+  labs(y = NULL, x='TF-IDF weight', title="10 terms with highest TF-IDF in Elementary Forms", caption="Stopwords removed+, stemmed")
+```
+
+# The vector-space model
+## The document-term matrix (DTM)
+- A frequently used bag-of-words representation of a text corpus is the *Document-Term Matrix*:
+  - Each row* is a document (a unit of text)
+  - Each column is a term (word)
+  - For a given DTM $X$, each cell $X_{i,j}$ indicates the number of times term $j$ occurs in document $i$.
+    - This can be the raw term counts or TF-IDF weighted counts.
+
+\tiny \*Sometimes the rows and columns are reversed, resulting in a *Term-Document Matrix* or *TDM*
+
+# The vector-space model
+## Casting a `tidytext` object into a DTM
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+X <- texts |> unnest_tokens(word, text) |>
+    anti_join(stop_words) |> count(title, word) |>
+    filter(n > 10) |> 
+    cast_dtm(title, word, n)
+print(X)
+```
+\tiny Note: This matrix is not weighted by TF-IDF, although we could apply the weights if desired.
+
+# The vector-space model
+## Viewing the DTM
+The object created has class `DocumentTermMatrix` from the `tm` package. We can inspect this to see what it contains.
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+class(X)
+dim(X)
+```
+
+# The vector-space model
+## Viewing the DTM
+The row and column names hold the documents and the vocabulary.
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+X$dimnames[1]
+X$dimnames[[2]][1:20] # first 20 columns
+```
+
+# The vector-space model
+## Viewing the DTM
+The easiest way to see the actual DTM is to cast it to a matrix.
+```{r, echo=TRUE,tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+Xm <- as.matrix(X)
+```
+
+# The vector-space model
+## Geometric interpretations
+- Each document is a vector in N-dimensional space, where N is the total number of unique words (row of the DTM / column of TDM)
+- Each word is a vector in D-dimensional space, where D is the number of documents (columns of the DTM / row of TDM)
+
+\tiny See https://web.stanford.edu/~jurafsky/slp3/6.pdf for more details on the vector-space model
+
+# The vector-space model
+## Document vectors
+```{r, out.width="70%", fig.align="center"}
+  include_graphics('../../../img/doc_vectors.png')
+```
+This example from Jurafsky and Martin shows a Term-Document Matrix (TDM) pertaining to four key words from four Shakespeare plays. The document vectors are highlighted in red.
+
+# The vector-space model
+## Document vectors
+```{r, out.width="70%", fig.align="center"}
+  include_graphics('../../../img/vector_vis.png')
+```
+Here vectors for each play are plotted in two-dimensional space. The y- and x-axes indicate the number of times the words "battle" and "fool" appear in each play. Note how some vectors are closer than others and how they have different lengths.
+
+# The vector-space model
+## Word vectors
+```{r, out.width="70%", fig.align="center"}
+  include_graphics('../../../img/word_vectors.png')
+```
+We could also treat the rows of this matrix as vector representations of each word. We will return to this idea next week.
+
+# Cosine similarity
+```{r, out.height="70%", fig.align="center"}
+  include_graphics('../../../img/cosine.png')
+```
+
+# Cosine similarity
+```{r, out.width="70%", fig.align="center"}
+  include_graphics('../../../img/vector_vis_angles.png')
+```
+
+# Cosine similarity
+
+$\vec{u}$ and $\vec{v}$ are vectors representing texts (e.g. rows from a DTM matrix). We can compute the cosine of the angle between these two vectors using the following formula:
+
+
+$$ cos(\theta) = \frac{\vec{u} \cdot \vec{v}}{\|\vec{u}\|\|\vec{v}\|} = \frac{\sum_{i}\vec{u_i} \vec{v_i}}{\sqrt{\sum_{i}\vec{u}_i^2} \sqrt{\sum_{i}\vec{v}_i^2}} $$
+
+# Cosine similarity
+## Calculation
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+set.seed(27516)
+u <- rnorm(10)
+v <- rnorm(10)
+
+sum(u*v) / (sqrt(sum(u^2)) * sqrt(sum(v^2)))
+
+# Same result via matrix multiplication
+u %*% v / (sqrt(u %*% u) * sqrt(v %*% v))
+```
+
+# Cosine similarity
+## Making a function
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+cosine.sim <- function(u,v) {
+  numerator <- u %*% v
+  denominator <- sqrt(u %*% u) * sqrt(v %*% v)
+  return (numerator/denominator)
+}
+
+cosine.sim(u,v)
+```
+
+
+
+# Cosine similarity
+## Cosine similarity between Marx and Durkheim
+We can use the two rows of the DTM matrix defined above as arguments to the similarity function.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+print(cosine.sim(Xm[1,], Xm[2,]))
+```
+
+# Cosine similarity
+## Cosine similarity for a larger corpus
+Let's consider another example with a larger corpus of texts.
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+m <- gutenberg_metadata |>
+    filter(author == "Shakespeare, William" & language == "en")
+plays <- gutenberg_download(2235:2269)
+
+plays <- plays |> left_join(m, by = "gutenberg_id") |>
+    filter(gutenberg_id != 2240) # Removing a duplicate
+```
+
+
+# Cosine similarity
+## From text to DTM
+Exercise: Modify the pipeline to filter out words that occur less than 5 times across the corpus. Inspect the object first.
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+plays.tidy <- plays |> unnest_tokens(word, text) |>
+  anti_join(stop_words) |>
+  count(title, word) |>
+  bind_tf_idf(word, title, n)
+```
+
+# Cosine similarity
+## From text to DTM
+Inspect `plays.tidy`. Which words get the highest IDF scores? 
+```{r, echo=FALSE, eval = FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+
+```
+
+
+# Cosine similarity
+## Creating the term-frequency matrix
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+DTM <- plays.tidy |> cast_dtm(title, word, tf)
+DTMd <- as.matrix(DTM)
+```
+
+# Cosine similarity
+## Normalizing document vectors
+We can simplify the cosine similarity calculation if we normalize each document vector by its length (the denominator in the above calculation.)
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+normalize <- function(v) {
+  return (v/sqrt(v %*% v))
+}
+
+# Normalizing every row (document) in the matrix
+for (i in 1:dim(DTMd)[1]) {
+  DTMd[i,] <- normalize(DTMd[i,])
+}
+```
+
+# Cosine similarity
+## Calculating cosine similarity using matrix multiplication
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+sims <- DTMd %*% t(DTMd)
+```
+
+# Cosine similarity
+```{r, echo=FALSE, out.height="75%", fig.align="center", tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(reshape2)
+library(viridis)
+data <- melt(sims)
+colnames(data) <- c("play_i", "play_j", "similarity")
+
+ggplot(data, aes(x = play_i, y = play_j, fill = similarity)) + geom_tile() +
+  scale_fill_viridis_c(option='plasma')+
+  theme_minimal() + ylim(rev(levels(data$play_i))) + xlim(levels(data$play_j))
+```
+
+# Cosine similarity
+```{r, echo=FALSE, out.height="75%", fig.align="center", tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+sims2 <- sims
+diag(sims2) <- NA # Set diagonal values to NA
+
+data <- melt(sims2)
+colnames(data) <- c("play_i", "play_j", "similarity")
+
+ggplot(data, aes(x = play_j, y = play_i, fill = similarity)) + geom_tile() +
+  scale_fill_viridis_c(option='plasma') +
+  theme_minimal()  + labs (x = "", y = "", title = "Cosine similarity of Shakespeare's plays") + theme(axis.text.x = element_text(angle = 45, hjust = 1)) + ylim(rev(levels(data$play_i))) + xlim(levels(data$play_j))
+```
+
+
+# Next week
+- Word embeddings and computational semantics
