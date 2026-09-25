@@ -641,12 +641,9 @@ predict(model, vector, type = "nearest", top_n = 10)
 
 # Word embeddings
 ## Loading a pre-trained embedding
-We will use 50-dimensional GloVe vectors trained on six billion tokens from Wikipedia and Gigaword. The model contains vectors for 400,000 terms and is 163 MB uncompressed.
-
-\footnotesize Model source: \url{https://github.com/piskvorky/gensim-data}
-
-Package documentation: \url{https://github.com/bnosac/word2vec}
+Loading 50-dimensional GloVe vectors trained on six billion tokens from Wikipedia and Gigaword.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
+source("../code/download_glove.R") # Downloads the file if missing
 glove <- read.wordvectors(
   file = "../data/glove-wiki-gigaword-50",
   type = "txt", normalize = TRUE
