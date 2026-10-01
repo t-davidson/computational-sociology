@@ -239,10 +239,9 @@ Loading a corpus of State of the Union speeches from 1900-2020. Each row represe
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 library(tidyverse)
 library(tidytext)
-set.seed(89540233)
+set.seed(27516)
 
-data <- as_tibble(read_csv("../data/sotu_texts.csv")) |>
-    sample_frac(0.5) # Downsampling by 50%
+data <- as_tibble(read_csv("../data/sotu_texts.csv"))
 data$index <- 1:dim(data)[1]
 ```
 
@@ -283,16 +282,17 @@ dim(DTM)
 
 # Latent Dirichlet Allocation
 ## Training an LDA model using `topicmodels`
-We can pass the DTM to the `LDA` function to train a topic model with 21 topics.
+We can pass the DTM to the `LDA` function to train a topic model with 27 topics.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 #install.packages("topicmodels")
 library(topicmodels)
-topic_model<- LDA(DTM, k=21,
-                  control = list(seed = 10980,
-                                 estimate.alpha = FALSE,
+topic_model<- LDA(DTM, k=27, method = "Gibbs",
+                  control = list(seed = 27516,
+                                 burnin = 100,
+                                 iter = 500,
                                  alpha = 0.1))
 ```
-\tiny Note: By default `LDA` also estimates $\alpha$, the Dirichlet parameter for the topic proportions. On these short paragraphs the estimate was large enough to make every document's topic proportions nearly uniform, so $\alpha$ is fixed at 0.1 here.
+\tiny Note: By default `LDA` also estimates $\alpha$, the Dirichlet parameter for the topic proportions. $\alpha$ is fixed at 0.1 otherwise proportions estimated incorrectly for short documents.
 
 
 \tiny LDA analysis based on code from https://www.tidytextmining.com/topicmodeling.html and https://cbail.github.io/SICSS_Topic_Modeling.html.
@@ -301,8 +301,8 @@ topic_model<- LDA(DTM, k=21,
 # Optional
 Run the second line to load a pre-fitted model.
 ```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
-#save.image(file = "../data/sotu_lda.RData")
-load(file = "../data/sotu_lda.RData")
+save.image(file = "../data/sotu_lda.RData")
+#load(file = "../data/sotu_lda.RData")
 ```
 
 # Latent Dirichlet Allocation
@@ -322,8 +322,6 @@ topics |> filter(term == "economy") |>
 # Latent Dirichlet Allocation
 ## Analyzing topics
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-library(ggplot2)
-
 top_terms <-
   topics |>
   group_by(topic) |>
@@ -331,7 +329,7 @@ top_terms <-
   ungroup() |>
   arrange(topic, -beta)
 
-top_terms |> filter(topic <= 7) |>
+top_terms |> filter(topic <= 9) |>
   mutate(term = reorder_within(term, beta, topic)) |>
   ggplot(aes(beta, term, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
@@ -342,7 +340,7 @@ top_terms |> filter(topic <= 7) |>
 # Latent Dirichlet Allocation
 ## Analyzing topics
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-top_terms |> filter(topic > 7 & topic <= 14) |>
+top_terms |> filter(topic > 9 & topic <= 18) |>
   mutate(term = reorder_within(term, beta, topic)) |>
   ggplot(aes(beta, term, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
@@ -353,7 +351,7 @@ top_terms |> filter(topic > 7 & topic <= 14) |>
 # Latent Dirichlet Allocation
 ## Analyzing topics
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-top_terms |> filter(topic > 14) |>
+top_terms |> filter(topic > 18) |>
   mutate(term = reorder_within(term, beta, topic)) |>
   ggplot(aes(beta, term, fill = factor(topic))) +
   geom_col(show.legend = FALSE) +
@@ -418,12 +416,7 @@ get_top_docs_and_words <- function(t, n_docs = 3, n_words = 10) {
 
 # Latent Dirichlet Allocation
 ## Interpreting the results
-"Producing an interpretable solution is the beginning, not the end, of an analysis. The solution
-constructs meaningful categories and generates corpus-level measures (e.g., the percentage of
-documents in which a given topic is highly represented) and document-level measures (e.g., the
-percentage of words in each document assigned to each topic) based on these categories. It
-remains for the analyst to use this information to address the analytic questions that motivated the research. The analyst must also validate the solution by demonstrating that the model is sound
-and that his or her interpretation is plausible" (DiMaggio et al. 2013: 586).
+"Producing an interpretable solution is the beginning, not the end, of an analysis. The solution constructs meaningful categories and generates corpus-level measures (e.g., the percentage of documents in which a given topic is highly represented) and document-level measures (e.g., the percentage of words in each document assigned to each topic) based on these categories. It remains for the analyst to use this information to address the analytic questions that motivated the research. The analyst must also validate the solution by demonstrating that the model is sound and that his or her interpretation is plausible" (DiMaggio et al. 2013: 586).
 
 # Latent Dirichlet Allocation
 ## Inspecting topics
@@ -562,9 +555,9 @@ plot(search.results)
 
 # Structural Topic Modeling
 ## Fitting a model
-Fitting a model with `k=60`. The `party` variable is used as a covariate for both prevalence and content. Year is used as a covariate for prevalence, where `s()` is a non-linear spline function.
+Fitting a model with `k=80`. The `party` variable is used as a covariate for both prevalence and content. Year is used as a covariate for prevalence, where `s()` is a non-linear spline function.
 ```{r, eval= FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
-K=60
+K=80
 fit <- stm(documents = output$documents, vocab = output$vocab, K=K,
            data = output$meta,
            prevalence = ~ party + s(year), # s takes a non-linear function
@@ -642,7 +635,7 @@ summary(prep)
 # Structural Topic Modeling
 ## Topic prevalence by party
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-topic.nums <- 1:60
+topic.nums <- 1:80
 plot(prep, covariate = "party", topics = topic.nums, model = fit,
      method = "difference", cov.value1 = "Republican", cov.value2 = "Democratic",
      xlab = "More Democrat ... More Republican",
