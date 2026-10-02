@@ -40,8 +40,6 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
     return(options$size)
 })
 
-# TODO: Course updates. Add homework 2 details (release date, due date, topics) if announcing this week.
-# TODO: Exercise slide. The 2024 topic-coding Google Sheet required a Rutgers login; needs a new sheet and link.
 ```
 
 # Plan
@@ -55,6 +53,14 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
 - Project proposals due today
   - Submit PDF via email
 
+# Course updates
+## Homework 2
+- Homework 2 released later today, due Wednesday, October 14
+  - Topics:
+    - Intro to NLP
+    - Word embeddings
+    - Topic modeling
+
 # {.plain}
 
 \begin{center}
@@ -66,22 +72,26 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
 # Introduction to topic modeling
 ## What is topic modeling?
 - A corpus of documents contains a set of latent themes or "topics"
-- A topic model is a probabilistic algorithm is designed to inductively create a "model" of these latent topics
+- A topic model is a probabilistic algorithm designed to inductively create a "model" of these latent topics
 - This gives us an overview of the content of an entire corpus and the ability to characterize individual documents
 
 # Introduction to topic modeling
-## Topic modeling and sociology (Mohr and Bogdanov 2013)
+## Topic modeling and sociology
 - Topic modeling is a "lens" to allow reading of a corpus "in a different light and at a different scale" to traditional content analysis.
   - Often we want to conduct an automated coding of a large corpus, but it can also be helpful for a "close reading" of a smaller corpus
 
+\tiny Mohr and Bogdanov 2013
+
 # Introduction to topic modeling
-## Topic modeling and sociology (Mohr and Bogdanov 2013)
+## Topic modeling and sociology
 - The approach still requires interpretation, but produces "a fundamental shift in the locus of methodological subjectivity", "from pre-counting to post-counting" (561).
   - Traditional content analysis requires us to develop our categories of analysis before coding a corpus, whereas the interpretative phase of LDA occurs after we have trained a model
   - "topic models do not remove the scholarly or the hermeneutic work from the project of analyzing a textual corpus, topic models simply move the bulk of this labor over to the other side of the data modeling procedure."
 
+\tiny Mohr and Bogdanov 2013
+
 # Introduction to topic modeling
-## Topic modeling and sociology (DiMaggio, Nag, and Blei 2013)
+## Topic modeling and sociology
 - Topic modeling is "an inductive relational approach to the study of culture"
   - It is *inductive* because the topics are "discovered" from the text
   - It is *relational* because meaning emerges out of relationships between words
@@ -91,19 +101,25 @@ knitr::knit_hooks$set(mysize = function(before, options, envir) {
   - Polysemy
   - Heteroglossia
 
+\tiny DiMaggio, Nag, and Blei 2013
+
 # Introduction to topic modeling
-## Topic modeling and sociology (DiMaggio, Nag, and Blei 2013)
+## Topic modeling and sociology
 "Topic modeling will not be a panacea for sociologists of culture. But it is a powerful tool for
 helping us understand and explore large archives of texts. Used properly by subject-area experts
 with appropriate validation, topic models can be valuable complements to other interpretive
 approaches, offering new ways to operationalize key concepts and to make sense of large textual
 corpora."
 
+\tiny DiMaggio, Nag, and Blei 2013
+
 # Introduction to topic modeling
-## Topic modeling and sociology (Karell and Freedman 2019)
+## Topic modeling and sociology
 - Karell and Freedman use topic modeling to study the rhetoric of militant groups in Afghanistan
   - They characterize the process as *computational abduction* and describe "a recursive movement between the computational results, a close reading of selected corpus material, further literature on social movements, and additional theories that engendered a novel conceptualization of radical rhetorics."
   - The topic model results are used to characterize the discourse of different militant groups.
+  
+\tiny Karell and Freedman 2019
 
 # Rhetorics of radicalism
 ```{r, out.height="75%", fig.align="center"}
@@ -126,11 +142,14 @@ include_graphics('../../../img/karell_reg.png')
 ```
 
 # Introduction to topic modeling
-## Social movement framing (Davidson 2024)
-- In a recent *Mobilization* paper, I use topic modeling to analyze discourse of Britain First (BF), a far-right organization in the UK
-- Topic model trained using Facebook posts by BF
-    - Topics grouped into broader metatopics
-- Results in regression analysis to measure framing
+## Social movement framing
+- I used topic modeling to analyze discourse by Britain First (BF), a far-right organization in the UK
+- Topic model trained using Facebook posts
+    - Topics grouped into broader "metatopics"
+- Topic distributions as outcomes to measure effect of framing on audience engagement
+
+\tiny Davidson, Thomas. 2024. “Audience Engagement and the Dynamics of Online Activism: Far-Right Mobilization on Facebook.” *Mobilization: An International Quarterly* 28 (4): 445–70.
+
 
 # Social movement framing
 ```{r, out.height="75%", fig.align="center"}
@@ -170,29 +189,29 @@ include_graphics('../../../img/bf_topics3.png')
     - The words "football" and "goal" have a high probability
     - The words "literary" and "helicopter" have a low probability
   - This topic can be represented as a distribution over all words in the vocabulary
-    - $Topic\ _k = [ football : 0.34, goal : 0.23, ..., literary : 0.0001, helicopter: 0.0002, ...]$
+    - $Topic_k = [ football : 0.34, goal : 0.23, ..., literary : 0.0001, helicopter: 0.0002, ...]$
 
 # Latent Dirichlet Allocation
 ## Intuition
 - A **document** is a distribution over topics
   - *All* documents contain *all* topics, but in different proportions
 - Let's say we take an article about a new player a football team hired and look at the topics based on the newspaper model:
-  - The highest probability topic might be *Sports*, but the article also discusses contract and the position of the player in the labor market
+  - The highest probability topic might be *Sports*, but the article also discusses the contract and the position of the player in the labor market
     - Thus the document may also contain the topics *Finance* and *Labor*.
-  - The article is irrelevant to other issues in discussed in newspapers, so has a low probability of containing the topic *national security* or *arts*.
+  - The article is irrelevant to other issues discussed in newspapers, so has a low probability of containing the topic *national security* or *arts*.
   - $Document_d = [ Sports : 0.63, Finance : 0.25, Labor : 0.12, ..., National\ security : 0.001, Arts: 0.002, ...]$
 
 # Latent Dirichlet Allocation
 ```{r, out.width="80%", fig.align="center"}
 include_graphics('../../../img/blei_genetic.png')
 ```
-\tiny Blei, David M. 2012. “Probabilistic Topic Models.” Communications of the ACM 55 (4): 77. https://doi.org/10.1145/2133806.2133826.
+\tiny Blei 2012
 
 # Latent Dirichlet Allocation
 ```{r, out.width="80%", fig.align="center"}
 include_graphics('../../../img/blei_topics.png')
 ```
-\tiny Blei, David M. 2012. “Probabilistic Topic Models.” Communications of the ACM 55 (4): 77. https://doi.org/10.1145/2133806.2133826.
+\tiny Blei 2012
 
 # Latent Dirichlet Allocation
 ## Intuition
@@ -230,16 +249,16 @@ $$
 - We use this formula to compute the *posterior distribution* of $\beta_{1:K}$ and $\theta_{1: D}$
 - This is a computationally-intensive process and requires some probabilistic short-cuts
   - *Variational* methods find an approximation of the posterior distribution that fits well\*
+  - Sampling methods such as *Gibbs sampling* draw from the posterior (used in the code below)
 
 \* \tiny Note: This approach is an approximation of the posterior obtained by a more computationally-intensive sampling procedure like Hamiltonian Monte Carlo
 
 # Latent Dirichlet Allocation
 ## Loading the corpus
-Loading a corpus of State of the Union speeches from 1900-2020. Each row represents a paragraph from a speech. Half of the 13,740 paragraphs are sampled at random, otherwise models take too long to run!
+Loading a corpus of State of the Union speeches from 1900-2020. Each row represents a paragraph from a speech.
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 library(tidyverse)
 library(tidytext)
-set.seed(27516)
 
 data <- as_tibble(read_csv("../data/sotu_texts.csv"))
 data$index <- 1:dim(data)[1]
@@ -283,7 +302,7 @@ dim(DTM)
 # Latent Dirichlet Allocation
 ## Training an LDA model using `topicmodels`
 We can pass the DTM to the `LDA` function to train a topic model with 27 topics.
-```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
 #install.packages("topicmodels")
 library(topicmodels)
 topic_model<- LDA(DTM, k=27, method = "Gibbs",
@@ -292,7 +311,7 @@ topic_model<- LDA(DTM, k=27, method = "Gibbs",
                                  iter = 500,
                                  alpha = 0.1))
 ```
-\tiny Note: By default `LDA` also estimates $\alpha$, the Dirichlet parameter for the topic proportions. $\alpha$ is fixed at 0.1 otherwise proportions estimated incorrectly for short documents.
+\tiny Note: $\alpha$ is the Dirichlet parameter for the topic proportions. It defaults to $50/k$; it is fixed at 0.1 here, otherwise proportions are estimated incorrectly for short documents.
 
 
 \tiny LDA analysis based on code from https://www.tidytextmining.com/topicmodeling.html and https://cbail.github.io/SICSS_Topic_Modeling.html.
@@ -300,20 +319,21 @@ topic_model<- LDA(DTM, k=27, method = "Gibbs",
 
 # Optional
 Run the second line to load a pre-fitted model.
-```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
-save.image(file = "../data/sotu_lda.RData")
-#load(file = "../data/sotu_lda.RData")
+```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+#save.image(file = "../data/sotu_lda.RData")
+load(file = "../data/sotu_lda.RData")
 ```
 
 # Latent Dirichlet Allocation
 ## Analyzing topics
-We can use the `tidy` function to pull the beta matrix from the model. Each row corresponds to the probability of word $w$ in topic $k$. In this case we can see the probabilities of the term "economy".
+We can use the `tidy` function to pull the beta matrix from the model. Each row corresponds to the probability of word $w$ in topic $k$.
 ```{r, echo=TRUE, mysize=TRUE, size='\\footnotesize'}
 topics <- tidy(topic_model, matrix = "beta")
 ```
 
 # Latent Dirichlet Allocation
 ## Analyzing topics
+In this case we can see the probabilities of the term "economy".
 ```{r, echo=TRUE, mysize=TRUE, size='\\scriptsize'}
 topics |> filter(term == "economy") |>
     dplyr::select(topic, beta)
@@ -427,7 +447,7 @@ get_top_docs_and_words(18, n_docs = 3)
 # Latent Dirichlet Allocation
 ## Exercise
 - Run code above to evaluate your assigned topics
-- Add your findings to the shared Google Sheet: TODO
+- Add your findings to the shared Google Sheet: \url{https://tinyurl.com/sotutopics2026}
 
 # Latent Dirichlet Allocation
 ## Validation
@@ -442,7 +462,7 @@ get_top_docs_and_words(18, n_docs = 3)
 ## How does it differ from NLP approaches covered so far?
 - Document representation
   -  A document is represented as a probability distribution over topics, not just a bag-of-words or an embedding
-    - Closest approach is *latent semantic analysis*, where a document is a set of weights over latent dimensions. Indeed, LDA was developed as an extension of LSA.
+    - Closest approach is *latent semantic analysis*, where a document is a set of weights over latent dimensions. Indeed, LDA was developed as an extension of probabilistic LSA.
 - Document retrieval
   - We can select documents by topic content rather than keywords
   - Words can be shared by multiple topics, unlike conventional keyword detection
@@ -484,19 +504,21 @@ get_top_docs_and_words(18, n_docs = 3)
 # Structural Topic Modeling
 ## Topic content
 - Content refers to the way different topics are discussed
-    - Different groups to use different kinds of language to refer to the same topic
+    - Different groups use different kinds of language to refer to the same topic
 
 # Structural Topic Modeling
 ## Analyzing open-ended survey responses using an STM
 ```{r, out.width="85%", fig.align="center"}
 include_graphics('../../../img/roberts_treatment.png')
 ```
+\tiny Roberts et al. 2014
 
 # Structural Topic Modeling
 ## Analyzing open-ended survey responses using an STM
 ```{r, out.height="65%", fig.align="center"}
 include_graphics('../../../img/roberts_party_id.png')
 ```
+\tiny Roberts et al. 2014
 
 # Structural Topic Modeling
 ## Selecting metadata
@@ -509,7 +531,7 @@ head(meta)
 # Structural Topic Modeling
 ## Preprocessing
 The `stm` library has its own set of functions for processing data. `textProcessor` takes a corpus, plus metadata, and conducts pre-processing tasks. `prepDocuments` then converts the documents into the appropriate format.
-```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', results='hide'}
+```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', results='hide'}
 library(stm)
 # install.packages("stm")
 processed.docs <- textProcessor(data$paragraph,
@@ -523,7 +545,7 @@ output <- prepDocuments(processed.docs$documents,
 
 # Structural Topic Modeling
 ## Storing/loading data
-I stored the image of this workspace and uploaded it to Github. You can load the trained model and all other files in this script by running this line.
+I stored the image of this workspace and uploaded it to GitHub. You can load the trained model and all other files in this script by running this line.
 ```{r, echo=TRUE, tidy=FALSE}
 library(stm)
 load(file = "../data/sotu_stm.RData")
@@ -588,16 +610,22 @@ plot(fit, type = "summary", topics =41:60)
 ```
 
 # Structural Topic Modeling
+## Inspecting topic proportions
+```{r, echo=TRUE, tidy=FALSE, out.height="62%", fig.align="center", fig.width=6, fig.height=4.5}
+plot(fit, type = "summary", topics = 61:80)
+```
+
+# Structural Topic Modeling
 ## Inspecting topic terms
 ```{r, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
-labelTopics(fit, topics=55, n=10)
+labelTopics(fit, topics=16, n=10)
 ```
 
 # Structural Topic Modeling
 ## Inspecting documents
-We can use `findThoughts` to identify documents with a high weight in a given topic. Note that the original texts column does not work, I have to use the index for the metadata file to identify relevant columns.
+We can use `findThoughts` to identify documents with a high weight in a given topic. The texts must match the documents kept by `prepDocuments`; the row names of `output$meta` record which paragraphs were kept.
 ```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
-t=55
+t=16
 thoughts <- findThoughts(fit,
     texts = as.character(data[as.numeric(rownames(output$meta)),]$paragraph),
     topic=t, n = 5)
@@ -607,7 +635,7 @@ for (i in unlist(thoughts$docs)) {print(i)}
 # Structural Topic Modeling
 ## Inspecting documents
 ```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
-t=21
+t=48
 thoughts <- findThoughts(fit,
     texts = as.character(data[as.numeric(rownames(output$meta)),]$paragraph),
     topic=t, n = 5)
@@ -617,7 +645,7 @@ for (i in unlist(thoughts$docs)) {print(i)}
 # Structural Topic Modeling
 ## Inspecting documents
 ```{r, eval=FALSE, echo=TRUE, tidy=FALSE, mysize=TRUE, size='\\scriptsize'}
-t=3
+t=77
 thoughts <- findThoughts(fit,
     texts = as.character(data[as.numeric(rownames(output$meta)),]$paragraph),
     topic=t, n = 5)
@@ -634,7 +662,7 @@ summary(prep)
 
 # Structural Topic Modeling
 ## Topic prevalence by party
-```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
+```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="74%", fig.align="center", fig.width=8, fig.height=10}
 topic.nums <- 1:80
 plot(prep, covariate = "party", topics = topic.nums, model = fit,
      method = "difference", cov.value1 = "Republican", cov.value2 = "Democratic",
@@ -646,8 +674,8 @@ plot(prep, covariate = "party", topics = topic.nums, model = fit,
 ## Prevalence over time
 We can use the `year` variable to track how prevalence changes over time.
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="65%", fig.align="center"}
-plot(prep, "year", method = "continuous", topics = c(55, 21, 3), model = fit, xlab = "Year",
-     labeltype = "custom", custom.labels = c("Farming", "Schooling", "Geopolitics"))
+plot(prep, "year", method = "continuous", topics = c(16, 48, 77), model = fit, xlab = "Year",
+     labeltype = "custom", custom.labels = c("Energy", "Education", "Cold War"))
 ```
 
 # Structural Topic Modeling
@@ -663,20 +691,20 @@ plot(prep, "year", method = "continuous", topics = c(), model = fit,
 ## Prevalence over time
 We can use the `year` variable to track how prevalence changes over time.
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="65%", fig.align="center"}
-plot(prep, "year", method = "continuous", topics = c(12, 45), model = fit, xlab = "Year",
-     labeltype = "custom", custom.labels = c("Vietnam", "Middle East"))
+plot(prep, "year", method = "continuous", topics = c(44, 76, 79), model = fit, xlab = "Year",
+     labeltype = "custom", custom.labels = c("World War II", "Middle East", "War on Terror"))
 ```
 
 # Structural Topic Modeling
 ## Content by party
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-plot(fit, type="perspectives", topics=21)
+plot(fit, type="perspectives", topics=48)
 ```
 
 # Structural Topic Modeling
 ## Content by party
 ```{r, echo=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize', out.height="70%", fig.align="center"}
-plot(fit, type="perspectives", topics=3)
+plot(fit, type="perspectives", topics=77)
 ```
 
 
@@ -689,9 +717,9 @@ plot(fit, type="perspectives", topics=3)
 
 # Alternative approaches
 - Several alternatives to STM that may be worth exploring
-    - BERT topic models, use embeddings from large language models to produce similar kinds of analyses \begin{tiny} (Egger and Yu 2022)
+    - BERT topic models use embeddings from large language models to produce similar kinds of analyses \begin{tiny} (Grootendorst 2022)
  \end{tiny}
-    - Key word topic models allow topics to be seeded using keywords \begin{tiny} (Eshima, Imai, and Sasaki 2023)
+    - Keyword topic models allow topics to be seeded using keywords \begin{tiny} (Eshima, Imai, and Sasaki 2023)
  \end{tiny}
     - Biterm topic models are more suitable for very short texts like social media posts \begin{tiny} (see Greve et al. 2022) \end{tiny}
 
@@ -699,7 +727,7 @@ plot(fit, type="perspectives", topics=3)
 - Topic modeling is an inductive approach for the summary of large text corpora
   - Analysis of topic models involves the interpretation of topics
   - A key challenge is selecting an appropriate number of topics
-- LDA algorithm summarize as corpus into K topics
+- The LDA algorithm summarizes a corpus into K topics
   - Each document is composed of a mixture of topics
   - Each topic is a mixture of words
 - STM improves on LDA by allowing topic prevalence and content to vary by covariates
