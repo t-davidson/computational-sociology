@@ -1,0 +1,279 @@
+model,organization,date,compute,open_weights,confidence
+DeepSeek V4.1 Flash,DeepSeek,2026-09-09,432e22,Yes,Likely
+GPT-6 Astra,OpenAI,2026-09-03,9400000000000001e11,No,Likely
+GLM-5.3-Flash,Z.ai (Zhipu AI),2026-08-20,324e22,Yes,Likely
+Motif-3,Motif Technologies,2026-08-07,10999999999999999e8,Yes,Confident
+K-EXAONE 2.0,LG AI Research,2026-07-31,355e22,Yes,Confident
+A.X K2,SK Telecom,2026-07-29,18e23,Yes,Confident
+Kimi K3,Moonshot,2026-07-16,20001e21,Yes,Speculative
+Inkling,Thinking Machines,2026-07-15,11e24,Yes,Likely
+LongCat-2.0,Meituan Inc,2026-06-29,1008e22,Yes,Likely
+Solar Open2 250B,Upstage,2026-06-28,105e22,Yes,Likely
+Nemotron 3 Ultra,Nvidia,2026-06-04,66e23,Yes,Likely
+Composer 2.5,Cursor,2026-05-18,387e23,No,Likely
+DeepSeek-V4-Pro,DeepSeek,2026-04-24,9702e21,Yes,Likely
+DeepSeek-V4-Flash,DeepSeek,2026-04-24,2496e21,Yes,Likely
+MiMo-V2.5-Pro,Xiaomi Corp,2026-04-23,6804e21,Yes,Likely
+EXAONE 4.5,LG AI Research,2026-04-09,385e22,Yes,Confident
+MolmoAct 2,"Allen Institute for AI,University of Washington,National University of Singapore,University of Pennsylvania,Johns Hopkins University,Amazon,Cortex AI",2026-04-05,11e21,Yes,Likely
+Composer 2,Cursor,2026-03-19,232e23,No,Confident
+GLM-5,Z.ai (Zhipu AI),2026-02-12,684e22,Yes,Likely
+Kimi K2.5,Moonshot,2026-02-02,58e23,Yes,Likely
+Solar Open 100B,Upstage,2025-12-31,13999999999999998e8,Yes,Confident
+K-EXAONE,LG AI Research,2025-12-31,152e22,Yes,Confident
+GLM-4.7,Z.ai (Zhipu AI),2025-12-22,442e22,Yes,Likely
+Nemotron 3-Nano-30B-A3B,Nvidia,2025-12-15,48e22,Yes,Likely
+Olmo 3,Allen Institute for AI,2025-11-20,10999999999999999e8,Yes,Confident
+Kimi K2 Thinking,Moonshot,2025-11-06,41999999999999997e8,Yes,Likely
+Ling-1T,Ant Group,2025-10-10,6000001e18,Yes,Confident
+GLM-4.6,"Z.ai (Zhipu AI),Tsinghua University",2025-09-30,442e22,Yes,Likely
+Qwen3-Omni-30B-A3B,Alibaba,2025-09-22,36e21,Yes,Confident
+AgentFounder-30B,Alibaba,2025-09-16,65367e19,Yes,Confident
+Qwen3-Max,Alibaba,2025-09-05,1512e22,No,Speculative
+LongCat-Flash,Meituan Inc,2025-09-01,3726e21,Yes,Likely
+GPT-5,OpenAI,2025-08-07,66e24,No,Speculative
+gpt-oss-120b,OpenAI,2025-08-05,494e22,Yes,Confident
+gpt-oss-20b,OpenAI,2025-08-05,549e21,Yes,Confident
+GLM-4.5,"Z.ai (Zhipu AI),Tsinghua University",2025-07-28,442e22,Yes,Confident
+Qwen3-235B-A22B-Thinking (Jul 2025),Alibaba,2025-07-25,4752e21,Yes,Likely
+Qwen3-235B-A22B (Jul 2025),Alibaba,2025-07-25,4752e21,Yes,Likely
+Qwen3-Coder-480B-A35B,Alibaba,2025-07-22,1575e21,Yes,Confident
+EXAONE 4.0 (32B),LG AI Research,2025-07-15,269000000000001e10,Yes,Confident
+Kimi K2,Moonshot,2025-07-11,2976e21,Yes,Confident
+Grok 4,xAI,2025-07-09,50000000000001e13,No,Speculative
+DeepSeek-R1 (May 2025),DeepSeek,2025-05-28,4020010000000001e9,Yes,Confident
+Seed1.5-VL,ByteDance,2025-05-11,1388556e18,No,Confident
+Qwen3-235B-A22B,Alibaba,2025-04-29,4752e21,Yes,Likely
+Pangu Ultra,Huawei,2025-04-10,10692e21,No,Confident
+Llama 4 Scout,Meta AI,2025-04-05,408e22,Yes,Likely
+Llama 4 Maverick,Meta AI,2025-04-05,2244000000001e12,Yes,Likely
+Llama 4 Behemoth (preview),Meta AI,2025-04-05,518400000000001e11,No,Likely
+DeepSeek-V3 (Mar 2025),DeepSeek,2025-03-24,33e23,Yes,Confident
+EXAONE Deep 32B,LG AI Research,2025-03-16,126e22,Yes,Confident
+Hunyuan-TurboS,Tencent,2025-03-11,54e23,No,Confident
+QwQ-32B,Alibaba,2025-03-06,351e22,Yes,Speculative
+GPT-4.5,OpenAI,2025-02-27,38e25,No,Likely
+Claude 3.7 Sonnet,Anthropic,2025-02-24,33499999999999998e9,No,Likely
+Grok 3,xAI,2025-02-17,35000000000000006e10,No,Likely
+Eagle 2,"Nvidia,Nanjing University,Tsinghua University,Hong Kong Polytechnic University,Johns Hopkins University,New York University (NYU)",2025-01-20,47156e18,Yes,Confident
+DeepSeek-R1,DeepSeek,2025-01-20,34999999999999997e8,Yes,Confident
+Eurus-2-7B-PRIME,"Tsinghua University,University of Illinois Urbana-Champaign (UIUC),Shanghai AI Lab,Peking University,Shanghai Jiao Tong University,CUHK Shenzhen Research Institute",2025-01-02,401915904e12,Yes,Speculative
+DeepSeek-V3,DeepSeek,2024-12-24,33e23,Yes,Confident
+EXAONE 3.5 32B,LG AI Research,2024-12-09,125e22,Yes,Confident
+Llama 3.3 70B,Meta AI,2024-12-06,68649768e17,Yes,Confident
+Amazon Nova Pro,Amazon,2024-12-03,6000010000000001e9,No,Speculative
+Hunyuan-Large,Tencent,2024-11-06,349237e19,Yes,Confident
+Doubao-pro,ByteDance,2024-10-28,2505e22,No,Likely
+NVLM-X 72B,Nvidia,2024-10-22,30398181e17,No,Likely
+NVLM-H 72B,Nvidia,2024-10-22,302e22,No,Likely
+NVLM-D 72B,Nvidia,2024-10-22,302e22,Yes,Confident
+Yi-Lightning,01.AI,2024-10-16,15e23,No,Confident
+Llama-3.1-Nemotron-70B-Instruct,"Nvidia,Meta AI",2024-10-12,7929e21,Yes,Confident
+Llama 3.2 11B,Meta AI,2024-09-24,579e21,Yes,Confident
+Telechat2-115B,China Telecom,2024-09-20,6899999999999999e9,Yes,Confident
+Qwen2.5-72B,Alibaba,2024-09-19,78e23,Yes,Confident
+Qwen2.5 Instruct (72B),Alibaba,2024-09-19,78516e20,Yes,Confident
+Qwen2.5-32B,Alibaba,2024-09-17,351e22,Yes,Confident
+DeepSeek-V2.5,DeepSeek,2024-09-06,17892e20,Yes,Confident
+Grok-2,xAI,2024-08-13,29599999999999996e9,No,Confident
+LLaVA-OV-72B,"ByteDance,Nanyang Technological University,Chinese University of Hong Kong (CUHK),Hong Kong University of Science and Technology (HKUST)",2024-08-06,3036551985824e12,Yes,Confident
+AFM-server,Apple,2024-07-29,43e23,No,Likely
+AFM-on-device,Apple,2024-07-29,45126e19,No,Confident
+Llama 3.1-405B,Meta AI,2024-07-23,38e24,Yes,Confident
+Claude 3.5 Sonnet,Anthropic,2024-06-20,2700000000000001e10,No,Speculative
+DeepSeek-Coder-V2 236B,DeepSeek,2024-06-17,12852e20,Yes,Confident
+Nemotron-4 340B,Nvidia,2024-06-14,17999999999999999e9,Yes,Confident
+OpenVLA,"Stanford University,University of California (UC) Berkeley,Toyota Research Institute,Google DeepMind,Massachusetts Institute of Technology (MIT),Physical Intelligence",2024-06-13,11e22,Yes,Confident
+Qwen2-72B,Alibaba,2024-06-07,302e22,Yes,Confident
+ALLaM adapted 70B,Saudi Data and Artificial Intelligence Authority,2024-05-21,1062e21,No,Confident
+Yi-Large,01.AI,2024-05-13,18e23,No,Speculative
+VILA1.5-13B,"Nvidia,Massachusetts Institute of Technology (MIT)",2024-05-03,23003136e14,Yes,Confident
+Llama 3-70B,Meta AI,2024-04-18,7861e21,Yes,Confident
+Reka Core,Reka AI,2024-04-15,8400010000000001e9,No,Speculative
+DBRX,Databricks,2024-03-27,26e23,Yes,Confident
+MM1-30B,Apple,2024-03-14,486e21,No,Likely
+Inflection-2.5,Inflection AI,2024-03-07,8000001e18,No,Likely
+Aramco Metabrain AI,Saudi Aramco,2024-03-04,105e23,No,Likely
+MegaScale (Production),"ByteDance,Peking University",2024-02-23,39e23,No,Speculative
+Qwen1.5-72B,Alibaba,2024-02-04,13e23,Yes,Confident
+GQA-8-XXL,Google Research,2023-12-23,34912896e15,No,Confident
+nekomata-14b,rinna,2023-12-21,25562e19,Yes,Confident
+FunSearch,Google DeepMind,2023-12-14,387e21,Yes,Speculative
+CogAgent,"Tsinghua University,Z.ai (Zhipu AI)",2023-12-14,6707e19,Yes,Likely
+VILA-13B,"Nvidia,Massachusetts Institute of Technology (MIT)",2023-12-12,23003136e14,Yes,Confident
+Mixtral 8x7B,Mistral AI,2023-12-11,774e21,Yes,Speculative
+Llama Guard,Meta AI,2023-12-07,16e22,Yes,Confident
+Gemini 1.0 Ultra,Google DeepMind,2023-12-06,50000000001e15,No,Speculative
+Qwen-72B,Alibaba,2023-11-30,13e23,Yes,Confident
+Inflection-2,Inflection AI,2023-11-22,1001e22,No,Confident
+Nemotron-3-8B,Nvidia,2023-11-15,18e22,Yes,Confident
+Volcano 13B,"Korea University,Korea Advanced Institute of Science and Technology (KAIST),LG",2023-11-13,456e20,Yes,Likely
+SPHINX (Llama 2 13B),"Shanghai AI Lab,Chinese University of Hong Kong (CUHK),ShanghaiTech University",2023-11-13,304e20,Yes,Likely
+RoFormer,Zhuiyi Technology,2023-11-08,2162688e12,No,Confident
+CogVLM-17B,"Tsinghua University,Z.ai (Zhipu AI),Beihang University",2023-11-06,6331e19,Yes,Confident
+LLaVA 1.5,"University of Wisconsin Madison,Microsoft Research",2023-11-05,7807e19,Yes,Confident
+Grok-1,xAI,2023-11-04,290000000001e13,Yes,Likely
+Yi-34B,01.AI,2023-11-02,61e22,Yes,Confident
+Skywork-13B,Kunlun Inc.,2023-10-30,25e22,Yes,Confident
+ChatGLM3-6B,Z.ai (Zhipu AI),2023-10-27,504e20,Yes,Speculative
+CODEFUSION (Python),"Microsoft,Microsoft Research",2023-10-26,792e16,No,Confident
+FinGPT-13B,"University of California Los Angeles (UCLA),Columbia University,New York University (NYU)",2023-10-07,16e22,Yes,Likely
+Amazon Titan,Amazon,2023-09-28,47999999999999996e8,No,Likely
+Falcon-180B,Technology Innovation Institute,2023-09-06,376e22,Yes,Confident
+Jais,"Cerebras Systems,Mohamed bin Zayed University of Artificial Intelligence (MBZUAI),Inception G42",2023-08-29,48946763e15,Yes,Confident
+Llama 2-70B,Meta AI,2023-07-18,81e22,Yes,Confident
+Llama 2-7B,Meta AI,2023-07-18,8.3999999999999992e+22,Yes,Confident
+Claude 2,Anthropic,2023-07-11,3866e21,No,Speculative
+InternLM,"Shanghai AI Lab,SenseTime",2023-07-06,9984e20,No,Confident
+GPT-4 (Jun 2023),OpenAI,2023-06-13,21e24,No,Likely
+PaLI-X,Google Research,2023-05-29,5.6000000000000003e+23,No,Likely
+ONE-PEACE,"Alibaba,Huazhong University of Science and Technology",2023-05-18,18e19,Yes,Speculative
+InstructBLIP,"Salesforce Research,Hong Kong University of Science and Technology (HKUST),Nanyang Technological University",2023-05-11,194e18,Yes,Confident
+PaLM 2,Google,2023-05-10,734e22,No,Likely
+StarCoder,"Hugging Face,ServiceNow,Northeastern University,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),Carnegie Mellon University (CMU),Johns Hopkins University,Leipzig University,ScaDS.AI,Queen Mary University of London,Roblox,Sea AI Lab,Technion - Israel Institute of Technology,Monash University,CSIRO,Data61,McGill University,Saama,University of British Columbia (UBC),Massachusetts Institute of Technology (MIT),Technical University of Munich,IBM,University of Vermont,UnfoldML,SAP,University of Notre Dame,Columbia University,New York University (NYU),University of Allahabad,Discover Dollar,Toloka,Telefonica,Stanford University,Weizmann Institute of Science,Alan Turing Institute,Wellesley College,EleutherAI,Forschungszentrum Julich",2023-05-09,846e20,Yes,Confident
+LLaVA,"University of Wisconsin Madison,Microsoft Research,Columbia University",2023-04-17,78049e18,Yes,Confident
+Incoder-6.7B,"Facebook AI Research,University of Washington,University of California (UC) Berkeley,Carnegie Mellon University (CMU),Toyota Technological Institute at Chicago",2023-04-09,300001e16,Yes,Confident
+BloombergGPT,"Bloomberg,Johns Hopkins University",2023-03-30,236e21,No,Confident
+PanGu-Σ,Huawei Noah's Ark Lab,2023-03-20,467e21,No,Confident
+GPT-4 (Mar 2023),OpenAI,2023-03-15,21e24,No,Likely
+Falcon-40B,Technology Innovation Institute,2023-03-15,24e22,Yes,Confident
+LLaMA-65B,Meta AI,2023-02-24,55e22,Yes,Confident
+BLIP-2 (Q-Former),Salesforce Research,2023-01-30,120000000001e10,Yes,Confident
+Hybrid H3-2.7B,"Stanford University,University at Buffalo",2022-12-28,648e19,Yes,Likely
+Vega v2,"Wuhan University,JD Explore Academy,Shanghai AI Lab,Nanyang Technological University,Washington University in St Louis,Chongqing University of Posts and Telecommunications,University of Sydney",2022-12-04,7.7599999999999992e+22,No,Confident
+Fusion in Encoder,Samsung,2022-11-18,13e19,No,Likely
+Galactica,Meta AI,2022-11-16,324e21,Yes,Likely
+Mogrifier RLSTM (WT2),DeepMind,2022-11-03,14e16,No,Confident
+U-PaLM (540B),Google,2022-10-20,253e22,No,Confident
+Flan-PaLM 540B,Google,2022-10-20,2540000000001e12,No,Confident
+PaLI,Google,2022-09-14,169e21,No,Likely
+BEIT-3,Microsoft,2022-08-22,7e19,Yes,Likely
+BlenderBot 3,"McGill University,Meta AI,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms)",2022-08-10,43e22,Yes,Likely
+GLM-130B,Tsinghua University,2022-08-04,35490054945e13,Yes,Confident
+AlexaTM 20B,Amazon,2022-08-02,204374016e15,No,Confident
+BLOOM-176B,"Hugging Face,BigScience",2022-07-11,365664e18,Yes,Confident
+NLLB,Meta AI,2022-07-06,1751113728e13,Yes,Confident
+CodeT5-large,Salesforce,2022-07-05,272e19,Yes,Likely
+Minerva (540B),Google,2022-06-29,27415e20,No,Confident
+DITTO,"Tsinghua University,Apple,Westlake University,Chinese University of Hong Kong (CUHK)",2022-06-06,331776e13,No,Confident
+GPT-2 Medium (FlashAttention),"Stanford University,University at Buffalo",2022-05-27,89280922e13,Yes,Confident
+Gato,DeepMind,2022-05-12,402e19,No,Confident
+UL2,"Google Research,Google Brain",2022-05-10,12e22,Yes,Confident
+OPT-175B,Meta AI,2022-05-02,43e22,Yes,Confident
+Flamingo,DeepMind,2022-04-29,218972000000001e9,No,Confident
+Sparse all-MLP,Meta AI,2022-04-14,532224e15,No,Confident
+PaLM (540B),Google Research,2022-04-04,25272e20,No,Confident
+Chinchilla,DeepMind,2022-03-29,576e21,No,Confident
+"Segatron-XL large, M=384 + HCP","Microsoft Research,University of Waterloo",2022-03-21,265e17,No,Confident
+GPT-3.5 (davinci-002),OpenAI,2022-03-15,2578e21,No,Speculative
+Statement Curriculum Learning,OpenAI,2022-03-02,17901648e15,No,Likely
+PolyCoder,Carnegie Mellon University (CMU),2022-02-26,11e20,Yes,Likely
+ST-MoE,"Google,Google Brain,Google Research",2022-02-17,29e22,No,Likely
+LaMDA,Google,2022-02-10,355e21,No,Confident
+GPT-NeoX-20B,EleutherAI,2022-02-09,931627008e14,Yes,Confident
+RETRO-7B,DeepMind,2022-02-07,168e20,No,Confident
+AlphaCode,DeepMind,2022-02-02,238010000000001e9,No,Confident
+InstructGPT 175B,OpenAI,2022-01-27,319181e18,No,Confident
+ERNIE 3.0 Titan,"Baidu,Peng Cheng Laboratory",2021-12-23,10421e20,No,Confident
+XGLM-7.5B,"Meta AI,Facebook AI Research",2021-12-20,225e20,Yes,Confident
+Contriever,"Meta AI,University College London (UCL),PSL University,Université Grenoble Alpes",2021-12-16,157e18,Yes,Likely
+GLaM,Google,2021-12-13,36363112434e13,No,Confident
+Gopher (280B),DeepMind,2021-12-08,631e21,No,Confident
+NÜWA,"Microsoft Research,Peking University",2021-11-24,724598784e13,No,Confident
+CodeT5-base,"Salesforce,Nanyang Technological University",2021-11-01,156e19,Yes,Likely
+S4,Stanford University,2021-10-31,78328627e12,Yes,Likely
+base LM+GNN+kNN,"Shannon.AI,Nanjing University,Nanyang Technological University,Zhejiang University (ZJU)",2021-10-17,52587456e12,Yes,Confident
+Yuan 1.0,Inspur,2021-10-12,35380000000001e10,No,Confident
+Megatron-Turing NLG 530B,"Microsoft,Nvidia",2021-10-11,8586e20,No,Confident
+Turing ULRv5,Microsoft,2021-09-28,28983951e15,No,Confident
+PLATO-XL,Baidu,2021-09-20,9.900000000000001e+21,Yes,Confident
+HyperCLOVA 204B,NAVER,2021-09-10,20000000001e13,No,Speculative
+PermuteFormer,Peking University,2021-09-06,2775e15,No,Speculative
+FLAN 137B,Google Research,2021-09-03,2047e21,No,Confident
+XLMR-XXL,Facebook AI Research,2021-08-17,3366e19,Yes,Confident
+Zidong Taichu,"Chinese Academy of Sciences,Wuhan AI Computing Center",2021-08-11,8016e17,Yes,Confident
+Jurassic-1-Jumbo,AI21 Labs,2021-08-11,37e22,No,Confident
+Codex,OpenAI,2021-07-07,7344e19,No,Likely
+ERNIE 3.0,Baidu,2021-07-05,225e20,Yes,Confident
+Adaptive Input Transformer + RD,"Microsoft Research Asia,Soochow University",2021-06-28,858e17,No,Likely
+ALIGN,Google Research,2021-06-11,2598670000001e10,No,Confident
+DeBERTa,Microsoft,2021-06-10,2.5880000000000002e+22,Yes,Confident
+EMDR,"Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),McGill University,DeepMind",2021-06-09,191e19,Yes,Confident
+ByT5-XXL,"Google,Google Research",2021-05-28,81e21,Yes,Likely
+PLUG,Alibaba,2021-04-19,35997696e15,No,Confident
+M6-T,Alibaba,2021-03-05,55e20,No,Likely
+Generative BST,Facebook AI Research,2021-03-05,1449e19,Yes,Confident
+SRU++ Large,ASAPP,2021-02-24,21173704e12,Yes,Confident
+Switch,Google,2021-01-11,822e20,Yes,Confident
+CLIP (ViT L/14@336px),OpenAI,2021-01-05,1.0499999999999999e+22,Yes,Confident
+ERNIE-Doc (247M),Baidu,2020-12-31,30302798e12,Yes,Confident
+CT-MoS (WT2),"Google,National Tsing Hua University",2020-12-25,54e16,No,Confident
+DensePhrases,"Korea University,Princeton University",2020-12-23,209952e13,Yes,Speculative
+CPM-Large,"Tsinghua University,Beijing Academy of Artificial Intelligence / BAAI",2020-12-01,26052e16,Yes,Confident
+KEPLER,"Tsinghua University,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),HEC,CIFAR AI Research,Princeton University,University of Montreal / Université de Montréal",2020-11-23,166e19,No,Confident
+German ELECTRA Large,"deepset,Bayerische Staatsbibliothek Muenchen",2020-10-21,142829568e13,Yes,Confident
+mT5-XXL,"Google,Google Research",2020-10-20,82e21,Yes,Confident
+LUKE,"University of Washington,National Institute of Informatics",2020-10-02,18144e18,Yes,Likely
+ERNIE-GEN (large),Baidu,2020-08-06,2e20,Yes,Speculative
+DeLighT,"University of Washington,Allen Institute for AI,Facebook AI Research",2020-08-03,38016e14,No,Likely
+GShard (dense),Google,2020-06-30,4765e19,No,Confident
+GPT-3 175B (davinci),OpenAI,2020-05-28,314e21,No,Confident
+UnifiedQA,"Allen Institute for AI,University of Washington",2020-05-02,165e17,Yes,Confident
+ELECTRA,"Stanford University,Google,Google Brain",2020-03-23,31e20,Yes,Likely
+Tensor-Transformer(1core)+PN (WT103),University of California (UC) Berkeley,2020-03-17,158e16,Yes,Confident
+TransformerXL + spectrum control,"University of California Los Angeles (UCLA),JD.com",2020-03-11,26289761e12,No,Speculative
+Feedback Transformer,"LORIA,University of Lorraine,Facebook AI Research",2020-02-21,7690547e12,No,Speculative
+FFN SwiGLU,Google,2020-02-14,33687317e12,No,Confident
+Turing-NLG,Microsoft,2020-02-13,1.5699999999999999e+22,No,Likely
+ALBERT-xxlarge,"Toyota Technological Institute at Chicago,Google",2020-02-09,239e19,Yes,Speculative
+TaLK Convolution,Carleton University,2020-02-08,26990346e12,No,Likely
+Meena,Google Brain,2020-01-28,112e21,No,Confident
+MMLSTM (WT-2),"Beijing University of Posts and Telecommunications,University of West London",2019-12-05,1938e14,No,Likely
+MMLSTM (PTB),"Beijing University of Posts and Telecommunications,University of West London",2019-12-05,58298782e9,No,Likely
+Transformer-XL DeFINE (141M),"University of Washington,Allen Institute for AI",2019-11-27,174276e13,No,Speculative
+Sandwich Transformer,"Allen Institute for AI,Facebook AI Research",2019-11-10,23504093e12,No,Speculative
+CamemBERT,"Facebook,INRIA,Sorbonne University",2019-11-10,83e19,Yes,Confident
+XLM-RoBERTa,Facebook AI,2019-11-05,2.0760000000000002e+22,Yes,Confident
+Base LM + kNN LM + Continuous Cache,"Stanford University,Facebook AI Research",2019-11-01,305292e14,No,Likely
+T5-11B,Google,2019-10-23,3.2999999999999998e+22,Yes,Confident
+T5-3B,Google,2019-10-23,90000000001e11,Yes,Confident
+DistilBERT,Hugging Face,2019-10-02,124416e14,Yes,Confident
+Megatron-LM (8.3B),Nvidia,2019-09-17,91e20,No,Likely
+Megatron-LM (1.2B),Nvidia,2019-09-17,11304e17,No,Confident
+Megatron-BERT,Nvidia,2019-09-17,22e21,No,Confident
+RoBERTa Large,"Facebook,University of Washington",2019-07-01,85067e17,Yes,Confident
+AWD-LSTM + MoS + Partial Shuffled,University of Texas at Austin,2019-06-10,315e15,Yes,Confident
+Transformer-XL Large + Phrase Induction,"Massachusetts Institute of Technology (MIT),University of Illinois Urbana-Champaign (UIUC)",2019-06-04,37848651e13,No,Speculative
+XLNet,"Carnegie Mellon University (CMU),Google Brain",2019-06-01,6.1900000000000005e+21,Yes,Confident
+AWD-LSTM-DRILL + dynamic evaluation† (WT2),IDIAP,2019-05-14,408e15,Yes,Likely
+BERT-Large-CAS (PTB+WT2+WT103),Amazon,2019-04-20,15405e16,No,Likely
+WeNet (Penn Treebank),Amazon,2019-04-08,730000001e9,No,Likely
+Cross-lingual alignment,"Tel Aviv University,Massachusetts Institute of Technology (MIT)",2019-04-04,256e16,Yes,Speculative
+SciBERT,Allen Institute for AI,2019-03-26,8926848e13,Yes,Confident
+GPT-2 (1.5B),OpenAI,2019-02-14,1920000000001e9,Yes,Speculative
+Transformer-XL (257M),"Carnegie Mellon University (CMU),Google Brain",2019-01-09,37832771e13,Yes,Speculative
+Multi-cell LSTM,University of Hyderabad,2018-11-15,200664e10,No,Likely
+Fine-tuned-AWD-LSTM-DOC (fin),Samsung R&D Institute Russia,2018-11-12,5188e13,No,Confident
+Mesh-TensorFlow Transformer 4.9B (language),Google Brain,2018-11-05,1617408e14,No,Confident
+Mesh-TensorFlow Transformer 2.9B (translation),Google Brain,2018-11-05,684288e14,No,Likely
+TrellisNet,"Carnegie Mellon University (CMU),Bosch Center for Artificial Intelligence,Intel Labs",2018-10-15,278e16,No,Confident
+BERT-Large,Google,2018-10-11,285e18,Yes,Confident
+Transformer (Adaptive Input Embeddings) WT103,Facebook AI Research,2018-09-28,447e17,Yes,Confident
+LSTM+NeuralCache,"KU Leuven,ESAT - PSI,Apple",2018-09-24,982800000000000,No,Likely
+Transformer + Simple Recurrent Unit,"ASAPP,Cornell University,Google,Princeton University",2018-09-17,11e18,No,Confident
+(ensemble): AWD-LSTM-DOC (fin) × 5 (WT2),"NTT Communication Science Laboratories,Tohoku University",2018-08-30,666e15,Yes,Confident
+Big Transformer for Back-Translation,"Facebook AI Research,Google Brain",2018-08-28,47808e16,Yes,Likely
+GPT-1,OpenAI,2018-06-01,17578125e12,Yes,Likely
+aLSTM(depth-2)+RecurrentPolicy (WT2),"University of Manchester,Alan Turing Institute",2018-05-22,7296e13,No,Confident
+Dropout-LSTM+Noise(Bernoulli) (WT2),"Columbia University,New York University (NYU),Princeton University",2018-05-03,127e15,No,Likely
+4 layer QRNN (h=2500),Salesforce Research,2018-03-22,59158815e10,No,Likely
+QRNN,Salesforce Research,2018-02-01,68866472e10,No,Likely
+"AWD-LSTM-MoS + dynamic evaluation (WT2, 2017)",Carnegie Mellon University (CMU),2017-11-10,336e16,No,Likely
+Fraternal dropout + AWD-LSTM 3-layer (WT2),"Jagiellonian University,Mila - Quebec AI (originally Montreal Institute for Learning Algorithms),University of Montreal / Université de Montréal",2017-10-31,306e15,No,Likely
+AWD-LSTM+WT+Cache+IOG (WT2),NTT Communication Science Laboratories,2017-09-26,318e13,No,Confident
+ISS,"Duke University,Microsoft",2017-09-15,34e14,No,Confident
+GL-LWGC-AWD-MoS-LSTM + dynamic evaluation (WT2),Ben-Gurion University of the Negev,2017-08-29,456e15,No,Confident
+EI-REHN-1000D,Korea Advanced Institute of Science and Technology (KAIST),2017-08-14,106e14,No,Confident
+AWD-LSTM - 3-layer LSTM (tied) + continuous cache pointer (WT2),Salesforce Research,2017-08-07,297e15,No,Confident
+Transformer,"Google Research,Google Brain",2017-06-12,74245248e11,No,Confident
+MoE-Multi,"Jagiellonian University,Google Brain",2017-01-23,9393905664e10,No,Confident

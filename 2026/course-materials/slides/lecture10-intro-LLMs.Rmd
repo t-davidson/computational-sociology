@@ -1,0 +1,906 @@
+---
+title: "Computational Sociology"
+subtitle: "Introduction to Large Language Models"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: October 30, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+- \usepackage{tikz}
+- \usetikzlibrary{shapes,arrows}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+library("formatR")
+
+opts_chunk$set(tidy.opts=list(width.cutoff=80),tidy=TRUE)
+opts_chunk$set(tidy = FALSE)
+
+knitr::knit_hooks$set(mysize = function(before, options, envir) {
+  if (before)
+    return(options$size)
+})
+```
+
+# Plan
+1. Course updates
+2. Language models and transformers
+3. Large language models
+4. Post-training, reasoning, and agents
+5. Text classification with LLMs
+6. Language understanding, meaning, and interpretability
+7. Challenges
+
+# Course updates
+## Project progress report
+- Progress report due next Friday, November 6
+  - 2–3-page double-spaced update on your final project (see last week's slides)
+- Submit PDF via email
+
+# Course updates
+## Homework 3
+- Homework 3 released after class today
+  - Supervised machine learning
+  - Supervised text classification
+  - Large language models
+- Due Friday, November 13
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part I: Language models and transformers\par}
+\vfill
+\end{center}
+
+# Language models
+## Review
+- Language models predict the likelihood of a sequence of words
+  - Applications include auto-completion, speech recognition, and more
+- In the bigram model, the probability of $w_k$ only depends on the previous word, $w_{k-1}$
+
+$$P(w_{1:n}) \approx \prod_{k=1}^n P(w_k|w_{k-1})$$
+
+- $n$-gram language models generalize this to longer sequences of words
+
+# Language models
+## Limitations of n-gram language models
+1. Insufficient data to sufficiently model language generation
+2. Complex models become intractable to compute
+3. Limited information on word order
+
+# Language models
+## Advances in neural language models
+- Over the past decade language models have developed due to three factors:
+
+    1. Availability of large text corpora
+    2. Advances in computer processing, notably Graphics Processing Units (GPUs)
+    3. Innovations in neural network architecture
+
+# Language models
+## Word2vec
+```{r, out.height="65%", fig.align="center"}
+include_graphics('../../../img/word2vec_training.png')
+```
+\tiny \centering Mikolov et al. 2013
+
+# Language models
+## From static to contextualized embeddings
+- Word2vec learns a single vector for each word, averaging across its different uses
+  - e.g. "crane" as a bird, construction equipment, or movement
+- Contextualized embeddings allow the vector for a word to vary according to its context
+- The *attention* mechanism makes this possible
+
+# Attention and the transformer architecture
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/attention2.png')
+```
+
+# Attention and the transformer architecture
+## Encoders and decoders
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/slp3_rnn_encoder_decoder.png')
+```
+\tiny \centering The decoder generates the target text using the encoder's final hidden state, here producing a translation. Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## The bottleneck
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/slp3_bottleneck.png')
+```
+\tiny \centering All information in a standard encoder-decoder passes through the final state. Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## Adding attention
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/slp3_rnn_attention.png')
+```
+\tiny \centering Attention allows the context for each step of the decoder to be represented as a weighted sum of all the encoder's hidden states. Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## Attending to a token
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/slp3_self_attention.png')
+```
+\tiny \centering When computing the representation for "it," the model attends most to "chicken" and "road." Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## The transformer
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/transformer_arch.png')
+```
+\tiny \centering Vaswani et al. 2017
+
+# Attention and the transformer architecture
+## Inside the decoder
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/slp3_transformer_decoder.png')
+```
+\tiny \centering The residual stream carries a token's representation through transformer blocks, with attention adding information from other tokens. Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## Stacked transformer blocks
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/slp3_transformer_stack.png')
+```
+\tiny \centering Each input token is encoded, passed through stacked transformer blocks, and used to predict the next token. Jurafsky and Martin 2026
+
+# Attention and the transformer architecture
+## Further resources
+- 3Blue1Brown has a \href{https://www.youtube.com/watch?v=wjZofJX0v4M}{series} on YouTube explaining how attention and transformers work
+
+```{r, out.height="58%", fig.align="center"}
+include_graphics('../../../img/3blue1brown.png')
+```
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part II: Large language models\par}
+\vfill
+\end{center}
+
+# Large language models
+## BERT
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/bert_paper.png')
+```
+
+# Large language models
+## BERT: pre-training and fine-tuning
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/bert_finetuning.png')
+```
+\tiny \centering Devlin et al. 2019
+
+# Large language models
+## Foundation models and transfer learning
+- Large language models (LLMs) are described as \textbf{foundation models} insofar as pre-trained models serve as a foundation for other tasks (Bommasani et al. 2021)
+- \textbf{Transfer learning} describes the process through which a model is adapted to new tasks
+
+\tiny Bommasani, Rishi, et al. 2021. "On the Opportunities and Risks of Foundation Models." *arXiv*:2108.07258.
+
+# Large language models
+## Decoders, encoders, and encoder-decoders
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/slp3_three_architectures.png')
+```
+\tiny \centering Decoders take tokens as input and generate tokens. Encoders produce a vector representation of each input token. Encoder-decoders take tokens as input and generate a series of tokens. Jurafsky and Martin 2026
+
+# Large language models
+## From BERT to GPT-3
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/gpt3_compute.png')
+```
+\tiny \centering Brown et al. 2020
+
+# Generating text
+## Predicting the next word
+LLMs predict the next *token*, usually a word or part of a word.
+```{r, out.width="78%", fig.align="center"}
+include_graphics('../../../img/slp3_next_word.png')
+```
+\tiny \centering An LLM takes a context as input and outputs a probability distribution over possible next words. Jurafsky and Martin 2026
+
+# Generating text
+## Autoregressive generation
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/slp3_generation.png')
+```
+\tiny \centering The model generates text by sampling a word from the distribution, adding it to the context, and repeating the process. Jurafsky and Martin 2026
+
+# Generating text
+## Sampling and temperature
+- The *temperature* controls how random the sampling is
+    - Near 0, the model always picks the most likely word, making it more deterministic
+    - Higher temperatures make it more likely that less probable words are used
+
+# Generating text
+## Sampling and temperature
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/slp3_temperature.png')
+```
+\tiny \centering At a temperature near 0, sampling becomes "greedy" decoding. Jurafsky and Martin 2026
+
+# Scale
+## Model size over time
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/Model-Size-Chart.png')
+```
+\tiny \centering \url{https://developer.nvidia.com/blog/using-deepspeed-and-megatron-to-train-megatron-turing-nlg-530b-the-worlds-largest-and-most-powerful-generative-language-model/}
+
+# Scale
+## Training compute over time
+Most companies no longer disclose the size of their models, so the compute used for training is a common measure of scale.
+```{r, fig.width=6, fig.height=3, out.height="54%", fig.align="center"}
+library(tidyverse)
+epoch <- read_csv("../data/epoch_language_models.csv")
+labels <- c("Transformer" = "Transformer", "BERT-Large" = "BERT",
+            "GPT-3 175B (davinci)" = "GPT-3", "GPT-4 (Mar 2023)" = "GPT-4",
+            "Llama 3.1-405B" = "Llama 3.1", "DeepSeek-R1" = "DeepSeek-R1",
+            "gpt-oss-120b" = "gpt-oss", "Grok 4" = "Grok 4")
+epoch |>
+  mutate(open_weights = if_else(open_weights == "Yes", "Open weights", "Closed"),
+         label = labels[model]) |>
+  ggplot(aes(x = date, y = compute, color = open_weights)) +
+  geom_point(alpha = 0.5) +
+  ggrepel::geom_label_repel(aes(label = label), size = 3, na.rm = TRUE,
+                            show.legend = FALSE, min.segment.length = 0,
+                            nudge_y = 1.5, label.size = 0.1, seed = 1) +
+  scale_y_log10(labels = scales::label_log()) +
+  scale_color_viridis_d(end = 0.7) +
+  labs(x = NULL, y = "Training compute (FLOP)", color = NULL) +
+  theme_bw(base_size = 13) +
+  theme(legend.position = "inside", legend.position.inside = c(0.85, 0.15))
+```
+\tiny Data from Epoch AI. 2026. "Data on AI Models." Accessed October 22, 2026. \url{https://epoch.ai/data/ai-models}.
+
+# Scale
+## Scaling laws
+
+Language model performance improves as compute, data, and parameters increase
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/kaplan_scaling_laws.png')
+```
+
+\tiny Kaplan, Jared, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, and Dario Amodei. 2020. "Scaling Laws for Neural Language Models." *arXiv*:2001.08361.
+
+# Scale
+## Scale and performance
+```{r, out.width="80%", fig.align="center"}
+include_graphics('../../../img/gpt3_performance.png')
+```
+\tiny \centering Brown et al. 2020
+
+# Scale
+## Vast training data
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/gpt3_data.png')
+```
+\tiny \centering Brown et al. 2020
+
+# Prompting
+## Text-to-text models
+- Early models like BERT work more like standard machine learning techniques
+    - e.g. extract an embedding for a term, fine-tune to predict a label given the input
+- Text-to-text models take text as input and produce text as output\*
+- This natural language interface makes it easy to transfer to new tasks and enables chat interfaces
+
+\tiny \* Raffel, Colin, Noam Shazeer, Adam Roberts, Katherine Lee, Sharan Narang, Michael Matena, Yanqi Zhou, Wei Li, and Peter J. Liu. 2020. "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer." *Journal of Machine Learning Research* 21(140): 1–67.
+
+# Prompting
+## Context windows
+- The *context window* defines the amount of text a model can process at once, measured in tokens
+- Context windows have been increasing over time:
+    - BERT (2018): 512
+    - GPT-3 (2020): 2,048
+    - GPT-4 Turbo (2023): 128,000
+    - Claude 3 (2024): 200,000
+    - Gemini 1.5 Pro (2024): 1,000,000
+
+# Prompting
+## User and system prompts
+- *Prompts* guide the model to generate specific outputs
+    - \textbf{User prompts} result in a single output
+        - e.g. "Is the following text positive or negative?"
+    - \textbf{System prompts} guide overall model behavior
+        - e.g. "You are a helpful assistant ... "
+
+# Prompting
+## Prompt engineering
+- An emerging field known as *prompt engineering* considers how to effectively design prompts
+    - Art or science?
+- Some systems can automatically refine and enhance prompts
+    - e.g. ChatGPT rewrote user prompts to DALL-E 3 to make better images, and to diversify demographic representation in outputs
+    
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part III: Post-training, reasoning, and agents\par}
+\vfill
+\end{center}
+
+# Post-training
+## Four stages of training
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/slp3_training_stages.png')
+```
+\tiny \centering Jurafsky and Martin 2026
+
+# Post-training
+## Reinforcement learning with human feedback (RLHF)
+- LLMs are pre-trained as language models but can be adapted to more general tasks by further training
+- RLHF involves using feedback to guide a model's behavior and is critical to contemporary chatbots
+    - Feedback used to make models "more helpful" and "less harmful"
+
+\tiny Ouyang, Long, et al. 2022. "Training Language Models to Follow Instructions with Human Feedback." In *Advances in Neural Information Processing Systems* 35, 27730–44.
+
+# Post-training
+## RLHF phases
+```{r, out.width="84%", fig.align="center"}
+include_graphics('../../../img/rlhf_instructgpt.png')
+```
+\tiny \centering Ouyang et al. 2022
+
+# Post-training
+## Direct preference optimization (DPO)
+- RLHF trains a separate *reward model* on human preferences, then uses reinforcement learning to optimize the LLM against it
+- DPO skips the reward model and trains the LLM directly on pairs of preferred and rejected responses
+    - Simpler, more stable, and cheaper than RLHF
+
+\tiny Rafailov, Rafael, Archit Sharma, Eric Mitchell, Christopher D. Manning, Stefano Ermon, and Chelsea Finn. 2023. "Direct Preference Optimization: Your Language Model Is Secretly a Reward Model." In *Advances in Neural Information Processing Systems* 36, 53728–41.
+
+# Post-training
+## RLHF versus DPO
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/dpo_vs_rlhf.png')
+```
+\tiny \centering Rafailov et al. 2023
+
+# Reasoning models
+## Chain-of-thought prompting
+- Including examples of step-by-step reasoning in the prompt improves performance on math and reasoning problems
+```{r, out.height="46%", fig.align="center"}
+include_graphics('../../../img/wei_chain_example.png')
+```
+
+\tiny Wei, Jason, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, and Denny Zhou. 2022. "Chain-of-Thought Prompting Elicits Reasoning in Large Language Models." In *Advances in Neural Information Processing Systems* 35, 24824–37.
+
+# Reasoning models
+## Learning to reason
+- Recent models are further trained using reinforcement learning to generate intermediate reasoning steps before answering
+    - e.g. OpenAI's o1, DeepSeek-R1
+- Rewards come from tasks with verifiable answers, such as math problems and coding tests
+
+\tiny Guo, Daya, et al. 2025. "DeepSeek-R1 Incentivizes Reasoning in LLMs Through Reinforcement Learning." *Nature* 645(8081): 633–38.
+
+# Reasoning models
+## "Thinking" longer improves performance
+```{r, out.height="64%", fig.align="center"}
+include_graphics('../../../img/r1_response_length.png')
+```
+\tiny \centering Guo et al. 2025
+
+# Agents
+## What are agents?
+- LLMs are increasingly used as *agents* that can use tools and pursue a goal over many steps
+    - The model chooses an action, such as searching the web or running code, observes the result, and decides what to do next
+- Coding agents like Claude Code and OpenAI's Codex can write, run, and debug code across a project
+
+# Advancing capabilities, 2020–2026
+```{r, out.height="65%", fig.align="center"}
+include_graphics('../../../img/brown_math_2020.png')
+```
+\tiny \centering GPT-3's few-shot accuracy on arithmetic problems. Brown et al. 2020
+
+# Advancing capabilities, 2020–2026
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/wei_chain_math.png')
+```
+\tiny \centering Wei et al. 2022
+
+# Advancing capabilities, 2020–2026
+
+> I have played a little bit with OpenAI's new iteration of #GPT, GPT-o1, which performs an initial reasoning step before running the LLM... The experience seemed roughly on par with trying to advise a *mediocre, but not completely incompetent, (static simulation of a) graduate student.*
+>
+> --- Terence Tao, September 2024
+
+\tiny \url{https://mathstodon.xyz/@tao/113132502735585408}
+
+# Advancing capabilities, 2020–2026
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/deepmind_olympiad_2025.png')
+```
+
+\tiny \url{https://deepmind.google/discover/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/}
+
+# Advancing capabilities, 2020–2026
+## A Millennium Prize Problem
+
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/openai_millenium_2026.png')
+```
+
+\tiny \url{https://www.nytimes.com/2026/09/08/science/openai-proof-millennium-problem.html}
+
+# Advancing capabilities, 2020–2026
+## The Navier–Stokes equations
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/navier_stokes.png')
+```
+\tiny OpenAI. 2026. ["On the Navier–Stokes Millennium Prize Problem."](https://openai.com/index/navier-stokes-solution/) September 8.
+
+# Advancing capabilities, 2020–2026
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/openai_ns_solution1.png')
+```
+\tiny \centering OpenAI 2026
+
+# Advancing capabilities, 2020–2026
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/openai_ns_solution2.png')
+```
+\tiny \centering OpenAI 2026
+
+# Advancing capabilities, 2020–2026
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/math_misalignment_2026.png')
+```
+
+\tiny Avila, Artur, et al. 2026. "A Severe Misalignment of AI in Mathematics." Zenodo. \url{https://doi.org/10.5281/zenodo.22737750}
+
+# Advancing capabilities, 2020–2026
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/openain_proofs_2026.png')
+```
+
+\tiny \url{https://www.nytimes.com/2026/10/06/science/openai-math-problems.html}
+
+# Benchmarks
+## Humanity's Last Exam
+- 2,500 questions written by nearly 1,000 experts in over 100 subjects, included only if leading LLMs could not answer them
+- Best score at launch in January 2025 was below 10%
+
+\tiny Center for AI Safety, Scale AI, and HLE Contributors Consortium. 2026. "A Benchmark of Expert-Level Academic Questions to Assess AI Capabilities." *Nature* 649(8099): 1139–46.
+
+# Benchmarks
+## Humanity's Last Exam
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/hle_examples.png')
+```
+\tiny \centering Center for AI Safety, Scale AI, and HLE Contributors Consortium 2026
+
+# Benchmarks
+## Humanity's Last Exam
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/HLE_leader.png')
+```
+\tiny \centering Center for AI Safety. 2026. "AI Dashboard." Accessed October 29, 2026. \url{https://dashboard.safe.ai}
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part IV: Text classification with LLMs\par}
+\vfill
+\end{center}
+
+# Text classification with LLMs
+## Interaction modalities
+- Three core ways to use LLMs:
+
+    1. Chat in browser (e.g. ChatGPT)
+    2. Code via API (e.g. OpenAI API)
+    3. Code via local model (e.g. Llama on a laptop)
+
+- Chat interfaces are good for experimentation, but code-based interaction is necessary for systematic research
+
+# Text classification with LLMs
+## Zero-shot, few-shot, and fine-tuning
+- Pre-trained LLMs can be used in several ways that differ from conventional supervised machine learning:
+    - *Zero-shot learning*: LLM makes a prediction based on a prompt alone
+    - *Few-shot learning*: LLM makes a prediction based on a prompt and one or more training examples
+    - *Fine-tuning*: Training data are fed into the LLM and its weights are updated to adapt to the task
+
+# Exercise
+## Prompt engineering for text classification
+- Task: Predict the sentiment of 100 reviews from last week's test set using a small LLM on your laptop
+    - Qwen2.5-0.5B-Instruct (0.5B parameters), run using `localLLM`
+- Edit the prompt to improve the scores and reduce the number of responses without a sentiment
+    - Zero-shot: Instructions only
+    - Few-shot: Instructions plus one or more labeled examples
+
+# Exercise
+## Installing `localLLM`
+`localLLM` runs models locally using `llama.cpp`.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+install.packages("localLLM",
+                 repos = c("https://eddieyang211.r-universe.dev",
+                           "https://cloud.r-project.org"))
+# Restart R (Session > Restart R), then run the rest
+library(localLLM)
+install_localLLM() # Downloads the backend
+```
+
+# Exercise
+## Generating text
+The model (491 MB) is downloaded the first time it is used.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+model <- paste0("https://huggingface.co/Qwen/",
+                "Qwen2.5-0.5B-Instruct-GGUF/resolve/main/",
+                "qwen2.5-0.5b-instruct-q4_k_m.gguf")
+
+quick_llama("What is sentiment analysis?", model_path = model,
+            verbosity = -1) |>
+  cat()
+```
+
+# Exercise
+## Loading the test set
+Reviews are truncated to 500 characters to keep the inputs short. The split is the same as last week, and we take a random sample of 100 test reviews.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+library(tidyverse)
+library(tidymodels)
+d <- read_tsv("../data/imdb_reviews_sample.tsv") |>
+  mutate(text = str_trunc(text, 500))
+
+set.seed(76543)
+review_split <- initial_split(d, strata = "sentiment",
+                              prop = 0.8)
+test <- testing(review_split) |> slice_sample(n = 100)
+```
+
+# Exercise
+## Writing a prompt
+`classify` adds a review to the prompt and returns the response, stopping after 10 tokens.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+prompt <- ""
+
+classify <- function(text) {
+  quick_llama(paste0(prompt, "\n\nReview: ", text),
+              model_path = model, max_tokens = 10,
+              clean = TRUE, hash = FALSE, verbosity = -1)
+}
+```
+
+# Exercise
+## Classifying a single review
+Change `i` to try other reviews.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+i <- 1
+classify(test$text[i])
+test$sentiment[i]
+```
+
+# Exercise
+## Classifying all 100 reviews
+Why is the `str_detect()` function necessary?
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+results <- test |>
+  mutate(
+    response = map_chr(text, classify, .progress = TRUE),
+    prediction = case_when(
+      str_detect(response, "[Pp]ositive") ~ "pos",
+      str_detect(response, "[Nn]egative") ~ "neg"),
+    prediction = factor(prediction, levels = c("neg", "pos")),
+    sentiment = factor(sentiment, levels = c("neg", "pos")))
+```
+
+# Exercise
+## Evaluating performance
+Responses without a valid label are `NA` and excluded from the scores.
+```{r, echo=TRUE, eval=FALSE, tidy=FALSE, mysize=TRUE, size='\\footnotesize'}
+results |> count(sentiment, prediction)
+sum(is.na(results$prediction)) # Responses without a sentiment
+
+review_metrics <- metric_set(accuracy, precision, recall, f_meas)
+results |>
+  review_metrics(truth = sentiment, estimate = prediction)
+```
+\tiny As last week, precision and recall refer to negative reviews.
+
+# Exercise
+## Questions
+- How sensitive are the results to the wording of the prompt?
+- Did the model follow your instructions?
+- How does it compare to last week's LASSO model (F1 = 0.85)?
+- Any reason for skepticism about accuracy?
+
+# Exercise
+## Structured output
+- Many APIs support *structured output*, which restricts responses to a predefined format, such as a set of labels
+- This ensures that only valid labels are produced
+
+# Recommendations
+## Choosing an approach
+\tiny
+\begin{tikzpicture}[node distance=2cm, auto]
+    % Define styles
+    \tikzstyle{block} = [rectangle, draw, fill=white, text width=10em, text centered, rounded corners, minimum height=3em]
+    \tikzstyle{ovalblock} = [ellipse, draw, fill=white, text width=5em, text centered, minimum height=3em]
+    \tikzstyle{line} = [draw, -latex']
+
+    % Nodes
+    \node [ovalblock] (A) {Document length};
+    \node [block, below left of=A] (B) {Use model with larger context window};
+    \node [ovalblock, below right of=A] (C) {Number of documents};
+    \node [block, below left of=C] (D) {Use zero or few-shot};
+    \node [ovalblock, below right of=C] (E) {Time allocation};
+    \node [block, below left of=E] (F) {Use zero or few-shot or annotate small sample and fine-tune larger model};
+    \node [ovalblock, below right of=E] (H) {Budget};
+    \node [block, below left of=H] (G) {Annotate large sample and fine-tune smaller model};
+    \node [block, below right of=H] (I) {Annotate large sample and fine-tune larger model};
+
+    % Arrows
+    \path [line, line width=1mm] (A) -- node [midway, above, sloped] {Long} (B);
+    \path [line, line width=1mm] (A) -- node [midway, above, sloped] {Short} (C);
+    \path [line, line width=1mm] (B) -- (C);
+    \path [line, line width=1mm] (C) -- node [midway, above, sloped] {<1000} (D);
+    \path [line, line width=1mm] (C) -- node [midway, above, sloped] {>1000} (E);
+    \path [line, line width=1mm] (E) -- node [midway, above, sloped] {Limited} (F);
+    \path [line, line width=1mm] (E) -- node [midway, above, sloped] {Extended} (H);
+    \path [line, line width=1mm] (H) -- node [midway, above, sloped] {Restricted} (G);
+    \path [line, line width=1mm] (H) -- node [midway, above, sloped] {Flexible} (I);
+\end{tikzpicture}
+
+\tiny \centering Chae and Davidson 2026
+
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part V: Language understanding, meaning, and interpretability\par}
+\vfill
+\end{center}
+
+# Language understanding
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/parrots.png')
+```
+
+# Language understanding
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/manning_daedalus.png')
+```
+\tiny \centering Manning 2022
+
+# Language understanding
+## Do LLMs understand language?
+\footnotesize
+
+|  | Bender et al. 2021 | Manning 2022 |
+|:--|:--|:--|
+| What LLMs learn | Linguistic form only | Language structure and world knowledge |
+| What meaning entails | Communicative intent | Connections to the world and other forms |
+| Do LLMs understand? | No, coherence is "in the eye of the beholder" | Partly, "meaning is not all or nothing" |
+| Takeaways | Harms: costs, bias, risks | Promise: general, multimodal models |
+
+\normalsize
+
+# Language understanding
+## Do LLMs understand language?
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/chomsky_false_promise.png')
+```
+
+\tiny Chomsky, Noam, Ian Roberts, and Jeffrey Watumull. 2023. ["Noam Chomsky: The False Promise of ChatGPT."](https://www.nytimes.com/2023/03/08/opinion/noam-chomsky-chatgpt-ai.html) *New York Times*, March 8.
+
+# Language understanding
+
+\large \centering
+colorless green ideas sleep furiously\
+furiously sleep ideas green colorless
+
+# Language understanding
+## Do LLMs understand language?
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/chomsky_1956.png')
+```
+
+\tiny \centering Chomsky, Noam. 1957. *Syntactic Structures*, p. 15. The Hague: Mouton.
+
+# Language understanding
+## Do LLMs understand language?
+A simple bigram model trained on newspaper text assigns a much higher probability to the grammatical sentence
+```{r, out.width="60%", fig.align="center"}
+include_graphics('../../../img/periera_result_chomsky.png')
+```
+
+\tiny Pereira, Fernando. 2000. "Formal Grammar and Information Theory: Together Again?" *Philosophical Transactions of the Royal Society of London. Series A* 358(1769): 1239–53.
+
+# Interpretability
+## Opening the black box
+- Conventional machine learning models offer limited interpretability, even less so for complex neural networks, and worse as size increases
+- An area of research known as *mechanistic interpretability* reverse-engineers model behavior by analyzing internal feature activations
+
+# Interpretability
+## Features
+- Researchers have identified millions of interpretable features in LLMs that represent different concepts
+
+\tiny Templeton, Adly, et al. 2024. "Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet." *Transformer Circuits Thread*. \url{https://transformer-circuits.pub/2024/scaling-monosemanticity/}
+
+# Interpretability
+## Features: the Golden Gate Bridge
+```{r, out.width="78%", fig.align="center"}
+include_graphics('../../../img/ggb_feature.png')
+```
+\tiny \centering The feature activates on text and images related to the bridge in many languages. \url{https://www.anthropic.com/research/mapping-mind-language-model}
+
+# Interpretability
+## Circuits
+- *Circuit tracing* maps the steps a model takes to produce an output, e.g. planning a rhyme before writing a line of poetry
+- But these methods only explain part of a model's computation, and only for some prompts
+
+\tiny Lindsey, Jack, et al. 2025. "On the Biology of a Large Language Model." *Transformer Circuits Thread*. \url{https://transformer-circuits.pub/2025/attribution-graphs/biology.html}
+
+# Interpretability
+## Circuits: multi-step reasoning
+```{r, out.height="64%", fig.align="center"}
+include_graphics('../../../img/circuit_dallas_austin.png')
+```
+\tiny \centering To name the capital of the state containing Dallas, the model represents Texas as an intermediate step. Lindsey et al. 2025. \url{https://www.anthropic.com/research/tracing-thoughts-language-model}
+
+# Interpretability
+## Are reasoning traces faithful?
+- Reasoning models output intermediate steps before answering, but these traces are not necessarily a faithful account of how the model reached its answer
+- When a prompt contains a cue that biases the answer, such as a hint, models often follow it without mentioning it in their reasoning
+
+\tiny Turpin, Miles, Julian Michael, Ethan Perez, and Samuel R. Bowman. 2023. "Language Models Don't Always Say What They Think: Unfaithful Explanations in Chain-of-Thought Prompting." In *Advances in Neural Information Processing Systems* 36, 74952–65.
+
+Chen, Yanda, et al. 2025. "Reasoning Models Don't Always Say What They Think." *arXiv*:2505.05410.
+
+# Interpretability
+## An unfaithful reasoning trace
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/cot_unfaithful_hint.png')
+```
+\tiny \centering Given a hint in the prompt's metadata, the model changes its answer from D to C without mentioning the hint. Chen et al. 2025
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Part VI: Challenges\par}
+\vfill
+\end{center}
+
+# Reliability
+## Hallucinations
+- LLMs are trained to predict text sequences without adherence to formal logic or truth—raising reliability issues
+    - Outputs can range from meaningful and accurate to incorrect or misleading ("hallucinations" or "confabulations")
+
+# Reliability
+## Why do LLMs hallucinate?
+- Next-word pre-training produces errors on facts that appear only once in the training data, such as a person's birthday
+- Evaluations that only score accuracy reward guessing over admitting uncertainty
+    - Answering "I don't know" always scores zero, while a guess might be right
+
+\tiny Kalai, Adam Tauman, Ofir Nachum, Santosh S. Vempala, and Edwin Zhang. 2026. "Evaluating Large Language Models for Accuracy Incentivizes Hallucinations." *Nature* 653(8116): 1047–51.
+
+# Reliability
+## Why do LLMs hallucinate?
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/kalai1.png')
+```
+\tiny \centering Kalai et al. 2026
+
+# Reliability
+## Why do LLMs hallucinate?
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/kalai2.png')
+```
+\tiny \centering Kalai et al. 2026
+
+# Reliability
+## Sycophancy
+```{r, out.width="92%", fig.align="center"}
+include_graphics('../../../img/sycophancy1.png')
+```
+
+\tiny Cheng, Myra, Cinoo Lee, Pranav Khadpe, Sunny Yu, Dyllan Han, and Dan Jurafsky. 2026. "Sycophantic AI Decreases Prosocial Intentions and Promotes Dependence." *Science* 391(6792): eaec8352.
+
+# Reliability
+## Sycophancy: consequences
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/sycophancy2.png')
+```
+\tiny \centering Cheng et al. 2026
+
+# Bias and ethics
+## Stereotypes and biases
+- Models learn stereotypes from data and make biased outputs
+- LLMs amplify this risk due to pre-training on vast amounts of unvetted data
+- Alignment and reinforcement learning are used to adapt commercial models, but biases remain
+
+# Bias and ethics
+## Ethical questions
+- Analyzing sensitive data poses risks, potentially violating privacy regulations (e.g. inputs to ChatGPT may violate IRB guidelines on data sharing)
+- Ethical dilemmas also arise from LLM use in research settings
+- The rapid development of technology outpaces consensus on ethical guidelines, necessitating cautious and informed application in research
+
+# Transparency and reproducibility
+## Transparency
+- Advanced generative AI models, often developed by corporations, lack transparency regarding their training data
+- This opacity complicates assessing the influence of pre-training on model outputs
+
+# Transparency and reproducibility
+## Reproducibility
+- Reproducibility is undermined by the stochasticity of LLMs
+    - Identical prompts can lead to varied outputs
+- Model updates and retirements by corporations can further impede the ability to reproduce results
+
+# Closed versus open models
+- The most powerful models are controlled by a handful of corporations
+    - GPT (OpenAI), Gemini (Google), Claude (Anthropic)
+    - These models are easy to use via APIs with minimal programming experience
+- Open-weight alternatives include Llama (Meta), Gemma (Google), Qwen (Alibaba), and DeepSeek
+    - Smaller models can run on a laptop
+    - Larger models require access to high-performance compute environments and more technical knowledge
+
+# Closed versus open models
+## Improving open-weight models
+- The best open-weight models now trail the best closed models by about four months
+
+\tiny Edwards, Jack, and Luke Emberson. 2026. "Open Models Lag State-of-the-Art Closed Models by 4 Months." *Epoch AI*. \url{https://epoch.ai/data-insights/open-closed-eci-gap}
+
+# Closed versus open models
+## Open weights versus open source
+- *Open weights* does not mean *open source*
+    - Training data and code generally not released
+    - Fully open models like Olmo 3 (Ai2) also release training data, code, and checkpoints
+
+\tiny Team Olmo, et al. 2025. "Olmo 3." *arXiv*:2512.13961.
+
+# Closed versus open models
+- Advantages of open-source models:
+    - Public weights and training data
+    - More controlled and reproducible
+    - Lower privacy risks
+    - More customizable
+
+\tiny Spirling, Arthur. 2023. "Why Open-Source Generative AI Models Are an Ethical Way Forward for Science." *Nature* 616(7957): 413.
+    
+# Recommendations
+## Reporting LLM-based research
+- Checklist for reporting studies that use LLMs in the behavioral and social sciences
+    - Scope of LLM use and the degree of human oversight
+    - Model details: exact model and version, access mode, date, and settings such as temperature
+    - Exact prompts, including system prompts and examples
+
+\tiny Feuerriegel, Stefan, et al. 2026. "A Reporting Checklist for Large Language Models in Behavioural Science." *Nature Human Behaviour* 10(7): 1182–86. Checklist: \url{https://www.llm-checklist.com}
+
+
+# Summary
+- Transformers use attention to represent words in context
+- LLMs are pre-trained on vast corpora and adapted to new tasks through fine-tuning or prompting
+- Post-training, reasoning, and tool use extend LLMs beyond next-word prediction
+- Zero- and few-shot learning reduce the need for training data, but predictions still need to be validated
+- Whether LLMs understand language, access meaning, think, and reason is debated
+- LLMs pose challenges for reliability, bias, ethics, transparency, and reproducibility
+
+# Next class
+- LLMs in social science research
