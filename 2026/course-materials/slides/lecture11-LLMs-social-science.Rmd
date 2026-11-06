@@ -1,0 +1,573 @@
+---
+title: "Computational Sociology"
+subtitle: "LLMs in Social Science Research"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: November 6, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+```
+
+# Plan
+1. Course updates
+2. Generative AI and social science
+3. Measurement
+4. Simulation
+5. Human–AI experiments
+6. Research practice
+
+# Course updates
+## Project progress report
+- Progress report due today
+- Submit PDF via email
+
+# Course updates
+## Homework 3
+- Homework 3 due next Friday, November 13
+
+# Course updates
+## Presentations
+- Student presentations on Friday, November 20
+- 12-minute presentation, plus Q&A
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Generative AI and social science\par}
+\vfill
+\end{center}
+
+# Generative AI and social science
+## Opportunities and risks
+- Generative AI has the potential to improve survey research, online experiments, automated content analyses, agent-based models, and other techniques used to study human behavior
+- Bias, ethics, replication, environmental impact, and the proliferation of low-quality research
+
+\tiny Bail 2024
+
+# Generative AI and social science
+## Measurement, prompting, and simulation
+- *Measurement*: Rigorous measurement and validation of AI-generated outputs
+- *Prompting*: Optimizing model performance and reproducibility
+- *Simulation*: Novel uses of AI to simulate attitudes and behaviors
+
+\tiny Davidson and Karell 2025
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Measurement\par}
+\vfill
+\end{center}
+
+# Text analysis with LLMs
+## Methodological bricolage
+- New opportunities for "methodological bricolage", as the same model can be used in multiple capacities
+    - e.g. LLM as classifier, topic model, and embedding
+- Enables rapid prototyping, experimentation, and bespoke solutions, making computational text analysis more flexible and accessible
+
+\tiny Bonikowski and Nelson 2022; Davidson 2024
+
+# Text analysis with LLMs
+## From codebooks to promptbooks
+- LLMs can be prompted to extract structured information from text
+    - e.g. Age, education, military service, and number of children from *New York Times* obituaries
+- A *promptbook* is "the complete set of prompts used in a project", analogous to a codebook
+    - Prompts are revised on a development set without changing the concept being measured
+
+\tiny Stuhler, Oscar, Cat Dang Ton, and Étienne Ollion. 2025. "From Codebooks to Promptbooks: Extracting Information from Text with Generative Large Language Models." *Sociological Methods & Research* 54(3): 794–848.
+
+# Text analysis with LLMs
+## Information extraction
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/stuhler_promptbook_accuracy.png')
+```
+\tiny Explicit information near perfect, but lower accuracy when interpretation needed
+
+\tiny \centering Stuhler et al. 2025
+
+# Text analysis with LLMs
+## Text classification with LLMs
+- How does performance vary across models and learning regimes?
+- Ten models, from BERT to GPT-4o, and four learning regimes
+    - *Zero-shot* and *few-shot* learning
+    - *Fine-tuning*
+    - *Instruction-tuning*: Fine-tuning a generative model on a prompt and input-output pairs
+
+\tiny Chae and Davidson 2026
+
+# Text analysis with LLMs
+## Sensitivity to prompts
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/chae_davidson_prompts.png')
+```
+\tiny Zero-shot accuracy on GPT-3 across prompts
+
+\tiny \centering Chae and Davidson 2026
+
+# Text analysis with LLMs
+## Sensitivity to examples
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/chae_davidson_examples.png')
+```
+
+\tiny \centering Chae and Davidson 2026
+
+# Text analysis with LLMs
+## Models and learning regimes
+```{r, out.width="86%", fig.align="center"}
+include_graphics('../../../img/chae_davidson_regimes_facebook.png')
+```
+
+\tiny \centering Chae and Davidson 2026
+
+# Text analysis with LLMs
+## Instruction-tuning
+```{r, out.width="86%", fig.align="center"}
+include_graphics('../../../img/chae_davidson_instruction.png')
+```
+
+\tiny \centering Chae and Davidson 2026
+
+# Measurement error
+## Correcting measurement errors
+
+- Using predictions can result in biased estimates and incorrect confidence intervals
+- Methods such as *design-based supervised learning (DSL)* adjust for classifier error
+
+\tiny Egami, Naoki, Musashi Hinck, Brandon M. Stewart, and Hanying Wei. 2024. "Using Large Language Model Annotations for the Social Sciences: A General Framework of Using Predicted Variables in Downstream Analyses." Working paper.
+
+# Measurement error
+## Correcting measurement errors
+```{r, out.width="84%", fig.align="center"}
+include_graphics('../../../img/egami_dsl_simulation.png')
+```
+
+\tiny \centering Egami et al. 2024
+
+# Qualitative analysis with LLMs
+## Computational methods and qualitative research
+- Generative AI has several advantages over conventional computational methods:
+    - Input texts need not be comparable or standardized
+    - Queries can be tailored to the task
+    - Applications for many tasks, including transcription, translation, exploratory analysis, and coding
+
+\tiny Davidson 2024
+
+# Qualitative analysis with LLMs
+## Qualitative coding with LLMs
+```{r, out.height="63%", fig.align="center"}
+include_graphics('../../../img/than_workflow.png')
+```
+
+\tiny \centering Than, Nga, Leanne Fan, Tina Law, Laura K. Nelson, and Leslie McCall. 2025. "Updating 'The Future of Coding': Qualitative Coding with Generative Large Language Models." *Sociological Methods & Research* 54(3): 849–88.
+
+# Qualitative analysis with LLMs
+## Technological reflexivity
+- LLM chatbots are "fundamentally qualitative", as they are built from text and are sensitive to social meaning
+- Instead of statistical validity and generalizability, research with LLM chatbots requires *technological reflexivity*
+- LLM chatbots cannot replace human researchers because results must still be interpreted qualitatively
+
+\tiny Ibrahim and Voyer 2026
+
+# Qualitative analysis with LLMs
+## Technological reflexivity
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/ibrahim_voyer_reflexivity.png')
+```
+\tiny \centering Ibrahim and Voyer 2026
+
+# Qualitative analysis with LLMs
+## AI-led interviews
+```{r, out.width="71%", fig.align="center"}
+include_graphics('../../../img/gardhus_interview_agents.png')
+```
+
+\tiny \centering Gårdhus, Tobias Priesholm, Nikolas Vitsakis, Fie Lejre Frederiksen, Anna Rogers, and Hjalmar Bang Carlsen. 2026. "AInterviewer: A Platform for Designing and Conducting AI-led Qualitative Interviews." In *Proceedings of the ACL*, 119–27.
+
+# Qualitative analysis with LLMs
+## Rejecting generative AI
+- 419 qualitative researchers signed an open letter rejecting generative AI for "reflexive" qualitative approaches, such as thematic analysis
+    - Generative AI is "simulated intelligence" and "incapable of meaning-making"
+    - Qualitative research "should remain a distinctly human practice"
+    - Generative AI harms the environment and exploits workers
+
+\tiny Jowsey et al. 2025
+
+# Qualitative analysis with LLMs
+## Response: Thematic analysis and theory
+- Thematic analysis is vulnerable to AI because it sidelines theory in favor of identifying themes, which LLMs "excel at"
+- Theory-rich approaches such as abductive analysis are more resilient
+    - A finding only becomes surprising in light of existing theories
+    - Whether a contribution is "interesting" is judged by the scholarly community
+
+\tiny Timmermans and Tavory 2026
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Simulation\par}
+\vfill
+\end{center}
+
+# Bias and representation
+## Machine habitus
+- Machine learning techniques and LLMs are not neutral but "see" the world in certain ways, analogous to how Bourdieu's "habitus" shapes experience
+- LLMs can reflect cognitive schemas present in public culture
+- How can these biases be leveraged for sociological research?
+
+\tiny Airoldi, Massimo. 2021. *Machine Habitus: Toward a Sociology of Algorithms*. Cambridge: Polity; Arseniev-Koehler and Foster 2022
+
+# Bias and representation
+## Whose viewpoints are represented?
+- LLMs can "overrepresent hegemonic viewpoints", reproducing biases and stereotypes from dominant social groups
+- After alignment efforts, ChatGPT responds to survey questions similarly to educated liberals
+- Models can be prompted to behave like specific social groups
+
+\tiny Bender et al. 2021; Martin, John Levi. 2023. "The Ethico-Political Universe of ChatGPT." *Journal of Social Computing* 4(1): 1–11; Argyle et al. 2023
+
+# Bias and representation
+## Forms of bias
+- Bias has become a catch-all term describing different things:
+    - Statistical deviation from human ground truth
+    - Political leanings embedded in model outputs
+    - Stereotyping across social categories
+    - Discrimination in consequential decisions
+- Bias can enter through pre-training data, post-training, and users' prompts
+- It is unclear what a neutral, unbiased model would entail
+
+\tiny Nelson, Laura K., Daniel Karell, and Thomas Davidson. 2026. "Generative AI and Society." Working paper.
+
+# Silicon sampling
+## Algorithmic fidelity
+- *Silicon samples* are created by conditioning a language model on the socio-demographic backstories of real survey respondents
+- *Algorithmic fidelity*: "the degree to which the complex patterns of relationships between ideas, attitudes, and socio-cultural contexts within a model accurately mirror those within a range of human sub-populations"
+
+\tiny Argyle et al. 2023
+
+# Silicon sampling
+## Describing partisans
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/argyle_describe.png')
+```
+
+# Silicon sampling
+## Describing partisans
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/argyle_describe2.png')
+```
+
+# Silicon sampling
+## Describing partisans
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/argyle_describe3.png')
+```
+
+# Silicon sampling
+## Simulated economic agents
+```{r, out.width="72%", fig.align="center"}
+include_graphics('../../../img/horton_agents.png')
+```
+\tiny \centering Horton, John J., Apostolos Filippas, and Benjamin S. Manning. 2023. "Large Language Models as Simulated Economic Agents: What Can We Learn from Homo Silicus?" NBER Working Paper 31122.
+
+# Silicon sampling
+## Low variance
+```{r, out.height="67%", fig.align="center"}
+include_graphics('../../../img/bisbee_thermometers.png')
+```
+
+\tiny \centering Bisbee et al. 2024
+
+# Silicon sampling
+## Machine bias
+```{r, out.height="64%", fig.align="center"}
+include_graphics('../../../img/boelaert_answer_space.png')
+```
+
+\tiny \centering Boelaert, Julien, Samuel Coavoux, Étienne Ollion, Ivaylo Petev, and Patrick Präg. 2025. "Machine Bias. How Do Generative Language Models Answer Opinion Polls?" *Sociological Methods & Research* 54(3): 1156–96.
+
+# Silicon sampling
+## Agents from interviews
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/interview_agents_schematic.png')
+```
+
+# Silicon sampling
+## Agents from interviews
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/park_2024_gss_accuracy.png')
+```
+
+\tiny \centering Park, Joon Sung, et al. 2026. "LLM Agents Grounded in Self-Reports Enable General-Purpose Simulation of Individuals." *arXiv*:2411.10109.
+
+# Silicon sampling
+## Mixed subjects design
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/broska_mixed_subjects.png')
+```
+
+\tiny \centering Broska, David, Michael Howes, and Austin van Loon. 2025. "The Mixed Subjects Design: Treating Large Language Models as Potentially Informative Observations." *Sociological Methods & Research* 54(3): 1074–1109.
+
+# Silicon sampling
+## Simulating the GSS
+- Simulate the answers of 500 GSS 2024 respondents to a question about AI
+    - IBM Granite 4.0 micro via `localLLM`
+- *System prompt*: a backstory with the respondent's age, sex, race, education, and political views
+- *User prompt*: "Overall, how worried, if at all, are you that in the next 10 years machines, computer programs, and Artificial Intelligence (AI) will take over many of the jobs done by humans?" followed by the five options, numbered
+
+```{r silicon-setup, include=FALSE}
+library(tidyverse)
+load("../data/silicon_sampling.RData") # Results from code/silicon_sampling.R
+
+# Share giving each answer within each group, real and simulated
+plot_silicon <- function(group) {
+  results |>
+    pivot_longer(c(real, silicon), names_to = "sample", values_to = "answer") |>
+    mutate(sample = fct_recode(sample, GSS = "real", Granite = "silicon")) |>
+    count(sample, {{ group }}, answer) |>
+    group_by(sample, {{ group }}) |>
+    mutate(share = n / sum(n)) |>
+    ggplot(aes(x = share, y = {{ group }}, fill = answer)) +
+    geom_col(color = "white") +
+    facet_wrap(~sample) +
+    scale_fill_viridis_d() +
+    labs(x = "Share", y = NULL, fill = NULL) +
+    theme_minimal() +
+    theme(legend.position = "bottom") +
+    guides(fill = guide_legend(nrow = 2, byrow = TRUE))
+}
+```
+
+# Silicon sampling
+## Answer distribution
+```{r, fig.width=6.5, fig.height=2.2, out.width="100%", fig.align="center"}
+plot_silicon(overall)
+```
+\tiny Simulated answers have lower variation (SD 0.59 vs. 1.13) and a different distribution
+
+# Silicon sampling
+## By political views
+```{r, fig.width=6.5, fig.height=3.2, out.width="100%", fig.align="center"}
+plot_silicon(polviews)
+```
+
+# Silicon sampling
+## By education
+```{r, fig.width=6.5, fig.height=3.2, out.width="100%", fig.align="center"}
+plot_silicon(degree)
+```
+
+# Silicon sampling
+## Exercise
+- Edit `code/silicon_sampling.R`
+- Choose another GSS question asked in 2024 and change `item` and `question` at the top of the script
+- Does the model reproduce the differences between groups? Are the simulated answers less varied than the real ones, or biased?
+
+# Agent-based models
+## Generative agents
+- Conventional agents in ABMs follow simple rules
+    - Recall the "low-dimensional" realism of Schelling's segregation model
+- Generative agents enable more complex simulations, using an LLM to store a record of each agent's experiences, synthesize memories into reflections, and retrieve them to plan behavior
+
+\tiny Bail 2024; Park et al. 2023
+
+# Agent-based models
+## Generative agents
+```{r, out.width="83%", fig.align="center"}
+include_graphics('../../../img/park_agents.png')
+```
+\tiny \centering Park et al. 2023
+
+# AI and online surveys
+## Unwanted synthetic respondents
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/westwood_attention_checks.png')
+```
+
+\tiny \centering Westwood, Sean J. 2025. "The Potential Existential Threat of Large Language Models to Online Survey Research." *Proceedings of the National Academy of Sciences* 122(47): e2518075122.
+
+# AI and online surveys
+## Participant use of AI
+```{r, out.height="63%", fig.align="center"}
+include_graphics('../../../img/zhang_xu_alvero_ai_usage.png')
+```
+
+\tiny \centering Zhang, Simone, Janet Xu, and AJ Alvero. 2025. "Generative AI Meets Open-Ended Survey Responses: Research Participant Use of AI and Homogenization." *Sociological Methods & Research* 54(3): 1197–1242.
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Human–AI experiments\par}
+\vfill
+\end{center}
+
+# Human–AI experiments
+## Chat as treatment
+- An LLM made real-time, evidence-based recommendations to help participants feel understood in conversations about gun control
+- The interventions improved reported conversation quality, promoted democratic reciprocity, and improved tone, without changing policy attitudes
+
+\tiny Argyle et al. 2023, *PNAS*
+
+# Human–AI experiments
+## Chat interventions
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/rephrase_experiment.png')
+```
+\tiny \centering Argyle et al. 2023, *PNAS*
+
+# Human–AI experiments
+## Reducing conspiracy beliefs
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/costello_summary.png')
+```
+
+\tiny \centering Costello, Thomas H., Gordon Pennycook, and David G. Rand. 2024. "Durably Reducing Conspiracy Beliefs through Dialogues with AI." *Science* 385(6714): eadq1814.
+
+# Human–AI experiments
+## Levers of persuasion
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/hackenburg_information_density.png')
+```
+
+\tiny \centering Hackenburg et al. 2025
+
+# Human–AI experiments
+## Auditing AI
+```{r, out.width="83%", fig.align="center"}
+include_graphics('../../../img/davidson_context_sensitivity.png')
+```
+
+\tiny \centering Davidson 2026
+
+# Human–AI experiments
+## Ethics
+- Should participants always be told they are interacting with AI?
+    - Disclosure is critical where participants could be exposed to misinformation or abuse
+    - But disclosure makes it harder to tell whether behavior reflects the interaction or attitudes toward AI
+- Using AI as a mediator between human participants avoids deception
+
+\tiny Bail 2024
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Research practice\par}
+\vfill
+\end{center}
+
+# Research practice
+## Adoption
+```{r, out.height="63%", fig.align="center"}
+include_graphics('../../../img/alvero_et_al_SS.png')
+```
+
+\tiny \centering Alvero, AJ, Dustin S. Stoltz, Oscar Stuhler, and Marshall A. Taylor. 2026. "Generative AI in Sociological Research: State of the Discipline." *Sociological Science* 13: 45–62.
+
+# Research practice
+## Reasons
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/alvero_reasons.png')
+```
+
+\tiny \centering Alvero et al. 2026
+
+# Research practice
+## Concerns
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/alvero_concerns.png')
+```
+
+\tiny \centering Alvero et al. 2026
+
+# Research practice
+## Trust
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/alvero_trust.png')
+```
+
+\tiny \centering Alvero et al. 2026
+
+# Research practice
+## Unstable and evolving norms
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/stuhler_acceptability_1.png')
+```
+
+\tiny \centering Stuhler, Oscar, Dustin S. Stoltz, AJ Alvero, and Marshall A. Taylor. Forthcoming. "Is It Okay to Use Generative AI in Sociological Research?" *Sociological Science*.
+
+# Research practice
+## Unstable and evolving norms
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/stuhler_acceptability_2.png')
+```
+
+\tiny \centering Stuhler et al. forthcoming
+
+# Research practice
+## Disclosure requirements
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/stuhler_disclosure.png')
+```
+
+\tiny \centering Stuhler et al. forthcoming
+
+# Research practice
+## Sociology without sociologists?
+```{r, out.width="70%", fig.align="center"}
+include_graphics('../../../img/engzell_wilmers_workflow.png')
+```
+
+\tiny \centering Engzell, Per, and Nathan Wilmers. 2026. "The Paper Factory." *SocArXiv*.
+
+# Research practice
+## Sociology without sociologists?
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/paper_factory2.png')
+```
+
+\tiny \centering Engzell and Wilmers 2026
+
+# Research practice
+## Sociology without sociologists?
+
+> So how good are the papers? Quality varies, but many contain discoveries that, with little extra tweaking, would fit well in mid-tier social science journals. As editors, there are papers that we would send out for peer review. There are none that are publishable as-is. Overall, each of these papers has flaws, but they consistently taught us something that we did not already know.
+
+\tiny Engzell and Wilmers 2026. \href{https://osf.io/cxkjq/overview?view_only=e3645d7a1af545098ebbaa368af3c75a}{Example papers and code}
+
+# Summary
+- Generative AI can be used for measurement, prompting, and simulation
+- LLMs make computational text analysis more flexible and accessible, including for qualitative research
+- Silicon sampling and generative agents have potential, but considerable downsides
+- LLMs are used as interventions in experiments with human participants and can be audited to understand model behavior
+- Debate among sociologists about appropriate uses
+
+# Next class
+- Computer vision and multimodal models
