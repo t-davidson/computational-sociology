@@ -1,0 +1,1089 @@
+---
+title: "Computational Sociology"
+subtitle: "Computer Vision and Multimodal Models"
+shorttitle: "Computational Sociology"
+author: Dr. Thomas Davidson
+institute: "University of North Carolina at Chapel Hill"
+date: November 13, 2026
+output:
+  beamer_presentation:
+    theme: Szeged
+    colortheme: beaver
+    fonttheme: structurebold
+    incremental: false
+    toc: false
+    keep_tex: true
+header-includes:
+- \usepackage{multicol}
+- \usepackage{caption}
+- \captionsetup[figure]{font=scriptsize}
+- \captionsetup[figure]{labelformat=empty}
+- \beamertemplatenavigationsymbolsempty
+- \definecolor{darkred}{HTML}{2C5080}
+- \setbeamercolor{structure}{fg=darkred}
+- \setbeamertemplate{footline}{\begin{beamercolorbox}[wd=\paperwidth,ht=2.5ex,dp=1.2ex,leftskip=1em]{title in head/foot}\usebeamerfont{title in head/foot}\insertshorttitle\end{beamercolorbox}}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+knitr::opts_chunk$set(dev = 'pdf')
+library("knitr")
+```
+
+# Plan
+1. Course updates
+2. Introduction to computer vision
+3. Sociological applications
+4. Multimodal models
+5. Synthetic images
+6. Bias
+
+# Course updates
+## Homework 3
+- Homework 3 due today
+
+# Course updates
+## Presentations
+- Presentations next Friday, November 20
+  - 10 minutes, plus Q&A
+- Structure
+  - Background
+  - Data
+  - Methodology
+  - Results
+  - Conclusions
+- Add your slides to the shared Google Slides (link to follow by email)
+
+# Course updates
+## Final paper
+- Final paper due Tuesday, December 8 at 5pm
+- Around 15-20 pages double-spaced
+- Incorporate feedback from the proposal, progress report, and presentation
+- Submit PDF via email
+- Code, and ideally replication data, in a GitHub repository
+
+# Course updates
+## Final paper
+- Components
+    - Introduction
+    - Literature review (brief)
+    - Data
+    - Methodology
+    - Results
+    - Discussion and conclusions
+    - AI usage statement
+    - References
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Introduction to computer vision\par}
+\vfill
+\end{center}
+
+# Introduction to computer vision
+## What is computer vision?
+- Computer vision encompasses a range of different machine-learning techniques designed specifically for image data
+- The general principle is the same as other machine-learning approaches
+  - Given some image $X$, predict an outcome associated with the image $Y$
+- The main difference is that the model architecture is adapted to work for image data
+
+# Introduction to computer vision
+## Digital representations of images
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/image_array.png')
+```
+
+\tiny \centering \href{https://e2eml.school/images/image_processing/three_d_array.png}{Source}
+
+# Introduction to computer vision
+## Digital representations of images
+- Just like text analysis, images must be normalized for use in machine learning models
+- A color image is stored as three 2-D matrices, one each for red, green, and blue, with pixel values normalized
+- Generally, we also reduce the dimensionality of these arrays to aggregate information across pixels to store a lower-dimensional representation of an image (compression)
+
+# Introduction to computer vision
+## Image classification
+- The goal is to predict the class of image $Y$, given the 2-D image matrix $X$
+- In this case, we have an image composed of 9 pixels, which is input into our classifier $f()$
+- Thus, we want to estimate $Y_{class} = f(X)$, where
+$$
+X = \begin{bmatrix}
+x_{11} & x_{12} & x_{13}\\
+x_{21} & x_{22} & x_{23}\\
+x_{31} & x_{32} & x_{33}\\
+\end{bmatrix}
+$$
+- Each element $x_{ij}$ corresponds to the normalized value of a pixel
+
+# Introduction to computer vision
+## Image classification
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/image_classification.png')
+```
+
+\tiny \centering Krizhevsky, Sutskever, and Hinton 2012
+
+# Introduction to computer vision
+## Object detection
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/object_detection.png')
+```
+
+\tiny \centering Redmon, Joseph, Santosh Divvala, Ross Girshick, and Ali Farhadi. 2016. "You Only Look Once: Unified, Real-Time Object Detection." *CVPR*, 779–88.
+
+# Introduction to computer vision
+## Image generation
+```{r, out.height="65%", fig.align="center"}
+include_graphics('../../../img/gan.png')
+```
+
+\tiny \centering Goodfellow, Ian J., Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. 2014. "Generative Adversarial Networks." *arXiv*:1406.2661.
+
+# Introduction to computer vision
+## Style transfer
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/style_transfer.png')
+```
+
+\tiny \centering Gatys, Leon A., Alexander S. Ecker, and Matthias Bethge. 2016. "Image Style Transfer Using Convolutional Neural Networks." *CVPR*, 2414–23.
+
+# Introduction to computer vision
+## How does it work?
+- Computer vision made major breakthroughs in the 2010s due to advances in neural network methods
+  - These methods have been around for a long time (the *perceptron* algorithm was developed in 1958) but were difficult to scale due to the computational challenge of estimating vast numbers of parameters
+  - This changed with the availability of large datasets and vast compute power
+- In contrast to other approaches involving feature construction, these methods directly "learn" features from the data
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+- The ImageNet Large Scale Visual Recognition Challenge is a competition to develop a model to classify images into object categories
+  - The aim is to construct a realistic setting with millions of images and thousands of objects
+- The \href{http://www.image-net.org/challenges/LSVRC/2012/index}{2012 ImageNet training dataset} contained 1,000 object categories, with images collected from Flickr and other search engines and labeled by hand
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/alexnet_paper.png')
+```
+
+\tiny \centering Krizhevsky, Sutskever, and Hinton 2012
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+- Krizhevsky, Sutskever, and Hinton achieve record-breaking performance by using Convolutional Neural Networks (CNNs)
+- CNNs made tractable by using several other methodological innovations
+  - Optimization across multiple Graphics Processing Units (GPUs)
+  - ReLU activation function for more efficient training
+  - Dropout to reduce overfitting
+- The random baseline is 0.1% accuracy (1/1000)
+  - Their model is correct 63% of the time (Top-1) and the correct answer is in the Top-5 predictions 85% of the time
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/image_classification.png')
+```
+
+\tiny \centering Krizhevsky, Sutskever, and Hinton 2012
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/imagenet_structure.png')
+```
+
+\tiny \centering Krizhevsky, Sutskever, and Hinton 2012
+
+# Introduction to computer vision
+## Convolutional Neural Networks
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/torres_cantu_1.png')
+```
+
+\tiny \centering Torres and Cantú 2022
+
+# Introduction to computer vision
+## Convolutional Neural Networks
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/torres_cantu_2.png')
+```
+
+\tiny \centering Torres and Cantú 2022
+
+# Introduction to computer vision
+## Convolutional Neural Networks
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/cnn_nodes_3.png')
+```
+
+\tiny \centering \href{https://colah.github.io/posts/2014-07-Conv-Nets-Modular/}{Source}: Chris Olah's blog post on convolutional neural networks. This \href{https://www.youtube.com/watch?v=KuXjwB4LzSA}{YouTube video} has a good visualization of the convolution process.
+
+# Introduction to computer vision
+## Convolutional Neural Networks
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/cnn_nodes_3_2d.png')
+```
+
+\tiny \centering \href{https://colah.github.io/posts/2014-07-Conv-Nets-Modular/}{Source}: Chris Olah's blog post on convolutional neural networks.
+
+# Introduction to computer vision
+## Convolutional Neural Networks
+```{r, out.width="75%", fig.align="center"}
+include_graphics('../../../img/cnn_close_up.png')
+```
+
+\tiny \centering \href{https://colah.github.io/posts/2014-07-Conv-Nets-Modular/}{Source}: Chris Olah's blog post on convolutional neural networks. Also see \href{https://colah.github.io/posts/2014-07-Understanding-Convolutions/}{this post} for a mathematical formulation.
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/cnn_imagenet.png')
+```
+
+\tiny \centering Krizhevsky, Sutskever, and Hinton 2012
+
+# Introduction to computer vision
+## The 2012 ImageNet Challenge
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/activation_functions.png')
+```
+
+# Introduction to computer vision
+## How neural networks see the world
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/layer_specialization.png')
+```
+
+\tiny \centering Olah, Mordvintsev, and Schubert 2017
+
+# Introduction to computer vision
+## How neural networks see the world
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/layer_aggregation.png')
+```
+
+\tiny \centering Olah, Mordvintsev, and Schubert 2017
+
+# Introduction to computer vision
+## How neural networks see the world
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/layer_optimization.png')
+```
+
+\tiny \centering Olah, Mordvintsev, and Schubert 2017
+
+# Introduction to computer vision
+## Transfer learning
+- One of the major breakthroughs in this area of research is *transfer learning*
+- A model trained to predict $Y$ can be retrained to predict a new outcome $Z$
+- This is often more efficient than training a model to predict $Z$ from scratch, particularly if we lack sufficient training data
+
+# Introduction to computer vision
+## Transfer learning
+- Let's say we want a dog detection model, we could start with a pre-trained cat detection model
+    - It can detect light intensity, edges, and corners
+    - It has representations of fur, tails, and whiskers
+- It is more efficient and requires less data to train the cat model to detect dogs than to train a dog detector from scratch
+
+# Introduction to computer vision
+## Transfer learning
+- Image recognition becomes tractable for social scientists who do not have access to huge training corpora and advanced compute resources
+- An existing pre-trained model can be *fine-tuned* on a small corpus of new labeled images
+  - In practice, this means adding layers to the end of a pre-trained network and learning new weights
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Sociological applications\par}
+\vfill
+\end{center}
+
+# Sociological applications
+## Examples
+- Using Google Street View to estimate demographics
+- Identifying trash in Street View imagery
+- Using social media images and posts to detect collective action
+- Visual frames
+- Using traffic cameras to measure racial avoidance
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gebru_car_bounding.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gebru_car_edmunds.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gebru_car_type_confusion.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gebru_car_price_confusion.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/gebru_street_view.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+- The information from the car detection model is then used in a regression model
+  - Demographics from the American Community Survey for a given geographic unit are estimated as a function of 88 variables including average number of cars per image, average car price, percent hybrids, percent foreign made, etc.
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/gebru_predictions.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Using Google Street View to estimate demographics
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gebru_car_race.png')
+```
+
+\tiny \centering Gebru et al. 2017
+
+# Sociological applications
+## Identifying trash in Street View imagery
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/hwang_trash.png')
+```
+
+\tiny Street View images coded by the amount of trash.
+
+\tiny \centering Hwang et al. 2023
+
+# Sociological applications
+## Using social media to detect collective action
+- Zhang and Pan 2019 use data from Weibo to identify collective action events in China
+- They develop an event-detection model that combines both image and text from social media posts
+- To detect collective action in images, they use a corpus of relevant social media posts collected by activists to fine-tune a pre-trained image detection model
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/zhang_fine_tuning.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/zhang_text_model.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/zhang_pred_probs.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+- They develop a simple procedure to classify posts depending on the content:
+$$
+p=\left\{\begin{array}{ll}
+\frac{\left(p_{\text {text }}+\alpha \cdot p_{\text {image }}\right)}{(1+\alpha)} \cdot \beta & \text { if the post has images, } \\
+p_{\text {text }} & \text { otherwise. }
+\end{array}\right.
+$$
+- $\alpha$ controls the relative weight of text and images and $\beta$ denotes the extra weight given to posts with both text and images
+- Both parameters are optimized by using cross-validation
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/zhang_precision_and_recall.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/zhang_true_positive.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/zhang_false_positive.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+- Many false positives contain content relevant to collective action such as corruption, housing demolition, and the police, but do not actually involve collective action
+- They therefore train a second-stage classifier to distinguish between collective action and such cases
+- This improves the out-of-sample $F_1$ score from 0.69 to 0.84, demonstrating how analysis of model results can enable us to make improvements to classifiers
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/zhang_overfitting.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Using social media to detect collective action
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/zhang_results.png')
+```
+
+\tiny \centering Zhang and Pan 2019
+
+# Sociological applications
+## Visual frames
+```{r, out.width="88%", fig.align="center"}
+include_graphics('../../../img/torres_visual_topics.png')
+```
+
+\tiny Image patches are clustered to create a vocabulary of visual words.
+
+\tiny \centering Torres 2024
+
+# Sociological applications
+## Visual frames
+```{r, out.width="78%", fig.align="center"}
+include_graphics('../../../img/torres_visual_topics2.png')
+```
+
+\tiny The visual words most distinctive of each topic.
+
+\tiny \centering Torres 2024
+
+# Sociological applications
+## Using traffic cameras to measure racial avoidance
+- Dietrich and Sands 2023 combine a field experiment with footage from public traffic cameras in New York City
+- Black or white male confederates stand on a sidewalk in Midtown and on the Upper East Side
+- The distance each passing pedestrian keeps from the confederates is measured from the camera images
+  - 3,552 pedestrians, tracked manually
+- An unobtrusive measure of behavior in public space
+
+# Sociological applications
+## Using traffic cameras to measure racial avoidance
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/dietrich_setup.png')
+```
+
+\tiny \centering Dietrich and Sands 2023
+
+# Sociological applications
+## Using traffic cameras to measure racial avoidance
+```{r, out.height="65%", fig.align="center"}
+include_graphics('../../../img/dietrich_results.png')
+```
+
+\tiny Pedestrians give a wider berth to Black confederates than to white confederates, around 4 inches on average.
+
+\tiny \centering Dietrich and Sands 2023
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Multimodal models\par}
+\vfill
+\end{center}
+
+# Multimodal models
+## Combining text and images
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/clip_approach.png')
+```
+
+\tiny \centering Radford et al. 2021
+
+# Multimodal models
+## Rich semantic representations
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/clip_zero_shot.png')
+```
+
+\tiny \centering Radford et al. 2021
+
+# Multimodal models
+## Multimodal neurons
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/multimodal_neurons.png')
+```
+
+\tiny \centering Goh, Gabriel, Nick Cammarata, Chelsea Voss, Shan Carter, Michael Petrov, Ludwig Schubert, Alec Radford, and Chris Olah. 2021. "Multimodal Neurons in Artificial Neural Networks." *Distill* 6(3): e30.
+
+# Multimodal models
+## Multimodal neurons
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/emotion_neurons.png')
+```
+
+\tiny \centering Goh et al. 2021
+
+# Multimodal models
+## Multimodal neurons
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/clip_geographic.png')
+```
+
+\tiny \centering Goh et al. 2021
+
+# Multimodal models
+## Adversarial examples
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/adversarial_attacks.png')
+```
+
+\tiny \centering Goh et al. 2021
+
+# Multimodal models
+## Adversarial examples
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/adversarial_apple.png')
+```
+
+\tiny \centering Goh et al. 2021
+
+# Multimodal models
+## Vision transformer architecture
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/vit_architecture.png')
+```
+
+\tiny \centering Dosovitskiy, Alexey, Lucas Beyer, Alexander Kolesnikov, Dirk Weissenborn, Xiaohua Zhai, Thomas Unterthiner, Mostafa Dehghani, Matthias Minderer, Georg Heigold, Sylvain Gelly, Jakob Uszkoreit, and Neil Houlsby. 2021. "An Image Is Worth 16x16 Words: Transformers for Image Recognition at Scale." *ICLR*.
+
+# Multimodal models
+## Vision-language models
+- Off-the-shelf vision-language models can readily be used for measurement
+- Many options, ranging from large frontier models like Gemini and GPT to open-weights models like Kimi and Gemma on Hugging Face
+- Zero-shot classification requires no task-specific training examples
+
+# Multimodal models
+## Vision encoder
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/gemma4_vision_encoder.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal models
+## Vision and language embeddings
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/gemma4_embeddings.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal models
+## Multimodal representations
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/gemma4_multimodal.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal models
+## Shared architecture
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/gemma4_architecture.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal models
+## Joint text-and-image clustering
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/zhang_leung1.png')
+```
+
+\tiny Example images from three image-only clusters.
+
+\tiny \centering Zhang and Leung 2026
+
+# Multimodal models
+## Joint text-and-image clustering
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/zhang_leung2.png')
+```
+
+\tiny Example posts from three multimodal clusters, with labels and translated text.
+
+\tiny \centering Zhang and Leung 2026
+
+# Multimodal models
+## Image description and zero-shot classification
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/blm_small.jpg')
+```
+
+\tiny \centering Source: \href{https://commons.wikimedia.org/wiki/File:Black_Lives_Matter_movement_in_Austria,_group_of_black_and_white_activists_with_signs,_social_justice_warriors_(50115128701).jpg}{Wikimedia Commons}
+
+# Multimodal models
+## Image description and zero-shot classification
+
+\texttt{[Author] Describe this image.}
+
+\texttt{[GPT-4] The image depicts a diverse group of protesters in an urban setting, possibly at a street or plaza. Many individuals in the crowd are holding up placards and signs ... The overall sentiment of the image seems to be in support of racial equality, anti-racism, and the end of police violence.}
+
+# Multimodal models
+## Image description and zero-shot classification
+
+\texttt{[Author] Make a Python list containing the text from each sign.}
+
+\texttt{[GPT-4] Based on the provided image, here is a Python list containing the text from each visible sign:}
+
+`sign_texts = [ "Being Black is Not a Crime", "End Police Brutality", "Protect Black Lives", "No Human is Illegal", ... ]`
+
+\texttt{Please note that the list may not be exhaustive, as there could be other signs in the image that are not fully visible or legible.}
+
+# Multimodal models
+## Image description and zero-shot classification
+- Natural language interface makes it faster to prototype image classifiers
+- Prompting enables more specific, nuanced types of queries
+- These capabilities now extend to other media like audio and video
+
+# Multimodal models
+## Image description and zero-shot classification
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/maranca_annotations.png')
+```
+
+\tiny \centering Rister Portinari Maranca, Alessandra, Jihoon Chung, Musashi Hinck, Adam D. Wolsky, Naoki Egami, and Brandon M. Stewart. 2025. "Correcting the Measurement Errors of AI-Assisted Labeling in Image Analysis Using Design-Based Supervised Learning." *Sociological Methods & Research* 54(3): 984–1016.
+
+# Multimodal models
+## Measurement error
+- Even small amounts of error in high-accuracy systems can lead to substantial bias and invalid confidence intervals in downstream analysis
+- Design-based supervised learning (DSL), covered last week for text, combines the AI labels with a small number of expert annotations
+- Applications to image analysis
+    - Visual predictors of perceived violence in protest images
+    - Images shared in the Black Lives Matter movement on Twitter
+    - U.S. outlets' reporting of immigrant caravans
+
+\tiny Rister Portinari Maranca et al. 2025
+
+# Multimodal models
+## Measurement error
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/maranca2.png')
+```
+
+\tiny Estimates using expert annotations (Benchmark), surrogate labels only (SO), and design-based supervised learning (DSL).
+
+\tiny \centering Rister Portinari Maranca et al. 2025
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Synthetic images\par}
+\vfill
+\end{center}
+
+# Synthetic images
+## Custommade readymades?
+```{r, out.width="80%", fig.align="center"}
+include_graphics('../../../img/bitbybit1-2_readymade-custommade.png')
+```
+
+\tiny \centering Salganik 2017
+
+# Synthetic images
+## Generating texts and images
+- Synthetic texts and images can now be indistinguishable from the real thing \begin{tiny} (Clark et al. 2021; Nightingale and Farid 2022) \end{tiny}
+- Chatbots can interact with human subjects in experimental settings \begin{tiny} (Jakesch et al. 2023; Argyle et al. 2023b) \end{tiny}
+
+# Synthetic images
+## Experimental stimuli
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/conjoint.png')
+```
+
+\tiny \centering Flores, René D., and Ariela Schachter. 2018. "Who Are the 'Illegals'? The Social Construction of Illegality in the United States." *American Sociological Review* 83(5): 839–68.
+
+# Synthetic images
+## Experimental stimuli
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/syn_immi.png')
+```
+
+\tiny \centering Davidson 2024
+
+# Synthetic images
+## Experimental stimuli
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/syn_protest.png')
+```
+
+# Synthetic images
+## Generating counterfactuals
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/syn_women.png')
+```
+
+# Synthetic images
+## Visual conjoints
+- Pessin and Munger 2026 use AI-generated photorealistic images in a conjoint experiment on housework attribution
+- Images vary the tidiness of the room, room type, source of mess, socioeconomic status, and the gender and race/ethnicity of the occupant
+- Text describes the couple's employment arrangement
+- 2,994 U.S. respondents each evaluated five vignettes
+
+# Synthetic images
+## Visual conjoints
+```{r, out.height="69%", fig.align="center"}
+include_graphics('../../../img/pessin_design.png')
+```
+
+\tiny \centering Pessin and Munger 2026
+
+# Synthetic images
+## Visual conjoints
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/pessin_responsibility.png')
+```
+
+\tiny Women are assigned more cleaning responsibility than men.
+
+\tiny \centering Pessin and Munger 2026
+
+# Synthetic images
+## Application: do vision-language models perceive mess?
+- Gemma 4 E2B, a small open-weights vision-language model, run locally with Ollama
+- The 12 room images from Pessin and Munger 2026
+- The model is asked the question respondents saw: "On a scale from 0 to 100, how messy is the room?"
+- Compare the model's ratings with the mean human rating of each image
+- Code: `code/visual_conjoint_vlm.R`
+
+# Synthetic images
+## Application: three kitchens
+
+\begin{center}
+\setlength{\tabcolsep}{3pt}
+\begin{tabular}{ccc}
+\includegraphics[width=0.3\textwidth]{../../../img/room_3.jpg} &
+\includegraphics[width=0.3\textwidth]{../../../img/room_1.jpg} &
+\includegraphics[width=0.3\textwidth]{../../../img/room_2.jpg} \\
+\footnotesize Human: 3 & \footnotesize Human: 56 & \footnotesize Human: 87 \\
+\footnotesize Gemma: 10 & \footnotesize Gemma: 65 & \footnotesize Gemma: 95
+\end{tabular}
+\end{center}
+
+\tiny Human ratings are means across approximately 1,250 respondents per image.
+
+# Synthetic images
+## Application: human and model ratings
+```{r, fig.width=5, fig.height=3.6, out.height="70%", fig.align="center"}
+library(ggplot2)
+load("../data/visual_conjoint_vlm.RData")
+ggplot(results, aes(x = human, y = model, color = source, shape = room)) +
+  geom_abline(linetype = "dashed") +
+  geom_point(size = 3) +
+  scale_color_viridis_d(end = 0.8) +
+  coord_equal(xlim = c(0, 100), ylim = c(0, 100)) +
+  labs(x = "Human rating (mean)", y = "Model rating",
+       color = "Source of mess", shape = "Room") +
+  theme_minimal()
+```
+
+\tiny The model separated tidy from messy rooms (r = 0.99) but rated the tidy rooms as messier than respondents did.
+
+# Synthetic images
+## Application: describing a room
+
+\vspace{0.5em}
+\begin{columns}[c]
+\begin{column}{0.42\textwidth}
+\includegraphics[width=\textwidth]{../../../img/room_2.jpg}
+\end{column}
+\begin{column}{0.55\textwidth}
+\scriptsize
+\textbf{Describe this image in one sentence.}
+
+``This image shows a kitchen with light blue cabinets and a wooden table covered with various items, including newspapers and folded clothes.''
+
+\vspace{1em}
+\textbf{How messy is the room? Give the number, then explain your rating in two sentences.}
+
+``75. The room is quite messy, with numerous items scattered across the floor and table, suggesting a lack of organization. The presence of boxes, clothes, and various papers indicates a significant accumulation of clutter.''
+\end{column}
+\end{columns}
+
+\vspace{0.5em}
+\tiny The model rated this room 95 when asked for the number only.
+
+# Synthetic images
+## Application: edited images
+- Does the rating change if the room is edited?
+- Three rooms edited with image models in the browser: ChatGPT, Gemini, and Grok
+- A messy kitchen tidied, a family added, then the family placed in a mess
+- A family or residents added to two messy living rooms
+- Each edited image rated by Gemma with the same question
+
+# Synthetic images
+## Edited images: a messy kitchen
+
+\begin{center}
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{ccc}
+\tiny ChatGPT & \tiny Gemini & \tiny Grok \\
+\includegraphics[height=0.175\textheight]{../../../img/room_2_chatgpt.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_gemini.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_grok.jpg} \\
+\tiny 20 & \tiny 30 & \tiny 10 \\
+\includegraphics[height=0.175\textheight]{../../../img/room_2_chatgpt_family.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_gemini_family.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_grok_family.jpg} \\
+\tiny 30 & \tiny 30 & \tiny 10 \\
+\includegraphics[height=0.175\textheight]{../../../img/room_2_chatgpt_family_messy.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_gemini_family_messy.jpg} &
+\includegraphics[height=0.175\textheight]{../../../img/room_2_grok_family_messy.jpg} \\
+\tiny 65 & \tiny 65 & \tiny 95 \\
+\end{tabular}
+\end{center}
+
+\vspace{-1em}
+\tiny Rows: tidied; family added; family in a mess. Gemma's rating below each image. Original: 95 (human 87).
+
+# Synthetic images
+## Edited images: adding a family
+
+\begin{center}
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{ccc}
+\tiny ChatGPT & \tiny Gemini & \tiny Grok \\
+\includegraphics[width=0.32\textwidth]{../../../img/room_4_chatgpt_family.jpg} &
+\includegraphics[width=0.32\textwidth]{../../../img/room_4_gemini_family.jpg} &
+\includegraphics[width=0.32\textwidth]{../../../img/room_4_grok_family.jpg} \\
+\tiny 85 & \tiny 85 & \tiny 85 \\
+\end{tabular}
+\end{center}
+
+\tiny A family added to a messy living room. Gemma's rating below each image. Original: 95 (human 80).
+
+# Synthetic images
+## Edited images: adding residents
+
+\begin{center}
+\setlength{\tabcolsep}{2pt}
+\renewcommand{\arraystretch}{0.5}
+\begin{tabular}{ccc}
+\tiny ChatGPT & \tiny Gemini & \tiny Grok \\
+\includegraphics[width=0.32\textwidth]{../../../img/room_9_chatgpt_residents.jpg} &
+\includegraphics[width=0.32\textwidth]{../../../img/room_9_gemini_residents.jpg} &
+\includegraphics[width=0.32\textwidth]{../../../img/room_9_grok_residents.jpg} \\
+\tiny 85 & \tiny 85 & \tiny 95 \\
+\end{tabular}
+\end{center}
+
+\tiny Residents added to a messy living room. Gemma's rating below each image. Original: 95 (human 86).
+
+# Synthetic images
+## Application: try it yourself
+- Run `code/visual_conjoint_vlm.R` with Ollama and Gemma 4 E2B
+- Change the wording of the question. Do the ratings move closer to the human ratings?
+- Use the model as a zero-shot classifier: kitchen or living room, mess made by children or adults?
+- Edit a room with an image model and rate the edited version
+
+# {.plain}
+
+\begin{center}
+\vfill
+{\usebeamerfont{title}\usebeamercolor[fg]{structure}\Large Bias\par}
+\vfill
+\end{center}
+
+# Biases in computer vision
+## Facial recognition datasets
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/ppb_faces.png')
+```
+
+\tiny \centering Buolamwini and Gebru 2018
+
+# Biases in computer vision
+## Facial recognition datasets
+```{r, out.width="95%", fig.align="center"}
+include_graphics('../../../img/dataset_balance_race_gender.png')
+```
+
+\tiny \centering Buolamwini and Gebru 2018
+
+# Biases in computer vision
+## Facial recognition datasets
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/gender_inaccuracy.png')
+```
+
+\tiny \centering Buolamwini and Gebru 2018
+
+# Biases in computer vision
+## Facial recognition datasets
+```{r, out.width="100%", fig.align="center"}
+include_graphics('../../../img/ibm_confidence.png')
+```
+
+\tiny \centering Buolamwini and Gebru 2018
+
+# Biases in computer vision
+## Stereotypes, biases, and cultural associations
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/class_embeddings.png')
+```
+
+\tiny \centering Kozlowski, Taddy, and Evans 2019
+
+# Biases in computer vision
+## Stereotypes, biases, and cultural associations
+```{r, out.height="70%", fig.align="center"}
+include_graphics('../../../img/koz_music.png')
+```
+
+\tiny \centering Kozlowski, Taddy, and Evans 2019
+
+# Biases in computer vision
+## Stereotypes, biases, and cultural associations
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/syn_music2.png')
+```
+
+# Biases in computer vision
+## Stereotypes in Stable Diffusion
+```{r, out.height="62%", fig.align="center"}
+include_graphics('../../../img/bianchi_bias.png')
+```
+
+\tiny \centering Bianchi, Federico, Pratyusha Kalluri, Esin Durmus, Faisal Ladhak, Myra Cheng, Debora Nozza, Tatsunori Hashimoto, Dan Jurafsky, James Zou, and Aylin Caliskan. 2023. "Easily Accessible Text-to-Image Generation Amplifies Demographic Stereotypes at Large Scale." In *Proceedings of the 2023 ACM Conference on Fairness, Accountability, and Transparency*, 1493–1504.
+
+# Biases in computer vision
+## Does the AI messiness rating vary by race?
+
+\begin{center}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{ccc}
+\tiny ChatGPT & \tiny Gemini & \tiny Grok \\
+\includegraphics[height=0.33\textheight]{../../../img/room_9_chatgpt_raceswap.jpg} &
+\includegraphics[height=0.33\textheight]{../../../img/room_9_gemini_raceswap.jpg} &
+\includegraphics[height=0.33\textheight]{../../../img/room_9_grok_raceswap.jpg} \\
+\footnotesize 85 $\rightarrow$ 85 & \footnotesize 85 $\rightarrow$ 85 & \footnotesize 95 $\rightarrow$ 95
+\end{tabular}
+\end{center}
+
+\tiny Gemma's ratings before and after the edit were identical.
+
+# Biases in computer vision
+## Feature or bug?
+- Biases are important for social scientists:
+    - Studying biases and stereotypes
+    - Analyzing content related to social problems
+    - Generating synthetic media
+- Bias mitigation efforts on commercial systems can hamper social scientific analyses
+    - Debiasing obfuscates
+    - Refusals
+
+# Bias mitigation and its impacts
+## Lipstick on a pig?
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/debiasing_pig.png')
+```
+
+\tiny \centering Gonen and Goldberg 2019
+
+# Bias mitigation and its impacts
+## Lipstick on a pig?
+```{r, out.height="72%", fig.align="center"}
+include_graphics('../../../img/doctors.png')
+```
+
+# Bias mitigation and its impacts
+## Unintended consequences
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/nazi_gen.png')
+```
+
+\tiny \centering Grant, Nico. 2024. "Google Chatbot's A.I. Images Put People of Color in Nazi-Era Uniforms." *The New York Times*, February 22, 2024.
+
+# Bias mitigation and its impacts
+## Refusals
+```{r, out.width="90%", fig.align="center"}
+include_graphics('../../../img/refusal.png')
+```
+
+# Bias mitigation and its impacts
+## Refusals
+```{r, out.width="72%", fig.align="center"}
+include_graphics('../../../img/exaggeration.png')
+```
+
+\tiny \centering Röttger, Paul, Hannah Rose Kirk, Bertie Vidgen, Giuseppe Attanasio, Federico Bianchi, and Dirk Hovy. 2024. "XSTest: A Test Suite for Identifying Exaggerated Safety Behaviours in Large Language Models." In *Proceedings of NAACL-HLT*, 5377–5400.
+
+# Multimodal data and the future of CSS
+## Audiovisual analyses
+```{r, out.height="68%", fig.align="center"}
+include_graphics('../../../img/gemma_audio1.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal data and the future of CSS
+## Audiovisual analyses
+```{r, out.height="66%", fig.align="center"}
+include_graphics('../../../img/gemma_audio2.png')
+```
+
+\tiny \centering \url{https://newsletter.maartengrootendorst.com/p/a-visual-guide-to-gemma-4}
+
+# Multimodal data and the future of CSS
+## World models and virtual reality
+```{r, out.width="85%", fig.align="center"}
+include_graphics('../../../img/genie4.png')
+```
+
+\tiny \centering \url{https://deepmind.google/models/genie/}
+
+# Summary
+- Computer vision methods made huge advances due to increased compute power and the availability of large datasets
+- Transfer learning and fine-tuning make it possible to adapt pre-trained models to new tasks with relative ease
+- Images can be used to measure demographics, collective action, and behavior in public space
+- Vision-language models combine text and images and can be prompted to describe and classify images, but the labels contain errors that must be accounted for
+- Synthetic images can be used as experimental stimuli
+- Biases in computer vision systems are both a problem and an object of study
+
+# Next class
+- Student presentations
